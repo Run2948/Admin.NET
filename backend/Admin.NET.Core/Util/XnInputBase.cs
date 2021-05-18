@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Admin.NET.Core.DynamicConditions;
 
 namespace Admin.NET.Core
 {
@@ -67,5 +68,10 @@ namespace Admin.NET.Core
         /// 降序排序(不要问我为什么是descend不是desc，前端约定参数就是这样)
         /// </summary>
         public virtual string DescStr { get; set; } = "descend";
+
+        /// <summary>
+        /// 复杂查询条件
+        /// </summary>
+        public virtual List<Condition> SearchParameters { get; set; } = new();
     }
 }
