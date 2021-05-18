@@ -40,6 +40,7 @@
     <PackageReference Include="Furion.Extras.Authentication.JwtBearer" Version="2.6.0" />
     <PackageReference Include="Furion.Extras.Logging.Serilog" Version="2.6.0" />
     <PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="2.6.0" />
+    <PackageReference Include="Magicodes.IE.Excel" Version="2.5.3.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.6" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="5.0.1" />
     <PackageReference Include="MiniExcel" Version="0.14.7" />
@@ -49,6 +50,7 @@
     <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
     <PackageReference Include="UAParser" Version="3.1.46" />
     <PackageReference Include="Yitter.IdGenerator" Version="1.0.12" />
+    <PackageReference Include="Zack.EFCore.Batch.Sqlite" Version="1.2.6" />
   </ItemGroup>
 
 </Project>
