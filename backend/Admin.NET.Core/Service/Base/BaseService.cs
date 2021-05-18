@@ -32,10 +32,9 @@ namespace Admin.NET.Core.Service.Base
     /// <typeparam name="TPageListDto"></typeparam>
     /// <typeparam name="TExportDto"></typeparam>
     /// <typeparam name="TPrintDto"></typeparam>
-    [Produces("application/json")]
     public class BaseService<TEntity, TSearchDto, TAddDto, TUpdateDto, TImportDto, TDetailDto, TPageListDto, TExportDto, TPrintDto>
         where TEntity : DEntityBase, new()
-    where TUpdateDto : BaseDto
+        where TUpdateDto : BaseDto
         where TSearchDto : PageInputBase
         where TPageListDto : new()
         where TExportDto : class, new()
