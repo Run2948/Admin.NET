@@ -34,6 +34,9 @@
         <template slot="operator" v-if="hasPerm('sysRole:add')">
           <a-button @click="$refs.addForm.add()" icon="plus" type="primary" v-if="hasPerm('sysRole:add')">新增角色</a-button>
         </template>
+        <span slot="roleType" slot-scope="text">
+            {{ typeFilter(text) }}
+        </span>
         <span slot="action" slot-scope="text, record">
           <a v-if="hasPerm('sysRole:edit')" @click="$refs.editForm.edit(record)">编辑</a>
           <a-divider type="vertical" v-if="hasPerm('sysRole:edit')"/>
@@ -75,6 +78,7 @@
   import editForm from './editForm'
   import roleMenuForm from './roleMenuForm'
   import roleOrgForm from './roleOrgForm'
+  import { sysDictTypeDropDown } from '@/api/modular/system/dictManage'
   export default {
     components: {
       XCard,
@@ -96,6 +100,13 @@
             dataIndex: 'name'
           },
           {
+            title: '角色类型',
+            dataIndex: 'roleType',
+            scopedSlots: {
+              customRender: 'roleType'
+            }
+          },
+          {
             title: '唯一编码',
             dataIndex: 'code'
           },
@@ -111,11 +122,13 @@
           })
         },
         selectedRowKeys: [],
-        selectedRows: []
+        selectedRows: [],
+        typeDictTypeDropDown: []
     }
     },
 
     created () {
+      this.sysDictTypeDropDown()
       if (this.hasPerm('sysRole:edit') || this.hasPerm('sysRole:grantMenu') || this.hasPerm('sysRole:grantData') || this.hasPerm('sysRole:delete')) {
         this.columns.push({
           title: '操作',
@@ -127,6 +140,23 @@
     },
 
     methods: {
+       typeFilter(roleType) {
+        // eslint-disable-next-line eqeqeq
+        const values = this.typeDictTypeDropDown.filter(item => item.code == roleType)
+        if (values.length > 0) {
+          return values[0].value
+        }
+      },
+      /**
+       * 获取字典数据
+       */
+      sysDictTypeDropDown(text) {
+        sysDictTypeDropDown({
+          code: 'role_type'
+        }).then((res) => {
+          this.typeDictTypeDropDown = res.data
+        })
+      },
       sysRoleDelete (record) {
         sysRoleDelete(record).then((res) => {
           if (res.success) {

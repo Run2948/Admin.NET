@@ -49,6 +49,9 @@
           <template slot="operator" v-if="hasPerm('sysOrg:add')">
             <a-button @click="$refs.addForm.add()" icon="plus" type="primary" v-if="hasPerm('sysOrg:add')">新增机构</a-button>
           </template>
+          <span slot="orgType" slot-scope="text">
+            {{ typeFilter(text) }}
+          </span>
           <span slot="action" slot-scope="text, record">
             <a v-if="hasPerm('sysOrg:edit')" @click="$refs.editForm.edit(record)">编辑</a>
             <a-divider type="vertical" v-if="hasPerm('sysOrg:edit') & hasPerm('sysOrg:delete')"/>
@@ -67,6 +70,7 @@
   import { STable, XCard } from '@/components'
   import { Empty } from 'ant-design-vue'
   import { getOrgPage, sysOrgDelete, getOrgTree } from '@/api/modular/system/orgManage'
+  import { sysDictTypeDropDown } from '@/api/modular/system/dictManage'
   import addForm from './addForm'
   import editForm from './editForm'
   export default {
@@ -87,6 +91,13 @@
           {
             title: '机构名称',
             dataIndex: 'name'
+          },
+          {
+            title: '机构类型',
+            dataIndex: 'orgType',
+            scopedSlots: {
+              customRender: 'orgType'
+            }
           },
           {
             title: '唯一编码',
@@ -111,6 +122,7 @@
         selectedRowKeys: [],
         selectedRows: [],
         defaultExpandedKeys: [],
+        typeDictTypeDropDown: [],
         // 搜索的三个参数
         expandedKeys: [],
         searchValue: '',
@@ -123,6 +135,7 @@
       }
     },
     created () {
+      this.sysDictTypeDropDown()
       this.getOrgTree()
       if (this.hasPerm('sysOrg:edit') || this.hasPerm('sysOrg:delete')) {
         this.columns.push({
@@ -153,6 +166,24 @@
             }
           }
           this.$refs.table.refresh()
+        })
+      },
+
+      typeFilter(orgType) {
+        // eslint-disable-next-line eqeqeq
+        const values = this.typeDictTypeDropDown.filter(item => item.code == orgType)
+        if (values.length > 0) {
+          return values[0].value
+        }
+      },
+      /**
+       * 获取字典数据
+       */
+      sysDictTypeDropDown(text) {
+        sysDictTypeDropDown({
+          code: 'org_type'
+        }).then((res) => {
+          this.typeDictTypeDropDown = res.data
         })
       },
       /**

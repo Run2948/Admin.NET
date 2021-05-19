@@ -10,6 +10,20 @@
     <a-spin :spinning="formLoading">
       <a-form :form="form">
         <a-form-item
+          label="机构类型"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+          has-feedback
+        >
+              <a-radio-group v-decorator="['orgtype',{rules: [{ required: true, message: '请选择机构类型！' }]}]" >
+               <a-radio
+                  v-for="(item, index) in typeEnumDataDropDown"
+                  :key="index"
+                  :value="parseInt(item.code)">{{ item.value }}</a-radio>
+              </a-radio-group>
+        </a-form-item>
+
+        <a-form-item
           label="机构名称"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
@@ -71,6 +85,7 @@
 
 <script>
   import { sysOrgAdd, getOrgTree } from '@/api/modular/system/orgManage'
+  import { sysDictTypeDropDown } from '@/api/modular/system/dictManage'
   export default {
     data () {
       return {
@@ -82,6 +97,7 @@
           xs: { span: 24 },
           sm: { span: 15 }
         },
+        typeEnumDataDropDown: [],
         orgTree: [],
         visible: false,
         confirmLoading: false,
@@ -89,13 +105,25 @@
         form: this.$form.createForm(this)
       }
     },
+    created () {
+      this.sysDictTypeDropDown()
+    },
     methods: {
       // 初始化方法
       add () {
         this.visible = true
         this.getOrgTree()
       },
-
+      /**
+       * 获取字典数据
+       */
+      sysDictTypeDropDown(text) {
+        sysDictTypeDropDown({
+          code: 'org_type'
+        }).then((res) => {
+          this.typeEnumDataDropDown = res.data
+        })
+      },
       /**
        * 获取机构树，并加载于表单中
        */

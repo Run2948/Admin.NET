@@ -6,6 +6,11 @@
     public class OrgOutput
     {
         /// <summary>
+        /// 机构类型-品牌_1、总店(加盟/直营)_2、直营店_3、加盟店_4
+        /// </summary>
+        public OrgTypeEnum OrgType { get; set; }
+
+        /// <summary>
         /// 机构Id
         /// </summary>
         public string Id { get; set; }

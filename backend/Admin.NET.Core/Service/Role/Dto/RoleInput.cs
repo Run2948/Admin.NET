@@ -9,6 +9,11 @@ namespace Admin.NET.Core.Service
     public class RoleInput
     {
         /// <summary>
+        /// 角色类型-集团角色_0、加盟商角色_1、门店角色_2
+        /// </summary>
+        public RoleTypeEnum RoleType { get; set; }
+
+        /// <summary>
         /// 名称
         /// </summary>
         public string Name { get; set; }
@@ -22,6 +27,12 @@ namespace Admin.NET.Core.Service
     public class RolePageInput : PageInputBase
     {
         /// <summary>
+        /// 角色类型-集团角色_0、加盟商角色_1、门店角色_2
+        /// </summary>
+        [Required(ErrorMessage = "请选择角色类型")]
+        public RoleTypeEnum RoleType { get; set; }
+
+        /// <summary>
         /// 名称
         /// </summary>
         public virtual string Name { get; set; }
@@ -34,6 +45,12 @@ namespace Admin.NET.Core.Service
 
     public class AddRoleInput
     {
+        /// <summary>
+        /// 角色类型-集团角色_0、加盟商角色_1、门店角色_2
+        /// </summary>
+        [Required(ErrorMessage = "请选择角色类型")]
+        public RoleTypeEnum RoleType { get; set; }
+
         /// <summary>
         /// 名称
         /// </summary>
@@ -68,6 +85,12 @@ namespace Admin.NET.Core.Service
 
     public class UpdateRoleInput
     {
+        /// <summary>
+        /// 角色类型-集团角色_0、加盟商角色_1、门店角色_2
+        /// </summary>
+        [Required(ErrorMessage = "请选择角色类型")]
+        public RoleTypeEnum RoleType { get; set; }
+
         /// <summary>
         /// 角色Id
         /// </summary>

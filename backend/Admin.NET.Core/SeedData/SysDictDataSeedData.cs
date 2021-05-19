@@ -121,6 +121,15 @@ namespace Admin.NET.Core
                 new SysDictData{Id=142307070922862, TypeId=142307070922829, Value="decimal", Code="decimal", Sort=100, Remark="decimal", Status=0 },
                 new SysDictData{Id=142307070922863, TypeId=142307070922829, Value="Guid", Code="Guid", Sort=100, Remark="Guid", Status=0 },
                 new SysDictData{Id=142307070922864, TypeId=142307070922829, Value="DateTimeOffset", Code="DateTimeOffset", Sort=100, Remark="DateTimeOffset", Status=0 },
+
+                new SysDictData{Id=142307070932801, TypeId=142307070932829, Value="集团角色", Code="0", Sort=100, Remark="集团角色", Status=0 },
+                new SysDictData{Id=142307070932802, TypeId=142307070932829, Value="加盟商角色", Code="1", Sort=100, Remark="加盟商角色", Status=0 },
+                new SysDictData{Id=142307070932803, TypeId=142307070932829, Value="门店角色", Code="2", Sort=100, Remark="门店角色", Status=0 },
+
+                new SysDictData{Id=160725867577413, TypeId=142307070932830, Value="品牌", Code="1", Sort=100, Remark="品牌", Status=0 },
+                new SysDictData{Id=160726529556549, TypeId=142307070932830, Value="总店(加盟/直营)", Code="2", Sort=100, Remark="总店(加盟/直营)", Status=0 },
+                new SysDictData{Id=160726561742917, TypeId=142307070932830, Value="直营店", Code="3", Sort=100, Remark="直营店", Status=0 },
+                new SysDictData{Id=160726610858053, TypeId=142307070932830, Value="加盟店", Code="4", Sort=100, Remark="加盟店", Status=0 },
             };
         }
     }

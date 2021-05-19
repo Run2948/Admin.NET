@@ -55,6 +55,12 @@ namespace Admin.NET.Core
         public CommonStatus Status { get; set; } = CommonStatus.ENABLE;
 
         /// <summary>
+        /// 角色类型-集团角色_0、加盟商角色_1、门店角色_2
+        /// </summary>
+        [Comment("角色类型-集团角色_0、加盟商角色_1、门店角色_2")]
+        public RoleTypeEnum RoleType { get; set; }
+
+        /// <summary>
         /// 多对多（用户）
         /// </summary>
         public ICollection<SysUser> SysUsers { get; set; }

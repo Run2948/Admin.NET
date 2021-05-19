@@ -1256,6 +1256,11 @@
             状态（字典 0正常 1停用 2删除）
             </summary>
         </member>
+        <member name="P:Admin.NET.Core.SysOrg.OrgType">
+            <summary>
+            机构类型-品牌_1、总店(加盟/直营)_2、直营店_3、加盟店_4
+            </summary>
+        </member>
         <member name="P:Admin.NET.Core.SysOrg.SysUsers">
             <summary>
             多对多（用户）
@@ -1349,6 +1354,11 @@
         <member name="P:Admin.NET.Core.SysRole.Status">
             <summary>
             状态（字典 0正常 1停用 2删除）
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.SysRole.RoleType">
+            <summary>
+            角色类型-集团角色_0、加盟商角色_1、门店角色_2
             </summary>
         </member>
         <member name="P:Admin.NET.Core.SysRole.SysUsers">
@@ -2604,6 +2614,31 @@
             已读
             </summary>
         </member>
+        <member name="T:Admin.NET.Core.OrgTypeEnum">
+            <summary>
+            机构类型
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.OrgTypeEnum.BRAND">
+            <summary>
+            品牌
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.OrgTypeEnum.HEAD">
+            <summary>
+            总店(加盟/直营)
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.OrgTypeEnum.DIRECT">
+            <summary>
+            直营店
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.OrgTypeEnum.FRANCHISED">
+            <summary>
+            加盟店
+            </summary>
+        </member>
         <member name="T:Admin.NET.Core.QueryTypeEnum">
             <summary>
             查询类型的枚举
@@ -2677,6 +2712,26 @@
         <member name="F:Admin.NET.Core.RequestTypeEnum.Delete">
             <summary>
             DELETE请求
+            </summary>
+        </member>
+        <member name="T:Admin.NET.Core.RoleTypeEnum">
+            <summary>
+            角色类型
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.RoleTypeEnum.GROUP">
+            <summary>
+            集团角色
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.RoleTypeEnum.JOIN">
+            <summary>
+            加盟商角色
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.RoleTypeEnum.STORE">
+            <summary>
+            门店角色
             </summary>
         </member>
         <member name="T:Admin.NET.Core.YesOrNot">
@@ -6366,6 +6421,11 @@
             父Id
             </summary>
         </member>
+        <member name="P:Admin.NET.Core.Service.OrgAddInput.OrgType">
+            <summary>
+            机构类型-品牌_1、总店(加盟/直营)_2、直营店_3、加盟店_4
+            </summary>
+        </member>
         <member name="P:Admin.NET.Core.Service.OrgAddInput.Name">
             <summary>
             名称
@@ -6409,6 +6469,11 @@
         <member name="P:Admin.NET.Core.Service.DeleteOrgInput.Id">
             <summary>
             机构Id
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.Service.UpdateOrgInput.OrgType">
+            <summary>
+            机构类型-品牌_1、总店(加盟/直营)_2、直营店_3、加盟店_4
             </summary>
         </member>
         <member name="P:Admin.NET.Core.Service.UpdateOrgInput.Id">
@@ -6461,6 +6526,11 @@
             机构Id
             </summary>
         </member>
+        <member name="P:Admin.NET.Core.Service.OrgPageInput.OrgType">
+            <summary>
+            机构类型-品牌_1、总店(加盟/直营)_2、直营店_3、加盟店_4
+            </summary>
+        </member>
         <member name="P:Admin.NET.Core.Service.OrgPageInput.Pid">
             <summary>
             父Id
@@ -6474,6 +6544,11 @@
         <member name="T:Admin.NET.Core.Service.OrgOutput">
             <summary>
             组织机构参数
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.Service.OrgOutput.OrgType">
+            <summary>
+            机构类型-品牌_1、总店(加盟/直营)_2、直营店_3、加盟店_4
             </summary>
         </member>
         <member name="P:Admin.NET.Core.Service.OrgOutput.Id">
@@ -6801,6 +6876,11 @@
             角色参数
             </summary>
         </member>
+        <member name="P:Admin.NET.Core.Service.RoleInput.RoleType">
+            <summary>
+            角色类型-集团角色_0、加盟商角色_1、门店角色_2
+            </summary>
+        </member>
         <member name="P:Admin.NET.Core.Service.RoleInput.Name">
             <summary>
             名称
@@ -6811,6 +6891,11 @@
             编码
             </summary>
         </member>
+        <member name="P:Admin.NET.Core.Service.RolePageInput.RoleType">
+            <summary>
+            角色类型-集团角色_0、加盟商角色_1、门店角色_2
+            </summary>
+        </member>
         <member name="P:Admin.NET.Core.Service.RolePageInput.Name">
             <summary>
             名称
@@ -6819,6 +6904,11 @@
         <member name="P:Admin.NET.Core.Service.RolePageInput.Code">
             <summary>
             编码
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.Service.AddRoleInput.RoleType">
+            <summary>
+            角色类型-集团角色_0、加盟商角色_1、门店角色_2
             </summary>
         </member>
         <member name="P:Admin.NET.Core.Service.AddRoleInput.Name">
@@ -6844,6 +6934,11 @@
         <member name="P:Admin.NET.Core.Service.AddRoleInput.Remark">
             <summary>
             备注
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.Service.UpdateRoleInput.RoleType">
+            <summary>
+            角色类型-集团角色_0、加盟商角色_1、门店角色_2
             </summary>
         </member>
         <member name="P:Admin.NET.Core.Service.UpdateRoleInput.Id">
@@ -6939,6 +7034,11 @@
         <member name="T:Admin.NET.Core.Service.RoleOutput">
             <summary>
             登录用户角色参数
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.Service.RoleOutput.RoleType">
+            <summary>
+            角色类型-集团角色_0、加盟商角色_1、门店角色_2
             </summary>
         </member>
         <member name="P:Admin.NET.Core.Service.RoleOutput.Id">
