@@ -187,6 +187,50 @@
             在线用户缓存
             </summary>
         </member>
+        <member name="T:Admin.NET.Core.DynamicConditions.Condition">
+            <summary>
+            查询条件
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.DynamicConditions.Condition.Field">
+            <summary>
+            字段名
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.DynamicConditions.Condition.Op">
+            <summary>
+            操作符
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.DynamicConditions.Condition.Value">
+            <summary>
+            字段值
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.DynamicConditions.Condition.OrGroup">
+            <summary>
+            分组名称
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Core.DynamicConditions.QueryableExstenstions.Search``1(System.Linq.IQueryable{``0},Admin.NET.Core.PageInputBase)">
+            <summary>
+            根据分页查询参数为IQueryable附加过滤条件
+            </summary>
+            <param name="source"></param>
+            <param name="searchParameters"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Core.DynamicConditions.QueryableExstenstions.ApplyOrder``1(System.Linq.IQueryable{``0},System.String,System.String)">
+            <summary>
+            附加排序
+            </summary>
+            <param name="source"></param>
+            <param name="property"></param>
+            <param name="sortMethod"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
         <member name="T:Admin.NET.Core.DBEntityTenant">
             <summary>
             自定义租户基类实体
@@ -2606,47 +2650,67 @@
         </member>
         <member name="T:Admin.NET.Core.QueryTypeEnum">
             <summary>
-            查询类型的枚举
+            查询类型枚举
             </summary>
         </member>
-        <member name="F:Admin.NET.Core.QueryTypeEnum.eq">
+        <member name="F:Admin.NET.Core.QueryTypeEnum.Equals">
             <summary>
             等于
             </summary>
         </member>
-        <member name="F:Admin.NET.Core.QueryTypeEnum.like">
-            <summary>
-            模糊
-            </summary>
-        </member>
-        <member name="F:Admin.NET.Core.QueryTypeEnum.gt">
-            <summary>
-            大于
-            </summary>
-        </member>
-        <member name="F:Admin.NET.Core.QueryTypeEnum.lt">
-            <summary>
-            小于
-            </summary>
-        </member>
-        <member name="F:Admin.NET.Core.QueryTypeEnum.ne">
+        <member name="F:Admin.NET.Core.QueryTypeEnum.NotEquals">
             <summary>
             不等于
             </summary>
         </member>
-        <member name="F:Admin.NET.Core.QueryTypeEnum.ge">
+        <member name="F:Admin.NET.Core.QueryTypeEnum.GreaterThan">
+            <summary>
+            大于
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.QueryTypeEnum.GreaterThanOrEquals">
             <summary>
             大于等于
             </summary>
         </member>
-        <member name="F:Admin.NET.Core.QueryTypeEnum.le">
+        <member name="F:Admin.NET.Core.QueryTypeEnum.LessThan">
+            <summary>
+            小于
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.QueryTypeEnum.LessThanOrEquals">
             <summary>
             小于等于
             </summary>
         </member>
-        <member name="F:Admin.NET.Core.QueryTypeEnum.isNotNull">
+        <member name="F:Admin.NET.Core.QueryTypeEnum.StdIn">
             <summary>
-            不为空
+            在列表中
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.QueryTypeEnum.StdNotIn">
+            <summary>
+            不在列表中
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.QueryTypeEnum.Contains">
+            <summary>
+            包含
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.QueryTypeEnum.NotContains">
+            <summary>
+            不包含
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.QueryTypeEnum.StartsWith">
+            <summary>
+            头部包含
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.QueryTypeEnum.EndsWith">
+            <summary>
+            尾部包含
             </summary>
         </member>
         <member name="T:Admin.NET.Core.RequestTypeEnum">
@@ -3461,6 +3525,225 @@
         <member name="P:Admin.NET.Core.Service.BaseId.Id">
             <summary>
             主键Id
+            </summary>
+        </member>
+        <member name="T:Admin.NET.Core.Service.Base.BaseService`9">
+            <summary>
+            通用方法
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TSearchDto"></typeparam>
+            <typeparam name="TAddDto"></typeparam>
+            <typeparam name="TUpdateDto"></typeparam>
+            <typeparam name="TImportDto"></typeparam>
+            <typeparam name="TDetailDto"></typeparam>
+            <typeparam name="TPageListDto"></typeparam>
+            <typeparam name="TExportDto"></typeparam>
+            <typeparam name="TPrintDto"></typeparam>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.Repository">
+            <summary>
+            数据仓储
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Core.Service.Base.BaseService`9.#ctor(Furion.DatabaseAccessor.IRepository{`0})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="repository"></param>
+        </member>
+        <member name="M:Admin.NET.Core.Service.Base.BaseService`9.Get(System.Int64)">
+            <summary>
+            主键查询
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.SearchExpression">
+            <summary>
+            分页搜索前
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.SearchQueryable">
+            <summary>
+            自定义分页搜索（复杂查询）
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.PageListHandle">
+            <summary>
+            分页数据返回前处理
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Core.Service.Base.BaseService`9.PageList(`1)">
+            <summary>
+            分页查询
+            </summary>
+            <param name="searchDto"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.BeforeAddAction">
+            <summary>
+            新增前验证或处理
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.AfterAddAction">
+            <summary>
+            新增后处理
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Core.Service.Base.BaseService`9.Add(`2)">
+            <summary>
+            新增
+            </summary>
+            <param name="addDto"></param>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.BeforeDeleteAction">
+            <summary>
+            删除前验证或处理
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.AfterDeleteAction">
+            <summary>
+            删除后处理
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Core.Service.Base.BaseService`9.Delete(System.Collections.Generic.List{System.Int64})">
+            <summary>
+            删除
+            </summary>
+            <param name="ids"></param>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.BeforeFakeDeleteAction">
+            <summary>
+            假删除前验证或处理
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.AfterFakeDeleteAction">
+            <summary>
+            假删除后处理
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Core.Service.Base.BaseService`9.FakeDelete(System.Collections.Generic.List{System.Int64})">
+            <summary>
+            假删除
+            </summary>
+            <param name="ids"></param>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.BeforeUpdateAction">
+            <summary>
+            更新前验证或处理
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.AfterUpdateAction">
+            <summary>
+            更新后处理
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Core.Service.Base.BaseService`9.Update(`3)">
+            <summary>
+            修改
+            </summary>
+            <param name="updateDto"></param>
+        </member>
+        <member name="M:Admin.NET.Core.Service.Base.BaseService`9.ImportTemplate">
+            <summary>
+            导入模版下载
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.BeforeImportAction">
+            <summary>
+            导入前验证或处理
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.AfterImportAction">
+            <summary>
+            导入后处理
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Core.Service.Base.BaseService`9.Import(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            导入
+            </summary>
+            <param name="file"></param>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.ExportSearchExpression">
+            <summary>
+            导出搜索前
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.ExportSearchQueryable">
+            <summary>
+            自定义导出搜索（复杂查询）
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.Service.Base.BaseService`9.ExportHandle">
+            <summary>
+            导出数据返回前处理
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Core.Service.Base.BaseService`9.Export(`1)">
+            <summary>
+            导出
+            </summary>
+            <param name="searchDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Core.Service.Base.BaseService`9.Print(System.Int64)">
+            <summary>
+            获取打印数据 todo: 最简单的主键查询单条数据，后续实现单据打印模版模块
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Admin.NET.Core.Service.Base.BaseService`9.GetSearchParameters(`1)">
+            <summary>
+            将查询dto组装成搜索参数
+            </summary>
+            <param name="searchDto"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Admin.NET.Core.Service.Base.BaseDto.Id">
+            <summary>
+            主键Id
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.Service.Base.BaseDto.CreatedTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.Service.Base.BaseDto.UpdatedTime">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.Service.Base.BaseDto.CreatedUserId">
+            <summary>
+            创建者Id
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.Service.Base.BaseDto.CreatedUserName">
+            <summary>
+            创建者名称
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.Service.Base.BaseDto.UpdatedUserId">
+            <summary>
+            修改者Id
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.Service.Base.BaseDto.UpdatedUserName">
+            <summary>
+            修改者名称
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.Service.Base.BaseDto.IsDeleted">
+            <summary>
+            软删除
             </summary>
         </member>
         <member name="T:Admin.NET.Core.Service.SysCacheService">
@@ -8584,6 +8867,14 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
+        <member name="M:Admin.NET.Core.ReflectionUtil.GetDescriptionValue``1(System.Type)">
+            <summary>
+            获取类型的特性
+            </summary>
+            <param name="field"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
         <member name="T:Admin.NET.Core.ITreeNode">
             <summary>
             树基类
@@ -8696,6 +8987,11 @@
         <member name="P:Admin.NET.Core.PageInputBase.DescStr">
             <summary>
             降序排序(不要问我为什么是descend不是desc，前端约定参数就是这样)
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.PageInputBase.SearchParameters">
+            <summary>
+            复杂查询条件
             </summary>
         </member>
         <member name="T:Admin.NET.Core.XnPageResult`1">
