@@ -43,7 +43,7 @@ namespace Admin.NET.Core.DynamicConditions
             var parameterExp = Expression.Parameter(type, "x");
             var propertyInfo = type.GetProperty(property);
             var propertyExp = Expression.Property(parameterExp, propertyInfo);
-            var lambdaExp = Expression.Lambda<Func<T, bool>>(propertyExp, parameterExp);
+            var lambdaExp = Expression.Lambda<Func<T, dynamic>>(propertyExp, parameterExp);
 
             return sortMethod == "descend" ? source.OrderByDescending(lambdaExp) : source.OrderBy(lambdaExp);
         }
