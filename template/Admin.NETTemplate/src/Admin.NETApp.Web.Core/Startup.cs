@@ -29,7 +29,6 @@ namespace Admin.NETApp.Web.Core
                         options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
                         options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                     });
-            services.AddRemoteRequest();
             services.AddViewEngine();
             services.AddSignalR();
             services.AddSimpleEventBus();
