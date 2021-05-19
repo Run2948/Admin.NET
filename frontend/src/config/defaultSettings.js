@@ -25,6 +25,7 @@ export default {
   autoHideHeader: false, //  auto hide header
   colorWeak: false,
   multiTab: false,
+  crumbsSate: false,
   production: process.env.NODE_ENV === 'production' && process.env.VUE_APP_PREVIEW !== 'true',
   // vue-ls options
   storageOptions: {

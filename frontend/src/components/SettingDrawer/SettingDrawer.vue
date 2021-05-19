@@ -144,6 +144,12 @@
                   <div slot="title">多页签模式</div>
                 </a-list-item-meta>
               </a-list-item>
+              <a-list-item>
+                <a-switch slot="actions" size="small" :defaultChecked="crumbsState" @change="onCrumbs" />
+                <a-list-item-meta>
+                  <div slot="title">显示面包屑</div>
+                </a-list-item-meta>
+              </a-list-item>
             </a-list>
           </div>
         </div>
@@ -215,6 +221,9 @@ export default {
     onMultiTab (checked) {
       this.$store.dispatch('ToggleMultiTab', checked)
     },
+    onCrumbs(checked) {
+      this.$store.dispatch('ToggleCrumbsState', checked)
+    },
     handleMenuTheme (theme) {
       this.$store.dispatch('ToggleTheme', theme)
     },
@@ -230,6 +239,7 @@ export default {
   autoHideHeader: ${this.autoHideHeader}, //  auto hide header
   colorWeak: ${this.colorWeak},
   multiTab: ${this.multiTab},
+  crumbsState: ${this.crumbsState},
   production: process.env.NODE_ENV === 'production' && process.env.VUE_APP_PREVIEW !== 'true',
   // vue-ls options
   storageOptions: {

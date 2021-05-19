@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-18 23:01:55
+ * @LastEditTime: 2021-05-19 00:49:11
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \frontend\src\utils\mixin.js
+ */
 // import Vue from 'vue'
 import { deviceEnquire, DEVICE_TYPE } from '@/utils/device'
 import { mapState } from 'vuex'
@@ -18,7 +26,8 @@ const mixin = {
       contentWidth: state => state.app.contentWidth,
       autoHideHeader: state => state.app.autoHideHeader,
       sidebarOpened: state => state.app.sidebar,
-      multiTab: state => state.app.multiTab
+      multiTab: state => state.app.multiTab,
+      crumbsState: state => state.app.crumbsState
     })
   },
   methods: {
