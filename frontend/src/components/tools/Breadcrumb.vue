@@ -1,5 +1,5 @@
 <template>
-  <a-breadcrumb v-if="crumbsState" class="breadcrumb">
+  <a-breadcrumb class="breadcrumb">
     <a-breadcrumb-item v-for="(item, index) in breadList" :key="item.name">
       <router-link
         v-if="item.name != name && index != 1"
@@ -15,17 +15,11 @@ export default {
   data () {
     return {
       name: '',
-      breadList: [],
-      crumbsState: true
+      breadList: []
     }
   },
   created () {
     this.getBreadcrumb()
-  },
-   computed: {
-    getCrumbsState() {
-      return this.$store.state.app.crumbsState
-    }
   },
   methods: {
     getBreadcrumb () {
@@ -42,9 +36,6 @@ export default {
   watch: {
     $route () {
       this.getBreadcrumb()
-    },
-    getCrumbsState (newVal, oldVal) {
-      this.crumbsState = newVal
     }
   }
 }

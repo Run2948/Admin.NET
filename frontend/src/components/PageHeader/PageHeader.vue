@@ -1,7 +1,7 @@
 <template>
   <div class="page-header">
     <div class="page-header-index-wide">
-      <s-breadcrumb />
+      <s-breadcrumb v-if="crumbsState" />
       <div class="detail">
         <div class="main" v-if="!$route.meta.hiddenHeaderContent">
           <div class="row">
@@ -57,7 +57,19 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+      crumbsState: this.$store.state.app.crumbsState
+      }
+  },
+  computed: {
+    getCrumbsState() {
+      return this.$store.state.app.crumbsState
+    }
+  },
+  watch: {
+    getCrumbsState (newVal, oldVal) {
+      this.crumbsState = newVal
+    }
   }
 }
 </script>
