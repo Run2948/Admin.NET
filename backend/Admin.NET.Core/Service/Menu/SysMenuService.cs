@@ -111,10 +111,10 @@ namespace Admin.NET.Core.Service
                 {
                     Id = u.Id,
                     Pid = u.Pid,
+                    Path = u.OpenType == MenuOpenType.OUTER ? u.Link : u.Router,
                     Name = u.Code,
                     Component = u.Component,
-                    Redirect = u.OpenType == MenuOpenType.OUTER ? u.Link : u.Redirect,
-                    Path = u.OpenType == MenuOpenType.OUTER ? u.Link : u.Router,
+                    Redirect = u.OpenType == MenuOpenType.OUTER ? u.Link : u.Redirect,                    
                     Meta = new Meta
                     {
                         Title = u.Name,
