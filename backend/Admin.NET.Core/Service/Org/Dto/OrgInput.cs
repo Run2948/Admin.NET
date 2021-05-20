@@ -16,6 +16,12 @@ namespace Admin.NET.Core.Service
     public class OrgAddInput
     {
         /// <summary>
+        /// 机构类型-品牌_1、总店(加盟/直营)_2、直营店_3、加盟店_4
+        /// </summary>
+        [Required(ErrorMessage = "请选择机构类型")]
+        public OrgTypeEnum OrgType { get; set; }
+
+        /// <summary>
         /// 名称
         /// </summary>
         [Required(ErrorMessage = "机构名称不能为空")]
@@ -69,6 +75,12 @@ namespace Admin.NET.Core.Service
 
     public class UpdateOrgInput
     {
+        /// <summary>
+        /// 机构类型-品牌_1、总店(加盟/直营)_2、直营店_3、加盟店_4
+        /// </summary>
+        [Required(ErrorMessage = "请选择机构类型")]
+        public OrgTypeEnum OrgType { get; set; }
+
         /// <summary>
         /// 机构Id
         /// </summary>
@@ -129,6 +141,12 @@ namespace Admin.NET.Core.Service
 
     public class OrgPageInput : PageInputBase
     {
+        /// <summary>
+        /// 机构类型-品牌_1、总店(加盟/直营)_2、直营店_3、加盟店_4
+        /// </summary>
+        [Required(ErrorMessage = "请选择机构类型")]
+        public OrgTypeEnum OrgType { get; set; }
+
         public string Id { get; set; }
 
         /// <summary>

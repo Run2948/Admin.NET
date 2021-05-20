@@ -20,6 +20,20 @@
         </a-form-item>
 
         <a-form-item
+          label="角色类型"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+          has-feedback
+        >
+              <a-radio-group v-decorator="['roleType',{rules: [{ required: true, message: '请选择角色类型！' }]}]" >
+               <a-radio
+                  v-for="(item, index) in typeEnumDataDropDown"
+                  :key="index"
+                  :value="parseInt(item.code)">{{ item.value }}</a-radio>
+              </a-radio-group>
+        </a-form-item>
+
+        <a-form-item
           label="角色名"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
@@ -63,6 +77,7 @@
 
 <script>
   import { sysRoleEdit } from '@/api/modular/system/roleManage'
+  import { sysDictTypeDropDown } from '@/api/modular/system/dictManage'
   export default {
     data () {
       return {
@@ -76,17 +91,26 @@
         },
         visible: false,
         confirmLoading: false,
+        typeEnumDataDropDown: [],
         form: this.$form.createForm(this)
       }
     },
+    created () {
+      this.sysDictTypeDropDown()
+      },
     methods: {
       // 初始化方法
       edit (record) {
         this.visible = true
+        this.form.getFieldDecorator('roleType', {
+          valuePropName: 'checked',
+          initialValue: record.roleType.toString()
+        })
         setTimeout(() => {
           this.form.setFieldsValue(
             {
               id: record.id,
+              roleType: record.roleType,
               name: record.name,
               code: record.code,
               sort: record.sort,
@@ -95,7 +119,16 @@
           )
         }, 100)
       },
-
+      /**
+       * 获取字典数据
+       */
+      sysDictTypeDropDown(text) {
+        sysDictTypeDropDown({
+          code: 'role_type'
+        }).then((res) => {
+          this.typeEnumDataDropDown = res.data
+        })
+      },
       handleSubmit () {
         const { form: { validateFields } } = this
         this.confirmLoading = true
