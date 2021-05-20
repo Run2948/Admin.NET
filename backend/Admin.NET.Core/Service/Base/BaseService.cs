@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Admin.NET.Core.DynamicConditions;
-using Furion.ClayObject.Extensions;
+﻿using Furion.ClayObject.Extensions;
 using Furion.DatabaseAccessor;
 using Furion.DatabaseAccessor.Extensions;
 using Furion.FriendlyException;
@@ -16,9 +9,15 @@ using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Yitter.IdGenerator;
 
-namespace Admin.NET.Core.Service.Base
+namespace Admin.NET.Core.Service
 {
     /// <summary>
     /// 通用方法
@@ -44,7 +43,7 @@ namespace Admin.NET.Core.Service.Base
         /// 数据仓储
         /// </summary>
         protected readonly IRepository<TEntity> Repository;
-  
+
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -55,7 +54,7 @@ namespace Admin.NET.Core.Service.Base
         }
 
         #region 查询/分页查询
-        
+
         /// <summary>
         /// 主键查询
         /// </summary>
@@ -66,12 +65,12 @@ namespace Admin.NET.Core.Service.Base
             var entity = await Repository.DetachedEntities.FirstOrDefaultAsync(e => e.Id == id);
             return entity.Adapt<TDetailDto>();
         }
-        
+
         /// <summary>
         /// 分页搜索前
         /// </summary>
         protected Func<TSearchDto, Expression<Func<TEntity, bool>>> SearchExpression = null;
-        
+
         /// <summary>
         /// 自定义分页搜索（复杂查询）
         /// </summary>
@@ -82,7 +81,7 @@ namespace Admin.NET.Core.Service.Base
         /// </summary>
         /// <returns></returns>
         protected Action<PagedList<TEntity>> PageListHandle = null;
-        
+
         /// <summary>
         /// 分页查询
         /// </summary>
@@ -103,7 +102,7 @@ namespace Admin.NET.Core.Service.Base
                 // 动态构建查询条件
                 GetSearchParameters(searchDto);
                 queryable = Repository.DetachedEntities.Search(searchDto);
-                
+
                 // 有自定义的查询条件
                 if (SearchExpression != null)
                     queryable = queryable.Where(SearchExpression(searchDto));
@@ -129,7 +128,7 @@ namespace Admin.NET.Core.Service.Base
         /// 新增后处理
         /// </summary>
         protected Action<TEntity> AfterAddAction = null;
-        
+
         /// <summary>
         /// 新增
         /// </summary>
@@ -138,16 +137,16 @@ namespace Admin.NET.Core.Service.Base
         {
             // 新增前操作
             BeforeAddAction?.Invoke(addDto);
-            
+
             // 写数据
             var entity = await addDto.Adapt<TEntity>().InsertAsync();
-            
+
             // 新增后操作
             AfterAddAction?.Invoke(entity.Entity);
         }
 
         #endregion
-        
+
         #region 删除/假删除
 
         /// <summary>
@@ -167,12 +166,12 @@ namespace Admin.NET.Core.Service.Base
         public virtual async Task Delete(List<long> ids)
         {
             BeforeDeleteAction?.Invoke(ids);
-            
-            var count = await Repository.Context.DeleteRangeAsync<TEntity>(x=>ids.Contains(x.Id));
+
+            var count = await Repository.Context.DeleteRangeAsync<TEntity>(x => ids.Contains(x.Id));
 
             AfterDeleteAction?.Invoke(ids, count);
         }
-        
+
         /// <summary>
         /// 假删除前验证或处理
         /// </summary>
@@ -213,7 +212,7 @@ namespace Admin.NET.Core.Service.Base
         /// 更新后处理
         /// </summary>
         protected Action<TEntity> AfterUpdateAction = null;
-        
+
         /// <summary>
         /// 修改
         /// </summary>
@@ -240,10 +239,10 @@ namespace Admin.NET.Core.Service.Base
             // 创建Excel导入对象
             IImporter importer = new ExcelImporter();
             var byteArray = await importer.GenerateTemplateBytes<TImportDto>();
-            
+
             // 文件名称
             var fileName = typeof(TEntity).GetDescriptionValue<CommentAttribute>() + "导入模版.xlsx";
-            
+
             return await Task.FromResult(
                 new FileContentResult(byteArray, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
@@ -274,7 +273,7 @@ namespace Admin.NET.Core.Service.Base
             {
                 await file.CopyToAsync(stream);
             }
-            
+
             // 创建Excel导入对象
             IImporter importer = new ExcelImporter();
             var import = await importer.Import<TImportDto>(path);
@@ -285,7 +284,7 @@ namespace Admin.NET.Core.Service.Base
                 throw Oops.Oh("导入异常:" + import.Exception);
             if (import.RowErrors.Count > 0)
                 throw Oops.Oh("数据校验:" + JSON.Serialize(import.RowErrors));
-            
+
             BeforeImportAction?.Invoke(import.Data);
 
             await Repository.InsertAsync(import.Data.Adapt<ICollection<TEntity>>());
@@ -301,7 +300,7 @@ namespace Admin.NET.Core.Service.Base
         /// 导出搜索前
         /// </summary>
         protected Func<TSearchDto, Expression<Func<TEntity, bool>>> ExportSearchExpression = null;
-        
+
         /// <summary>
         /// 自定义导出搜索（复杂查询）
         /// </summary>
@@ -312,7 +311,7 @@ namespace Admin.NET.Core.Service.Base
         /// </summary>
         /// <returns></returns>
         protected Action<PagedList<TEntity>> ExportHandle = null;
-        
+
         /// <summary>
         /// 导出
         /// </summary>
@@ -332,23 +331,23 @@ namespace Admin.NET.Core.Service.Base
                 // 动态构建查询条件
                 GetSearchParameters(searchDto);
                 queryable = Repository.DetachedEntities.Search(searchDto);
-                
+
                 // 有自定义的查询条件
                 if (ExportSearchExpression != null)
                     queryable = queryable.Where(ExportSearchExpression(searchDto));
             }
-            
+
             var entitys = await queryable.ToListAsync();
-            
+
             // 创建Excel导出对象
             IExporter exporter = new ExcelExporter();
-            
+
             // 导出文件
             var byteArray = await exporter.ExportAsByteArray(entitys.Adapt<List<TExportDto>>());
-            
+
             // 文件名称
             var fileName = typeof(TEntity).GetDescriptionValue<CommentAttribute>() + DateTime.Now.ToString("yyyyMMddHHssmm") + ".xlsx";
-            
+
             return await Task.FromResult(
                 new FileContentResult(byteArray, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
@@ -384,14 +383,14 @@ namespace Admin.NET.Core.Service.Base
         {
             // 如果没有复杂查询条件，把自定义查询dto中有内容的项加入查询条件
             if (searchDto.SearchParameters != null && searchDto.SearchParameters.Any()) return;
-            
+
             // 查询dto转为字典
             var searchDictionary = searchDto.ToDictionary();
-            
+
             // 取实体中的字段名称
             var entityPropertieNames =
                 typeof(TEntity).GetProperties().Select(x => x.Name).ToList();
-                
+
             // 将searchDto中有值的属性加入复杂查询条件
             foreach (var keyValuePair in searchDictionary)
             {

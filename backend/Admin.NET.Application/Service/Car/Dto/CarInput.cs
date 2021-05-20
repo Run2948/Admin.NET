@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Admin.NET.Core;
-using Admin.NET.Core.Service.Base;
+﻿using Admin.NET.Core;
+using Admin.NET.Core.Service;
 using Magicodes.ExporterAndImporter.Core;
 using Magicodes.ExporterAndImporter.Core.Filters;
 using Magicodes.ExporterAndImporter.Core.Models;
 using Magicodes.ExporterAndImporter.Excel;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Admin.NET.Application.Dto
 {
@@ -15,7 +15,7 @@ namespace Admin.NET.Application.Dto
         public string CarName { get; set; }
         public string CarNo { get; set; }
     }
-    
+
     public class CarAdd
     {
         public string CarName { get; set; }
@@ -80,7 +80,7 @@ namespace Admin.NET.Application.Dto
                 // 支持绑定值映射
                 else if (item.PropertyName == "Gender")
                 {
-                    item.MappingValues = new Dictionary<string, dynamic>() {{"男", 0}, {"女", 1}};
+                    item.MappingValues = new Dictionary<string, dynamic>() { { "男", 0 }, { "女", 1 } };
                 }
             }
 

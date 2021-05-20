@@ -48,31 +48,31 @@ namespace Admin.NET.Core
         /// </summary>
         [Description("在列表中")]
         StdIn = 6,
-        
+
         /// <summary>
         /// 不在列表中
         /// </summary>
         [Description("不在列表中")]
         StdNotIn = 7,
-        
+
         /// <summary>
         /// 包含
         /// </summary>
         [Description("包含")]
         Contains = 8,
-        
+
         /// <summary>
         /// 不包含
         /// </summary>
         [Description("不包含")]
         NotContains = 9,
-        
+
         /// <summary>
         /// 头部包含
         /// </summary>
         [Description("头部包含")]
         StartsWith = 10,
-        
+
         /// <summary>
         /// 尾部包含
         /// </summary>

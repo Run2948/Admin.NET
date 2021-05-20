@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Furion.LinqBuilder;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Furion.LinqBuilder;
 
-namespace Admin.NET.Core.DynamicConditions
+namespace Admin.NET.Core
 {
     public static class QueryableExstenstions
     {

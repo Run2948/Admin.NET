@@ -1,18 +1,18 @@
-﻿using System.Threading.Tasks;
-using Admin.NET.Application.Dto;
+﻿using Admin.NET.Application.Dto;
 using Admin.NET.Application.Entity;
-using Admin.NET.Core.Service.Base;
+using Admin.NET.Core.Service;
 using Furion.DatabaseAccessor;
 using Furion.DependencyInjection;
 using Furion.DynamicApiController;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Admin.NET.Application
 {
-    
+
     [Route("api/[controller]")]
     [ApiDescriptionSettings("自己的业务", Name = "Car", Order = 90)]
-    public class CarService : BaseService<Car, CarSeaarch, CarAdd, CarUpdate, CarImport, CarDetail, CarPageList, CarExport, CarPrint>,IDynamicApiController,ITransient
+    public class CarService : BaseService<Car, CarSeaarch, CarAdd, CarUpdate, CarImport, CarDetail, CarPageList, CarExport, CarPrint>, IDynamicApiController, ITransient
     {
         public CarService(IRepository<Car> repository) : base(repository)
         {

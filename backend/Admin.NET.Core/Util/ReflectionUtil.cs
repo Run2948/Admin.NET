@@ -22,7 +22,7 @@ namespace Admin.NET.Core
             // 如果没有数据返回null
             return customAttributes.Length > 0 ? (T)customAttributes[0] : null;
         }
-        
+
         /// <summary>
         /// 获取类型的特性
         /// </summary>

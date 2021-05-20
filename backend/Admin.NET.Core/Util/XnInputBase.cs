@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Admin.NET.Core.DynamicConditions;
 
 namespace Admin.NET.Core
 {

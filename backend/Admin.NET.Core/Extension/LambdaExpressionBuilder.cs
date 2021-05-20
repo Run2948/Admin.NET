@@ -1,11 +1,14 @@
 ﻿using System;
-using System.Linq;
-using System.Reflection;
-using System.Linq.Expressions;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 
-namespace Admin.NET.Core.DynamicConditions
+namespace Admin.NET.Core
 {
+    /// <summary>
+    /// 动态生成查询表达式
+    /// </summary>
     public static class LambdaExpressionBuilder
     {
         private static Expression GetExpression(ParameterExpression parameter, Condition condition)
@@ -35,7 +38,7 @@ namespace Admin.NET.Core.DynamicConditions
                     condition.Value = typeof(Enumerable)
                         .GetMethod("ToArray", BindingFlags.Public | BindingFlags.Static)
                         ?.MakeGenericMethod(realPropertyType)
-                        .Invoke(null, new[] {condition.Value});
+                        .Invoke(null, new[] { condition.Value });
             }
 
             var constantParam = Expression.Constant(condition.Value);
@@ -62,9 +65,9 @@ namespace Admin.NET.Core.DynamicConditions
                 case QueryTypeEnum.LessThanOrEquals:
                     return Expression.LessThanOrEqual(propertyParam, constantParam);
                 case QueryTypeEnum.StdIn:
-                    return Expression.Call(typeof(Enumerable), "Contains", new[] {realPropertyType}, constantParam, propertyParam);
+                    return Expression.Call(typeof(Enumerable), "Contains", new[] { realPropertyType }, constantParam, propertyParam);
                 case QueryTypeEnum.StdNotIn:
-                    return Expression.Not(Expression.Call(typeof(Enumerable), "Contains", new[] {realPropertyType}, constantParam, propertyParam));
+                    return Expression.Not(Expression.Call(typeof(Enumerable), "Contains", new[] { realPropertyType }, constantParam, propertyParam));
             }
 
             return null;
@@ -140,7 +143,7 @@ namespace Admin.NET.Core.DynamicConditions
             return Expression.Lambda<Func<T, bool>>(exp, parameter);
         }
     }
-    
+
     /// <summary>
     /// 查询条件
     /// </summary>
@@ -151,17 +154,17 @@ namespace Admin.NET.Core.DynamicConditions
         /// 字段名
         /// </summary>
         public string Field { get; set; }
-        
+
         /// <summary>
         /// 操作符
         /// </summary>
         public QueryTypeEnum Op { get; set; }
-        
+
         /// <summary>
         /// 字段值
         /// </summary>
         public object Value { get; set; }
-        
+
         /// <summary>
         /// 分组名称
         /// </summary>

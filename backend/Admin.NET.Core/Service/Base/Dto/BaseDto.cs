@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Admin.NET.Core.Service.Base
+namespace Admin.NET.Core.Service
 {
     public class BaseDto
     {

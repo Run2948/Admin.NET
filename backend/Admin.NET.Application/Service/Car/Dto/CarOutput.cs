@@ -12,22 +12,22 @@ namespace Admin.NET.Application.Dto
         public string CarName { get; set; }
         public string CarNo { get; set; }
     }
-    
+
     public class CarPageList
     {
         public string CarName { get; set; }
         public string CarNo { get; set; }
     }
-    
+
     /// <summary>
     /// 导出支持各种配置
     /// </summary>
     [ExcelExporter(Name = "车辆资料", TableStyle = TableStyles.Light10, ExporterHeaderFilter = typeof(CarExport))]
-    public class CarExport:IExporterHeaderFilter
+    public class CarExport : IExporterHeaderFilter
     {
         [ExporterHeader(DisplayName = "车名", IsBold = true, IsIgnore = true)]
         public string CarName { get; set; }
-        
+
         [ExporterHeader("车牌号")]
         public string CarNo { get; set; }
 
@@ -46,15 +46,15 @@ namespace Admin.NET.Application.Dto
             // 修改显示名称
             if (exporterHeaderInfo.DisplayName.Equals("车名"))
                 exporterHeaderInfo.DisplayName = "禁止开车";
-            
+
             // 忽略的改为不忽略
             if (exporterHeaderInfo.ExporterHeaderAttribute.IsIgnore)
                 exporterHeaderInfo.ExporterHeaderAttribute.IsIgnore = false;
-            
+
             return exporterHeaderInfo;
         }
     }
-    
+
     public class CarPrint
     {
         public string CarName { get; set; }
