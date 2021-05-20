@@ -6,12 +6,12 @@
           <a-row :gutter="48">
             <a-col :md="8" :sm="24">
               <a-form-item label="角色名">
-                <a-input v-model="queryParam.name" allow-clear placeholder="请输入角色名"/>
+                <a-input v-model="queryParam.name" allow-clear placeholder="请输入角色名" />
               </a-form-item>
             </a-col>
             <a-col :md="8" :sm="24">
               <a-form-item label="唯一编码">
-                <a-input v-model="queryParam.code" allow-clear placeholder="请输入唯一编码"/>
+                <a-input v-model="queryParam.code" allow-clear placeholder="请输入唯一编码" />
               </a-form-item>
             </a-col>
             <a-col :md="8" :sm="24">
@@ -29,20 +29,21 @@
         :data="loadData"
         :alert="true"
         :rowKey="(record) => record.code"
-        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
-      >
+        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }">
         <template slot="operator" v-if="hasPerm('sysRole:add')">
-          <a-button @click="$refs.addForm.add()" icon="plus" type="primary" v-if="hasPerm('sysRole:add')">新增角色</a-button>
+          <a-button @click="$refs.addForm.add()" icon="plus" type="primary" v-if="hasPerm('sysRole:add')">新增角色
+          </a-button>
         </template>
         <span slot="roleType" slot-scope="text">
-            {{ typeFilter(text) }}
+          {{ typeFilter(text) }}
         </span>
         <span slot="action" slot-scope="text, record">
           <a v-if="hasPerm('sysRole:edit')" @click="$refs.editForm.edit(record)">编辑</a>
-          <a-divider type="vertical" v-if="hasPerm('sysRole:edit')"/>
+          <a-divider type="vertical" v-if="hasPerm('sysRole:edit')" />
           <a-dropdown v-if="hasPerm('sysRole:grantMenu') || hasPerm('sysRole:grantData') || hasPerm('sysRole:delete')">
             <a class="ant-dropdown-link">
-              更多 <a-icon type="down" />
+              更多
+              <a-icon type="down" />
             </a>
             <a-menu slot="overlay">
               <a-menu-item v-if="hasPerm('sysRole:grantMenu')">
@@ -64,21 +65,29 @@
 
       <add-form ref="addForm" @ok="handleOk" />
       <edit-form ref="editForm" @ok="handleOk" />
-      <role-menu-form ref="roleMenuForm" @ok="handleOk"/>
-      <role-org-form ref="roleOrgForm" @ok="handleOk"/>
+      <role-menu-form ref="roleMenuForm" @ok="handleOk" />
+      <role-org-form ref="roleOrgForm" @ok="handleOk" />
 
     </a-card>
   </div>
 </template>
 
 <script>
-  import { STable, XCard } from '@/components'
-  import { getRolePage, sysRoleDelete } from '@/api/modular/system/roleManage'
+  import {
+    STable,
+    XCard
+  } from '@/components'
+  import {
+    getRolePage,
+    sysRoleDelete
+  } from '@/api/modular/system/roleManage'
   import addForm from './addForm'
   import editForm from './editForm'
   import roleMenuForm from './roleMenuForm'
   import roleOrgForm from './roleOrgForm'
-  import { sysDictTypeDropDown } from '@/api/modular/system/dictManage'
+  import {
+    sysDictTypeDropDown
+  } from '@/api/modular/system/dictManage'
   export default {
     components: {
       XCard,
@@ -89,13 +98,12 @@
       roleOrgForm
     },
 
-    data () {
+    data() {
       return {
         // 查询参数
         queryParam: {},
         // 表头
-        columns: [
-          {
+        columns: [{
             title: '角色名',
             dataIndex: 'name'
           },
@@ -124,23 +132,26 @@
         selectedRowKeys: [],
         selectedRows: [],
         typeDictTypeDropDown: []
-    }
+      }
     },
 
-    created () {
+    created() {
       this.sysDictTypeDropDown()
-      if (this.hasPerm('sysRole:edit') || this.hasPerm('sysRole:grantMenu') || this.hasPerm('sysRole:grantData') || this.hasPerm('sysRole:delete')) {
+      if (this.hasPerm('sysRole:edit') || this.hasPerm('sysRole:grantMenu') || this.hasPerm('sysRole:grantData') || this
+        .hasPerm('sysRole:delete')) {
         this.columns.push({
           title: '操作',
           width: '150px',
           dataIndex: 'action',
-          scopedSlots: { customRender: 'action' }
+          scopedSlots: {
+            customRender: 'action'
+          }
         })
       }
     },
 
     methods: {
-       typeFilter(roleType) {
+      typeFilter(roleType) {
         // eslint-disable-next-line eqeqeq
         const values = this.typeDictTypeDropDown.filter(item => item.code == roleType)
         if (values.length > 0) {
@@ -157,7 +168,7 @@
           this.typeDictTypeDropDown = res.data
         })
       },
-      sysRoleDelete (record) {
+      sysRoleDelete(record) {
         sysRoleDelete(record).then((res) => {
           if (res.success) {
             this.$message.success('删除成功')
@@ -170,10 +181,10 @@
         })
       },
 
-      handleOk () {
+      handleOk() {
         this.$refs.table.refresh()
       },
-      onSelectChange (selectedRowKeys, selectedRows) {
+      onSelectChange(selectedRowKeys, selectedRows) {
         this.selectedRowKeys = selectedRowKeys
         this.selectedRows = selectedRows
       }
@@ -186,8 +197,8 @@
   .table-operator {
     margin-bottom: 18px;
   }
+
   button {
     margin-right: 8px;
   }
-
 </style>
