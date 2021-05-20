@@ -3,21 +3,20 @@
 
 <div align="center">
 
+[![star](https://gitee.com/dotnetchina/Furion/badge/star.svg?theme=gvp)](https://gitee.com/dotnetchina/Furion/stargazers)
 [![star](https://gitee.com/zuohuaijun/Admin.NET/badge/star.svg?theme=dark)](https://gitee.com/zuohuaijun/Admin.NET/stargazers)
 [![fork](https://gitee.com/zuohuaijun/Admin.NET/badge/fork.svg?theme=dark)](https://gitee.com/zuohuaijun/Admin.NET/members)
-[![star](https://gitee.com/dotnetchina/Furion/badge/star.svg?theme=gvp)](https://gitee.com/dotnetchina/Furion/stargazers)
-[![star](https://gitee.com/xiaonuobase/snowy/badge/star.svg?theme=gray)](https://gitee.com/xiaonuobase/snowy/stargazers)
 [![GitHub license](https://img.shields.io/badge/license-Apache2-yellow)](https://gitee.com/dotnetchina/Furion/blob/master/LICENSE)
 
 </div>
 
 ### 🍟 概述
 
-* 基于.NET 5实现的通用权限管理平台（RBAC模式）。整合最新技术高效快速开发，前后端分离模式，开箱即用。
-* 后台基于Furion框架，前端基于小诺Antd Vue框架。集EFCore、多租户、分库读写分离、缓存、数据校验、鉴权、动态API、gRPC等众多黑科技于一身。
-* 模块化架构设计，层次清晰，业务层推荐写到单独模块，框架升级不影响业务!
+* 基于.NET 5实现的通用管理平台。整合最新技术，模块插件式开发，前后端分离，开箱即用。
+* 后台基于Furion框架，vue2前端基于小诺框架，vue3前端基于Vben-Admin框架。
+* 集成EF Core、多租户、缓存、数据校验、鉴权、事件总线、动态API、通讯、远程请求、任务调度、gRPC等众多黑科技。
 * 核心模块包括：用户、角色、职位、组织机构、菜单、字典、日志、多应用管理、文件管理、定时任务等功能。
-* 代码量少、上手简单、功能强大、易扩展，轻松开发从现在开始！
+* 代码简洁、易扩展，让开发更简单、更通用、更流行！
 
 ```
 如果对您有帮助，点击右上角⭐Star⭐关注 ，感谢支持开源！
@@ -78,7 +77,20 @@ dotnet new Admin.NET -n 你的项目名称
     </tr>
 </table>
 
-【工作流】
+### 🎁 前后端一体化
+
+将后台提供的Swagger接口直接生成对应前端的API文件，前端再也不需要手撸一个个的对应后后的API定义了。后台接口更新后，只需要重新生成一遍覆盖即可。
+
+详细教程见群里面视频文件【Fur课堂_20201028前后端（第1部份）.mp4】、【Fur课堂_20201028前后端（第2部份）.mp4】
+
+<table>
+    <tr>
+        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/bf-01.png"/></td>
+        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/bf-02.png"/></td>
+    </tr>
+</table>
+
+`增加了Vue3.0、Vite、Antd、TypeScript模式的UI框架，希望大家来一来完善各页面应用，感谢💖💖💖`
 
 ### 😎 衍生版本
 
@@ -301,9 +313,13 @@ GIT完成后默认为SqlLite数据库，使用其他数据库可通过基于EF C
 ### 💐 特别鸣谢
 - 👉 Furion：  [https://dotnetchina.gitee.io/furion](https://dotnetchina.gitee.io/furion)
 - 👉 xiaonuo：[https://gitee.com/xiaonuobase/snowy](https://gitee.com/xiaonuobase/snowy)
+- 👉 Vben-Admin：[https://vvbin.cn/doc-next/](https://vvbin.cn/doc-next/)
 - 👉 k-form-design：[https://gitee.com/kcz66/k-form-design](https://gitee.com/kcz66/k-form-design)
 - 👉 MiniExcel：[https://gitee.com/dotnetchina/MiniExcel](https://gitee.com/dotnetchina/MiniExcel)
 - 👉 SqlSugar：[https://gitee.com/dotnetchina/SqlSugar](https://gitee.com/dotnetchina/SqlSugar)
-
+- 👉 IdGenerator：[https://github.com/yitter/idgenerator](https://github.com/yitter/idgenerator)
+- 👉 ua-parser：[https://github.com/ua-parser/uap-csharp/](https://github.com/ua-parser/uap-csharp/)
+- 👉 Zack.EFCore.Batch：[https://github.com/yangzhongke/Zack.EFCore.Batch](https://github.com/yangzhongke/Zack.EFCore.Batch)
+- 👉 OnceMi.AspNetCore.OSS：[https://github.com/oncemi/OnceMi.AspNetCore.OSS](https://github.com/oncemi/OnceMi.AspNetCore.OSS)
 
 如果对您有帮助，您可以点右上角 💘Star💘支持一下，这样我们才有持续下去的动力，谢谢！！！
