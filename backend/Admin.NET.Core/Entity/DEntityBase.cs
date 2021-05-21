@@ -14,18 +14,8 @@ namespace Admin.NET.Core
     {
     }
 
-    public abstract class DEntityBase<TKey> : DEntityBase<TKey, MasterDbContextLocator>
-    {
-    }
-
     public abstract class DEntityBase<TKey, TDbContextLocator1> : PrivateDEntityBase<TKey>
         where TDbContextLocator1 : class, IDbContextLocator
-    {
-    }
-
-    public abstract class DEntityBase<TKey, TDbContextLocator1, TDbContextLocator2> : PrivateDEntityBase<TKey>
-        where TDbContextLocator1 : class, IDbContextLocator
-        where TDbContextLocator2 : class, IDbContextLocator
     {
     }
 
