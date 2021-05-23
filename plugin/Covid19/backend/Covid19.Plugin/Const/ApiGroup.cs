@@ -6,8 +6,8 @@
     public class ApiGroup
     {
         /// <summary>
-        /// API分组名称
+        /// 分组名称
         /// </summary>
-        public const string API_GROUP_NAME = "核酸检测系统";
+        public const string API_GROUP_NAME = "核酸采样系统";
     }
 }

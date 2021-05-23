@@ -34,7 +34,7 @@ namespace Admin.NET.Web.Core
                         // 忽略循环引用
                         options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                         // 忽略空值
-                        options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                        // options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                     });
             services.AddViewEngine();
             services.AddSignalR();

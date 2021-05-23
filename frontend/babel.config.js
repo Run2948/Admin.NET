@@ -15,14 +15,14 @@ plugins.push(['import', {
 
 module.exports = {
   presets: [
-    '@vue/cli-plugin-babel/preset',
     [
       '@babel/preset-env',
       {
         'useBuiltIns': 'entry',
         'corejs': 3
       }
-    ]
+    ],
+    '@vue/cli-plugin-babel/preset'
   ],
   plugins
 }
