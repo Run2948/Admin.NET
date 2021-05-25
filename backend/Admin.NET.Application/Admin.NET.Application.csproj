@@ -18,11 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Admin.NET.Core\Admin.NET.Core.csproj" />
+    <Folder Include="System\Services\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="System\Services\" />
+    <ProjectReference Include="..\Admin.NET.Core\Admin.NET.Core.csproj" />
   </ItemGroup>
 
 </Project>

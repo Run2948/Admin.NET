@@ -1,4 +1,4 @@
-﻿using Admin.NET.Core;
+﻿using Furion.Extras.Admin.NET;
 using Microsoft.EntityFrameworkCore;
 
 namespace Admin.NET.Application.Entity

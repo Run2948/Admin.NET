@@ -1,5 +1,5 @@
-﻿using Admin.NET.Core;
-using Admin.NET.Core.Service;
+﻿using Furion.Extras.Admin.NET;
+using Furion.Extras.Admin.NET.Service;
 using Magicodes.ExporterAndImporter.Core;
 using Magicodes.ExporterAndImporter.Core.Filters;
 using Magicodes.ExporterAndImporter.Core.Models;

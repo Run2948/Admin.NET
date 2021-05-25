@@ -1,6 +1,6 @@
 ﻿using Admin.NET.Application.Dto;
 using Admin.NET.Application.Entity;
-using Admin.NET.Core.Service;
+using Furion.Extras.Admin.NET.Service;
 using Furion.DatabaseAccessor;
 using Furion.DependencyInjection;
 using Furion.DynamicApiController;
