@@ -1,4 +1,4 @@
-﻿using Admin.NET.Core;
+using Furion.Extras.Admin.NET;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
