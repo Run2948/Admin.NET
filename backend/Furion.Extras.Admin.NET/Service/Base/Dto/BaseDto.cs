@@ -23,7 +23,7 @@ namespace Furion.Extras.Admin.NET.Service
         /// <summary>
         /// 创建者Id
         /// </summary>
-        public virtual long CreatedUserId { get; set; }
+        public virtual long? CreatedUserId { get; set; }
 
         /// <summary>
         /// 创建者名称
@@ -34,7 +34,7 @@ namespace Furion.Extras.Admin.NET.Service
         /// <summary>
         /// 修改者Id
         /// </summary>
-        public virtual long UpdatedUserId { get; set; }
+        public virtual long? UpdatedUserId { get; set; }
 
         /// <summary>
         /// 修改者名称
