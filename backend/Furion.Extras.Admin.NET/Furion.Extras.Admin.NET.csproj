@@ -45,10 +45,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Furion" Version="2.7.3" />
-    <PackageReference Include="Furion.Extras.Authentication.JwtBearer" Version="2.7.3" />
-    <PackageReference Include="Furion.Extras.Logging.Serilog" Version="2.7.3" />
-    <PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="2.7.3" />
+    <PackageReference Include="Furion" Version="2.7.5" />
+    <PackageReference Include="Furion.Extras.Authentication.JwtBearer" Version="2.7.5" />
+    <PackageReference Include="Furion.Extras.Logging.Serilog" Version="2.7.5" />
+    <PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="2.7.5" />
     <PackageReference Include="Magicodes.IE.Excel" Version="2.5.3.9" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.6" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="5.0.1" />
