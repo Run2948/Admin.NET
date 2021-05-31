@@ -1,5 +1,5 @@
-﻿using Admin.NET.Core;
-using Admin.NET.Core.Service;
+﻿using Furion.Extras.Admin.NET;
+using Furion.Extras.Admin.NET.Service;
 using Furion;
 using Furion.DatabaseAccessor;
 using Furion.FriendlyException;

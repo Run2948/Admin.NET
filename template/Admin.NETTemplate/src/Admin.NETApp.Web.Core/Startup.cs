@@ -1,6 +1,5 @@
-﻿using Admin.NET.Core;
-using Admin.NET.Core.Hubs;
-using Admin.NET.Core.Service;
+﻿using Furion.Extras.Admin.NET;
+using Furion.Extras.Admin.NET.Service;
 using Furion;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

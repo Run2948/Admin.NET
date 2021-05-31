@@ -1,5 +1,5 @@
-﻿using Admin.NET.Core;
-using Admin.NET.Core.Service;
+﻿using Furion.Extras.Admin.NET;
+using Furion.Extras.Admin.NET.Service;
 using Furion;
 using Furion.DatabaseAccessor;
 using Furion.FriendlyException;
@@ -77,9 +77,9 @@ namespace Admin.NETApp.EntityFramework.Core
 
             foreach (var entity in entities)
             {
-                if (entity.Entity.GetType().IsSubclassOf(typeof(DBEntityTenant)))
+                if (entity.Entity.GetType().IsSubclassOf(typeof(DEntityTenant)))
                 {
-                    var obj = entity.Entity as DBEntityTenant;
+                    var obj = entity.Entity as DEntityTenant;
                     switch (entity.State)
                     {
                         // 自动设置租户Id
@@ -150,7 +150,7 @@ namespace Admin.NETApp.EntityFramework.Core
             ParameterExpression parameterExpression = Expression.Parameter(metadata.ClrType, "u");
 
             // 租户过滤器
-            if (entityBuilder.Metadata.ClrType.BaseType.Name == typeof(DBEntityTenant).Name)
+            if (entityBuilder.Metadata.ClrType.BaseType.Name == typeof(DEntityTenant).Name)
             {
                 if (metadata.FindProperty(onTableTenantId) != null)
                 {
