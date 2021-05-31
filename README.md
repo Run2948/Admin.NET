@@ -136,14 +136,14 @@ dotnet new Admin.NET -n 你的项目名称
 
 ### 🏀 分层说明
 ```
-├─Admin.NET.Application             ->业务应用层，在此写您具体业务代码是🌻🌻🌻
-├─Admin.NET.Core                    ->框架核心层，后期准备做成NuGet包直接引用即可
+├─Admin.NET.Application             ->业务应用层，在此写您具体业务代码
+├─Admin.NET.Core                    ->框架核心层
 ├─Admin.NET.Database.Migrations     ->架构维护层，主要存放迁移中间文件
 ├─Admin.NET.EntityFramework.Core    ->EF Core配置层，主要配置数据库及相关
 ├─Admin.NET.Web.Core                ->Web核心层，主要是服务注册及鉴权
 ├─Admin.NET.Web.Entry               ->Web入口层/启动层，可任意更换
-注：建议自己的业务代码直接写在【Admin.NET.Application】层里面，包括实体与服务等，或者单独新建个业务应用工程，进行模块化开发。
-😛其他层尽量不要管，可随框架升级而无缝升级。
+├─Furion.Extras.Admin.NET           ->封装的框架核心层，已做成NuGet包
+注：源码直接开发建议自己的业务代码直接写在【Admin.NET.Application】层里面，可随框架升级减少冲突。或直接用模板脚手架创建自己的工程。
 ```
 
 ### 📖 帮助文档
