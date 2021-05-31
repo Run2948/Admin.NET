@@ -54,7 +54,6 @@ namespace Furion.Extras.Admin.NET
                 if (onlineUsers == null) return;
 
                 onlineUsers.RemoveAll(u => u.ConnectionId == Context.ConnectionId);
-
                 await _cache.SetAsync(CommonConst.CACHE_KEY_ONLINE_USER, onlineUsers);
             }
         }
