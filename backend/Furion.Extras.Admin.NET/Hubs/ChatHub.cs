@@ -1,4 +1,4 @@
-﻿using Furion.Extras.Admin.NET.Service;
+using Furion.Extras.Admin.NET.Service;
 using Furion.DataEncryption;
 using Microsoft.AspNetCore.SignalR;
 using System;
@@ -53,14 +53,7 @@ namespace Furion.Extras.Admin.NET
                 var onlineUsers = await _cache.GetAsync<List<OnlineUser>>(CommonConst.CACHE_KEY_ONLINE_USER);
                 if (onlineUsers == null) return;
 
-                for (int i = 0; i < onlineUsers.Count; i++)
-                {
-                    if (onlineUsers[i].ConnectionId == Context.ConnectionId)
-                    {
-                        onlineUsers.RemoveAt(i);
-                        return;
-                    }
-                }
+                onlineUsers.RemoveAll(u => u.ConnectionId == Context.ConnectionId);
 
                 await _cache.SetAsync(CommonConst.CACHE_KEY_ONLINE_USER, onlineUsers);
             }
