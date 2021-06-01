@@ -3,13 +3,13 @@
 ### 需求描述
 
 - 在我们 fork 了一个项目后, 我们需要自己开发一些独特的功能, 但同时需要随时更新原有项目的新功能怎么办?
-- 有时, 我们突发奇想, 先给原先的项目提一个 Pull Requests 又该怎么办?
+- 有时, 我们突发奇想, 想给原先的项目提一个 Pull Requests 又该怎么办?
 
 ### 解决方案
 
 #### 新建一个分支来维护自己的代码
 
-- 首先, 我们我们需要给你的项目添加一个针对远程fork地址的 `upstream` 来更新远程的新代码
+- 首先, 我们需要给你的项目添加一个针对远程fork地址的 `upstream` 来更新远程的新代码
 
   - 通过命令执行: `git remote add upstream https://gitee.com/zuohuaijun/Admin.NET.git`
 
@@ -123,7 +123,7 @@
 
   ![image-20210429112622432](http://images.wynnyo.com/Markdown/image-20210429112622432.png?x-oss-process=style/wynnyo-style)
 
-- 在当前分支下, 拉去 upstream 修改, 并推送到自己的 master 分支上
+- 在当前分支下, 拉取 upstream 修改, 并推送到自己的 master 分支上
 
   ```shell
   git pull upstream master
@@ -142,7 +142,7 @@
 
   ![image-20210429114232845](http://images.wynnyo.com/Markdown/image-20210429114232845.png?x-oss-process=style/wynnyo-style)
 
-  注: **在合并的时候可能会有冲突, 这个最好用ide合并**(基本每次都有, 以为master 那边没忽略 db)
+  注: **在合并的时候可能会有冲突, 这个最好用ide合并**(基本每次都有, 因为master 那边没忽略 db)
 
   - 如果是 Db 冲突, **这里一定要保留自己分支的**
 
@@ -150,7 +150,7 @@
 
   ![image-20210429114309378](http://images.wynnyo.com/Markdown/image-20210429114309378.png?x-oss-process=style/wynnyo-style)
 
-- 合并完冲突后, 一半数据会有一些变化, 这时, 我们需要做的是更新我们自己的 Db, 如果可以确定没有改 db相关的可以忽略
+- 合并完冲突后, 一般数据会有一些变化, 这时, 我们需要做的是更新我们自己的 Db, 如果可以确定没有改 db相关的可以忽略
 
   ```shell
   # Merge_Master 这个名字依次累加
@@ -171,7 +171,7 @@
 
 - **这个操作要在 master分支上操作**
 
-- 切换到master分支, 后面简答git操作, 代码不在重复写了
+- 切换到master分支, 后面的简单git操作, 代码不再重复写了
 
 - 修改代码, 完事一套git操作
 
@@ -182,5 +182,5 @@
   ![image-20210429120426121](http://images.wynnyo.com/Markdown/image-20210429120426121.png?x-oss-process=style/wynnyo-style)
 
 - 点击创建等待审批即可
-- 这时你的 test 分支最好需要等待审批过了再合并你的 master 分支
+- 这时你的 test 分支最好等待审批过了再合并你的 master 分支
 
