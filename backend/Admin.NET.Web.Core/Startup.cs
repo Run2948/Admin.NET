@@ -22,8 +22,7 @@ namespace Admin.NET.Web.Core
             services.AddCorsAccessor();
             services.AddRemoteRequest();
             services.AddControllersWithViews()
-                    .AddMvcFilter<RequestActionFilter>()
-                    .AddInjectWithUnifyResult<XnRestfulResultProvider>()
+                    .AddMvcFilter<RequestActionFilter>()                    
                     .AddNewtonsoftJson(options =>
                     {
                         // 首字母小写(驼峰样式)
@@ -34,7 +33,8 @@ namespace Admin.NET.Web.Core
                         options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                         // 忽略空值
                         // options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-                    });
+                    })
+                    .AddInjectWithUnifyResult<XnRestfulResultProvider>();
             services.AddViewEngine();
             services.AddSignalR();
             services.AddSimpleEventBus();
