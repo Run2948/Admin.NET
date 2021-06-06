@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Furion.Extras.Admin.NET" Version="1.0.19" />
+    <PackageReference Include="Furion.Extras.Admin.NET" Version="1.0.20" />
   </ItemGroup>
 
   <ItemGroup>
