@@ -1,4 +1,4 @@
-﻿using Furion.DatabaseAccessor;
+using Furion.DatabaseAccessor;
 using Furion.DatabaseAccessor.Extensions;
 using Furion.DependencyInjection;
 using Furion.DynamicApiController;
@@ -40,7 +40,7 @@ namespace Furion.Extras.Admin.NET.Service
             var configs = await _sysConfigRep.DetachedEntities
                                              .Where((name, u => EF.Functions.Like(u.Name, $"%{input.Name.Trim()}%")),
                                                     (code, u => EF.Functions.Like(u.Code, $"%{input.Code.Trim()}%")),
-                                                    (groupCode, u => EF.Functions.Like(u.Code, $"%{input.GroupCode.Trim()}%")))
+                                                    (groupCode, u => EF.Functions.Like(u.GroupCode, $"%{input.GroupCode.Trim()}%")))
                                              .Where(u => u.Status != CommonStatus.DELETED).OrderBy(u => u.GroupCode)
                                              .ToPagedListAsync(input.PageNo, input.PageSize);
             return XnPageResult<SysConfig>.PageResult(configs);
