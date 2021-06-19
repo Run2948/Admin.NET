@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const createThemeColorReplacerPlugin = require('./config/plugin.config')
 
-function resolve(dir) {
+function resolve (dir) {
   return path.join(__dirname, dir)
 }
 
@@ -28,6 +28,8 @@ const assetsCDN = {
 
 // vue.config.js
 const vueConfig = {
+  lintOnSave: false,//关闭eslintrc语法检查
+  
   configureWebpack: {
     // webpack plugins
     plugins: [
@@ -72,8 +74,8 @@ const vueConfig = {
     loaderOptions: {
       less: {
         modifyVars: {
-          'primary-color': '#1890FF',
-          'layout-color': '#1890FF',
+          'primary-color': '#FA541C',
+          'layout-color': '#FA541C',
           'border-radius-base': '2px'
         },
         // DO NOT REMOVE THIS LINE
