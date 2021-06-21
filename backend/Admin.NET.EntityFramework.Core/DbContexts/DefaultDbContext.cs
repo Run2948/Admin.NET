@@ -100,8 +100,11 @@ namespace Admin.NET.EntityFramework.Core
                         case EntityState.Modified:
                             entity.Property(nameof(Entity.TenantId)).IsModified = false;
                             obj.UpdatedTime = DateTimeOffset.Now;
-                            obj.UpdatedUserId = long.Parse(userId);
-                            obj.UpdatedUserName = userName;
+                            if (!string.IsNullOrEmpty(userId))
+                            {
+                                obj.UpdatedUserId = long.Parse(userId);
+                                obj.UpdatedUserName = userName;
+                            }
                             break;
                     }
                 }
@@ -121,8 +124,11 @@ namespace Admin.NET.EntityFramework.Core
                     else if (entity.State == EntityState.Modified)
                     {
                         obj.UpdatedTime = DateTimeOffset.Now;
-                        obj.UpdatedUserId = long.Parse(userId);
-                        obj.UpdatedUserName = userName;
+                        if (!string.IsNullOrEmpty(userId))
+                        {
+                            obj.UpdatedUserId = long.Parse(userId);
+                            obj.UpdatedUserName = userName;
+                        }
                     }
                 }
             }

@@ -278,6 +278,7 @@ namespace Furion.Extras.Admin.NET.Service
             }.InsertNowAsync();
 
             var finalName = newFile.Entity.Id + fileSuffix; // 生成文件的最终名称
+            // newFile.Entity.FileObjectName = finalName;
             switch (fileLocation)
             {
                 case FileLocation.ALIYUN:
@@ -308,7 +309,6 @@ namespace Furion.Extras.Admin.NET.Service
                     }
                     break;
             }
-            newFile.Entity.FileObjectName = finalName;
             return newFile.Entity.Id; // 返回文件唯一标识
         }
     }
