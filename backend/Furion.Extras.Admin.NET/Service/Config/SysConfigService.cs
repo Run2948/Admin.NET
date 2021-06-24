@@ -158,6 +158,7 @@ namespace Furion.Extras.Admin.NET.Service
         /// 获取验证码开关标识
         /// </summary>
         /// <returns></returns>
+        [NonAction]
         public async Task<bool> GetCaptchaOpenFlag()
         {
             var value = await GetConfigCache("DILON_CAPTCHA_OPEN");
