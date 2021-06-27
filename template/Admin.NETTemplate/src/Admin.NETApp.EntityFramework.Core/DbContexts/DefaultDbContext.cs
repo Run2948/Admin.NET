@@ -177,17 +177,5 @@ namespace Admin.NETApp.EntityFramework.Core
 
             return Expression.Lambda(finialExpression, parameterExpression);
         }
-
-        /// <summary>
-        /// 配置假删除过滤器
-        /// </summary>
-        /// <param name="entityBuilder"></param>
-        /// <param name="dbContext"></param>
-        /// <param name="isDeletedKey"></param>
-        /// <returns></returns>
-        protected LambdaExpression FakeDeleteQueryFilterExpression(EntityTypeBuilder entityBuilder, DbContext dbContext, string isDeletedKey = null)
-        {
-            return base.FakeDeleteQueryFilterExpression(entityBuilder, dbContext, isDeletedKey);
-        }
     }
 }
