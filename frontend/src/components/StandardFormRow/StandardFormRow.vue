@@ -37,13 +37,13 @@ export default {
     }
   },
   computed: {
-    lastCls () {
+    lastCls() {
       return this.last ? classes[2] : null
     },
-    blockCls () {
+    blockCls() {
       return this.block ? classes[0] : null
     },
-    gridCls () {
+    gridCls() {
       return this.grid ? classes[1] : null
     }
   }
@@ -109,14 +109,13 @@ export default {
   }
 
   &.antd-pro-components-standard-form-row-index-standardFormRowGrid {
-      /deep/ .ant-form-item,
-      div.ant-form-item-control-wrapper {
-        display: block;
-      }
-      /deep/ .ant-form-item-label {
-        float: left;
-      }
+    /deep/ .ant-form-item,
+    div.ant-form-item-control-wrapper {
+      display: block;
+    }
+    /deep/ .ant-form-item-label {
+      float: left;
+    }
   }
 }
-
 </style>

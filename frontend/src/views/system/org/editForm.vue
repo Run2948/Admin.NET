@@ -5,40 +5,49 @@
     :visible="visible"
     :confirmLoading="confirmLoading"
     @ok="handleSubmit"
-    @cancel="handleCancel">
+    @cancel="handleCancel"
+  >
     <a-spin :spinning="formLoading">
       <a-form :form="form">
-        <a-form-item style="display: none;" :labelCol="labelCol" :wrapperCol="wrapperCol" has-feedback>
+        <a-form-item style="display: none" :labelCol="labelCol" :wrapperCol="wrapperCol" has-feedback>
           <a-input v-decorator="['id']" />
         </a-form-item>
 
         <a-form-item label="机构类型" :labelCol="labelCol" :wrapperCol="wrapperCol" has-feedback>
           <a-radio-group
             placeholder="请选择机构类型！"
-            v-decorator="['orgtype',{rules: [{ required: true, message: '请选择机构类型！' }]}]">
-            <a-radio v-for="(item,index) in typeEnumDataDropDown" :key="index" :value="item.code">{{ item.value }}
+            v-decorator="['orgtype', { rules: [{ required: true, message: '请选择机构类型！' }] }]"
+          >
+            <a-radio v-for="(item, index) in typeEnumDataDropDown" :key="index" :value="item.code"
+              >{{ item.value }}
             </a-radio>
           </a-radio-group>
         </a-form-item>
 
         <a-form-item label="机构名称" :labelCol="labelCol" :wrapperCol="wrapperCol" has-feedback>
-          <a-input placeholder="请输入机构名称" v-decorator="['name', {rules: [{required: true, message: '请输入机构名称！'}]}]" />
+          <a-input
+            placeholder="请输入机构名称"
+            v-decorator="['name', { rules: [{ required: true, message: '请输入机构名称！' }] }]"
+          />
         </a-form-item>
 
         <a-form-item label="唯一编码" :labelCol="labelCol" :wrapperCol="wrapperCol" has-feedback>
-          <a-input placeholder="请输入唯一编码" v-decorator="['code', {rules: [{required: true, message: '请输入唯一编码！'}]}]" />
+          <a-input
+            placeholder="请输入唯一编码"
+            v-decorator="['code', { rules: [{ required: true, message: '请输入唯一编码！' }] }]"
+          />
         </a-form-item>
 
         <a-form-item label="上级机构" :labelCol="labelCol" :wrapperCol="wrapperCol" has-feedback>
           <a-tree-select
-            v-decorator="['pid', {rules: [{ required: true, message: '请选择上级机构！' }]}]"
+            v-decorator="['pid', { rules: [{ required: true, message: '请选择上级机构！' }] }]"
             style="width: 100%"
             :dropdownStyle="{ maxHeight: '300px', overflow: 'auto' }"
             :treeData="orgTree"
             placeholder="请选择上级机构"
-            treeDefaultExpandAll>
-            <span slot="title" slot-scope="{ id }">{{ id }}
-            </span>
+            treeDefaultExpandAll
+          >
+            <span slot="title" slot-scope="{ id }">{{ id }} </span>
           </a-tree-select>
         </a-form-item>
 
@@ -48,7 +57,8 @@
             style="width: 100%"
             v-decorator="['sort', { initialValue: 100 }]"
             :min="1"
-            :max="1000" />
+            :max="1000"
+          />
         </a-form-item>
 
         <a-form-item label="备注" :labelCol="labelCol" :wrapperCol="wrapperCol" has-feedback>
@@ -60,106 +70,102 @@
 </template>
 
 <script>
-  import {
-    sysOrgEdit,
-    getOrgTree
-  } from '@/api/modular/system/orgManage'
-  import {
-    sysDictTypeDropDown
-  } from '@/api/modular/system/dictManage'
-  export default {
-    data() {
-      return {
-        labelCol: {
-          xs: {
-            span: 24
-          },
-          sm: {
-            span: 5
-          }
+import { sysOrgEdit, getOrgTree } from '@/api/modular/system/orgManage'
+import { sysDictTypeDropDown } from '@/api/modular/system/dictManage'
+export default {
+  data() {
+    return {
+      labelCol: {
+        xs: {
+          span: 24
         },
-        wrapperCol: {
-          xs: {
-            span: 24
-          },
-          sm: {
-            span: 15
-          }
+        sm: {
+          span: 5
+        }
+      },
+      wrapperCol: {
+        xs: {
+          span: 24
         },
-        typeEnumDataDropDown: [],
-        orgTree: [],
-        visible: false,
-        confirmLoading: false,
-        formLoading: true,
-        form: this.$form.createForm(this)
-      }
-    },
-    created() {
-      this.sysDictTypeDropDown()
-    },
-    methods: {
-      // 初始化方法
-      edit(record) {
-        console.log(record)
-        this.visible = true
-        this.getOrgTree()
-        this.form.getFieldDecorator('orgtype', {
-          valuePropName: 'checked',
-          initialValue: record.orgType.toString()
-        })
-        setTimeout(() => {
-          this.form.setFieldsValue({
-            id: record.id,
-            orgType: record.orgType,
-            name: record.name,
-            code: record.code,
-            sort: record.sort,
-            pid: record.pid,
-            remark: record.remark
-          })
-        }, 100)
+        sm: {
+          span: 15
+        }
       },
-      /**
-       * 获取字典数据
-       */
-      sysDictTypeDropDown(text) {
-        sysDictTypeDropDown({
-          code: 'org_type'
-        }).then((res) => {
-          this.typeEnumDataDropDown = res.data
+      typeEnumDataDropDown: [],
+      orgTree: [],
+      visible: false,
+      confirmLoading: false,
+      formLoading: true,
+      form: this.$form.createForm(this)
+    }
+  },
+  created() {
+    this.sysDictTypeDropDown()
+  },
+  methods: {
+    // 初始化方法
+    edit(record) {
+      console.log(record)
+      this.visible = true
+      this.getOrgTree()
+      this.form.getFieldDecorator('orgtype', {
+        valuePropName: 'checked',
+        initialValue: record.orgType.toString()
+      })
+      setTimeout(() => {
+        this.form.setFieldsValue({
+          id: record.id,
+          orgType: record.orgType,
+          name: record.name,
+          code: record.code,
+          sort: record.sort,
+          pid: record.pid,
+          remark: record.remark
         })
-      },
-      /**
-       * 获取机构树，并加载于表单中
-       */
-      getOrgTree() {
-        getOrgTree().then((res) => {
-          this.formLoading = false
-          if (!res.success) {
-            this.orgTree = []
-            return
+      }, 100)
+    },
+    /**
+     * 获取字典数据
+     */
+    sysDictTypeDropDown(text) {
+      sysDictTypeDropDown({
+        code: 'org_type'
+      }).then(res => {
+        this.typeEnumDataDropDown = res.data
+      })
+    },
+    /**
+     * 获取机构树，并加载于表单中
+     */
+    getOrgTree() {
+      getOrgTree().then(res => {
+        this.formLoading = false
+        if (!res.success) {
+          this.orgTree = []
+          return
+        }
+        this.orgTree = [
+          {
+            id: '-1',
+            parentId: '0',
+            title: '顶级',
+            value: '0',
+            pid: '0',
+            children: res.data
           }
-          this.orgTree = [{
-            'id': '-1',
-            'parentId': '0',
-            'title': '顶级',
-            'value': '0',
-            'pid': '0',
-            'children': res.data
-          }]
-        })
-      },
+        ]
+      })
+    },
 
-      handleSubmit() {
-        const {
-          form: {
-            validateFields
-          }
-        } = this
-        this.confirmLoading = true
-        validateFields((errors, values) => {
-          if (!errors) {
-            sysOrgEdit(values).then((res) => {
+    handleSubmit() {
+      const {
+        form: { validateFields }
+      } = this
+      this.confirmLoading = true
+      validateFields((errors, values) => {
+        if (!errors) {
+          sysOrgEdit(values)
+            .then(res => {
               if (res.success) {
                 this.$message.success('编辑成功')
                 this.visible = false
@@ -169,18 +175,19 @@
               } else {
                 this.$message.error('编辑失败：' + res.message)
               }
-            }).finally((res) => {
+            })
+            .finally(res => {
               this.confirmLoading = false
             })
-          } else {
-            this.confirmLoading = false
-          }
-        })
-      },
-      handleCancel() {
-        this.form.resetFields()
-        this.visible = false
-      }
+        } else {
+          this.confirmLoading = false
+        }
+      })
+    },
+    handleCancel() {
+      this.form.resetFields()
+      this.visible = false
     }
   }
+}
 </script>

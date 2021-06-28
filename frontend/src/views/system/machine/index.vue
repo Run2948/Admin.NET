@@ -74,67 +74,63 @@
   </div>
 </template>
 <script>
-  import {
-    sysMachineBase,
-    sysMachineUse,
-    sysMachineNetwork
-  } from '@/api/modular/system/machineManage'
-  export default {
-    data() {
-      return {
-        loading: true,
-        machineBaseInfo: [],
-        machineUseInfo: [],
-        machineNetworkInfo: []
-      }
-    },
-    // 进页面加载
-    created() {
-      this.loadMachineBaseInfo()
-      this.loadMachineUseInfo()
-    },
-    methods: {
-      // 加载数据方法
-      loadMachineBaseInfo() {
-        sysMachineBase().then((res) => {
-          this.loading = false
-          this.machineBaseInfo = res.data
-        })
-      },
-      loadMachineUseInfo() {
-        sysMachineUse().then((res) => {
-          this.loading = false
-          this.machineUseInfo = res.data
-        })
-      },
-      loadMachineNetworkInfo() {
-        sysMachineNetwork().then((res) => {
-          this.loading = false
-          this.machineNetworkInfo = res.data
-        })
-      },
-      refreshData() {
-        this.loadMachineUseInfo()
-        this.loadMachineNetworkInfo()
-      }
-    },
-    mounted() {
-      this.timer = setInterval(this.refreshData, 3000)
-    },
-    beforeDestroy() {
-        clearInterval(this.timer)
+import { sysMachineBase, sysMachineUse, sysMachineNetwork } from '@/api/modular/system/machineManage'
+export default {
+  data() {
+    return {
+      loading: true,
+      machineBaseInfo: [],
+      machineUseInfo: [],
+      machineNetworkInfo: []
     }
+  },
+  // 进页面加载
+  created() {
+    this.loadMachineBaseInfo()
+    this.loadMachineUseInfo()
+  },
+  methods: {
+    // 加载数据方法
+    loadMachineBaseInfo() {
+      sysMachineBase().then(res => {
+        this.loading = false
+        this.machineBaseInfo = res.data
+      })
+    },
+    loadMachineUseInfo() {
+      sysMachineUse().then(res => {
+        this.loading = false
+        this.machineUseInfo = res.data
+      })
+    },
+    loadMachineNetworkInfo() {
+      sysMachineNetwork().then(res => {
+        this.loading = false
+        this.machineNetworkInfo = res.data
+      })
+    },
+    refreshData() {
+      this.loadMachineUseInfo()
+      this.loadMachineNetworkInfo()
+    }
+  },
+  mounted() {
+    this.timer = setInterval(this.refreshData, 3000)
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
   }
+}
 </script>
 <style lang="less">
-  .sysInfo_table {
-    width: 100%;
-    min-height: 45px;
-    line-height: 45px;
-    text-align: center;
-  }
+.sysInfo_table {
+  width: 100%;
+  min-height: 45px;
+  line-height: 45px;
+  text-align: center;
+}
 
-  .sysInfo_td {
-    border-bottom: 1px solid #e8e8e8;
-  }
+.sysInfo_td {
+  border-bottom: 1px solid #e8e8e8;
+}
 </style>

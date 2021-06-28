@@ -10,90 +10,79 @@
 </template>
 
 <script>
-  import {
-    deepMerge
-  } from '@jiaminghi/charts/lib/util/index'
+import { deepMerge } from '@jiaminghi/charts/lib/util/index'
 
-  import {
-    deepClone
-  } from '@jiaminghi/c-render/lib/plugin/util'
+import { deepClone } from '@jiaminghi/c-render/lib/plugin/util'
 
-  export default {
-    name: 'LabelTag',
-    props: {
-      config: {
-        type: Object,
-        default: () => ([])
-      }
-    },
-    data() {
-      return {
-        defaultConfig: {
-          /**
-           * @description Label data
-           * @type {Array<String>}
-           * @default data = []
-           * @example data = ['label1', 'label2']
-           */
-          data: [],
-          /**
-           * @description Label color (Hex|Rgb|Rgba|color keywords)
-           * @type {Array<String>}
-           * @default colors = ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b']
-           * @example colors = ['#666', 'rgb(0, 0, 0)', 'rgba(0, 0, 0, 1)', 'red']
-           */
-          colors: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b']
-        },
+export default {
+  name: 'LabelTag',
+  props: {
+    config: {
+      type: Object,
+      default: () => []
+    }
+  },
+  data() {
+    return {
+      defaultConfig: {
+        /**
+         * @description Label data
+         * @type {Array<String>}
+         * @default data = []
+         * @example data = ['label1', 'label2']
+         */
+        data: [],
+        /**
+         * @description Label color (Hex|Rgb|Rgba|color keywords)
+         * @type {Array<String>}
+         * @default colors = ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b']
+         * @example colors = ['#666', 'rgb(0, 0, 0)', 'rgba(0, 0, 0, 1)', 'red']
+         */
+        colors: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b']
+      },
 
-        mergedConfig: null
-      }
-    },
-    watch: {
-      config() {
-        const {
-          mergeConfig
-        } = this
-
-        mergeConfig()
-      }
-    },
-    methods: {
-      mergeConfig() {
-        const {
-          config,
-          defaultConfig
-        } = this
-
-        this.mergedConfig = deepMerge(deepClone(defaultConfig, true), config || {})
-      }
-    },
-    mounted() {
-      const {
-        mergeConfig
-      } = this
+      mergedConfig: null
+    }
+  },
+  watch: {
+    config() {
+      const { mergeConfig } = this
 
       mergeConfig()
     }
+  },
+  methods: {
+    mergeConfig() {
+      const { config, defaultConfig } = this
+
+      this.mergedConfig = deepMerge(deepClone(defaultConfig, true), config || {})
+    }
+  },
+  mounted() {
+    const { mergeConfig } = this
+
+    mergeConfig()
   }
+}
 </script>
 
 <style lang="less">
-  .label-tag {
+.label-tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .label-item {
+    margin: 5px;
+    font-size: 5px;
     display: flex;
-    justify-content: center;
     align-items: center;
 
-    .label-item {
-      margin: 5px;
-      font-size: 5px;
-      display: flex;
-      align-items: center;
-
-      div {
-        width: 12px;
-        height: 12px;
-        margin-left: 5px;
-      }
+    div {
+      width: 12px;
+      height: 12px;
+      margin-left: 5px;
     }
   }
+}
 </style>

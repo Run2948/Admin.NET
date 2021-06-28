@@ -1,47 +1,47 @@
 export function resetSize(vm) {
+  // eslint-disable-next-line camelcase
+  var img_width, img_height, bar_width, bar_height // 图片的宽度、高度，移动条的宽度、高度
+
+  var parentWidth = vm.$el.parentNode.offsetWidth || window.offsetWidth
+  var parentHeight = vm.$el.parentNode.offsetHeight || window.offsetHeight
+
+  // eslint-disable-next-line eqeqeq
+  if (vm.imgSize.width.indexOf('%') != -1) {
     // eslint-disable-next-line camelcase
-    var img_width, img_height, bar_width, bar_height	// 图片的宽度、高度，移动条的宽度、高度
+    img_width = parseInt(this.imgSize.width) / 100 * parentWidth + 'px'
+  } else {
+    // eslint-disable-next-line camelcase
+    img_width = this.imgSize.width
+  }
 
-    var parentWidth = vm.$el.parentNode.offsetWidth || window.offsetWidth
-    var parentHeight = vm.$el.parentNode.offsetHeight || window.offsetHeight
+  // eslint-disable-next-line eqeqeq
+  if (vm.imgSize.height.indexOf('%') != -1) {
+    // eslint-disable-next-line camelcase
+    img_height = parseInt(this.imgSize.height) / 100 * parentHeight + 'px'
+  } else {
+    // eslint-disable-next-line camelcase
+    img_height = this.imgSize.height
+  }
 
-    // eslint-disable-next-line eqeqeq
-    if (vm.imgSize.width.indexOf('%') != -1) {
-        // eslint-disable-next-line camelcase
-        img_width = parseInt(this.imgSize.width) / 100 * parentWidth + 'px'
-    } else {
-        // eslint-disable-next-line camelcase
-        img_width = this.imgSize.width
-    }
+  // eslint-disable-next-line eqeqeq
+  if (vm.barSize.width.indexOf('%') != -1) {
+    // eslint-disable-next-line camelcase
+    bar_width = parseInt(this.barSize.width) / 100 * parentWidth + 'px'
+  } else {
+    // eslint-disable-next-line camelcase
+    bar_width = this.barSize.width
+  }
 
-    // eslint-disable-next-line eqeqeq
-    if (vm.imgSize.height.indexOf('%') != -1) {
-        // eslint-disable-next-line camelcase
-        img_height = parseInt(this.imgSize.height) / 100 * parentHeight + 'px'
-    } else {
-        // eslint-disable-next-line camelcase
-        img_height = this.imgSize.height
-    }
+  // eslint-disable-next-line eqeqeq
+  if (vm.barSize.height.indexOf('%') != -1) {
+    // eslint-disable-next-line camelcase
+    bar_height = parseInt(this.barSize.height) / 100 * parentHeight + 'px'
+  } else {
+    // eslint-disable-next-line camelcase
+    bar_height = this.barSize.height
+  }
 
-    // eslint-disable-next-line eqeqeq
-    if (vm.barSize.width.indexOf('%') != -1) {
-        // eslint-disable-next-line camelcase
-        bar_width = parseInt(this.barSize.width) / 100 * parentWidth + 'px'
-    } else {
-        // eslint-disable-next-line camelcase
-        bar_width = this.barSize.width
-    }
-
-    // eslint-disable-next-line eqeqeq
-    if (vm.barSize.height.indexOf('%') != -1) {
-        // eslint-disable-next-line camelcase
-        bar_height = parseInt(this.barSize.height) / 100 * parentHeight + 'px'
-    } else {
-        // eslint-disable-next-line camelcase
-        bar_height = this.barSize.height
-    }
-
-    return { imgWidth: img_width, imgHeight: img_height, barWidth: bar_width, barHeight: bar_height }
+  return { imgWidth: img_width, imgHeight: img_height, barWidth: bar_width, barHeight: bar_height }
 }
 
 // eslint-disable-next-line camelcase

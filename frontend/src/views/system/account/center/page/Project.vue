@@ -44,7 +44,7 @@ export default {
     TagSelectOption,
     StandardFormRow
   },
-  data () {
+  data() {
     return {
       data: [],
       form: this.$form.createForm(this),
@@ -52,23 +52,24 @@ export default {
     }
   },
   filters: {
-    fromNow (date) {
+    fromNow(date) {
       return moment(date).fromNow()
     }
   },
-  mounted () {
+  mounted() {
     this.getList()
   },
   methods: {
-    handleChange (value) {
+    handleChange(value) {
       console.log(`selected ${value}`)
     },
-    getList () {
+    getList() {
       this.data = [
         {
           id: '123',
           cover: 'https://gw.alipayobjects.com/zos/rmsportal/uMfMFlvUuceEyPpotzlq.png',
-          content: '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+          content:
+            '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
           message: '消息',
           description: '小诺框架产品',
           href: 'https://xiaonuo.vip',
@@ -95,7 +96,8 @@ export default {
         {
           id: '1234',
           cover: 'https://gw.alipayobjects.com/zos/rmsportal/iZBVOIhGJiAnhplqjvZW.png',
-          content: '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+          content:
+            '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
           message: '消息',
           description: '小诺框架产品',
           href: 'https://xiaonuo.vip',
@@ -122,7 +124,8 @@ export default {
         {
           id: '12345',
           cover: 'https://gw.alipayobjects.com/zos/rmsportal/iXjVmWVHbCJAyqvDxdtx.png',
-          content: '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+          content:
+            '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
           message: '消息',
           description: '小诺框架产品',
           href: 'https://xiaonuo.vip',
@@ -149,7 +152,8 @@ export default {
         {
           id: '1236',
           cover: 'https://gw.alipayobjects.com/zos/rmsportal/gLaIAoVWTtLbBWZNYEMg.png',
-          content: '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+          content:
+            '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
           message: '消息',
           description: '小诺框架产品',
           href: 'https://xiaonuo.vip',
@@ -181,35 +185,35 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .ant-pro-pages-account-projects-cardList {
-    margin-top: 24px;
+.ant-pro-pages-account-projects-cardList {
+  margin-top: 24px;
 
-    /deep/ .ant-card-meta-title {
-      margin-bottom: 4px;
+  /deep/ .ant-card-meta-title {
+    margin-bottom: 4px;
+  }
+
+  /deep/ .ant-card-meta-description {
+    height: 44px;
+    overflow: hidden;
+    line-height: 22px;
+  }
+
+  .cardItemContent {
+    display: flex;
+    height: 20px;
+    margin-top: 16px;
+    margin-bottom: -4px;
+    line-height: 20px;
+
+    > span {
+      flex: 1 1;
+      color: rgba(0, 0, 0, 0.45);
+      font-size: 12px;
     }
 
-    /deep/ .ant-card-meta-description {
-      height: 44px;
-      overflow: hidden;
-      line-height: 22px;
-    }
-
-    .cardItemContent {
-      display: flex;
-      height: 20px;
-      margin-top: 16px;
-      margin-bottom: -4px;
-      line-height: 20px;
-
-      > span {
-        flex: 1 1;
-        color: rgba(0,0,0,.45);
-        font-size: 12px;
-      }
-
-      /deep/ .ant-pro-avatar-list {
-        flex: 0 1 auto;
-      }
+    /deep/ .ant-pro-avatar-list {
+      flex: 0 1 auto;
     }
   }
+}
 </style>

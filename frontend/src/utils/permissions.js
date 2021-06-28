@@ -20,7 +20,7 @@ export function hasBtnPermission (permission) {
   const admintype = store.getters.admintype
   // eslint-disable-next-line eqeqeq
   if (admintype == '1') {
-     return true
+    return true
   }
   return myBtns.indexOf(permission) > -1
 }

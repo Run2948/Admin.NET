@@ -1,12 +1,6 @@
 <template>
   <div>
-    <v-chart
-      :forceFit="true"
-      :height="height"
-      :width="width"
-      :data="data"
-      :scale="scale"
-      :padding="0">
+    <v-chart :forceFit="true" :height="height" :width="width" :data="data" :scale="scale" :padding="0">
       <v-tooltip />
       <v-interval
         :shape="['liquid-fill-gauge']"
@@ -21,9 +15,9 @@
           (transfer, value) => {
             return {
               name: transfer,
-              value,
-            };
-          },
+              value
+            }
+          }
         ]"
       ></v-interval>
       <v-guide
@@ -39,7 +33,7 @@
         :v-style="{
           fontSize: 100,
           textAlign: 'center',
-          opacity: 0.75,
+          opacity: 0.75
         }"
       />
     </v-chart>
@@ -63,5 +57,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

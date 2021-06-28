@@ -10,44 +10,44 @@
   </a-modal>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-        labelCol: {
-          xs: {
-            span: 24
-          },
-          sm: {
-            span: 5
-          }
+export default {
+  data() {
+    return {
+      labelCol: {
+        xs: {
+          span: 24
         },
-        wrapperCol: {
-          xs: {
-            span: 24
-          },
-          sm: {
-            span: 15
-          }
-        },
-        visible: false,
-        confirmLoading: false,
-        form: this.$form.createForm(this)
-      }
-    },
-    methods: {
-      // 初始化方法
-      details(record) {
-        this.visible = true
-        setTimeout(() => {
-          this.form.setFieldsValue({
-            message: record.message
-          })
-        }, 100)
+        sm: {
+          span: 5
+        }
       },
-      handleCancel() {
-        this.form.resetFields()
-        this.visible = false
-      }
+      wrapperCol: {
+        xs: {
+          span: 24
+        },
+        sm: {
+          span: 15
+        }
+      },
+      visible: false,
+      confirmLoading: false,
+      form: this.$form.createForm(this)
+    }
+  },
+  methods: {
+    // 初始化方法
+    details(record) {
+      this.visible = true
+      setTimeout(() => {
+        this.form.setFieldsValue({
+          message: record.message
+        })
+      }, 100)
+    },
+    handleCancel() {
+      this.form.resetFields()
+      this.visible = false
     }
   }
+}
 </script>

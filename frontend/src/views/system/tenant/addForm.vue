@@ -5,18 +5,25 @@
     :visible="visible"
     :confirmLoading="confirmLoading"
     @ok="handleSubmit"
-    @cancel="handleCancel">
+    @cancel="handleCancel"
+  >
     <a-spin :spinning="formLoading">
       <a-form :form="form">
         <a-row :gutter="24">
           <a-col :md="12" :sm="24">
             <a-form-item label="公司名称" :labelCol="labelCol" :wrapperCol="wrapperCol" has-feedback>
-              <a-input placeholder="请输入公司名称" v-decorator="['name', {rules: [{required: true, message: '请输入公司名称！'}]}]" />
+              <a-input
+                placeholder="请输入公司名称"
+                v-decorator="['name', { rules: [{ required: true, message: '请输入公司名称！' }] }]"
+              />
             </a-form-item>
           </a-col>
           <a-col :md="12" :sm="24">
             <a-form-item label="管理员姓名" :labelCol="labelCol" :wrapperCol="wrapperCol" has-feedback>
-              <a-input placeholder="请输入管理员姓名" v-decorator="['adminName', {rules: [{required: true, message: '请输入管理员姓名'}]}]" />
+              <a-input
+                placeholder="请输入管理员姓名"
+                v-decorator="['adminName', { rules: [{ required: true, message: '请输入管理员姓名' }] }]"
+              />
             </a-form-item>
           </a-col>
         </a-row>
@@ -24,7 +31,10 @@
         <a-row :gutter="24">
           <a-col :md="12" :sm="24">
             <a-form-item label="邮箱(账号)" :labelCol="labelCol" :wrapperCol="wrapperCol" has-feedback>
-              <a-input placeholder="请输入电子邮箱" v-decorator="['email', {rules: [{required: true, message: '请输入电子邮箱'}]}]" />
+              <a-input
+                placeholder="请输入电子邮箱"
+                v-decorator="['email', { rules: [{ required: true, message: '请输入电子邮箱' }] }]"
+              />
             </a-form-item>
           </a-col>
           <a-col :md="12" :sm="24">
@@ -62,75 +72,71 @@
             </a-form>
           </a-col>
         </a-row>
-
       </a-form>
     </a-spin>
   </a-modal>
 </template>
 
 <script>
-  import {
-    sysTenantAdd
-  } from '@/api/modular/system/tenantManage'
+import { sysTenantAdd } from '@/api/modular/system/tenantManage'
 
-  export default {
-    data() {
-      return {
-        labelCol: {
-          xs: {
-            span: 24
-          },
-          sm: {
-            span: 6
-          }
+export default {
+  data() {
+    return {
+      labelCol: {
+        xs: {
+          span: 24
         },
-        wrapperCol: {
-          xs: {
-            span: 24
-          },
-          sm: {
-            span: 16
-          }
-        },
-        labelCol_JG: {
-          xs: {
-            span: 24
-          },
-          sm: {
-            span: 3
-          }
-        },
-        wrapperCol_JG: {
-          xs: {
-            span: 24
-          },
-          sm: {
-            span: 20
-          }
-        },
-        visible: false,
-        confirmLoading: false,
-        formLoading: false,
-        form: this.$form.createForm(this)
-      }
-    },
-    methods: {
-      // 初始化方法
-      add(record) {
-        this.visible = true
-        this.formLoading = false
+        sm: {
+          span: 6
+        }
       },
+      wrapperCol: {
+        xs: {
+          span: 24
+        },
+        sm: {
+          span: 16
+        }
+      },
+      labelCol_JG: {
+        xs: {
+          span: 24
+        },
+        sm: {
+          span: 3
+        }
+      },
+      wrapperCol_JG: {
+        xs: {
+          span: 24
+        },
+        sm: {
+          span: 20
+        }
+      },
+      visible: false,
+      confirmLoading: false,
+      formLoading: false,
+      form: this.$form.createForm(this)
+    }
+  },
+  methods: {
+    // 初始化方法
+    add(record) {
+      this.visible = true
+      this.formLoading = false
+    },
 
-      handleSubmit() {
-        const {
-          form: {
-            validateFields
-          }
-        } = this
-        this.confirmLoading = true
-        validateFields((errors, values) => {
-          if (!errors) {
-            sysTenantAdd(values).then((res) => {
+    handleSubmit() {
+      const {
+        form: { validateFields }
+      } = this
+      this.confirmLoading = true
+      validateFields((errors, values) => {
+        if (!errors) {
+          sysTenantAdd(values)
+            .then(res => {
               if (res.success) {
                 this.$message.success('新增成功')
                 this.visible = false
@@ -140,18 +146,19 @@
               } else {
                 this.$message.error('新增失败：' + res.message)
               }
-            }).finally((res) => {
+            })
+            .finally(res => {
               this.confirmLoading = false
             })
-          } else {
-            this.confirmLoading = false
-          }
-        })
-      },
-      handleCancel() {
-        this.form.resetFields()
-        this.visible = false
-      }
+        } else {
+          this.confirmLoading = false
+        }
+      })
+    },
+    handleCancel() {
+      this.form.resetFields()
+      this.visible = false
     }
   }
+}
 </script>

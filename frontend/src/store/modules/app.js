@@ -79,7 +79,7 @@ const app = {
       state.multiTab = bool
     },
     TOGGLE_CRUMBS_STATE: (state, bool) => {
-      debugger
+      // debugger
       Vue.ls.set(DEFAULT_CRUMBS_STATE, bool)
       state.crumbsState = bool
     },

@@ -8,89 +8,80 @@
     @cancel="handleCancel"
   >
     <a-spin :spinning="confirmLoading">
-      <a-form :form="form" >
-        <a-form-item
-          style="display: none;"
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-        >
+      <a-form :form="form">
+        <a-form-item style="display: none" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="['id']" />
         </a-form-item>
-        <a-form-item
-          style="display: none;"
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-        >
+        <a-form-item style="display: none" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="['active']" />
         </a-form-item>
-        <a-form-item
-          label="应用名称"
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-          has-feedback
-        >
-          <a-input placeholder="请输入应用名称" v-decorator="['name', {rules: [{required: true, message: '请输入应用名称！'}]}]" />
+        <a-form-item label="应用名称" :labelCol="labelCol" :wrapperCol="wrapperCol" has-feedback>
+          <a-input
+            placeholder="请输入应用名称"
+            v-decorator="['name', { rules: [{ required: true, message: '请输入应用名称！' }] }]"
+          />
         </a-form-item>
-        <a-form-item
-          label="唯一编码"
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-          has-feedback
-        >
-          <a-input placeholder="请输入唯一编码" v-decorator="['code', {rules: [{required: true, message: '请输入唯一编码！'}]}]" />
+        <a-form-item label="唯一编码" :labelCol="labelCol" :wrapperCol="wrapperCol" has-feedback>
+          <a-input
+            placeholder="请输入唯一编码"
+            v-decorator="['code', { rules: [{ required: true, message: '请输入唯一编码！' }] }]"
+          />
         </a-form-item>
-        <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-          label="排序"
-        >
-          <a-input-number placeholder="请输入排序" style="width: 100%" v-decorator="['sort', { initialValue: 100 }]" :min="1" :max="1000" />
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="排序">
+          <a-input-number
+            placeholder="请输入排序"
+            style="width: 100%"
+            v-decorator="['sort', { initialValue: 100 }]"
+            :min="1"
+            :max="1000"
+          />
         </a-form-item>
       </a-form>
     </a-spin>
   </a-modal>
 </template>
 <script>
-  import { sysAppEdit } from '@/api/modular/system/appManage'
-  export default {
-    data () {
-      return {
-        labelCol: {
-          xs: { span: 24 },
-          sm: { span: 5 }
-        },
-        wrapperCol: {
-          xs: { span: 24 },
-          sm: { span: 15 }
-        },
-        visible: false,
-        confirmLoading: false,
-        visibleDef: false,
-        form: this.$form.createForm(this)
-      }
-    },
-    methods: {
-      // 初始化方法
-      edit (record) {
-        this.visible = true
-        setTimeout(() => {
-          this.form.setFieldsValue(
-            {
-              id: record.id,
-              name: record.name,
-              code: record.code,
-              sort: record.sort,
-              active: record.active
-            }
-          )
-        }, 100)
+import { sysAppEdit } from '@/api/modular/system/appManage'
+export default {
+  data() {
+    return {
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 5 }
       },
-      handleSubmit () {
-        const { form: { validateFields } } = this
-        this.confirmLoading = true
-        validateFields((errors, values) => {
-          if (!errors) {
-            sysAppEdit(values).then((res) => {
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 15 }
+      },
+      visible: false,
+      confirmLoading: false,
+      visibleDef: false,
+      form: this.$form.createForm(this)
+    }
+  },
+  methods: {
+    // 初始化方法
+    edit(record) {
+      this.visible = true
+      setTimeout(() => {
+        this.form.setFieldsValue({
+          id: record.id,
+          name: record.name,
+          code: record.code,
+          sort: record.sort,
+          active: record.active
+        })
+      }, 100)
+    },
+    handleSubmit() {
+      const {
+        form: { validateFields }
+      } = this
+      this.confirmLoading = true
+      validateFields((errors, values) => {
+        if (!errors) {
+          sysAppEdit(values)
+            .then(res => {
               if (res.success) {
                 this.$message.success('编辑成功')
                 this.visible = false
@@ -99,18 +90,19 @@
               } else {
                 this.$message.error('编辑失败：' + res.message)
               }
-            }).finally((res) => {
+            })
+            .finally(res => {
               this.confirmLoading = false
             })
-          } else {
-            this.confirmLoading = false
-          }
-        })
-      },
-      handleCancel () {
-        this.form.resetFields()
-        this.visible = false
-      }
+        } else {
+          this.confirmLoading = false
+        }
+      })
+    },
+    handleCancel() {
+      this.form.resetFields()
+      this.visible = false
     }
   }
+}
 </script>

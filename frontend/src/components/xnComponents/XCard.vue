@@ -5,12 +5,12 @@
 </template>
 
 <script>
-    export default {
-        name: 'XCard',
-      data() {
-        return {
-          tstyle: { 'padding-bottom': '0px', 'margin-bottom': '10px' }
-        }
-      }
+export default {
+  name: 'XCard',
+  data() {
+    return {
+      tstyle: { 'padding-bottom': '0px', 'margin-bottom': '10px' }
     }
+  }
+}
 </script>

@@ -1,5 +1,4 @@
 <template>
-
   <a-modal
     title="修改头像"
     :visible="visible"
@@ -7,9 +6,10 @@
     :confirmLoading="confirmLoading"
     :width="800"
     :footer="null"
-    @cancel="cancelHandel">
+    @cancel="cancelHandel"
+  >
     <a-row>
-      <a-col :xs="24" :md="12" :style="{height: '350px'}">
+      <a-col :xs="24" :md="12" :style="{ height: '350px' }">
         <vue-cropper
           ref="cropper"
           :img="options.img"
@@ -22,44 +22,43 @@
         >
         </vue-cropper>
       </a-col>
-      <a-col :xs="24" :md="12" :style="{height: '350px'}">
+      <a-col :xs="24" :md="12" :style="{ height: '350px' }">
         <div class="avatar-upload-preview">
-          <img :src="previews.url" :style="previews.img"/>
+          <img :src="previews.url" :style="previews.img" />
         </div>
       </a-col>
     </a-row>
-    <br>
+    <br />
     <a-row>
       <a-col :lg="2" :md="2">
         <a-upload name="file" :beforeUpload="beforeUpload" :showUploadList="false">
           <a-button icon="upload">选择图片</a-button>
         </a-upload>
       </a-col>
-      <a-col :lg="{span: 1, offset: 2}" :md="2">
-        <a-button icon="plus" @click="changeScale(1)"/>
+      <a-col :lg="{ span: 1, offset: 2 }" :md="2">
+        <a-button icon="plus" @click="changeScale(1)" />
       </a-col>
-      <a-col :lg="{span: 1, offset: 1}" :md="2">
-        <a-button icon="minus" @click="changeScale(-1)"/>
+      <a-col :lg="{ span: 1, offset: 1 }" :md="2">
+        <a-button icon="minus" @click="changeScale(-1)" />
       </a-col>
-      <a-col :lg="{span: 1, offset: 1}" :md="2">
-        <a-button icon="undo" @click="rotateLeft"/>
+      <a-col :lg="{ span: 1, offset: 1 }" :md="2">
+        <a-button icon="undo" @click="rotateLeft" />
       </a-col>
-      <a-col :lg="{span: 1, offset: 1}" :md="2">
-        <a-button icon="redo" @click="rotateRight"/>
+      <a-col :lg="{ span: 1, offset: 1 }" :md="2">
+        <a-button icon="redo" @click="rotateRight" />
       </a-col>
-      <a-col :lg="{span: 2, offset: 6}" :md="2">
+      <a-col :lg="{ span: 2, offset: 6 }" :md="2">
         <a-button type="primary" @click="finish('blob')" :loading="uploading">保存</a-button>
       </a-col>
     </a-row>
   </a-modal>
-
 </template>
 <script>
-  import { sysFileInfoUploadAvatar } from '@/api/modular/system/fileManage'
-  import { sysUserUpdateAvatar } from '@/api/modular/system/userManage'
+import { sysFileInfoUploadAvatar } from '@/api/modular/system/fileManage'
+import { sysUserUpdateAvatar } from '@/api/modular/system/userManage'
 
-  export default {
-  data () {
+export default {
+  data() {
     return {
       visible: false,
       id: null,
@@ -77,29 +76,29 @@
     }
   },
   methods: {
-    edit (id) {
+    edit(id) {
       this.visible = true
       this.id = id
       /* 获取原始头像 */
     },
-    close () {
+    close() {
       this.id = null
       this.visible = false
     },
-    cancelHandel () {
+    cancelHandel() {
       this.close()
     },
-    changeScale (num) {
+    changeScale(num) {
       num = num || 1
       this.$refs.cropper.changeScale(num)
     },
-    rotateLeft () {
+    rotateLeft() {
       this.$refs.cropper.rotateLeft()
     },
-    rotateRight () {
+    rotateRight() {
       this.$refs.cropper.rotateRight()
     },
-    beforeUpload (file) {
+    beforeUpload(file) {
       this.fileList = file
       const reader = new FileReader()
       // 把Array Buffer转化为blob 如果是base64不需要
@@ -114,18 +113,16 @@
     },
 
     // 上传图片（点击上传按钮）
-    finish (type) {
+    finish(type) {
       if (type === 'blob') {
         this.uploading = true
-        this.$refs.cropper.getCropBlob((data) => {
-          const files = new window.File(
-            [data],
-            this.fileList.name,
-            { type: this.fileList.type }
-          )
+        this.$refs.cropper.getCropBlob(data => {
+          const files = new window.File([data], this.fileList.name, {
+            type: this.fileList.type
+          })
           const formData = new FormData()
           formData.append('file', files)
-          sysFileInfoUploadAvatar(formData).then((res) => {
+          sysFileInfoUploadAvatar(formData).then(res => {
             if (res.success) {
               this.updateAvatar(res.data)
               this.$emit('ok', res.data)
@@ -136,17 +133,17 @@
           })
         })
       } else {
-        this.$refs.cropper.getCropData((data) => {
+        this.$refs.cropper.getCropData(data => {
           console.log(data)
         })
       }
     },
-    updateAvatar (data) {
+    updateAvatar(data) {
       const params = {
         id: this.id,
         avatar: data
       }
-      sysUserUpdateAvatar(params).then((res) => {
+      sysUserUpdateAvatar(params).then(res => {
         this.uploading = false
         if (res.success) {
           this.visible = false
@@ -156,7 +153,7 @@
         }
       })
     },
-    realTime (data) {
+    realTime(data) {
       this.previews = data
     }
   }
@@ -164,20 +161,19 @@
 </script>
 
 <style lang="less" scoped>
+.avatar-upload-preview {
+  position: absolute;
+  top: 50%;
+  transform: translate(50%, -50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  box-shadow: 0 0 4px #ccc;
+  overflow: hidden;
 
-  .avatar-upload-preview {
-    position: absolute;
-    top: 50%;
-    transform: translate(50%, -50%);
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    box-shadow: 0 0 4px #ccc;
-    overflow: hidden;
-
-    img {
-      width: 100%;
-      height: 100%;
-    }
+  img {
+    width: 100%;
+    height: 100%;
   }
+}
 </style>

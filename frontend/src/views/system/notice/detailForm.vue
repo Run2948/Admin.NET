@@ -5,11 +5,12 @@
     :confirmLoading="confirmLoading"
     :visible="visible"
     :footer="null"
-    @cancel="handleCancel">
+    @cancel="handleCancel"
+  >
     <a-spin :spinning="confirmLoading">
-      <div style="text-align: center;font-size: 30px">{{ this.contentRecord.title }}</div>
-      <br>
-      <div style="text-align: right;font-size: 10px">
+      <div style="text-align: center; font-size: 30px">{{ this.contentRecord.title }}</div>
+      <br />
+      <div style="text-align: right; font-size: 10px">
         <span>（发布人：{{ this.contentRecord.publicUserName }}）</span>
         <span>发布时间：{{ this.contentRecord.publicTime }} </span>
       </div>
@@ -21,42 +22,40 @@
   </a-modal>
 </template>
 <script>
-  import {
-    sysNoticeDetail
-  } from '@/api/modular/system/noticeManage'
+import { sysNoticeDetail } from '@/api/modular/system/noticeManage'
 
-  export default {
-    name: 'DetailForm',
-    components: {},
-    data() {
-      return {
-        visible: false,
-        confirmLoading: false,
-        contentRecord: {}
-      }
+export default {
+  name: 'DetailForm',
+  components: {},
+  data() {
+    return {
+      visible: false,
+      confirmLoading: false,
+      contentRecord: {}
+    }
+  },
+  methods: {
+    // 初始化方法
+    detail(record) {
+      this.confirmLoading = true
+      this.visible = true
+      this.sysNoticeDetail(record.id)
     },
-    methods: {
-      // 初始化方法
-      detail(record) {
-        this.confirmLoading = true
-        this.visible = true
-        this.sysNoticeDetail(record.id)
-      },
-      /**
-       * 查看详情
-       */
-      sysNoticeDetail(id) {
-        sysNoticeDetail({
-          id: id
-        }).then((res) => {
-          this.confirmLoading = false
-          this.contentRecord = res.data
-        })
-      },
-      handleCancel() {
-        this.visible = false
-        this.contentRecord = {}
-      }
+    /**
+     * 查看详情
+     */
+    sysNoticeDetail(id) {
+      sysNoticeDetail({
+        id: id
+      }).then(res => {
+        this.confirmLoading = false
+        this.contentRecord = res.data
+      })
+    },
+    handleCancel() {
+      this.visible = false
+      this.contentRecord = {}
     }
   }
+}
 </script>

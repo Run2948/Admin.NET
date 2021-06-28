@@ -27,7 +27,7 @@ export default {
       required: true
     }
   },
-  data () {
+  data() {
     return {
       height: 100
     }
@@ -36,5 +36,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  @import "smooth.area.less";
+@import 'smooth.area.less';
 </style>

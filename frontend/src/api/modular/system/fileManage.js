@@ -43,6 +43,34 @@ export function sysFileInfoUpload (parameter) {
 }
 
 /**
+ * 上传文件后公开路径
+ *
+ * @author zhujinrun
+ * @date 2021/6/27 00:20
+ */
+export function sysFileInfoUploadPublic (parameter) {
+  return axios({
+    url: '/sysFileInfo/uploadPublic',
+    method: 'post',
+    data: parameter
+  })
+}
+
+/**
+ * 上传头像
+ *
+ * @author zuohuaijun
+ * @date 2021/4/23 00:20
+ */
+export function sysFileInfoUploadAvatar (parameter) {
+  return axios({
+    url: '/sysFileInfo/uploadAvatar',
+    method: 'post',
+    data: parameter
+  })
+}
+
+/**
  * 下载文件
  *
  * @author yubaoshan
@@ -73,6 +101,20 @@ export function sysFileInfoPreview (parameter) {
 }
 
 /**
+ * 公开文件
+ *
+ * @author zhujinrun
+ * @date 2021/6/27 00:20
+ */
+export function sysFileInfoPublic (parameter) {
+  return axios({
+    url: '/sysFileInfo/public',
+    method: 'get',
+    params: parameter
+  })
+}
+
+/**
  * 查看详情文件信息表
  *
  * @author yubaoshan
@@ -95,20 +137,6 @@ export function sysFileInfoDetail (parameter) {
 export function sysFileInfoDelete (parameter) {
   return axios({
     url: '/sysFileInfo/delete',
-    method: 'post',
-    data: parameter
-  })
-}
-
-/**
- * 上传头像
- *
- * @author zuohuaijun
- * @date 2021/4/23 00:20
- */
-export function sysFileInfoUploadAvatar (parameter) {
-  return axios({
-    url: '/sysFileInfo/uploadAvatar',
     method: 'post',
     data: parameter
   })

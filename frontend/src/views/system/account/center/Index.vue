@@ -5,41 +5,30 @@
         <a-card :bordered="false">
           <div class="account-center-avatarHolder">
             <div class="avatar">
-              <img :src="avatar()">
+              <img :src="avatar()" />
             </div>
             <div class="username">{{ nickname() }}</div>
             <div class="bio">海纳百川，有容乃大</div>
           </div>
           <div class="account-center-detail">
-            <p>
-              <i class="title"></i>交互专家
-            </p>
-            <p>
-              <i class="group"></i>蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED
-            </p>
+            <p><i class="title"></i>交互专家</p>
+            <p><i class="group"></i>蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED</p>
             <p>
               <i class="address"></i>
               <span>浙江省</span>
               <span>杭州市</span>
             </p>
           </div>
-          <a-divider/>
+          <a-divider />
 
           <div class="account-center-tags">
             <div class="tagsTitle">标签</div>
             <div>
               <template v-for="(tag, index) in tags">
                 <a-tooltip v-if="tag.length > 20" :key="tag" :title="tag">
-                  <a-tag
-                    :key="tag"
-                    :closable="index !== 0"
-                  >{{ `${tag.slice(0, 20)}...` }}</a-tag>
+                  <a-tag :key="tag" :closable="index !== 0">{{ `${tag.slice(0, 20)}...` }}</a-tag>
                 </a-tooltip>
-                <a-tag
-                  v-else
-                  :key="tag"
-                  :closable="index !== 0"
-                >{{ tag }}</a-tag>
+                <a-tag v-else :key="tag" :closable="index !== 0">{{ tag }}</a-tag>
               </template>
               <a-input
                 v-if="tagInputVisible"
@@ -52,12 +41,12 @@
                 @blur="handleTagInputConfirm"
                 @keyup.enter="handleTagInputConfirm"
               />
-              <a-tag v-else @click="showTagInput" style="background: #fff; borderStyle: dashed;">
-                <a-icon type="plus"/>New Tag
+              <a-tag v-else @click="showTagInput" style="background: #fff; borderstyle: dashed">
+                <a-icon type="plus" />New Tag
               </a-tag>
             </div>
           </div>
-          <a-divider :dashed="true"/>
+          <a-divider :dashed="true" />
 
           <div class="account-center-team">
             <div class="teamTitle">团队</div>
@@ -66,7 +55,7 @@
                 <a-row>
                   <a-col :span="12" v-for="(item, index) in teams" :key="index">
                     <a>
-                      <a-avatar size="small" :src="item.avatar"/>
+                      <a-avatar size="small" :src="item.avatar" />
                       <span class="member">{{ item.name }}</span>
                     </a>
                   </a-col>
@@ -78,7 +67,7 @@
       </a-col>
       <a-col :md="24" :lg="17">
         <a-card
-          style="width:100%"
+          style="width: 100%"
           :bordered="false"
           :tabList="tabListNoTitle"
           :activeTabKey="noTitleKey"
@@ -106,7 +95,7 @@ export default {
     ArticlePage,
     ProjectPage
   },
-  data () {
+  data() {
     return {
       tags: ['很有想法的', '专注设计', '辣~', '大长腿', '川妹子', '海纳百川'],
 
@@ -133,18 +122,19 @@ export default {
       noTitleKey: 'app'
     }
   },
-  mounted () {
+  mounted() {
     this.getTeams()
   },
   methods: {
     ...mapGetters(['nickname', 'avatar']),
 
-    getTeams () {
-      this.teams = [{
-        id: 1,
-        name: '科学搬砖组',
-        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png'
-      },
+    getTeams() {
+      this.teams = [
+        {
+          id: 1,
+          name: '科学搬砖组',
+          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png'
+        },
         {
           id: 2,
           name: '程序员日常',
@@ -169,27 +159,27 @@ export default {
       this.teamSpinning = false
     },
 
-    handleTabChange (key, type) {
+    handleTabChange(key, type) {
       this[type] = key
     },
 
-    handleTagClose (removeTag) {
+    handleTagClose(removeTag) {
       const tags = this.tags.filter(tag => tag !== removeTag)
       this.tags = tags
     },
 
-    showTagInput () {
+    showTagInput() {
       this.tagInputVisible = true
       this.$nextTick(() => {
         this.$refs.tagInput.focus()
       })
     },
 
-    handleInputChange (e) {
+    handleInputChange(e) {
       this.tagInputValue = e.target.value
     },
 
-    handleTagInputConfirm () {
+    handleTagInputConfirm() {
       const inputValue = this.tagInputValue
       let tags = this.tags
       if (inputValue && !tags.includes(inputValue)) {

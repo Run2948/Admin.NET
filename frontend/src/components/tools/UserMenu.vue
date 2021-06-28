@@ -47,11 +47,17 @@
         </a-menu>
       </a-dropdown>
     </div>
-    <a-modal title="切换应用" :visible="visible" :footer="null" :confirm-loading="confirmLoading" @cancel="handleCancel">
+    <a-modal
+      title="切换应用"
+      :visible="visible"
+      :footer="null"
+      :confirm-loading="confirmLoading"
+      @cancel="handleCancel"
+    >
       <a-form :form="form1">
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="选择应用">
-          <a-menu mode="inline" :default-selected-keys="this.defApp" style="border-bottom:0px;lineHeight:55px;">
-            <a-menu-item v-for="item in userInfo.apps" :key="item.code" style="top:0px;" @click="switchApp(item.code)">
+          <a-menu mode="inline" :default-selected-keys="this.defApp" style="border-bottom: 0px; lineheight: 55px">
+            <a-menu-item v-for="item in userInfo.apps" :key="item.code" style="top: 0px" @click="switchApp(item.code)">
               {{ item.name }}
             </a-menu-item>
           </a-menu>
@@ -62,156 +68,149 @@
 </template>
 
 <script>
-  import screenfull from 'screenfull'
-  import NoticeIcon from '@/components/NoticeIcon'
-  import {
-    mapActions,
-    mapGetters
-  } from 'vuex'
-  import {
-    ALL_APPS_MENU
-  } from '@/store/mutation-types'
-  import Vue from 'vue'
-  import {
-    message
-  } from 'ant-design-vue/es'
+import screenfull from 'screenfull'
+import NoticeIcon from '@/components/NoticeIcon'
+import { mapActions, mapGetters } from 'vuex'
+import { ALL_APPS_MENU } from '@/store/mutation-types'
+import Vue from 'vue'
+import { message } from 'ant-design-vue/es'
 
-  export default {
-    name: 'UserMenu',
-    components: {
-      NoticeIcon,
-      screenfull
-    },
-    props: {
-      mode: {
-        type: String,
-        // sidemenu, topmenu
-        default: 'sidemenu'
-      }
-    },
-    data() {
-      return {
-        labelCol: {
-          xs: {
-            span: 24
-          },
-          sm: {
-            span: 5
-          }
+export default {
+  name: 'UserMenu',
+  components: {
+    NoticeIcon,
+    screenfull
+  },
+  props: {
+    mode: {
+      type: String,
+      // sidemenu, topmenu
+      default: 'sidemenu'
+    }
+  },
+  data() {
+    return {
+      labelCol: {
+        xs: {
+          span: 24
         },
-        wrapperCol: {
-          xs: {
-            span: 24
-          },
-          sm: {
-            span: 16
-          }
+        sm: {
+          span: 5
+        }
+      },
+      wrapperCol: {
+        xs: {
+          span: 24
         },
-        visible: false,
-        confirmLoading: false,
-        form1: this.$form.createForm(this),
-        defApp: [],
-        isFullscreen: false
-      }
-    },
-
-    computed: {
-      ...mapGetters(['token', 'nickname', 'avatar', 'userInfo'])
-    },
-    // 设置signalr令牌
-    async mounted() {
-      await this.$socket.authenticate(this.token)
-    },
-    methods: {
-      ...mapActions(['Logout', 'MenuChange']),
-
-      handleLogout() {
-        this.$confirm({
-          title: '提示',
-          content: '真的要注销登录吗 ?',
-          okText: '确定',
-          cancelText: '取消',
-          onOk: () => {
-            return this.Logout({})
-              .then(() => {
-                setTimeout(() => {
-                  window.location.reload()
-                }, 16)
-              })
-              .catch(err => {
-                this.$message.error({
-                  title: '错误',
-                  description: err.message
-                })
-              })
-          },
-          onCancel() {}
-        })
-      },
-
-      /**
-       * 打开切换应用框
-       */
-      appToggled() {
-        this.visible = true
-        this.defApp.push(Vue.ls.get(ALL_APPS_MENU)[0].code)
-      },
-
-      switchApp(appCode) {
-        this.visible = false
-        this.defApp = []
-        const applicationData = this.userInfo.apps.filter(item => item.code === appCode)
-        const hideMessage = message.loading('正在切换应用！', 0)
-        this.MenuChange(applicationData[0])
-          .then(res => {
-            hideMessage()
-            // eslint-disable-next-line handle-callback-err
-          })
-          .catch(err => {
-            message.error('应用切换异常' + err)
-          })
-      },
-      handleCancel() {
-        this.form1.resetFields()
-        this.visible = false
-      },
-      /* 全屏切换 */
-      toggleFullscreen() {
-        if (!screenfull.isEnabled) {
-          message.error('您的浏览器不支持全屏模式')
-          return
+        sm: {
+          span: 16
         }
-        screenfull.toggle()
-        if (screenfull.isFullscreen) {
-          this.isFullscreen = false
-        } else {
-          this.isFullscreen = true
-        }
-      }
+      },
+      visible: false,
+      confirmLoading: false,
+      form1: this.$form.createForm(this),
+      defApp: [],
+      isFullscreen: false
+    }
+  },
+
+  computed: {
+    ...mapGetters(['token', 'nickname', 'avatar', 'userInfo'])
+  },
+  // 设置signalr令牌
+  async mounted() {
+    await this.$socket.authenticate(this.token)
+  },
+  methods: {
+    ...mapActions(['Logout', 'MenuChange']),
+
+    handleLogout() {
+      this.$confirm({
+        title: '提示',
+        content: '真的要注销登录吗 ?',
+        okText: '确定',
+        cancelText: '取消',
+        onOk: () => {
+          return this.Logout({})
+            .then(() => {
+              setTimeout(() => {
+                window.location.reload()
+              }, 16)
+            })
+            .catch(err => {
+              this.$message.error({
+                title: '错误',
+                description: err.message
+              })
+            })
+        },
+        onCancel() {}
+      })
     },
-    // signalr接收的信息
-    sockets: {
-      ReceiveMessage(data) {
-        this.$notification.info({
-          message: '系统消息',
-          description: data,
-          placement: 'bottomRight',
-          duration: null
+
+    /**
+     * 打开切换应用框
+     */
+    appToggled() {
+      this.visible = true
+      this.defApp.push(Vue.ls.get(ALL_APPS_MENU)[0].code)
+    },
+
+    switchApp(appCode) {
+      this.visible = false
+      this.defApp = []
+      const applicationData = this.userInfo.apps.filter(item => item.code === appCode)
+      const hideMessage = message.loading('正在切换应用！', 0)
+      this.MenuChange(applicationData[0])
+        .then(res => {
+          hideMessage()
+          // eslint-disable-next-line handle-callback-err
         })
+        .catch(err => {
+          message.error('应用切换异常' + err)
+        })
+    },
+    handleCancel() {
+      this.form1.resetFields()
+      this.visible = false
+    },
+    /* 全屏切换 */
+    toggleFullscreen() {
+      if (!screenfull.isEnabled) {
+        message.error('您的浏览器不支持全屏模式')
+        return
+      }
+      screenfull.toggle()
+      if (screenfull.isFullscreen) {
+        this.isFullscreen = false
+      } else {
+        this.isFullscreen = true
       }
     }
+  },
+  // signalr接收的信息
+  sockets: {
+    ReceiveMessage(data) {
+      this.$notification.info({
+        message: '系统消息',
+        description: data,
+        placement: 'bottomRight',
+        duration: null
+      })
+    }
   }
+}
 </script>
 
 <style lang="less" scoped>
-  .appRedio {
-    border: 1px solid #91d5ff;
-    padding: 10px 20px;
-    background: #e6f7ff;
-    border-radius: 2px;
-    margin-bottom: 10px;
-    color: #91d5ff;
-    /*display: inline;
+.appRedio {
+  border: 1px solid #91d5ff;
+  padding: 10px 20px;
+  background: #e6f7ff;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  color: #91d5ff;
+  /*display: inline;
     margin-bottom:10px;*/
-  }
+}
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div class="footer">
-    <div class="links">
-    </div>
+    <div class="links"></div>
     <div class="copyright">
-      Copyright © 2021 <a target="_blank" href="https://gitee.com/zuohuaijun/Admin.NET">Admin.NET</a> All rights reserved. v1.5.2
+      Copyright © 2021 <a target="_blank" href="https://gitee.com/zuohuaijun/Admin.NET">Admin.NET</a> All rights
+      reserved. v1.5.2
     </div>
   </div>
 </template>
@@ -11,7 +11,7 @@
 <script>
 export default {
   name: 'GlobalFooter',
-  data () {
+  data() {
     return {}
   }
 }

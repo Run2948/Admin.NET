@@ -8,68 +8,64 @@
     @cancel="handleCancel"
   >
     <a-spin :spinning="confirmLoading">
-
-      <div style="text-align: center;font-size: 30px">{{ this.contentRecord.title }}</div>
-      <br>
-      <div style="text-align: right;font-size: 10px">
+      <div style="text-align: center; font-size: 30px">{{ this.contentRecord.title }}</div>
+      <br />
+      <div style="text-align: right; font-size: 10px">
         <span>（发布人：{{ this.contentRecord.publicUserName }}）</span>
         <span>发布时间：{{ this.contentRecord.publicTime }} </span>
       </div>
-      <a-divider style="margin-top: 5px"/>
-      <div >
+      <a-divider style="margin-top: 5px" />
+      <div>
         <label v-html="this.contentRecord.content"></label>
       </div>
-
     </a-spin>
   </a-modal>
 </template>
 
 <script>
-  import { sysNoticeDetail } from '@/api/modular/system/noticeManage'
+import { sysNoticeDetail } from '@/api/modular/system/noticeManage'
 
-  export default {
-    name: 'DetailForm',
-    components: {
+export default {
+  name: 'DetailForm',
+  components: {},
+
+  data() {
+    return {
+      visible: false,
+      confirmLoading: false,
+      contentRecord: ''
+    }
+  },
+
+  methods: {
+    // 初始化方法
+    detail(record) {
+      this.confirmLoading = false
+      this.visible = true
+      this.contentRecord = record
     },
 
-    data () {
-      return {
-        visible: false,
-        confirmLoading: false,
-        contentRecord: ''
-      }
-    },
-
-    methods: {
-
-      // 初始化方法
-      detail (record) {
+    /**
+     * 查看详情
+     */
+    sysNoticeDetail(id) {
+      sysNoticeDetail({ id: id }).then(res => {
         this.confirmLoading = false
-        this.visible = true
-        this.contentRecord = record
-      },
+        this.contentRecord = res.data
+      })
+    },
 
-      /**
-       * 查看详情
-       */
-      sysNoticeDetail (id) {
-        sysNoticeDetail({ id: id }).then((res) => {
-          this.confirmLoading = false
-          this.contentRecord = res.data
-        })
-      },
-
-      handleCancel () {
-        this.visible = false
-      }
+    handleCancel() {
+      this.visible = false
     }
   }
+}
 </script>
 <style>
-  .subButton{
-    float: right;
-  }
-  .subForm-item{
-    margin-bottom: 0px;
-  }
+.subButton {
+  float: right;
+}
+.subForm-item {
+  margin-bottom: 0px;
+}
 </style>

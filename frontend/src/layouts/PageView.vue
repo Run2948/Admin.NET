@@ -5,27 +5,25 @@
       <slot slot="action" name="action"></slot>
       <slot slot="content" name="headerContent"></slot>
       <div slot="content" v-if="!this.$slots.headerContent && description">
-        <p style="font-size: 14px;color: rgba(0,0,0,.65)">{{ description }}</p>
-        <div class="link">
-        </div>
+        <p style="font-size: 14px; color: rgba(0, 0, 0, 0.65)">{{ description }}</p>
+        <div class="link"></div>
       </div>
       <slot slot="extra" name="extra">
         <div class="extra-img">
-          <img v-if="typeof extraImage !== 'undefined'" :src="extraImage"/>
+          <img v-if="typeof extraImage !== 'undefined'" :src="extraImage" />
         </div>
       </slot>
       <div slot="pageMenu">
         <div class="page-menu-search" v-if="search">
           <a-input-search
-            style="width: 80%; max-width: 522px;"
+            style="width: 80%; max-width: 522px"
             placeholder="请输入..."
             size="large"
             enterButton="搜索"
           />
         </div>
         <div class="page-menu-tabs" v-if="tabs && tabs.items">
-          <!-- @change="callback" :activeKey="activeKey" -->
-          <a-tabs :tabBarStyle="{margin: 0}" :activeKey="tabs.active()" @change="tabs.callback">
+          <a-tabs :tabBarStyle="{ margin: 0 }" :activeKey="tabs.active()" @change="tabs.callback">
             <a-tab-pane v-for="item in tabs.items" :tab="item.title" :key="item.key"></a-tab-pane>
           </a-tabs>
         </div>
@@ -38,7 +36,7 @@
           <keep-alive v-if="multiTab">
             <router-view ref="content" />
           </keep-alive>
-          <router-view v-else ref="content" style="margin: -12px -14px 0;"/>
+          <router-view v-else ref="content" style="margin: -12px -14px 0" />
         </slot>
       </div>
     </div>
@@ -72,7 +70,7 @@ export default {
       default: null
     }
   },
-  data () {
+  data() {
     return {
       pageTitle: null,
       description: null,
@@ -87,15 +85,15 @@ export default {
       multiTab: state => state.app.multiTab
     })
   },
-  mounted () {
+  mounted() {
     this.tabs = this.directTabs
     this.getPageMeta()
   },
-  updated () {
+  updated() {
     this.getPageMeta()
   },
   methods: {
-    getPageMeta () {
+    getPageMeta() {
       // eslint-disable-next-line
       //文字样式//(typeof(this.title) === 'string' || !this.title) ? this.title : this.$route.meta.title
       // 为了简洁改为无
@@ -119,59 +117,59 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .content {
-    margin: 24px 24px 0;
-    .link {
-      margin-top: 16px;
-      &:not(:empty) {
-        margin-bottom: 16px;
+.content {
+  margin: 24px 24px 0;
+  .link {
+    margin-top: 16px;
+    &:not(:empty) {
+      margin-bottom: 16px;
+    }
+    a {
+      margin-right: 32px;
+      height: 24px;
+      line-height: 24px;
+      display: inline-block;
+      i {
+        font-size: 24px;
+        margin-right: 8px;
+        vertical-align: middle;
       }
-      a {
-        margin-right: 32px;
+      span {
         height: 24px;
         line-height: 24px;
         display: inline-block;
-        i {
-          font-size: 24px;
-          margin-right: 8px;
-          vertical-align: middle;
-        }
-        span {
-          height: 24px;
-          line-height: 24px;
-          display: inline-block;
-          vertical-align: middle;
-        }
+        vertical-align: middle;
       }
     }
   }
-  .page-menu-search {
-    text-align: center;
-    margin-bottom: 16px;
-  }
-  .page-menu-tabs {
-    margin-top: 48px;
-  }
+}
+.page-menu-search {
+  text-align: center;
+  margin-bottom: 16px;
+}
+.page-menu-tabs {
+  margin-top: 48px;
+}
 
+.extra-img {
+  margin-top: -60px;
+  text-align: center;
+  width: 195px;
+
+  img {
+    width: 100%;
+  }
+}
+
+.mobile {
   .extra-img {
-    margin-top: -60px;
+    margin-top: 0;
     text-align: center;
-    width: 195px;
+    width: 96px;
 
     img {
       width: 100%;
     }
   }
-
-  .mobile {
-    .extra-img{
-      margin-top: 0;
-      text-align: center;
-      width: 96px;
-
-      img{
-        width: 100%;
-      }
-    }
-  }
+}
 </style>

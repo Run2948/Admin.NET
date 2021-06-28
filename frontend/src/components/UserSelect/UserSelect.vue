@@ -56,14 +56,16 @@ export default {
       }
       this.userFetching = true
 
-      getUserPage(params).then((res) => {
-        this.data = res.data.rows.map(user => ({
-          text: `${user.name} ${user.account}`,
-          value: user.id
-        }))
-      }).finally(() => {
-        this.fetching = false
-      })
+      getUserPage(params)
+        .then(res => {
+          this.data = res.data.rows.map(user => ({
+            text: `${user.name} ${user.account}`,
+            value: user.id
+          }))
+        })
+        .finally(() => {
+          this.fetching = false
+        })
     },
     handleChange(value) {
       Object.assign(this, {

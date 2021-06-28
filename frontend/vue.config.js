@@ -28,8 +28,8 @@ const assetsCDN = {
 
 // vue.config.js
 const vueConfig = {
-  lintOnSave: false,//关闭eslintrc语法检查
-  
+  // 关闭eslintrc语法检查
+  // lintOnSave: true,
   configureWebpack: {
     // webpack plugins
     plugins: [
@@ -102,10 +102,8 @@ const vueConfig = {
       }
     }
   },
-
   // disable source map in production
   productionSourceMap: false,
-  lintOnSave: undefined,
   // babel-loader no-ignore node_modules/*
   transpileDependencies: []
 }

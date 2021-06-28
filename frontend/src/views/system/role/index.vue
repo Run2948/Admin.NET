@@ -16,7 +16,7 @@
             </a-col>
             <a-col :md="8" :sm="24">
               <a-button type="primary" @click="$refs.table.refresh(true)">查询</a-button>
-              <a-button style="margin-left: 8px" @click="() => queryParam = {}">重置</a-button>
+              <a-button style="margin-left: 8px" @click="() => (queryParam = {})">重置</a-button>
             </a-col>
           </a-row>
         </a-form>
@@ -28,10 +28,12 @@
         :columns="columns"
         :data="loadData"
         :alert="true"
-        :rowKey="(record) => record.code"
-        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }">
+        :rowKey="record => record.code"
+        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
+      >
         <template slot="operator" v-if="hasPerm('sysRole:add')">
-          <a-button @click="$refs.addForm.add()" icon="plus" type="primary" v-if="hasPerm('sysRole:add')">新增角色
+          <a-button @click="$refs.addForm.add()" icon="plus" type="primary" v-if="hasPerm('sysRole:add')"
+            >新增角色
           </a-button>
         </template>
         <span slot="roleType" slot-scope="text">
@@ -60,145 +62,141 @@
             </a-menu>
           </a-dropdown>
         </span>
-
       </s-table>
 
       <add-form ref="addForm" @ok="handleOk" />
       <edit-form ref="editForm" @ok="handleOk" />
       <role-menu-form ref="roleMenuForm" @ok="handleOk" />
       <role-org-form ref="roleOrgForm" @ok="handleOk" />
-
     </a-card>
   </div>
 </template>
 
 <script>
-  import {
+import { STable, XCard } from '@/components'
+import { getRolePage, sysRoleDelete } from '@/api/modular/system/roleManage'
+import addForm from './addForm'
+import editForm from './editForm'
+import roleMenuForm from './roleMenuForm'
+import roleOrgForm from './roleOrgForm'
+import { sysDictTypeDropDown } from '@/api/modular/system/dictManage'
+export default {
+  components: {
+    XCard,
     STable,
-    XCard
-  } from '@/components'
-  import {
-    getRolePage,
-    sysRoleDelete
-  } from '@/api/modular/system/roleManage'
-  import addForm from './addForm'
-  import editForm from './editForm'
-  import roleMenuForm from './roleMenuForm'
-  import roleOrgForm from './roleOrgForm'
-  import {
-    sysDictTypeDropDown
-  } from '@/api/modular/system/dictManage'
-  export default {
-    components: {
-      XCard,
-      STable,
-      addForm,
-      editForm,
-      roleMenuForm,
-      roleOrgForm
-    },
+    addForm,
+    editForm,
+    roleMenuForm,
+    roleOrgForm
+  },
 
-    data() {
-      return {
-        // 查询参数
-        queryParam: {},
-        // 表头
-        columns: [{
-            title: '角色名',
-            dataIndex: 'name'
-          },
-          {
-            title: '角色类型',
-            dataIndex: 'roleType',
-            scopedSlots: {
-              customRender: 'roleType'
-            }
-          },
-          {
-            title: '唯一编码',
-            dataIndex: 'code'
-          },
-          {
-            title: '排序',
-            dataIndex: 'sort'
-          }
-        ],
-        // 加载数据方法 必须为 Promise 对象
-        loadData: parameter => {
-          return getRolePage(Object.assign(parameter, this.queryParam)).then((res) => {
-            return res.data
-          })
+  data() {
+    return {
+      // 查询参数
+      queryParam: {},
+      // 表头
+      columns: [
+        {
+          title: '角色名',
+          dataIndex: 'name'
         },
-        selectedRowKeys: [],
-        selectedRows: [],
-        typeDictTypeDropDown: []
-      }
-    },
-
-    created() {
-      this.sysDictTypeDropDown()
-      if (this.hasPerm('sysRole:edit') || this.hasPerm('sysRole:grantMenu') || this.hasPerm('sysRole:grantData') || this
-        .hasPerm('sysRole:delete')) {
-        this.columns.push({
-          title: '操作',
-          width: '150px',
-          dataIndex: 'action',
+        {
+          title: '角色类型',
+          dataIndex: 'roleType',
           scopedSlots: {
-            customRender: 'action'
+            customRender: 'roleType'
           }
+        },
+        {
+          title: '唯一编码',
+          dataIndex: 'code'
+        },
+        {
+          title: '排序',
+          dataIndex: 'sort'
+        }
+      ],
+      // 加载数据方法 必须为 Promise 对象
+      loadData: parameter => {
+        return getRolePage(Object.assign(parameter, this.queryParam)).then(res => {
+          return res.data
         })
+      },
+      selectedRowKeys: [],
+      selectedRows: [],
+      typeDictTypeDropDown: []
+    }
+  },
+
+  created() {
+    this.sysDictTypeDropDown()
+    if (
+      this.hasPerm('sysRole:edit') ||
+      this.hasPerm('sysRole:grantMenu') ||
+      this.hasPerm('sysRole:grantData') ||
+      this.hasPerm('sysRole:delete')
+    ) {
+      this.columns.push({
+        title: '操作',
+        width: '150px',
+        dataIndex: 'action',
+        scopedSlots: {
+          customRender: 'action'
+        }
+      })
+    }
+  },
+
+  methods: {
+    typeFilter(roleType) {
+      // eslint-disable-next-line eqeqeq
+      const values = this.typeDictTypeDropDown.filter(item => item.code == roleType)
+      if (values.length > 0) {
+        return values[0].value
       }
     },
-
-    methods: {
-      typeFilter(roleType) {
-        // eslint-disable-next-line eqeqeq
-        const values = this.typeDictTypeDropDown.filter(item => item.code == roleType)
-        if (values.length > 0) {
-          return values[0].value
-        }
-      },
-      /**
-       * 获取字典数据
-       */
-      sysDictTypeDropDown(text) {
-        sysDictTypeDropDown({
-          code: 'role_type'
-        }).then((res) => {
-          this.typeDictTypeDropDown = res.data
-        })
-      },
-      sysRoleDelete(record) {
-        sysRoleDelete(record).then((res) => {
+    /**
+     * 获取字典数据
+     */
+    sysDictTypeDropDown(text) {
+      sysDictTypeDropDown({
+        code: 'role_type'
+      }).then(res => {
+        this.typeDictTypeDropDown = res.data
+      })
+    },
+    sysRoleDelete(record) {
+      sysRoleDelete(record)
+        .then(res => {
           if (res.success) {
             this.$message.success('删除成功')
             this.$refs.table.refresh()
           } else {
             this.$message.error('删除失败：' + res.message)
           }
-        }).catch((err) => {
+        })
+        .catch(err => {
           this.$message.error('删除错误：' + err.message)
         })
-      },
+    },
 
-      handleOk() {
-        this.$refs.table.refresh()
-      },
-      onSelectChange(selectedRowKeys, selectedRows) {
-        this.selectedRowKeys = selectedRowKeys
-        this.selectedRows = selectedRows
-      }
+    handleOk() {
+      this.$refs.table.refresh()
+    },
+    onSelectChange(selectedRowKeys, selectedRows) {
+      this.selectedRowKeys = selectedRowKeys
+      this.selectedRows = selectedRows
     }
-
   }
+}
 </script>
 
 <style lang="less">
-  .table-operator {
-    margin-bottom: 18px;
-  }
+.table-operator {
+  margin-bottom: 18px;
+}
 
-  button {
-    margin-right: 8px;
-  }
+button {
+  margin-right: 8px;
+}
 </style>

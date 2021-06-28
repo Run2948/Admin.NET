@@ -33,14 +33,14 @@ export default {
   },
   methods: {
     getOrgData() {
-      getOrgTree().then((res) => {
+      getOrgTree().then(res => {
         this.orgTree = res
       })
     },
     /**
      * 选择树机构，初始化机构名称于表单中
      */
-    onchange (value) {
+    onchange(value) {
       this.$emit('change', value)
     }
   }

@@ -3,62 +3,15 @@ module.exports = {
   env: {
     node: true
   },
-  'extends': [
-    'plugin:vue/strongly-recommended',
-    '@vue/standard'
-  ],
+  extends: ['plugin:vue/essential', '@vue/standard'],
   rules: {
-    'no-console': 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'generator-star-spacing': 'off',
-    'no-mixed-operators': 0,
-    'vue/max-attributes-per-line': [
-      2,
-      {
-        'singleline': 5,
-        'multiline': {
-          'max': 1,
-          'allowFirstLine': false
-        }
-      }
-    ],
-    'vue/attribute-hyphenation': 0,
-    'vue/html-self-closing': 0,
-    'vue/component-name-in-template-casing': 0,
-    'vue/html-closing-bracket-spacing': 0,
-    'vue/singleline-html-element-content-newline': 0,
-    'vue/no-unused-components': 0,
-    'vue/multiline-html-element-content-newline': 0,
-    'vue/no-use-v-if-with-v-for': 0,
-    'vue/html-closing-bracket-newline': 0,
-    'vue/no-parsing-error': 0,
-    'no-tabs': 0,
-    'quotes': [
-      2,
-      'single',
-      {
-        'avoidEscape': true,
-        'allowTemplateLiterals': true
-      }
-    ],
-    'semi': [
-      2,
-      'never',
-      {
-        'beforeStatementContinuationChars': 'never'
-      }
-    ],
-    'no-delete-var': 2,
-    'prefer-const': [
-      2,
-      {
-        'ignoreReadBeforeAssign': false
-      }
-    ],
-    'template-curly-spacing': 'off',
-    'indent': 'off',
-    "space-before-function-paren": 0,
-    'no-multi-spaces': 2, //不能用多余的空格
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-mixed-operators': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'vue/no-unused-components': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-multi-spaces': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    // 'generator-star-spacing': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'space-before-function-paren': 'off'
   },
   parserOptions: {
     parser: 'babel-eslint'

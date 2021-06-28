@@ -12,7 +12,7 @@ export const PageLoading = {
       default: 'large'
     }
   },
-  render () {
+  render() {
     const style = {
       textAlign: 'center',
       background: 'rgba(0,0,0,0.6)',
@@ -50,23 +50,23 @@ loading.newInstance = (Vue, options) => {
   const cdProps = Object.assign({ visible: false, size: 'large', tip: 'Loading...' }, options)
 
   const instance = new Vue({
-    data () {
+    data() {
       return {
         ...cdProps
       }
     },
-    render () {
+    render() {
       const { tip } = this
       const props = {}
       this.tip && (props.tip = tip)
       if (this.visible) {
-        return <PageLoading { ...{ props } } />
+        return <PageLoading {...{ props }} />
       }
       return null
     }
   }).$mount(loadingElement)
 
-  function update (config) {
+  function update(config) {
     const { visible, size, tip } = { ...cdProps, ...config }
     instance.$set(instance, 'visible', visible)
     if (tip) {

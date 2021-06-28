@@ -84,7 +84,7 @@ export function sysOpLogDelete (parameter) {
  * @author yubaoshan
  * @date 2020/6/23 23:09
  */
- export function sysExLogDelete (parameter) {
+export function sysExLogDelete (parameter) {
   return axios({
     url: '/sysExLog/delete',
     method: 'post',

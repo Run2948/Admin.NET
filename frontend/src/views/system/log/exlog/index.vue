@@ -31,18 +31,20 @@
                     v-model="queryParam.dates"
                     :show-time="{
                       hideDisabledOptions: true,
-                      defaultValue: [moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')],
+                      defaultValue: [moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]
                     }"
-                    format="YYYY-MM-DD HH:mm:ss" />
+                    format="YYYY-MM-DD HH:mm:ss"
+                  />
                 </a-form-item>
               </a-col>
             </template>
-            <a-col :md="!advanced && 8 || 24" :sm="24">
+            <a-col :md="(!advanced && 8) || 24" :sm="24">
               <span
                 class="table-page-search-submitButtons"
-                :style="advanced && { float: 'right', overflow: 'hidden' } || {} ">
+                :style="(advanced && { float: 'right', overflow: 'hidden' }) || {}"
+              >
                 <a-button type="primary" @click="$refs.table.refresh(true)">查询</a-button>
-                <a-button style="margin-left: 8px" @click="() => queryParam = {}">重置</a-button>
+                <a-button style="margin-left: 8px" @click="() => (queryParam = {})">重置</a-button>
                 <a @click="toggleAdvanced" style="margin-left: 8px">
                   {{ advanced ? '收起' : '展开' }}
                   <a-icon :type="advanced ? 'up' : 'down'" />
@@ -59,8 +61,9 @@
         :columns="columns"
         :data="loadData"
         :alert="true"
-        :rowKey="(record) => record.id"
-        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }">
+        :rowKey="record => record.id"
+        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
+      >
         <template slot="operator" v-if="hasPerm('sysExLog:delete')">
           <a-popconfirm @confirm="() => sysExLogDelete()" placement="top" title="确认清空日志？">
             <a-button>清空日志</a-button>
@@ -92,138 +95,132 @@
   </div>
 </template>
 <script>
-  import {
+import { STable, Ellipsis, XCard } from '@/components'
+import { sysExLogPage, sysExLogDelete } from '@/api/modular/system/logManage'
+import detailsExlog from './details'
+import moment from 'moment'
+export default {
+  components: {
+    XCard,
     STable,
     Ellipsis,
-    XCard
-  } from '@/components'
-  import {
-    sysExLogPage,
-    sysExLogDelete
-  } from '@/api/modular/system/logManage'
-  import detailsExlog from './details'
-  import moment from 'moment'
-  export default {
-    components: {
-      XCard,
-      STable,
-      Ellipsis,
-      detailsExlog
-    },
-    data() {
-      return {
-        advanced: false,
-        // 查询参数
-        queryParam: {},
-        // 表头
-        columns: [{
-            title: '类名',
-            dataIndex: 'className',
-            scopedSlots: {
-              customRender: 'className'
-            }
-          },
-          {
-            title: '方法名',
-            dataIndex: 'methodName',
-            scopedSlots: {
-              customRender: 'methodName'
-            }
-          },
-          {
-            title: '异常名称',
-            dataIndex: 'exceptionName',
-            scopedSlots: {
-              customRender: 'exceptionName'
-            }
-          },
-          {
-            title: '异常信息',
-            dataIndex: 'exceptionMsg',
-            scopedSlots: {
-              customRender: 'exceptionMsg'
-            }
-          },
-          {
-            title: '异常时间',
-            dataIndex: 'exceptionTime',
-            scopedSlots: {
-              customRender: 'exceptionTime'
-            }
-          },
-          {
-            title: '操作人',
-            dataIndex: 'name'
-          },
-          {
-            title: '详情',
-            dataIndex: 'action',
-            width: '150px',
-            scopedSlots: {
-              customRender: 'action'
-            }
+    detailsExlog
+  },
+  data() {
+    return {
+      advanced: false,
+      // 查询参数
+      queryParam: {},
+      // 表头
+      columns: [
+        {
+          title: '类名',
+          dataIndex: 'className',
+          scopedSlots: {
+            customRender: 'className'
           }
-        ],
-        // 加载数据方法 必须为 Promise 对象
-        loadData: parameter => {
-          return sysExLogPage(Object.assign(parameter, this.switchingDate())).then((res) => {
-            return res.data
-          })
         },
-        selectedRowKeys: [],
-        selectedRows: [],
-        defaultExpandedKeys: []
-      }
-    },
-    created() {},
-    methods: {
-      moment,
-      /**
-       * 查询参数组装
-       */
-      switchingDate() {
-        const dates = this.queryParam.dates
-        if (dates != null) {
-          this.queryParam.searchBeginTime = moment(dates[0]).format('YYYY-MM-DD HH:mm:ss')
-          this.queryParam.searchEndTime = moment(dates[1]).format('YYYY-MM-DD HH:mm:ss')
-          if (dates.length < 1) {
-            delete this.queryParam.searchBeginTime
-            delete this.queryParam.searchEndTime
+        {
+          title: '方法名',
+          dataIndex: 'methodName',
+          scopedSlots: {
+            customRender: 'methodName'
+          }
+        },
+        {
+          title: '异常名称',
+          dataIndex: 'exceptionName',
+          scopedSlots: {
+            customRender: 'exceptionName'
+          }
+        },
+        {
+          title: '异常信息',
+          dataIndex: 'exceptionMsg',
+          scopedSlots: {
+            customRender: 'exceptionMsg'
+          }
+        },
+        {
+          title: '异常时间',
+          dataIndex: 'exceptionTime',
+          scopedSlots: {
+            customRender: 'exceptionTime'
+          }
+        },
+        {
+          title: '操作人',
+          dataIndex: 'name'
+        },
+        {
+          title: '详情',
+          dataIndex: 'action',
+          width: '150px',
+          scopedSlots: {
+            customRender: 'action'
           }
         }
-        const obj = JSON.parse(JSON.stringify(this.queryParam))
-        delete obj.dates
-        return obj
-      },
-      /**
-       * 清空日志
-       */
-      sysExLogDelete() {
-        sysExLogDelete().then((res) => {
-          if (res.success) {
-            this.$message.success('清空成功')
-            this.$refs.table.refresh(true)
-          } else {
-            this.$message.error('清空失败：' + res.message)
-          }
+      ],
+      // 加载数据方法 必须为 Promise 对象
+      loadData: parameter => {
+        return sysExLogPage(Object.assign(parameter, this.switchingDate())).then(res => {
+          return res.data
         })
       },
-      toggleAdvanced() {
-        this.advanced = !this.advanced
-      },
-      onSelectChange(selectedRowKeys, selectedRows) {
-        this.selectedRowKeys = selectedRowKeys
-        this.selectedRows = selectedRows
+      selectedRowKeys: [],
+      selectedRows: [],
+      defaultExpandedKeys: []
+    }
+  },
+  created() {},
+  methods: {
+    moment,
+    /**
+     * 查询参数组装
+     */
+    switchingDate() {
+      const dates = this.queryParam.dates
+      if (dates != null) {
+        this.queryParam.searchBeginTime = moment(dates[0]).format('YYYY-MM-DD HH:mm:ss')
+        this.queryParam.searchEndTime = moment(dates[1]).format('YYYY-MM-DD HH:mm:ss')
+        if (dates.length < 1) {
+          delete this.queryParam.searchBeginTime
+          delete this.queryParam.searchEndTime
+        }
       }
+      const obj = JSON.parse(JSON.stringify(this.queryParam))
+      delete obj.dates
+      return obj
+    },
+    /**
+     * 清空日志
+     */
+    sysExLogDelete() {
+      sysExLogDelete().then(res => {
+        if (res.success) {
+          this.$message.success('清空成功')
+          this.$refs.table.refresh(true)
+        } else {
+          this.$message.error('清空失败：' + res.message)
+        }
+      })
+    },
+    toggleAdvanced() {
+      this.advanced = !this.advanced
+    },
+    onSelectChange(selectedRowKeys, selectedRows) {
+      this.selectedRowKeys = selectedRowKeys
+      this.selectedRows = selectedRows
     }
   }
+}
 </script>
 <style lang="less">
-  .table-operator {
-    margin-bottom: 18px;
-  }
+.table-operator {
+  margin-bottom: 18px;
+}
 
-  button {
-    margin-right: 8px;
-  }
+button {
+  margin-right: 8px;
+}
 </style>

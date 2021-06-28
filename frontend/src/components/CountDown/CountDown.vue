@@ -5,8 +5,7 @@
 </template>
 
 <script>
-
-function fixedZero (val) {
+function fixedZero(val) {
   return val * 1 < 10 ? `0${val}` : val
 }
 
@@ -26,7 +25,7 @@ export default {
       default: () => ({})
     }
   },
-  data () {
+  data() {
     return {
       dateTime: '0',
       originTargetTime: 0,
@@ -36,7 +35,7 @@ export default {
     }
   },
   filters: {
-    format (time) {
+    format(time) {
       const hours = 60 * 60 * 1000
       const minutes = 60 * 1000
 
@@ -46,12 +45,12 @@ export default {
       return `${fixedZero(h)}:${fixedZero(m)}:${fixedZero(s)}`
     }
   },
-  created () {
+  created() {
     this.initTime()
     this.tick()
   },
   methods: {
-    initTime () {
+    initTime() {
       let lastTime = 0
       let targetTime = 0
       this.originTargetTime = this.target
@@ -69,7 +68,7 @@ export default {
 
       this.lastTime = lastTime < 0 ? 0 : lastTime
     },
-    tick () {
+    tick() {
       const { onEnd } = this
 
       this.timer = setTimeout(() => {
@@ -86,17 +85,16 @@ export default {
       }, this.interval)
     }
   },
-  beforeUpdate () {
+  beforeUpdate() {
     if (this.originTargetTime !== this.target) {
       this.initTime()
     }
   },
-  beforeDestroy () {
+  beforeDestroy() {
     clearTimeout(this.timer)
   }
 }
 </script>
 
 <style scoped>
-
 </style>
