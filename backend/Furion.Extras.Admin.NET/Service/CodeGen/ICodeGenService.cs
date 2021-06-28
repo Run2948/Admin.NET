@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Furion.Extras.Admin.NET.Service.CodeGen
+namespace Furion.Extras.Admin.NET.Service
 {
     public interface ICodeGenService
     {
@@ -12,7 +12,7 @@ namespace Furion.Extras.Admin.NET.Service.CodeGen
 
         Task<SysCodeGen> GetCodeGen([FromQuery] QueryCodeGenInput input);
 
-        List<TableColumnOuput> GetColumnList(AddCodeGenInput input);
+        List<TableColumnOutput> GetColumnList(AddCodeGenInput input);
 
         List<TableOutput> GetTableList();
 

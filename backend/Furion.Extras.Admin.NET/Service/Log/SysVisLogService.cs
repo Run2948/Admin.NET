@@ -36,7 +36,7 @@ namespace Furion.Extras.Admin.NET.Service
             var searchBeginTime = !string.IsNullOrEmpty(input.SearchBeginTime?.Trim());
             var visLogs = await _sysVisLogRep.DetachedEntities
                                              .Where((name, u => EF.Functions.Like(u.Name, $"%{input.Name.Trim()}%")))
-                                             .Where(input.VisType >= 0, u => u.VisType == input.VisType)
+                                             .Where(input.VisType.HasValue, u => u.VisType == input.VisType.Value)
                                              .Where(success, u => u.Success == input.Success)
                                              .Where(searchBeginTime, u => u.VisTime >= DateTime.Parse(input.SearchBeginTime.Trim()) &&
                                                                      u.VisTime <= DateTime.Parse(input.SearchEndTime.Trim()))

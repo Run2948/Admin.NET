@@ -8,7 +8,7 @@ namespace Furion.Extras.Admin.NET.Service
     {
         Task Add(CodeGenConfig input);
 
-        void AddList(List<TableColumnOuput> tableColumnOuputList, SysCodeGen codeGenerate);
+        void AddList(List<TableColumnOutput> tableColumnOutputList, SysCodeGen codeGenerate);
 
         Task Delete(long codeGenId);
 

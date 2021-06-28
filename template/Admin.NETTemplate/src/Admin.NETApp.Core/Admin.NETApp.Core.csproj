@@ -14,25 +14,4 @@
     <PackageReference Include="Furion.Extras.Admin.NET" Version="1.0.23" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Update="C:\Users\Administrator\.nuget\packages\furion.extras.admin.net\1.0.16\contentFiles\any\net5.0\applicationconfig.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="C:\Users\Administrator\.nuget\packages\furion.extras.admin.net\1.0.16\contentFiles\any\net5.0\Furion.Extras.Admin.NET.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="C:\Users\Administrator\.nuget\packages\furion.extras.admin.net\1.0.19\contentFiles\any\net5.0\applicationconfig.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="C:\Users\Administrator\.nuget\packages\furion.extras.admin.net\1.0.19\contentFiles\any\net5.0\Furion.Extras.Admin.NET.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="C:\Users\Administrator\.nuget\packages\furion.extras.admin.net\1.0.7\contentFiles\any\net5.0\applicationconfig.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="C:\Users\Administrator\.nuget\packages\furion.extras.admin.net\1.0.7\contentFiles\any\net5.0\Furion.Extras.Admin.NET.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
 </Project>

@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="applicationsettings.json" />
-    <None Remove="Admin.NETApp.Application.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="applicationsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -19,10 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Admin.NETApp.Core\Admin.NETApp.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="System\Services\" />
   </ItemGroup>
 
 </Project>

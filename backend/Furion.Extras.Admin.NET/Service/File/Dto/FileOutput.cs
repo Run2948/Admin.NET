@@ -50,4 +50,23 @@
         /// </summary>
         public string FilePath { get; set; }
     }
+
+
+    public class PublicFileOutput
+    {
+        /// <summary>
+        /// 文件Id
+        /// </summary>
+        public long Id { get; set; }
+
+        /// <summary>
+        /// 存储到bucket的名称（文件唯一标识id）
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 访问路径
+        /// </summary>
+        public string Url{ get; set; }
+    }
 }

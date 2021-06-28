@@ -11,11 +11,17 @@ using Yitter.IdGenerator;
 
 namespace Admin.NETApp.EntityFramework.Core
 {
-    [AppDbContext("MultiTenantConnection", DbProvider.Sqlite)]
+    [AppDbContext("MultiTenantConnection", DbProvider.MySql)]
     public class MultiTenantDbContext : AppDbContext<MultiTenantDbContext, MultiTenantDbContextLocator>
     {
         public MultiTenantDbContext(DbContextOptions<MultiTenantDbContext> options) : base(options)
         {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.LogTo(Console.WriteLine);
         }
 
         protected override void SavingChangesEvent(DbContextEventData eventData, InterceptionResult<int> result)

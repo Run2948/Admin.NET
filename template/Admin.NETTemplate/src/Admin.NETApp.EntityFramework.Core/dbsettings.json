@@ -1,7 +1,8 @@
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Data Source=./Admin.NETApp.db",
-    "MultiTenantConnection": "Data Source=./Admin.NETApp_SaaS.db",
-    "PgSqlConnection": "HOST=127.0.0.1;PORT=5432;DATABASE=Admin.NETApp;PASSWORD=123qwe;USER ID=postgres;"
+    //"DefaultConnection": "Data Source=./Admin.NETApp.db",
+    //"MultiTenantConnection": "Data Source=./Admin.NETApp_SaaS.db",
+    "DefaultConnection": "Data Source=localhost;Database=Admin.NETApp;User ID=root;Password=123456;pooling=true;port=3306;sslmode=none;CharSet=utf8;",
+    "MultiTenantConnection": "Data Source=localhost;Database=Admin.NETApp_SaaS;User ID=root;Password=123456;pooling=true;port=3306;sslmode=none;CharSet=utf8;"
   }
 }

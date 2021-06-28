@@ -14,7 +14,7 @@ using Yitter.IdGenerator;
 
 namespace Admin.NETApp.EntityFramework.Core
 {
-    [AppDbContext("DefaultConnection", DbProvider.Sqlite)]
+    [AppDbContext("DefaultConnection", DbProvider.MySql)]
     public class DefaultDbContext : AppDbContext<DefaultDbContext>, IMultiTenantOnTable, IModelBuilderFilter
     {
         public DefaultDbContext(DbContextOptions<DefaultDbContext> options) : base(options)
@@ -24,6 +24,12 @@ namespace Admin.NETApp.EntityFramework.Core
 
             // 忽略空值更新
             InsertOrUpdateIgnoreNullValues = true;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.LogTo(Console.WriteLine);
         }
 
         /// <summary>

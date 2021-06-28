@@ -63,6 +63,12 @@
       "maxSize": 1048576,
       "contentType": [ "image/jpg", "image/png", "image/jpeg", "image/gif" ]
     },
+    // 编辑器
+    "Editor": {
+      "path": "Upload/Editor",
+      "maxSize": 1048576,
+      "contentType": [ "image/jpg", "image/png", "image/jpeg", "image/gif", "image/bmp" ]
+    },
     // 默认
     "Default": {
       "path": "Upload/Default",

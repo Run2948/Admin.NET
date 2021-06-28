@@ -70,7 +70,7 @@ namespace Furion.Extras.Admin.NET.Service
             var roles = await _sysRoleRep.DetachedEntities
                                          .Where((name, u => EF.Functions.Like(u.Name, $"%{input.Name.Trim()}%")),
                                                 (code, u => EF.Functions.Like(u.Code, $"%{input.Code.Trim()}%")))
-                                         .Where(u => u.Status == CommonStatus.ENABLE).OrderBy(u => u.Sort)
+                                         .Where(u => u.Status == CommonStatus.ENABLE).OrderBy(u => u.Sort).ThenBy(u => u.Id)
                                          .ToPagedListAsync(input.PageNo, input.PageSize);
             return XnPageResult<SysRole>.PageResult(roles);
         }
@@ -88,7 +88,7 @@ namespace Furion.Extras.Admin.NET.Service
             return await _sysRoleRep.DetachedEntities
                                     .Where((name, u => EF.Functions.Like(u.Name, $"%{input.Name.Trim()}%")),
                                            (code, u => EF.Functions.Like(u.Code, $"%{input.Code.Trim()}%")))
-                                    .Where(u => u.Status == CommonStatus.ENABLE).OrderBy(u => u.Sort)
+                                    .Where(u => u.Status == CommonStatus.ENABLE).OrderBy(u => u.Sort).ThenBy(u => u.Id)
                                     .Select(u => new
                                     {
                                         u.Id,

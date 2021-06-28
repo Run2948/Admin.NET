@@ -47,6 +47,13 @@ namespace Furion.Extras.Admin.NET
         public string NameSpace { get; set; }
 
         /// <summary>
+        /// 前端项目名称
+        /// </summary>
+        [Comment("前端项目名称")]
+        [MaxLength(100)]
+        public string FrontProject { get; set; }
+
+        /// <summary>
         /// 程序集
         /// </summary>
         [NotMapped]

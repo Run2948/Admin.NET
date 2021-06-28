@@ -93,27 +93,27 @@ namespace Furion.Extras.Admin.NET.Service
         /// <summary>
         /// 批量增加
         /// </summary>
-        /// <param name="tableColumnOuputList"></param>
+        /// <param name="tableColumnOutputList"></param>
         /// <param name="codeGenerate"></param>
         [NonAction]
-        public void AddList(List<TableColumnOuput> tableColumnOuputList, SysCodeGen codeGenerate)
+        public void AddList(List<TableColumnOutput> tableColumnOutputList, SysCodeGen codeGenerate)
         {
-            if (tableColumnOuputList == null) return;
+            if (tableColumnOutputList == null) return;
 
-            foreach (var tableColumn in tableColumnOuputList)
+            foreach (var tableColumn in tableColumnOutputList)
             {
                 var codeGenConfig = new SysCodeGenConfig();
 
-                var YesOrNo = YesOrNot.Y.ToString();
+                var yesOrNo = YesOrNot.Y.ToString();
                 if (Convert.ToBoolean(tableColumn.ColumnKey))
                 {
-                    YesOrNo = YesOrNot.N.ToString();
+                    yesOrNo = YesOrNot.N.ToString();
                 }
 
                 if (CodeGenUtil.IsCommonColumn(tableColumn.ColumnName))
                 {
                     codeGenConfig.WhetherCommon = YesOrNot.Y.ToString();
-                    YesOrNo = YesOrNot.N.ToString();
+                    yesOrNo = YesOrNot.N.ToString();
                 }
                 else
                 {
@@ -127,10 +127,10 @@ namespace Furion.Extras.Admin.NET.Service
                 codeGenConfig.WhetherRetract = YesOrNot.N.ToString();
 
                 codeGenConfig.WhetherRequired = YesOrNot.N.ToString();
-                codeGenConfig.QueryWhether = YesOrNo;
-                codeGenConfig.WhetherAddUpdate = YesOrNo;
-                codeGenConfig.WhetherTable = YesOrNo;
-                codeGenConfig.WhetherOrderBy = YesOrNo;
+                codeGenConfig.QueryWhether = yesOrNo;
+                codeGenConfig.WhetherAddUpdate = yesOrNo;
+                codeGenConfig.WhetherTable = yesOrNo;
+                codeGenConfig.WhetherOrderBy = yesOrNo;
 
                 codeGenConfig.ColumnKey = tableColumn.ColumnKey;
 

@@ -14,7 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Furion.Extras.Admin.NET.Service.CodeGen
+namespace Furion.Extras.Admin.NET.Service
 {
     /// <summary>
     /// 代码生成器服务
@@ -140,7 +140,7 @@ namespace Furion.Extras.Admin.NET.Service.CodeGen
         /// </summary>
         /// <returns></returns>
         [HttpGet("/codeGenerate/ColumnList/{tableName}")]
-        public List<TableColumnOuput> GetColumnListByTableName(string tableName)
+        public List<TableColumnOutput> GetColumnListByTableName(string tableName)
         {
             // 获取实体类型属性
             var entityType = Db.GetDbContext().Model.GetEntityTypes().FirstOrDefault(u => u.ClrType.Name == tableName);
@@ -152,7 +152,7 @@ namespace Furion.Extras.Admin.NET.Service.CodeGen
 
             // 按原始类型的顺序获取所有实体类型属性（不包含导航属性，会返回null）
             return type.GetProperties().Select(propertyInfo => entityType.FindProperty(propertyInfo.Name))
-                       .Where(p => p != null).Select(p => new TableColumnOuput
+                       .Where(p => p != null).Select(p => new TableColumnOutput
                        {
                            ColumnName = p.Name,
                            ColumnKey = p.IsKey().ToString(),
@@ -167,7 +167,7 @@ namespace Furion.Extras.Admin.NET.Service.CodeGen
         /// </summary>
         /// <returns></returns>
         [NonAction]
-        public List<TableColumnOuput> GetColumnList([FromQuery] AddCodeGenInput input)
+        public List<TableColumnOutput> GetColumnList([FromQuery] AddCodeGenInput input)
         {
             // 获取实体类型属性
             var entityType = Db.GetDbContext().Model.GetEntityTypes()
@@ -180,7 +180,7 @@ namespace Furion.Extras.Admin.NET.Service.CodeGen
 
             // 按原始类型的顺序获取所有实体类型属性（不包含导航属性，会返回null）
             return type.GetProperties().Select(propertyInfo => entityType.FindProperty(propertyInfo.Name))
-                       .Where(p => p != null).Select(p => new TableColumnOuput
+                       .Where(p => p != null).Select(p => new TableColumnOutput
                        {
                            ColumnName = p.Name,
                            ColumnKey = p.IsKey().ToString(),
@@ -235,7 +235,7 @@ namespace Furion.Extras.Admin.NET.Service.CodeGen
         private async Task AddMenu(string className, string busName, string application, long pid)
         {
             // 定义菜单编码前缀
-            var codePrefix = "dilon_" + className.ToLower();
+            var codePrefix = "gen_" + className.ToLower();
 
             // 先删除该表已生成的菜单列表
             var menus = await _sysMenuRep.DetachedEntities.Where(u => u.Code == codePrefix || u.Code.StartsWith(codePrefix + "_")).ToListAsync();
@@ -367,17 +367,17 @@ namespace Furion.Extras.Admin.NET.Service.CodeGen
         /// <returns></returns>
         private List<string> GetTargetPathList(SysCodeGen input)
         {
-            var backendPath = new DirectoryInfo(App.WebHostEnvironment.ContentRootPath).Parent.FullName + @"\" + input.NameSpace + @"\Service\" + input.TableName + @"\";
+            var backendPath = new DirectoryInfo(App.WebHostEnvironment.ContentRootPath).Parent.FullName + @"\" + input.NameSpace + @"\Main\" + input.TableName + @"\";
             var servicePath = backendPath + input.TableName + "Service.cs";
             var iservicePath = backendPath + "I" + input.TableName + "Service.cs";
             var inputPath = backendPath + @"Dto\" + input.TableName + "Input.cs";
             var outputPath = backendPath + @"Dto\" + input.TableName + "Output.cs";
             var viewPath = backendPath + @"Dto\" + input.TableName + "Dto.cs";
-            var frontendPath = new DirectoryInfo(App.WebHostEnvironment.ContentRootPath).Parent.Parent.FullName + @"\frontend\src\views\main\";
+            var frontendPath = new DirectoryInfo(App.WebHostEnvironment.ContentRootPath).Parent.Parent.FullName + @"\" + (input.FrontProject ?? "frontend") + @"\src\views\main\";
             var indexPath = frontendPath + input.TableName + @"\index.vue";
             var addFormPath = frontendPath + input.TableName + @"\addForm.vue";
             var editFormPath = frontendPath + input.TableName + @"\editForm.vue";
-            var apiJsPath = new DirectoryInfo(App.WebHostEnvironment.ContentRootPath).Parent.Parent.FullName + @"\frontend\src\api\modular\main\" + input.TableName + "Manage.js";
+            var apiJsPath = new DirectoryInfo(App.WebHostEnvironment.ContentRootPath).Parent.Parent.FullName + @"\" + (input.FrontProject ?? "frontend") + @"\src\api\modular\main\" + input.TableName + "Manage.js";
 
             return new List<string>()
             {

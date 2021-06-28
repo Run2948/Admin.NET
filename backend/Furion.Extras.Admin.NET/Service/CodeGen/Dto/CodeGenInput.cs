@@ -34,6 +34,12 @@ namespace Furion.Extras.Admin.NET.Service
         public string NameSpace { get; set; }
 
         /// <summary>
+        /// 前端项目名称
+        /// </summary>
+        [Required(ErrorMessage = "前端项目名称不能为空")]
+        public string FrontProject { get; set; }
+
+        /// <summary>
         /// 作者姓名
         /// </summary>
         [Required(ErrorMessage = "作者姓名不能为空")]
@@ -102,6 +108,12 @@ namespace Furion.Extras.Admin.NET.Service
         /// </summary>
         [Required(ErrorMessage = "命名空间不能为空")]
         public string NameSpace { get; set; }
+
+        /// <summary>
+        /// 前端项目名称
+        /// </summary>
+        [Required(ErrorMessage = "前端项目名称不能为空")]
+        public string FrontProject { get; set; }
 
         /// <summary>
         /// 作者姓名

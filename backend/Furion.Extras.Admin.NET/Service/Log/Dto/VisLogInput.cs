@@ -18,6 +18,6 @@
         /// <summary>
         /// 访问类型
         /// </summary>
-        public LoginType VisType { get; set; }
+        public LoginType? VisType { get; set; }
     }
 }

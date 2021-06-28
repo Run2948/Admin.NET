@@ -1,4 +1,5 @@
-﻿using Admin.NETApp.Core;
+﻿using KaoWu.Core;
+using Furion.Extras.Admin.NET;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -11,11 +12,19 @@ namespace @Model.NameSpace
     {
 @foreach (var column in Model.TableField){
 if (@column.ColumnKey != "True"){
+if(@column.NetType.Contains("Enum") || @column.NetType.EndsWith("int") || @column.NetType == "long" || @column.NetType == "bool") {
+        @:/// <summary>
+        @:/// @column.ColumnComment
+        @:/// </summary>
+        @:public virtual @column.NetType? @column.ColumnName { get; set; }
+        @:
+} else {
         @:/// <summary>
         @:/// @column.ColumnComment
         @:/// </summary>
         @:public virtual @column.NetType @column.ColumnName { get; set; }
         @:
+}
 }
 }
     }
@@ -24,12 +33,21 @@ if (@column.ColumnKey != "True"){
     {
 @foreach (var column in Model.TableField){
 if (@column.WhetherRequired == "Y"){
+if(@column.NetType.Contains("Enum") || @column.NetType.EndsWith("int") || @column.NetType == "long" || @column.NetType == "bool") {
+        @:/// <summary>
+        @:/// @column.ColumnComment
+        @:/// </summary>
+        @:[Required(ErrorMessage = "@(@column.ColumnComment)不能为空")]
+        @:public override @column.NetType? @column.ColumnName { get; set; }
+        @:
+} else {
         @:/// <summary>
         @:/// @column.ColumnComment
         @:/// </summary>
         @:[Required(ErrorMessage = "@(@column.ColumnComment)不能为空")]
         @:public override @column.NetType @column.ColumnName { get; set; }
         @:
+}
 }
 }
     }
@@ -62,7 +80,7 @@ if (@column.ColumnKey == "True"){
 }
     }
 
-    public class Querye@(@Model.ClassName)Input : Delete@(@Model.ClassName)Input
+    public class Query@(@Model.ClassName)Input : Delete@(@Model.ClassName)Input
     {
 
     }

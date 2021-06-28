@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
-    <UserSecretsId>57d48f83-ab08-4ead-b238-744c8c8340e9</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,12 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Admin.NET.Web.Core\Admin.NET.Web.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Admin.NET_SaaS.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

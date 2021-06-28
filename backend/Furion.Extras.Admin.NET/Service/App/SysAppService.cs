@@ -46,7 +46,7 @@ namespace Furion.Extras.Admin.NET.Service
                 var appCodeList = await _sysMenuService.GetUserMenuAppCodeList(userId);
                 apps = apps.Where(u => appCodeList.Contains(u.Code));
             }
-            var appList = await apps.OrderBy(u => u.Sort).Select(u => new AppOutput
+            var appList = await apps.OrderBy(u => u.Sort).ThenBy(u => u.Id).Select(u => new AppOutput
             {
                 Code = u.Code,
                 Name = u.Name,
@@ -73,7 +73,7 @@ namespace Furion.Extras.Admin.NET.Service
                                        .Where((name, u => EF.Functions.Like(u.Name, $"%{input.Name.Trim()}%")),
                                               (code, u => EF.Functions.Like(u.Code, $"%{input.Code.Trim()}%")))
                                        //.Where(u => u.Status == CommonStatus.ENABLE)
-                                       .OrderBy(u => u.Sort)
+                                       .OrderBy(u => u.Sort).ThenBy(u => u.Id)
                                        .ToPagedListAsync(input.PageNo, input.PageSize);
             return XnPageResult<SysApp>.PageResult(apps);
         }
@@ -159,7 +159,7 @@ namespace Furion.Extras.Admin.NET.Service
         [HttpGet("/sysApp/list")]
         public async Task<dynamic> GetAppList()
         {
-            return await _sysAppRep.DetachedEntities.Where(u => u.Status == CommonStatus.ENABLE).OrderBy(u => u.Sort).ToListAsync();
+            return await _sysAppRep.DetachedEntities.Where(u => u.Status == CommonStatus.ENABLE).OrderBy(u => u.Sort).ThenBy(u => u.Id).ToListAsync();
         }
 
         /// <summary>

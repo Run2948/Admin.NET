@@ -156,7 +156,7 @@ namespace Furion.Extras.Admin.NET.Service
             var name = !string.IsNullOrEmpty(input.Name?.Trim());
             var menus = await _sysMenuRep.DetachedEntities.Where((application, u => u.Application == input.Application.Trim()),
                                                                  (name, u => EF.Functions.Like(u.Name, $"%{input.Name.Trim()}%")))
-                                                          .Where(u => u.Status == CommonStatus.ENABLE).OrderBy(u => u.Sort)
+                                                          .Where(u => u.Status == CommonStatus.ENABLE).OrderBy(u => u.Sort).ThenBy(u => u.Id)
                                                           .Select(u => u.Adapt<MenuOutput>())
                                                           .ToListAsync();
             return new TreeBuildUtil<MenuOutput>().Build(menus);
@@ -377,7 +377,7 @@ namespace Furion.Extras.Admin.NET.Service
                                          .Where(application, u => u.Application == input.Application.Trim())
                                          .Where(u => u.Status == CommonStatus.ENABLE)
                                          .Where(u => u.Type == MenuType.DIR || u.Type == MenuType.MENU)
-                                         .OrderBy(u => u.Sort)
+                                         .OrderBy(u => u.Sort).ThenBy(u => u.Id)
                                          .Select(u => new MenuTreeOutput
                                          {
                                              Id = u.Id,
@@ -409,7 +409,7 @@ namespace Furion.Extras.Admin.NET.Service
                                          .Where(application, u => u.Application == input.Application.Trim())
                                          .Where(u => u.Status == CommonStatus.ENABLE)
                                          .Where(menuIdList.Count > 0, u => menuIdList.Contains(u.Id))
-                                         .OrderBy(u => u.Sort).Select(u => new MenuTreeOutput
+                                         .OrderBy(u => u.Sort).ThenBy(u => u.Id).Select(u => new MenuTreeOutput
                                          {
                                              Id = u.Id,
                                              ParentId = u.Pid,

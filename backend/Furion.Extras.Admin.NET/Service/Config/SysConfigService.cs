@@ -41,7 +41,7 @@ namespace Furion.Extras.Admin.NET.Service
                                              .Where((name, u => EF.Functions.Like(u.Name, $"%{input.Name.Trim()}%")),
                                                     (code, u => EF.Functions.Like(u.Code, $"%{input.Code.Trim()}%")),
                                                     (groupCode, u => EF.Functions.Like(u.GroupCode, $"%{input.GroupCode.Trim()}%")))
-                                             .Where(u => u.Status != CommonStatus.DELETED).OrderBy(u => u.GroupCode)
+                                             .Where(u => u.Status != CommonStatus.DELETED).OrderBy(u => u.GroupCode).ThenBy(u => u.Id)
                                              .ToPagedListAsync(input.PageNo, input.PageSize);
             return XnPageResult<SysConfig>.PageResult(configs);
         }

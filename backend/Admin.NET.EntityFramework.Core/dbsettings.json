@@ -1,7 +1,8 @@
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Data Source=./Admin.NET.db",
-    "MultiTenantConnection": "Data Source=./Admin.NET_SaaS.db",
-    "PgSqlConnection": "HOST=127.0.0.1;PORT=5432;DATABASE=Admin.NET;PASSWORD=123qwe;USER ID=postgres;"
+    //"DefaultConnection": "Data Source=./Admin.NET.db",
+    //"MultiTenantConnection": "Data Source=./Admin.NET_SaaS.db",
+    "DefaultConnection": "Data Source=localhost;Database=Admin.NET;User ID=root;Password=123456;pooling=true;port=3306;sslmode=none;CharSet=utf8;",
+    "MultiTenantConnection": "Data Source=localhost;Database=Admin.NET_SaaS;User ID=root;Password=123456;pooling=true;port=3306;sslmode=none;CharSet=utf8;"
   }
 }

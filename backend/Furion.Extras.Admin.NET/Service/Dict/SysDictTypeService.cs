@@ -47,7 +47,7 @@ namespace Furion.Extras.Admin.NET.Service
             var dictTypes = await _sysDictTypeRep.DetachedEntities
                                   .Where((code, u => EF.Functions.Like(u.Code, $"%{input.Code.Trim()}%")),
                                          (name, u => EF.Functions.Like(u.Name, $"%{input.Name.Trim()}%")))
-                                  .Where(u => (u.Status != CommonStatus.DELETED && !supperAdmin) || (u.Status <= CommonStatus.DELETED && supperAdmin)).OrderBy(u => u.Sort)
+                                  .Where(u => (u.Status != CommonStatus.DELETED && !supperAdmin) || (u.Status <= CommonStatus.DELETED && supperAdmin)).OrderBy(u => u.Sort).ThenBy(u => u.Id)
                                   .ToPagedListAsync(input.PageNo, input.PageSize);
             return XnPageResult<SysDictType>.PageResult(dictTypes);
         }
