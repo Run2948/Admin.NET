@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Run2948",
+  "classifications": [
+    "Furion",
+    "Extras",
+    "Vue",
+    "Antd",
+    "snowy",
+    "k-form-design"
+  ],
+  "name": "Furion Extras Vue Template",
+  "identity": "Furion.Extras.Vue.Template",
+  "shortName": "fevt",
+  "tags": {
+    "language": "javascript",
+    "type": "project"
+  },
+  "sourceName": "Admin.VueApp",
+  "preferNameDirectory": true
+}

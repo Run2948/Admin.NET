@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Furion.Extras.Vue.Template</id>
+    <version>1.0.23</version>
+    <description>基于 Furion 框架快速搭建 Vue 通用权限应用层架构模板。</description>
+    <authors>Run2948</authors>
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+    <icon>icon.png</icon>
+    <license type="file">LICENSE</license>
+  </metadata>
+</package>

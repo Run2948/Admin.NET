@@ -36,7 +36,10 @@
 
 |                                                                 模板类型                                                                           | 名称                              |                                                                                 版本                                                                                                     | 描述                   |
 | :------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------- |
-|       [![nuget](https://shields.io/badge/-Nuget-yellow?cacheSeconds=604800)](https://www.nuget.org/packages/Furion.Extras.AspNetCore.Template/)        | Furion.Extras.AspNetCore.Template |              [![nuget](https://img.shields.io/nuget/v/Furion.Extras.AspNetCore.Template.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Furion.Extras.AspNetCore.Template/)              | Admin.NET 框架模板     |
+|       [![nuget](https://shields.io/badge/-Nuget-yellow?cacheSeconds=604800)](https://www.nuget.org/packages/Furion.Extras.AspNetCore.Template/)        | Furion.Extras.AspNetCore.Template |              [![nuget](https://img.shields.io/nuget/v/Furion.Extras.AspNetCore.Template.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Furion.Extras.AspNetCore.Template/)              | Admin.NET 框架模板  |
+| [![nuget](https://shields.io/badge/-Nuget-yellow?cacheSeconds=604800)](https://www.nuget.org/packages/Furion.Extras.Vue.Template/) | Furion.Extras.Vue.Template | [![nuget](https://img.shields.io/nuget/v/Furion.Extras.Vue.Template.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Furion.Extras.Vue.Template/) | Admin.Vue 框架模板 |
+
+**后端脚手架  (feat)**
 
 ```
 打开 CMD 或 Powershell 执行dotnet命令
@@ -54,6 +57,25 @@ dotnet new feat -h
 dotnet new feat -n 你的项目名称 -d 你的数据库类型
 
 其实安装之后可以直接在VS里面进行可视化及创建工程
+```
+
+**前端脚手架 (fevt)**
+
+```
+打开 CMD 或 Powershell 执行dotnet命令
+
+1、安装脚手架
+dotnet new --install Furion.Extras.Vue.Template
+
+2、更新脚手架
+dotnet new --install Furion.Extras.Vue.Template
+
+3、查看手脚架
+dotnet new fevt -h
+
+4、使用脚手架（生成之后推荐将所有的 nuget 包更新到最新版本）
+dotnet new fevt -n 你的项目名称
+
 ```
 
 ### 🐱‍🚀 模块/插件化开发
