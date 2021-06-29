@@ -19,7 +19,7 @@
 	  <PackageReference Include="Zack.EFCore.Batch.MSSQL" Version="1.4.5" />
   </ItemGroup>
 	<ItemGroup Condition="'$(MySql)' == 'True' ">
-		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0" />
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
 		<PackageReference Include="Zack.EFCore.Batch.MySQL.Pomelo" Version="1.4.5" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(Oracle)' == 'True' ">

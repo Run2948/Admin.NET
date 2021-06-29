@@ -1,20 +1,20 @@
 {
   "ConnectionStrings": {
     //#if (SqlServer)
-    "DefaultConnection": "Data Source=.;User Id=sa;Password=123456;Initial Catalog=Admin.NETApp;Pooling=true;Min Pool Size=1;",
-    "MultiTenantConnection": "Data Source=.;User Id=sa;Password=123456;Initial Catalog=Admin.NETAppp_SaaS;Pooling=true;Min Pool Size=1;",
+    "DefaultConnection": "Data Source=.;User Id=sa;Password=123456;Initial Catalog=Admin.NETApp;MultipleActiveResultSets=true;",
+    "MultiTenantConnection": "Data Source=.;User Id=sa;Password=123456;Initial Catalog=Admin.NETAppp_SaaS;MultipleActiveResultSets=true;"
     ////#elseif (MySql)
-    "DefaultConnection": "Data Source=localhost;Port=3306;Database=Admin.NETApp;User ID=root;Password=123456;SslMode=none;CharSet=utf8;Min pool size=1;",
-    "MultiTenantConnection": "Data Source=localhost;Port=3306;Database=Admin.NETApp_SaaS;User ID=root;Password=123456;SslMode=none;CharSet=utf8;Min pool size=1;",
+    "DefaultConnection": "Data Source=localhost;Port=3306;Database=Admin.NETApp;User ID=root;Password=123456;SslMode=none;CharSet=utf8;",
+    "MultiTenantConnection": "Data Source=localhost;Port=3306;Database=Admin.NETApp_SaaS;User ID=root;Password=123456;SslMode=none;CharSet=utf8;"
     ////#elseif (Oracle)
-    "DefaultConnection": "Data Source=//localhost:1521/Admin.NETApp;User ID=scott;Password=123456;Pooling=true;Min Pool Size=1;",
-    "MultiTenantConnection": "Data Source=//localhost:1521/Admin.NETApp_SaaS;User ID=scott;Password=123456;Pooling=true;Min Pool Size=1;",
+    "DefaultConnection": "Data Source=localhost:1521/Admin.NETApp;User ID=scott;Password=123456;Pooling=false;",
+    "MultiTenantConnection": "Data Source=localhost:1521/Admin.NETApp_SaaS;User ID=scott;Password=123456;Pooling=false;"
     ////#elseif (PostgreSQL) 
-    "DefaultConnection": "Host=localhost;Port=5432;Username=postgres;Password=123456; Database=Admin.NETApp;Pooling=true;Minimum Pool Size=1;",
-    "MultiTenantConnection": "Host=localhost;Port=5432;Username=postgres;Password=123456; Database=Admin.NETApp_SaaS;Pooling=true;Minimum Pool Size=1;",
+    "DefaultConnection": "Host=localhost;Port=5432;Username=postgres;Password=123456; Database=Admin.NETApp;Keepalive=30;",
+    "MultiTenantConnection": "Host=localhost;Port=5432;Username=postgres;Password=123456; Database=Admin.NETApp_SaaS;Keepalive=30;"
     ////#elseif (Sqlite)
-    "DefaultConnection": "Data Source=./Admin.NETApp.db; Pooling=true;Min Pool Size=1;",
-    "MultiTenantConnection": "Data Source=./Admin.NETApp_SaaS.db; Pooling=true;Min Pool Size=1;"
+    "DefaultConnection": "Data Source=./Admin.NETApp.db;",
+    "MultiTenantConnection": "Data Source=./Admin.NETApp_SaaS.db;"
     //#endif
   }
 }
