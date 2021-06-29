@@ -26,7 +26,7 @@
 
 |                                                                 包类型                                                                             | 名称                              |                                                                                 版本                                                                                                     | 描述                   |
 | :------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------- |
-|       [![nuget](https://shields.io/badge/-Nuget-yellow?cacheSeconds=604800)](https://www.nuget.org/packages/Furion.Extras.Admin.NET/)              | Furion.Extras.Admin.NET          |              [![nuget](https://img.shields.io/nuget/v/Furion.Extras.Admin.NET.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Furion.Extras.Admin.NET/)                          | Admin.NET 核心包       |
+|       [![nuget](https://shields.io/badge/-Nuget-yellow?cacheSeconds=604800)](https://www.nuget.org/packages/Furion.Extras.AspNetCore/)              | Furion.Extras.AspNetCore          |              [![nuget](https://img.shields.io/nuget/v/Furion.Extras.AspNetCore.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Furion.Extras.AspNetCore/)                          | Admin.NET 核心包       |
 
 ```
 可自行按照 Furion 框架脚手架初始化工程，然后引用此包即可，其他层配置见源代码。🔊此包会紧跟Furion版本更新而更新。
@@ -36,19 +36,22 @@
 
 |                                                                 模板类型                                                                           | 名称                              |                                                                                 版本                                                                                                     | 描述                   |
 | :------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------- |
-|       [![nuget](https://shields.io/badge/-Nuget-yellow?cacheSeconds=604800)](https://www.nuget.org/packages/Furion.Admin.NET.Template.App/)        | Furion.Admin.NET.Template.App    |              [![nuget](https://img.shields.io/nuget/v/Furion.Admin.NET.Template.App.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Furion.Admin.NET.Template.App/)              | Admin.NET 框架模板     |
+|       [![nuget](https://shields.io/badge/-Nuget-yellow?cacheSeconds=604800)](https://www.nuget.org/packages/Furion.Extras.AspNetCore.Template/)        | Furion.Extras.AspNetCore.Template |              [![nuget](https://img.shields.io/nuget/v/Furion.Extras.AspNetCore.Template.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Furion.Extras.AspNetCore.Template/)              | Admin.NET 框架模板     |
 
 ```
 打开 CMD 或 Powershell 执行dotnet命令
 
 1、安装脚手架
-dotnet new --install Furion.Admin.NET.Template.App
+dotnet new --install Furion.Extras.AspNetCore.Template
 
 2、更新脚手架
-dotnet new --install Furion.Admin.NET.Template.App
+dotnet new --install Furion.Extras.AspNetCore.Template
 
-3、使用脚手架（生成之后推荐将所有的 nuget 包更新到最新版本）
-dotnet new Admin.NET -n 你的项目名称
+3、查看手脚架
+dotnet new feat -h
+
+4、使用脚手架（生成之后推荐将所有的 nuget 包更新到最新版本）
+dotnet new feat -n 你的项目名称 -d 你的数据库类型
 
 其实安装之后可以直接在VS里面进行可视化及创建工程
 ```

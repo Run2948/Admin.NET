@@ -6,12 +6,12 @@
           <a-row :gutter="48">
             <a-col :md="8" :sm="24">
               <a-form-item label="手机号">
-                <a-input v-model="queryParam.phoneNumbers" placeholder="请输入手机号" />
+                <a-input v-model="queryParam.phoneNumbers" allow-clear placeholder="请输入手机号" />
               </a-form-item>
             </a-col>
             <a-col :md="8" :sm="24">
               <a-form-item label="发送状态">
-                <a-select v-model="queryParam.status" placeholder="请选择发送状态">
+                <a-select v-model="queryParam.status" allow-clear placeholder="请选择发送状态">
                   <a-select-option v-for="(item, index) in statusDictTypeDropDown" :key="index" :value="item.code">{{
                     item.value
                   }}</a-select-option>

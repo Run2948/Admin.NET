@@ -17,7 +17,7 @@ namespace @Model.NameSpace
     /// <summary>
     /// @(@Model.BusName)服务
     /// </summary>
-    [ApiDescriptionSettings("Custom", Name = "@Model.ClassName", Order = 100)]
+    [ApiDescriptionSettings("Business", Name = "@Model.ClassName", Order = 100)]
     public class @(@Model.ClassName)Service : I@(@Model.ClassName)Service, IDynamicApiController, ITransient
     {
         private readonly IRepository<@(@Model.ClassName)> _rep;

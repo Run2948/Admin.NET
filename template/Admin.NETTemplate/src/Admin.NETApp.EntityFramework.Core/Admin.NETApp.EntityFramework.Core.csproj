@@ -4,17 +4,37 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+	<ItemGroup>
+		<None Remove="dbsettings.json" />
+	</ItemGroup>
+	
   <ItemGroup>
     <Content Include="dbsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-	<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0" />
-	<PackageReference Include="Zack.EFCore.Batch.MySQL.Pomelo" Version="1.4.6" />
+  <ItemGroup Condition="'$(SqlServer)' == 'True' ">
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
+	  <PackageReference Include="Zack.EFCore.Batch.MSSQL" Version="1.4.5" />
   </ItemGroup>
-
+	<ItemGroup Condition="'$(MySql)' == 'True' ">
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0" />
+		<PackageReference Include="Zack.EFCore.Batch.MySQL.Pomelo" Version="1.4.5" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(Oracle)' == 'True' ">
+		<PackageReference Include="Oracle.EntityFrameworkCore" Version="5.21.1" />
+		<PackageReference Include="Zack.EFCore.Batch.Oracle" Version="1.4.5" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(Npgsql)' == 'True' ">
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.7" />
+		<PackageReference Include="Zack.EFCore.Batch.Npgsql" Version="1.4.5" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(Sqlite)' == 'True' ">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.7" />
+		<PackageReference Include="Zack.EFCore.Batch.Sqlite" Version="1.4.5" />
+	</ItemGroup>
+	
   <ItemGroup>
     <ProjectReference Include="..\Admin.NETApp.Core\Admin.NETApp.Core.csproj" />
   </ItemGroup>

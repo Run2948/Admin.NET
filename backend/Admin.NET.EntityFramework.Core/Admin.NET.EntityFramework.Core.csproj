@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <None Remove="dbsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="dbsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -12,7 +16,7 @@
 
   <ItemGroup>
 	<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0" />
-	<PackageReference Include="Zack.EFCore.Batch.MySQL.Pomelo" Version="1.4.6" />
+	<PackageReference Include="Zack.EFCore.Batch.MySQL.Pomelo" Version="1.4.5" />
   </ItemGroup>
 
   <ItemGroup>

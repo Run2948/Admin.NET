@@ -2,7 +2,7 @@
   "ConnectionStrings": {
     //"DefaultConnection": "Data Source=./Admin.NET.db",
     //"MultiTenantConnection": "Data Source=./Admin.NET_SaaS.db",
-    "DefaultConnection": "Data Source=localhost;Database=Admin.NET;User ID=root;Password=123456;pooling=true;port=3306;sslmode=none;CharSet=utf8;",
-    "MultiTenantConnection": "Data Source=localhost;Database=Admin.NET_SaaS;User ID=root;Password=123456;pooling=true;port=3306;sslmode=none;CharSet=utf8;"
+    "DefaultConnection": "Data Source=local.host;Database=Admin.NET;User ID=root;Password=123456;pooling=true;port=3306;sslmode=none;CharSet=utf8;",
+    "MultiTenantConnection": "Data Source=local.host;Database=Admin.NET_SaaS;User ID=root;Password=123456;pooling=true;port=3306;sslmode=none;CharSet=utf8;"
   }
 }

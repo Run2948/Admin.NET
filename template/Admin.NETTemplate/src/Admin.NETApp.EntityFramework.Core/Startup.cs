@@ -17,8 +17,17 @@ namespace Admin.NETApp.EntityFramework.Core
 
                 options.AddDb<DefaultDbContext>(providerName: default, optionBuilder: opt =>
                 {
-                    // opt.UseBatchEF_Sqlite(); // EF批量组件
+#if (SqlServer)
+                    opt.UseBatchEF_MSSQL(); // EF批量组件
+#elif (MySql)
                     opt.UseBatchEF_MySQLPomelo(); // EF批量组件
+#elif (Oracle)
+                    opt.UseBatchEF_Oracle(); // EF批量组件
+#elif (Npgsql)
+                    opt.UseBatchEF_Npgsql(); // EF批量组件
+#elif (Sqlite)
+                    opt.UseBatchEF_Sqlite(); // EF批量组件
+#endif
                 });
                 options.AddDb<MultiTenantDbContext, MultiTenantDbContextLocator>();
             }, "Admin.NETApp.Database.Migrations");

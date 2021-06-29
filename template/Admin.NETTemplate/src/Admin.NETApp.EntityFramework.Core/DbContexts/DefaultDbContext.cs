@@ -14,7 +14,17 @@ using Yitter.IdGenerator;
 
 namespace Admin.NETApp.EntityFramework.Core
 {
+#if (SqlServer)
+    [AppDbContext("DefaultConnection", DbProvider.SqlServer)]
+#elif (MySql)
     [AppDbContext("DefaultConnection", DbProvider.MySql)]
+#elif (Oracle)
+    [AppDbContext("DefaultConnection", DbProvider.Oracle)]
+#elif (Npgsql)
+    [AppDbContext("DefaultConnection", DbProvider.Npgsql)]
+#elif (Sqlite)
+    [AppDbContext("DefaultConnection", DbProvider.Sqlite)]
+#endif
     public class DefaultDbContext : AppDbContext<DefaultDbContext>, IMultiTenantOnTable, IModelBuilderFilter
     {
         public DefaultDbContext(DbContextOptions<DefaultDbContext> options) : base(options)

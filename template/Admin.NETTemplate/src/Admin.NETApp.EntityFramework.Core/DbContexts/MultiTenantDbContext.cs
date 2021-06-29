@@ -11,7 +11,17 @@ using Yitter.IdGenerator;
 
 namespace Admin.NETApp.EntityFramework.Core
 {
+#if (SqlServer)
+    [AppDbContext("MultiTenantConnection", DbProvider.SqlServer)]
+#elif (MySql)
     [AppDbContext("MultiTenantConnection", DbProvider.MySql)]
+#elif (Oracle)
+    [AppDbContext("MultiTenantConnection", DbProvider.Oracle)]
+#elif (Npgsql)
+    [AppDbContext("MultiTenantConnection", DbProvider.Npgsql)]
+#elif (Sqlite)
+    [AppDbContext("MultiTenantConnection", DbProvider.Sqlite)]
+#endif
     public class MultiTenantDbContext : AppDbContext<MultiTenantDbContext, MultiTenantDbContextLocator>
     {
         public MultiTenantDbContext(DbContextOptions<MultiTenantDbContext> options) : base(options)
