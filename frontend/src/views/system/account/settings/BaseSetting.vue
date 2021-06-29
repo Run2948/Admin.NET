@@ -78,7 +78,7 @@
         form: this.$form.createForm(this),
         sexData: [],
         option: {
-          img: '/avatar2.jpg',
+          img: null,
           info: true,
           size: 1,
           outputType: 'jpeg',
@@ -118,13 +118,17 @@
             tel: this.userInfo.tel
           })
           this.birthdayString = moment(this.userInfo.birthday).format('YYYY-MM-DD')
-          sysFileInfoPreview({
-            id: this.userInfo.avatar
-          }).then((res) => {
-            this.option.img = window.URL.createObjectURL(new Blob([res]))
-          }).catch((err) => {
-            this.$message.error('预览错误：' + err.message)
-          })
+          if (this.userInfo.avatar != null) {
+            sysFileInfoPreview({
+              id: this.userInfo.avatar
+            }).then((res) => {
+              this.option.img = window.URL.createObjectURL(new Blob([res]))
+            }).catch((err) => {
+              this.$message.error('预览错误：' + err.message)
+            })
+          } else {
+            this.option.img = '/avatar2.jpg'
+          }
           // this.option.img = process.env.VUE_APP_API_BASE_URL + '/sysFileInfo/preview?id=' + this.userInfo.avatar
           this.getSexData()
         }, 100)
@@ -185,6 +189,7 @@
     margin: 0 auto;
     width: 100%;
     max-width: 180px;
+    height: 180px;
     border-radius: 50%;
     box-shadow: 0 0 4px #ccc;
 
