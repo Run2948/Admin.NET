@@ -85,6 +85,8 @@ const user = {
                 this.$message.error('预览错误：' + err.message)
               })
               // commit('SET_AVATAR', process.env.VUE_APP_API_BASE_URL + '/sysFileInfo/preview?id=' + data.avatar)
+            } else {
+              commit('SET_AVATAR', '/avatar2.jpg')
             }
             resolve(data)
           } else {
