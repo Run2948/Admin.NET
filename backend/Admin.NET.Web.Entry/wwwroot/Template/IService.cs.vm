@@ -1,4 +1,4 @@
-﻿using KaoWu.Core;
+﻿using Admin.NET.Core;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

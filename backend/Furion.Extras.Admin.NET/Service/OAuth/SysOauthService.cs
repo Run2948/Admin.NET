@@ -31,7 +31,7 @@ namespace Furion.Extras.Admin.NET.Service.OAuth
         [HttpGet("oauth/wechat")]
         public Task WechatLogin()
         {
-            _httpContext.Response.Redirect(_wechatOAuth.GetAuthorizeUrl("Dilon"));
+            _httpContext.Response.Redirect(_wechatOAuth.GetAuthorizeUrl("Feat"));
             return Task.CompletedTask;
         }
 

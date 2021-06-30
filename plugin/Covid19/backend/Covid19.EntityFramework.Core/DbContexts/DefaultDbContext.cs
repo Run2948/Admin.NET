@@ -1,7 +1,7 @@
-﻿using Admin.NET.Core;
-using Admin.NET.Core.Service;
-using Furion;
+﻿using Furion;
 using Furion.DatabaseAccessor;
+using Furion.Extras.Admin.NET;
+using Furion.Extras.Admin.NET.Service;
 using Furion.FriendlyException;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -77,9 +77,9 @@ namespace Covid19.EntityFramework.Core
 
             foreach (var entity in entities)
             {
-                if (entity.Entity.GetType().IsSubclassOf(typeof(DBEntityTenant)))
+                if (entity.Entity.GetType().IsSubclassOf(typeof(DEntityTenant)))
                 {
-                    var obj = entity.Entity as DBEntityTenant;
+                    var obj = entity.Entity as DEntityTenant;
                     switch (entity.State)
                     {
                         // 自动设置租户Id
@@ -150,7 +150,7 @@ namespace Covid19.EntityFramework.Core
             ParameterExpression parameterExpression = Expression.Parameter(metadata.ClrType, "u");
 
             // 租户过滤器
-            if (entityBuilder.Metadata.ClrType.BaseType.Name == typeof(DBEntityTenant).Name)
+            if (entityBuilder.Metadata.ClrType.BaseType.Name == typeof(DEntityTenant).Name)
             {
                 if (metadata.FindProperty(onTableTenantId) != null)
                 {
@@ -176,18 +176,6 @@ namespace Covid19.EntityFramework.Core
             }
 
             return Expression.Lambda(finialExpression, parameterExpression);
-        }
-
-        /// <summary>
-        /// 配置假删除过滤器
-        /// </summary>
-        /// <param name="entityBuilder"></param>
-        /// <param name="dbContext"></param>
-        /// <param name="isDeletedKey"></param>
-        /// <returns></returns>
-        protected LambdaExpression FakeDeleteQueryFilterExpression(EntityTypeBuilder entityBuilder, DbContext dbContext, string isDeletedKey = null)
-        {
-            return base.FakeDeleteQueryFilterExpression(entityBuilder, dbContext, isDeletedKey);
         }
     }
 }

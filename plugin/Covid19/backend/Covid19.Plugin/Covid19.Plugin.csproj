@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -16,13 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Covid19.Plugin.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Furion.Extras.Admin.NET" Version="1.0.10" />
+    <PackageReference Include="Furion.Extras.AspNetCore" Version="1.0.24" />
   </ItemGroup>
 
 </Project>

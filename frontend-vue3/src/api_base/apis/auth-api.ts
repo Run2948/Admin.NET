@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Admin.NET通用权限管理平台
- * 前后端分离架构，开箱即用，紧随前沿技术。<br/><a href='https://gitee.com/zuohuaijun/Admin.NET/'>https://gitee.com/zuohuaijun/Admin.NET</a>
+ * 前后端分离架构，开箱即用，紧随前沿技术。<br/><a href='https://gitee.com/Run2948/Admin.NET/'>https://gitee.com/Run2948/Admin.NET</a>
  *
  * OpenAPI spec version: 1.0.0
  *

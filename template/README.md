@@ -4,7 +4,7 @@
   * [想创建自己的dotnet模板么？看这里](https://www.cnblogs.com/laozhang-is-phi/p/10205495.html)
   * [打造自己的.NET Core项目模板](https://www.cnblogs.com/catcher1994/p/10061470.html)
   * [Runnable Project Templates](https://github.com/dotnet/templating/wiki/Runnable-Project-Templates)
-  * [Packaging License within the nupkg](https://github.com/NuGet/Home/wiki/Packaging-License-within-the-nupkg)
+  * [.nuspec 引用](https://docs.microsoft.com/zh-cn/nuget/reference/nuspec)  - [NuGet.Client/**nuspec.xsd**](https://github.com/NuGet/NuGet.Client/blob/dev/src/NuGet.Core/NuGet.Packaging/compiler/resources/nuspec.xsd)
 
 * 生成模板
 

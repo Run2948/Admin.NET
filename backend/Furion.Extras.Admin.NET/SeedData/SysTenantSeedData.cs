@@ -29,7 +29,7 @@ namespace Furion.Extras.Admin.NET
                 {
                     Id = 142307070918781,
                     Name = "公司1租户",
-                    Email = "zuohuaijun@163.com",
+                    Email = "zhujinrun@163.com",
                     AdminName = "Admin",
                     Phone = "18020030720",
                     Host = "",

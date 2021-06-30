@@ -169,7 +169,7 @@
               <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" hasFeedback>
                 <span slot="label">
                   <a-tooltip
-                    title="当选择了需要内链或外链打开的选项，此处输入要打开的链接地址，例：http://www.dilon.vip"
+                    title="当选择了需要内链或外链打开的选项，此处输入要打开的链接地址，例：https://www.baidu.com"
                   >
                     <a-icon type="question-circle-o" /> </a-tooltip
                   >&nbsp; 内外链地址

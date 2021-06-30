@@ -2,9 +2,9 @@ version: '3.7'
 
 services:
       
-  dilon.core:
-    image: dilon.core
-    container_name: dilon.core_container
+  feat:
+    image: feat
+    container_name: feat_container
     build:
       context: .
       dockerfile: Dockerfile

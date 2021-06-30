@@ -2,9 +2,9 @@ version: '3.7'
 
 services:
 
-    dilon.vue:
-        image: dilon.vue
-        container_name: dilon.vue_container
+    fevt:
+        image: fevt
+        container_name: fevt_container
         build:
           context: .
           dockerfile: Dockerfile

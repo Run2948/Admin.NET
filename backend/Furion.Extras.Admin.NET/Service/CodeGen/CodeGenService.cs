@@ -235,7 +235,7 @@ namespace Furion.Extras.Admin.NET.Service
         private async Task AddMenu(string className, string busName, string application, long pid)
         {
             // 定义菜单编码前缀
-            var codePrefix = "gen_" + className.ToLower();
+            var codePrefix = "feat_" + className.ToLower();
 
             // 先删除该表已生成的菜单列表
             var menus = await _sysMenuRep.DetachedEntities.Where(u => u.Code == codePrefix || u.Code.StartsWith(codePrefix + "_")).ToListAsync();

@@ -1,7 +1,13 @@
-﻿<template>
+﻿@{
+var fileColumn = ""; var imageColumn = "";
+foreach (var column in Model.TableField){
+if(column.EffectType == "file") { fileColumn = column.ColumnName; }
+if(column.EffectType == "image") { imageColumn = column.ColumnName; }
+}
+<template>
   <div>
     <a-card :bordered="false" :bodyStyle="tstyle">
-@{var index = 0;}
+@{var index = 0; }
 @if(Model.QueryWhetherList.Count > 0){
       <text>
       <div class="table-page-search-wrapper" v-if="hasPerm('@Model.ClassName:page')">
@@ -42,7 +48,7 @@ if(@index >= 3){
               </a-form-item>
             </a-col></text>
 }
-}else if(@column.EffectType == "select" || @column.EffectType == "radio"){
+}else if(@column.EffectType == "select" || @column.EffectType == "radio" || @column.EffectType == "radiobutton"){
 if(@index >= 3){
               <text><a-col :md="8" :sm="24">
                 <a-form-item label="@column.ColumnComment">
@@ -121,14 +127,28 @@ if (@column.ColumnKey == "True"){
         </template>
 @foreach (var column in Model.TableField){
 if(@column.WhetherTable == "Y"){
-if(@column.WhetherRetract == "Y" || @column.EffectType == "select" || @column.EffectType == "radio" || @column.EffectType == "checkbox"){
+if(@column.WhetherRetract == "Y" || @column.EffectType == "select" || @column.EffectType == "radio" || @column.EffectType == "radiobutton" || @column.EffectType == "checkbox" || @column.EffectType == "file" || @column.EffectType == "image"){
         @:<span slot="@(@column.ColumnName)scopedSlots" slot-scope="text">
-if(@column.WhetherRetract == "Y" && (@column.EffectType == "select" || @column.EffectType == "radio" || @column.EffectType == "checkbox")){
+if(@column.WhetherRetract == "Y" && (@column.EffectType == "select" || @column.EffectType == "radio" || @column.EffectType == "radiobutton" || @column.EffectType == "checkbox" || @column.EffectType == "file" || @column.EffectType == "image")){
           @:<ellipsis :length="10" tooltip>{{ '@column.DictTypeCode' | dictType(text) }}</ellipsis>
 }else if(@column.WhetherRetract == "Y"){
           @:<ellipsis :length="10" tooltip>{{ text }}</ellipsis>
 }else if(@column.EffectType == "checkbox"){
           @:<a-tag v-for="textData in JSON.parse(text)" :key="textData.code" color="green">{{ 'sex' | dictType(textData) }}</a-tag>
+}else if(@column.EffectType == "file"){
+        @:<div v-if="text != null && text != ''">
+        @:  <a target="_blank" :href="text">{{ text.substring(text.lastIndexOf('/') + 1) }}</a>
+        @:</div>
+}else if(@column.EffectType == "image"){
+        @:<div v-if="text != null && text != ''">
+        @:  <a-avatar :src="text" shape="square" :size="64" @@click="handleImagePreview(text)" />
+        @:  <a-modal :visible="previewVisible" :mask="false" :footer="null" @@cancel="cancelImagePreview">
+        @:    <img alt="@(column.ColumnComment)" style="width: 100%" :src="previewImage" />
+        @:  </a-modal>
+        @:</div>
+        @:<div v-else>
+        @:  <a-avatar icon="exclamation-circle" shape="square" :size="64" />
+        @:</div>
 }else{
           @:{{ '@column.DictTypeCode' | dictType(text) }}
 }
@@ -205,7 +225,7 @@ if(@column.EffectType == "switch"){
 if(@column.EffectType == "fk"){
             @:customRender: (vlaue, record) => record.@(@column.LowerFkEntityName)@(@column.FkColumnName),
 }
-if(@column.WhetherRetract == "Y" || @column.EffectType == "select" || @column.EffectType == "radio" || @column.EffectType == "checkbox"){
+if(@column.WhetherRetract == "Y" || @column.EffectType == "select" || @column.EffectType == "radio" || @column.EffectType == "radiobutton" || @column.EffectType == "checkbox" || @column.EffectType == "file" || @column.EffectType == "image"){
             @:dataIndex: '@column.ColumnName',
             @:scopedSlots: { customRender: '@(@column.ColumnName)scopedSlots' }
 }else{
@@ -232,14 +252,18 @@ if(columnDataColumns != columnData){
         },
 @foreach (var column in Model.TableField){
 if(@column.QueryWhether == "Y"){
-if(@column.EffectType == "select" || @column.EffectType == "radio"){
+if(@column.EffectType == "select" || @column.EffectType == "radio" || @column.EffectType == "radiobutton"){
 if(@column.DictTypeCode != "")
 @:        @(@column.ColumnName)Data: [],
 }
 }
 }
         selectedRowKeys: [],
-        selectedRows: []
+        selectedRows: [],
+@if(imageColumn != ""){
+		@:previewVisible: false,
+        @:previewImage: ''
+}
       }
     },
     created () {
@@ -253,7 +277,7 @@ if(@column.DictTypeCode != "")
       }
 @foreach (var column in Model.TableField){
 if(@column.QueryWhether == "Y"){
-if(@column.EffectType == "select" || @column.EffectType == "radio"){
+if(@column.EffectType == "select" || @column.EffectType == "radio" || @column.EffectType == "radiobutton"){
 if(@column.DictTypeCode != ""){
       @:const @(@column.ColumnName)Option = this.$options
       @:this.@(@column.ColumnName)Data = @(@column.ColumnName)Option.filters['dictData']('@column.DictTypeCode')
@@ -309,6 +333,17 @@ if(@column.EffectType == "datepicker"){
       @:},
 }
 }
+}
+@if(imageColumn != ""){
+        @:handleImagePreview(url) {
+        @:  // console.log(file)
+        @:  this.previewImage = url
+        @:  this.previewVisible = true
+        @:},
+        @:cancelImagePreview() {
+        @:  this.previewImage = ''
+        @:  this.previewVisible = false
+        @:},		
 }
       handleOk () {
         this.$refs.table.refresh()

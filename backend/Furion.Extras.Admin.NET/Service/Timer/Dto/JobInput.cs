@@ -152,7 +152,6 @@ namespace Furion.Extras.Admin.NET.Service
         /// <summary>
         /// 任务名称
         /// </summary>
-        /// <example>dilon</example>
         [Required, MaxLength(20)]
         public string JobName { get; set; }
 

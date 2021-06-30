@@ -13,7 +13,7 @@
   "identity": "Furion.Extras.Vue.Template",
   "shortName": "fevt",
   "tags": {
-    "language": "javascript",
+    "language": "JavaScript",
     "type": "project"
   },
   "sourceName": "Admin.VueApp",

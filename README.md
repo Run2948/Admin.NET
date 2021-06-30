@@ -4,8 +4,8 @@
 <div align="center">
 
 [![star](https://gitee.com/dotnetchina/Furion/badge/star.svg?theme=gvp)](https://gitee.com/dotnetchina/Furion/stargazers)
-[![star](https://gitee.com/zuohuaijun/Admin.NET/badge/star.svg?theme=dark)](https://gitee.com/zuohuaijun/Admin.NET/stargazers)
-[![fork](https://gitee.com/zuohuaijun/Admin.NET/badge/fork.svg?theme=dark)](https://gitee.com/zuohuaijun/Admin.NET/members)
+[![star](https://gitee.com/Run2948/Admin.NET/badge/star.svg?theme=dark)](https://gitee.com/Run2948/Admin.NET/stargazers)
+[![fork](https://gitee.com/Run2948/Admin.NET/badge/fork.svg?theme=dark)](https://gitee.com/Run2948/Admin.NET/members)
 [![GitHub license](https://img.shields.io/badge/license-Apache2-yellow)](https://gitee.com/dotnetchina/Furion/blob/master/LICENSE)
 
 </div>
@@ -96,9 +96,9 @@ dotnet new fevt -n 你的项目名称
 
 <table>
     <tr>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/covid19-1.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/covid19-2.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/covid19-3.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/covid19-1.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/covid19-2.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/covid19-3.png"/></td>
     </tr>
 </table>
 
@@ -110,20 +110,11 @@ dotnet new fevt -n 你的项目名称
 
 <table>
     <tr>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/bf-01.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/bf-02.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/bf-01.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/bf-02.png"/></td>
     </tr>
 </table>
-
 `增加了Vue3.0、Vite、Antd、TypeScript模式的UI框架，希望大家来一来完善各页面应用，感谢💖💖💖`
-
-### 😎 衍生版本
-
-【Admin.NET】隆重推出SqlSugar版本
-
-- 👉 SqlSugar版本：[https://gitee.com/zhengguojing/admin-net-sqlsugar](https://gitee.com/zhengguojing/admin-net-sqlsugar)
-
-`如果集成其他ORM，请参照各自操作使用说明。系统默认EFCore不会处理其他ORM实体等，请自行处理。`
 
 ### 👑 多租户简介
 
@@ -135,7 +126,7 @@ dotnet new fevt -n 你的项目名称
 
 ### 🥞 更新日志
 
-更新日志 [点击查看](https://gitee.com/zuohuaijun/Admin.NET/commits/master)
+更新日志 [点击查看](https://gitee.com/Run2948/Admin.NET/commits/master)
 
 ### 🍿 在线体验
 
@@ -143,19 +134,20 @@ dotnet new fevt -n 你的项目名称
 
 - 体验地址：[http://www.dilon.vip:8866/](http://www.dilon.vip:8866/)
 - 开发者租户：用户名：superAdmin，密码：123456
-- 公司1租户： 公司1租户管理员（用户名：zuohuaijun@163.com 密码：123456），公司1租户普通用户（用户名：dilon@163.com 密码：123456）           
+- 公司1租户： zhujinrun@163.com 密码：123456
+  - 普通用户：用户名：feat@163.com 密码：123456）           
 
 ### 🍄 快速启动
 
 需要安装：VS2019（最新版）、npm或yarn（最新版）
 
-* 启动后台：打开backend/Admin.NET.sln解决方案，直接运行（F5）即可启动（数据库默认SQLite）
-* 启动前端：VSCode或HBuilder，打开frontend文件夹，进行依赖下载，运行npm install或yarn命令，再运行npm run serve或 yarn run serve
+* 启动后台：打开 backend/Admin.NET.sln 解决方案，直接运行（F5）即可启动（数据库默认SQLite）
+* 启动前端：VSCode或HBuilder，打开 frontend 文件夹，进行依赖下载，运行 npm install 或 yarn install 命令，再运行npm run serve 或 yarn run serve
 * 浏览器访问：`http://localhost:81` （默认前端端口为：81，后台端口为：5566）
 <table>
     <tr>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/f1.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/f0.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/f1.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/f0.png"/></td>
     </tr>
 </table>
 
@@ -207,29 +199,29 @@ dotnet new fevt -n 你的项目名称
 
 <table>
     <tr>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/1.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/2.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/3.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/1.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/2.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/3.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/4.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/5.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/6.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/4.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/5.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/6.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/7.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/8.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/9.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/7.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/8.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/9.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/10.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/11.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/12.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/10.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/11.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/12.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/13.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/14.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/15.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/13.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/14.png"/></td>
+        <td><img src="https://gitee.com/Run2948/Admin.NET/raw/master/doc/img/15.png"/></td>
     </tr>
 </table>
 
@@ -257,55 +249,51 @@ dotnet new fevt -n 你的项目名称
 
 ### 💪 数据库操作
 
-本框架ORM默认采用EF Core开发，加上拓展比如SqlSugar，理论上兼容并支持所有类型数据库。😜
+本框架ORM默认采用EF Core开发，理论上兼容并支持所有类型数据库。😜 目前支持所有的数据库类型可通过脚手架命令查看：
 
-【MySQL】
+```cmd
+> dotnet new feat -h
 
-1. Admin.NET.EntityFramework.Core 项目安装 ``` Pomelo.EntityFrameworkCore.MySql，Nuget 需安装 5.0 版本 (支持 MySql 5.x +)  MySql.EntityFrameworkCore：支持 (MySql 8.x +) ```
-2. DefaultDbContext.cs 指定 DbProvider , ```[AppDbContext("DefaultConnection", DbProvider.MySql)]```
-3. dbsettings.json 配置 "DefaultConnection": ```"Data Source=localhost;Database=Admin.NET;User ID=root;Password=000000;pooling=true;port=3306;sslmode=none;CharSet=utf8;"```
-4. 打开程序包管理器控制台，默认项目Admin.NET.Database.Migrations 执行命令:```Add-Migration Init和update-database```
-
-【SQLServer】
-
-1. Admin.NET.EntityFramework.Core 项目安装 ``` Microsoft.EntityFrameworkCore.SqlServer ```
-2. DefaultDbContext.cs 指定 DbProvider , ```[AppDbContext("DefaultConnection", DbProvider.SqlServer)]```
-3. dbsettings.json 配置 "DefaultConnection": ```"Server=localhost;Database=Admin.NET;User=sa;Password=000000;MultipleActiveResultSets=True;"```
-4. 打开程序包管理器控制台，默认项目Admin.NET.Database.Migrations 执行命令:```Add-Migration Init 和 update-database```
-
-```
-提示：其他类型数据库依次类推，首先添加EF的Core版包，然后指定数据库类型，修改数据库连接字符串，执行EF迁移命令即可。
+Furion Extras AspNetCore Template (C#)
+作者: Run2948
+选项:
+  -d|--dbType  The type of DbProvider to use
+                   SqlServer    - Microsoft.EntityFrameworkCore.SqlServer
+                   MySql        - Pomelo.EntityFrameworkCore.MySql
+                   Oracle       - Oracle.EntityFrameworkCore
+                   Npgsql       - Npgsql.EntityFrameworkCore.PostgreSQL
+                   Sqlite       - Microsoft.EntityFrameworkCore.Sqlite
+               默认: Sqlite
 ```
 【数据库初始化操作】
-GIT完成后默认为SqlLite数据库，使用其他数据库可通过基于EF Core的CodeFirst初始化,添加好拓展包，创建好空数据库，设置好数据库信息和后，即可通过此操作可进行数据库初始化操作。
-1. 启动项目设置为 XXXX.Web.Entry
-2. 程序包管理控制台默认项目设置为 XXXX.Database.Migrations
-3. 依次输入并回车执行
+
+1.  启动项目设置为 `XXXX.Web.Entry`
+2.  程序包管理控制台默认项目设置为 `XXXX.Database.Migrations`
+3.  程序包管理控制台依次输入并回车执行
+```cmd
+Add-Migration Init -Context DefaultDbContext
+Update-Database Init -Context DefaultDbContext 
+
+Add-Migration Init -Context MultiTenantDbContext
+Update-Database Init -Context MultiTenantDbContext
 ```
-    Add-Migration v1.0.0 -Context DefaultDbContext
-    update-database v1.0.0 -Context DefaultDbContext 
-    Add-Migration v1.0.0 -Context MultiTenantDbContext
-    update-database v1.0.0 -Context MultiTenantDbContext
-```
-至此完成初始数据部署。后期添加/修改自己业务的数据类后通过更新版本号来更新数据库即可。
-```
-    Add-Migration v1.0.1 -Context DefaultDbContext
-    update-database v1.0.1 -Context DefaultDbContext 
-    Add-Migration v1.0.1 -Context MultiTenantDbContext
-    update-database v1.0.1 -Context MultiTenantDbContext
+4. 后期添加/修改自己业务的数据类后通过更新版本号来更新数据库即可。
+
+```cmd
+Add-Migration v1.0.1 -Context DefaultDbContext
+Update-Database v1.0.1 -Context DefaultDbContext 
+    
+Add-Migration v1.0.1 -Context MultiTenantDbContext
+Update-Database v1.0.1 -Context MultiTenantDbContext
 ```
 【EF批量操作】
 
-使用 Zack.EFCore.Batch [https://hub.fastgit.org/yangzhongke/Zack.EFCore.Batch](https://hub.fastgit.org/yangzhongke/Zack.EFCore.Batch) 安装对应包即可
+ 使用 [Zack.EFCore.Batch](https://hub.fastgit.org/yangzhongke/Zack.EFCore.Batch) 实现，使用脚手架创建项目时选择对应的数据库类型即可自动下载安装
 1. MSSQL：Zack.EFCore.Batch.MSSQL
 2. MySql：Zack.EFCore.Batch.MySQL.Pomelo
 3. Npgsql：Zack.EFCore.Batch.Npgsql
 4. Oracle：Zack.EFCore.Batch.Oracle
 5. Sqlite：Zack.EFCore.Batch.Sqlite
-
-```
-提示：记得修改Admin.NET.EntityFramework.Core层里面Startup注册服务类型 opt.UseBatchEF_Sqlite()， 改成相应得库类型。
-```
 
 ### ⚡ 近期计划
 
@@ -334,8 +322,8 @@ GIT完成后默认为SqlLite数据库，使用其他数据库可通过基于EF C
 
 [![Giteye chart](https://chart.giteye.net/gitee/zuohuaijun/Admin.NET/JRFF5WLM.png)](https://giteye.net/chart/JRFF5WLM)
 
-
 ### 💐 特别鸣谢
+
 - 👉 Furion：  [https://dotnetchina.gitee.io/furion](https://dotnetchina.gitee.io/furion)
 - 👉 xiaonuo：[https://gitee.com/xiaonuobase/snowy](https://gitee.com/xiaonuobase/snowy)
 - 👉 Vben-Admin：[https://vvbin.cn/doc-next/](https://vvbin.cn/doc-next/)

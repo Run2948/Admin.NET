@@ -150,7 +150,7 @@ namespace Furion.Extras.Admin.NET.Service
         [NonAction]
         public async Task<bool> GetDemoEnvFlag()
         {
-            var value = await GetConfigCache("DILON_DEMO_ENV_FLAG");
+            var value = await GetConfigCache("FEAT_DEMO_ENV_FLAG");
             return bool.Parse(value);
         }
 
@@ -160,7 +160,7 @@ namespace Furion.Extras.Admin.NET.Service
         /// <returns></returns>
         public async Task<bool> GetCaptchaOpenFlag()
         {
-            var value = await GetConfigCache("DILON_CAPTCHA_OPEN");
+            var value = await GetConfigCache("FEAT_CAPTCHA_OPEN");
             return bool.Parse(value);
         }
     }

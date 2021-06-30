@@ -15,7 +15,6 @@ namespace Furion.Extras.Admin.NET
         /// <summary>
         /// 任务名称
         /// </summary>
-        /// <example>dilon</example>
         [Comment("任务名称")]
         [Required, MaxLength(20)]
         public string JobName { get; set; }

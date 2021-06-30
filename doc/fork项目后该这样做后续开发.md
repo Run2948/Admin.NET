@@ -11,13 +11,13 @@
 
 - 首先, 我们需要给你的项目添加一个针对远程fork地址的 `upstream` 来更新远程的新代码
 
-  - 通过命令执行: `git remote add upstream https://gitee.com/zuohuaijun/Admin.NET.git`
+  - 通过命令执行: `git remote add upstream https://gitee.com/Run2948/Admin.NET.git`
 
   - 也可以直接在 config文件中添加
 
     ```
     [remote "upstream"]
-    	url = https://gitee.com/zuohuaijun/Admin.NET.git
+    	url = https://gitee.com/Run2948/Admin.NET.git
     	fetch = +refs/heads/*:refs/remotes/upstream/*
     ```
 
@@ -27,16 +27,16 @@
 
 - 在这里, 我们开始初始化我们的项目, 这里重点讲下DB和EF相关的东西
 
-  - 先看下项目中是否存在 Db 文件, 如 : Dilon.db, Dilon_SaaS.db, 如果存在, 删除了
+  - 先看下项目中是否存在 Db 文件, 如 : Admin.NET.db, Admin.NET_SaaS.db, 如果存在, 删除了
 
-  - 看下 Dilon.Database.Migrations 项目下是否存在Migrations 文件夹, 存在的话, 删除了
+  - 看下 Admin.NET.Database.Migrations 项目下是否存在Migrations 文件夹, 存在的话, 删除了
 
   - 添加 migration
 
     - vs: `Add-Migration Init -Context DefaultDbContext`, **这里需要注意的是需要设置启动项和选择当前项目**, 这里可以看官方介绍
-    - cmd: `dotnet ef migrations add Init -c DefaultDbContext -p Dilon.Database.Migrations/Dilon.Database.Migrations.csproj -s Dilon.Web.Entry/Dilon.Web.Entry.csproj`, **注意这个是在 `backend` 路径下执行, 同时需要全局安装 dotnet ef, 安装命令: `dotnet tool install --global dotnet-ef`**
+    - cmd: `dotnet ef migrations add Init -c DefaultDbContext -p Admin.NET.Database.Migrations/Admin.NET.Database.Migrations.csproj -s Admin.NET.Web.Entry/Admin.NET.Web.Entry.csproj`, **注意这个是在 `backend` 路径下执行, 同时需要全局安装 dotnet ef, 安装命令: `dotnet tool install --global dotnet-ef`**
 
-  - 执行完成后, 会在 Dilon.Database.Migrations  项目下生成对应的文件
+  - 执行完成后, 会在 Admin.NET.Database.Migrations  项目下生成对应的文件
 
     ![image-20210429102344986](http://images.wynnyo.com/Markdown/image-20210429102344986.png?x-oss-process=style/wynnyo-style)
 
@@ -45,13 +45,13 @@
     - 注: 由于 Migrations 文件夹是在.gitignore中的, 我们需要去把那一行注释掉, 然后再 add
 
       ````
-      # /backend/Dilon.Database.Migrations/Migrations
+      # /backend/Admin.NET.Database.Migrations/Migrations
       ````
     
   - 更新数据库 `update database`
 
     - vs: `update-database -Context DefaultDbContext`, 注意事项和上边一样
-    - cmd: `dotnet ef database update -c DefaultDbContext -p Dilon.Database.Migrations/Dilon.Database.Migrations.csproj -s Dilon.Web.Entry/Dilon.Web.Entry.csproj`
+    - cmd: `dotnet ef database update -c DefaultDbContext -p Admin.NET.Database.Migrations/Admin.NET.Database.Migrations.csproj -s Admin.NET.Web.Entry/Admin.NET.Web.Entry.csproj`
 
   - 再执行下 `git add .`
 
@@ -71,7 +71,7 @@
 
 #### 新增自己的业务代码
 
-- 在 Dilon.Applition 项目 Entity文件夹中新增实体
+- 在 Admin.NET.Core 项目 Entity文件夹中新增实体
 
   ```c#
   [Table("b_test")]
@@ -92,9 +92,9 @@
   }
   ```
 
-- 添加 migration: `dotnet ef migrations add Add_BTest -c DefaultDbContext -p Dilon.Database.Migrations/Dilon.Database.Migrations.csproj -s Dilon.Web.Entry/Dilon.Web.Entry.csproj`
+- 添加 migration: `dotnet ef migrations add Add_BTest -c DefaultDbContext -p Admin.NET.Database.Migrations/Admin.NET.Database.Migrations.csproj -s Admin.NET.Web.Entry/Admin.NET.Web.Entry.csproj`
 
-- 更新数据库: `dotnet ef database update -c DefaultDbContext -p Dilon.Database.Migrations/Dilon.Database.Migrations.csproj -s Dilon.Web.Entry/Dilon.Web.Entry.csproj`
+- 更新数据库: `dotnet ef database update -c DefaultDbContext -p Admin.NET.Database.Migrations/Admin.NET.Database.Migrations.csproj -s Admin.NET.Web.Entry/Admin.NET.Web.Entry.csproj`
 
 - 注: 在这两个操作中**不要删除**以前的 DB 文件 和 migration 文件
 
@@ -154,8 +154,8 @@
 
   ```shell
   # Merge_Master 这个名字依次累加
-  dotnet ef migrations add Merge_Master1 -c DefaultDbContext -p Dilon.Database.Migrations/Dilon.Database.Migrations.csproj -s Dilon.Web.Entry/Dilon.Web.Entry.csproj
-  dotnet ef database update -c DefaultDbContext -p Dilon.Database.Migrations/Dilon.Database.Migrations.csproj -s Dilon.Web.Entry/Dilon.Web.Entry.csproj
+  dotnet ef migrations add Merge_Master1 -c DefaultDbContext -p Admin.NET.Database.Migrations/Admin.NET.Database.Migrations.csproj -s Admin.NET.Web.Entry/Admin.NET.Web.Entry.csproj
+  dotnet ef database update -c DefaultDbContext -p Admin.NET.Database.Migrations/Admin.NET.Database.Migrations.csproj -s Admin.NET.Web.Entry/Admin.NET.Web.Entry.csproj
   ```
 
 - 最后来一套 git 操作即可

@@ -1,4 +1,5 @@
 ﻿using Covid19.Core;
+using Furion.Extras.Admin.NET;
 using Furion.DatabaseAccessor;
 using Furion.DatabaseAccessor.Extensions;
 using Furion.DependencyInjection;
@@ -7,6 +8,7 @@ using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +17,7 @@ namespace @Model.NameSpace
     /// <summary>
     /// @(@Model.BusName)服务
     /// </summary>
-    [ApiDescriptionSettings(Name = "@Model.ClassName", Order = 100)]
+    [ApiDescriptionSettings("Business", Name = "@Model.ClassName", Order = 100)]
     public class @(@Model.ClassName)Service : I@(@Model.ClassName)Service, IDynamicApiController, ITransient
     {
         private readonly IRepository<@(@Model.ClassName)> _rep;
@@ -60,7 +62,11 @@ if (@column.QueryType == "like"){
                                      @:.Where(!string.IsNullOrEmpty(input.@column.ColumnName), u => u.@(@column.ColumnName) @column.QueryType input.@(@column.ColumnName))
 }
 }else{
+if(@column.NetType.Contains("Enum") || @column.NetType.EndsWith("int") || @column.NetType == "long" || @column.NetType == "bool") {
+                                     @:.Where(input.@(@column.ColumnName).HasValue, u => u.@(@column.ColumnName) @column.QueryType input.@(@column.ColumnName).Value)
+} else {
                                      @:.Where(u => u.@(@column.ColumnName) @column.QueryType input.@(@column.ColumnName))
+}
 }
 }
 }
@@ -116,7 +122,7 @@ if (@column.ColumnKey == "True"){
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet("/@Model.ClassName/detail")]
-        public async Task<@(@Model.ClassName)> Get([FromQuery] Querye@(@Model.ClassName)Input input)
+        public async Task<@(@Model.ClassName)> Get([FromQuery] Query@(@Model.ClassName)Input input)
         {
 @foreach (var column in Model.TableField){
 if (@column.ColumnKey == "True"){
@@ -158,6 +164,8 @@ if(@column.EffectType == "fk" && @column.FkEntityName != "" && @column.FkColumnN
 @foreach (var column in Model.TableField){
 if(@column.EffectType == "fk" && @column.FkEntityName != "" && @column.FkColumnName != ""){
                 @:item.@(@column.FkEntityName)@(@column.FkColumnName) = (await _@(@column.LowerFkEntityName)Rep.FirstOrDefaultAsync(e => e.Id == item.@(@column.ColumnName)))?.@column.FkColumnName;
+}else{
+                @:await Task.Run(() => Console.Write(item.@(@column.ColumnName)));
 }
 }
             }
