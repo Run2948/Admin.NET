@@ -6,7 +6,7 @@ namespace Admin.NET.Application
     /// <summary>
     /// 系统服务接口
     /// </summary>
-    [ApiDescriptionSettings("Custom", Name = "Test", Order = 100)]
+    [ApiDescriptionSettings("Business", Name = "Test", Order = 100)]
     public class SystemAppService : IDynamicApiController
     {
         private readonly ISystemService _systemService;

@@ -1,24 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-		<Description>基于Furion框架实现的通用权限管理平台应用层框架。前后端分离，开箱即用。</Description>
-		<VersionPrefix>1.0.0</VersionPrefix>
+    <Description>基于Furion框架实现的通用权限管理平台应用层框架。</Description>
+    <VersionPrefix>1.0.0</VersionPrefix>
     <Authors>Run2948</Authors>
-		<TargetFramework>net5.0</TargetFramework>
-		<PackageId>Furion.Extras.AspNetCore</PackageId>
-		<PackageTags>Furion Extras Admin.NET AspNetCore</PackageTags>
-		<PackageProjectUrl>https://gitee.com/Run2948/Admin.NET</PackageProjectUrl>
-		<RepositoryType>Gitee</RepositoryType>
-		<RepositoryUrl>https://gitee.com/Run2948/Admin.NET</RepositoryUrl>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <TargetFramework>net5.0</TargetFramework>
+    <PackageId>Furion.Extras.AspNetCore</PackageId>
+    <PackageTags>Furion Extras Admin.NET AspNetCore</PackageTags>
+    <PackageProjectUrl>https://github.com/Run2948/Admin.NET</PackageProjectUrl>
+    <RepositoryType>Gitee</RepositoryType>
+    <RepositoryUrl>https://gitee.com/Run2948/Admin.NET</RepositoryUrl>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Copyright>Copyright © Run2948</Copyright>
-		<NeutralLanguage></NeutralLanguage>
+    <NeutralLanguage></NeutralLanguage>
     <PackageIcon>icon.png</PackageIcon>
-		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<Version>1.0.25</Version>
-		<PackageLicenseExpression></PackageLicenseExpression>
-		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<AssemblyName>Furion.Extras.AspNetCore</AssemblyName>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>1.0.28</Version>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <AssemblyName>Furion.Extras.AspNetCore</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -38,10 +38,10 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-		<None Include="LICENSE">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
+    <None Include="LICENSE">
+    	<Pack>True</Pack>
+    	<PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -52,21 +52,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Furion" Version="2.10.4" />
-    <PackageReference Include="Furion.Extras.Authentication.JwtBearer" Version="2.10.4" />
-    <PackageReference Include="Furion.Extras.Logging.Serilog" Version="2.10.4" />
-    <PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="2.10.4" />
-    <PackageReference Include="Magicodes.IE.Excel" Version="2.5.4.4" />
+    <PackageReference Include="Furion" Version="2.11.1" />
+    <PackageReference Include="Furion.Extras.Authentication.JwtBearer" Version="2.11.1" />
+    <PackageReference Include="Furion.Extras.Logging.Serilog" Version="2.11.1" />
+    <PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="2.11.1" />
+    <PackageReference Include="Magicodes.IE.Excel" Version="2.5.4.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.7" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="5.0.1" />
-    <PackageReference Include="MiniExcel" Version="0.17.1" />
+    <PackageReference Include="MiniExcel" Version="0.17.2" />
     <PackageReference Include="OnceMi.AspNetCore.OSS" Version="1.0.4" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.10" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
     <PackageReference Include="UAParser" Version="3.1.47" />
     <PackageReference Include="Yitter.IdGenerator" Version="1.0.12" />
-    <PackageReference Include="Zack.EFCore.Batch" Version="1.4.5" />
+    <PackageReference Include="Zack.EFCore.Batch" Version="1.4.6" />
   </ItemGroup>
 
 </Project>

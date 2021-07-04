@@ -6,7 +6,7 @@ namespace Covid19.Application
     /// <summary>
     /// 系统服务接口
     /// </summary>
-    [ApiDescriptionSettings("自己的业务", Name = "Test", Order = 100)]
+    [ApiDescriptionSettings("Business", Name = "Test", Order = 100)]
     public class SystemAppService : IDynamicApiController
     {
         private readonly ISystemService _systemService;

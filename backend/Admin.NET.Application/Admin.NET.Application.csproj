@@ -10,7 +10,7 @@
     <None Remove="applicationsettings.json" />
     <None Remove="Admin.NET.Application.xml" />
   </ItemGroup>
-	
+
   <ItemGroup>
     <Content Include="applicationsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

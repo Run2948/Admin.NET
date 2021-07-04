@@ -2,7 +2,7 @@
   <div class="logo">
     <router-link :to="{ name: 'Console' }">
       <LogoSvg alt="logo" />
-      <h1 v-if="showTitle">{{ this.titles }}</h1>
+      <h1 v-if="showTitle">{{ this.text }}</h1>
     </router-link>
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {
   mixins: [mixin, mixinDevice],
   data() {
     return {
-      titles: ''
+      text: ''
     }
   },
   props: {
@@ -37,15 +37,15 @@ export default {
   created() {
     if (this.layoutMode === 'topmenu') {
       if (this.title.length > 8) {
-        this.titles = this.title.substring(0, 8) + '...'
+        this.text = this.title.substring(0, 8) + '...'
       } else {
-        this.titles = this.title
+        this.text = this.title
       }
     } else {
       if (this.title.length > 10) {
-        this.titles = this.title.substring(0, 8) + '...'
+        this.text = this.title.substring(0, 8) + '...'
       } else {
-        this.titles = this.title
+        this.text = this.title
       }
     }
   }

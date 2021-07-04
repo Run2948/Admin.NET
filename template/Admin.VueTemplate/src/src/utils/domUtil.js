@@ -5,7 +5,7 @@ export const setDocumentTitle = function (title) {
   const regex = /\bMicroMessenger\/([\d\.]+)/
   if (regex.test(ua) && /ip(hone|od|ad)/i.test(ua)) {
     const i = document.createElement('iframe')
-    i.src = '/favicon.ico'
+    i.src = '/favicon.svg'
     i.style.display = 'none'
     i.onload = function () {
       setTimeout(function () {

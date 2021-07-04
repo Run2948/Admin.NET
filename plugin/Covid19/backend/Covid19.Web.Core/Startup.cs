@@ -98,7 +98,7 @@ namespace Covid19.Web.Core
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseInject(string.Empty);
+            app.UseInject("swagger");
 
             app.UseEndpoints(endpoints =>
             {

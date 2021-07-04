@@ -2,18 +2,18 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Furion.Extras.Vue.Template</id>
-    <version>1.0.24</version>
-	<title>Furion.Extras.Vue.Template</title>
-	<authors>Run2948</authors>
+    <version>1.0.28</version>
+    <title>Furion.Extras.Vue.Template</title>
+    <authors>Run2948</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-	<license type="file">LICENSE</license>
-    <projectUrl>https://gitee.com/Run2948/Admin.NET</projectUrl>
+    <license type="file">LICENSE</license>
+    <projectUrl>https://github.com/Run2948/Admin.NET</projectUrl>
     <repository type="Gitee" url="https://gitee.com/Run2948/Admin.NET" branch="develop" />
-	<icon>icon.png</icon>	
+    <icon>icon.png</icon>
     <description>基于 Furion 框架快速搭建 Vue 通用权限管理项目模板。</description>
     <releaseNotes></releaseNotes>
-	<copyright>Copyright © Run2948</copyright>
-	<tags>Furion Extras Vue Antd snowy k-form-design</tags>
+    <copyright>Copyright © Run2948</copyright>
+    <tags>Furion Extras Vue Antd snowy k-form-design</tags>
     <packageTypes>
       <packageType name="Template" />
     </packageTypes>
