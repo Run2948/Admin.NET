@@ -1,4 +1,3 @@
-using Furion;
 using Furion.DatabaseAccessor;
 using Furion.DatabaseAccessor.Extensions;
 using Furion.DependencyInjection;
@@ -278,7 +277,7 @@ namespace Furion.Extras.Admin.NET.Service
             }.InsertNowAsync();
 
             var finalName = newFile.Entity.Id + fileSuffix; // 生成文件的最终名称
-            // newFile.Entity.FileObjectName = finalName;
+            newFile.Entity.FileObjectName = finalName;
             switch (fileLocation)
             {
                 case FileLocation.ALIYUN:

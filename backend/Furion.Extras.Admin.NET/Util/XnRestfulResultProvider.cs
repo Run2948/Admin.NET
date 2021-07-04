@@ -52,6 +52,12 @@ namespace Furion.Extras.Admin.NET
             // 处理对象结果
             else if (context.Result is ObjectResult objectResult) data = objectResult.Value;
             else if (context.Result is EmptyResult) data = null;
+            else if (context.Result is FileStreamResult)
+            {
+                // 服务端要在header设置Access-Control-Expose-Headers, 前端才能正常获取到
+                context.HttpContext.Response.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
+                return null;
+            }
             else return null;
 
             return new JsonResult(new XnRestfulResult<object>
