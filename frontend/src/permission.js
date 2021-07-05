@@ -9,6 +9,8 @@ import { ACCESS_TOKEN, ALL_APPS_MENU } from '@/store/mutation-types'
 
 import { Modal, notification } from 'ant-design-vue' // NProgress Configuration
 import { timeFix } from '@/utils/util'/// es/notification
+import Enumerable from 'linq'
+
 NProgress.configure({ showSpinner: false })
 const whiteList = ['login', 'register', 'registerResult'] // no redirect whitelist
 // 无默认首页的情况
@@ -48,7 +50,7 @@ router.beforeEach((to, from, next) => {
               const applocation = []
               res.apps.forEach(item => {
                 const apps = { 'code': '', 'name': '', 'active': '', 'menu': '' }
-                if (item.active) {
+                if (item.active === 'Y') {
                   apps.code = item.code
                   apps.name = item.name
                   apps.active = item.active
@@ -62,6 +64,13 @@ router.beforeEach((to, from, next) => {
                 }
                 applocation.push(apps)
               })
+              if (antDesignmenus === undefined) {
+                // 没有设置默认值的情况下，使第一个应用菜单为默认菜单
+                var firstApps = Enumerable.from(applocation).first()
+                firstApps.active = 'Y'
+                firstApps.menu = res.menus
+                antDesignmenus = res.menus
+              }
               Vue.ls.set(ALL_APPS_MENU, applocation, 7 * 24 * 60 * 60 * 1000)
               // 延迟 1 秒显示欢迎信息
               setTimeout(() => {
