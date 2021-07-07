@@ -74,7 +74,7 @@ export default {
   },
   created() {
     // this.defApp.push(Vue.ls.get(ALL_APPS_MENU)[0].code)
-    var defautMenu = Enumerable.from(Vue.ls.get(ALL_APPS_MENU)).firstOrDefault(x => x.active === 'Y' || x.active)
+    var defautMenu = Enumerable.from(Vue.ls.get(ALL_APPS_MENU)).firstOrDefault(x => x.active === 'Y')
     if (defautMenu !== undefined) {
       this.defApp.push(defautMenu.code)
     }
