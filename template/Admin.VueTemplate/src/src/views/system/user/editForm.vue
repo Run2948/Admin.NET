@@ -102,8 +102,8 @@
         </a-col>
         <a-col :md="12" :sm="24">
           <a-form :form="form">
-            <a-form-item label="电话" :labelCol="labelCol" :wrapperCol="wrapperCol" has-feedback>
-              <a-input placeholder="请输入电话" v-decorator="['tel']" />
+            <a-form-item label="微信号" :labelCol="labelCol" :wrapperCol="wrapperCol" has-feedback>
+              <a-input placeholder="请输入微信号" v-decorator="['weChat']" />
             </a-form-item>
           </a-form>
         </a-col>
@@ -313,7 +313,7 @@ export default {
           sex: record.sex,
           email: record.email,
           phone: record.phone,
-          tel: record.tel
+          weChat: record.weChat
         })
       }, 100)
       // 时间单独处理

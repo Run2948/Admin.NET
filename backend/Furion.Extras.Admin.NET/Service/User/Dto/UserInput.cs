@@ -55,9 +55,9 @@ namespace Furion.Extras.Admin.NET.Service
         public string Phone { get; set; }
 
         /// <summary>
-        /// 电话
+        /// 微信
         /// </summary>
-        public string Tel { get; set; }
+        public string WeChat { get; set; }
 
         /// <summary>
         /// 状态-正常_0、停用_1、删除_2
@@ -132,9 +132,9 @@ namespace Furion.Extras.Admin.NET.Service
         public string Phone { get; set; }
 
         /// <summary>
-        /// 电话
+        /// 微信
         /// </summary>
-        public string Tel { get; set; }
+        public string WeChat { get; set; }
 
         /// <summary>
         /// 状态-正常_0、停用_1、删除_2
@@ -203,9 +203,9 @@ namespace Furion.Extras.Admin.NET.Service
         public string Phone { get; set; }
 
         /// <summary>
-        /// 电话
+        /// 微信
         /// </summary>
-        public string Tel { get; set; }
+        public string WeChat { get; set; }
 
         /// <summary>
         /// 状态-正常_0、停用_1、删除_2
@@ -277,9 +277,9 @@ namespace Furion.Extras.Admin.NET.Service
         public string Phone { get; set; }
 
         /// <summary>
-        /// 电话
+        /// 微信
         /// </summary>
-        public string Tel { get; set; }
+        public string WeChat { get; set; }
 
         /// <summary>
         /// 员工信息
@@ -307,7 +307,7 @@ namespace Furion.Extras.Admin.NET.Service
         [Required(ErrorMessage = "生日不能为空")]
         public DateTime? Birthday { get; set; }
 
-        public string Tel { get; set; }
+        public string WeChat { get; set; }
     }
 
     /// <summary>

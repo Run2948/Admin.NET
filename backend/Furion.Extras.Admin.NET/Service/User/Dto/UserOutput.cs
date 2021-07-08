@@ -53,9 +53,9 @@ namespace Furion.Extras.Admin.NET.Service
         public virtual string Phone { get; set; }
 
         /// <summary>
-        /// 电话
+        /// 微信
         /// </summary>
-        public virtual string Tel { get; set; }
+        public virtual string WeChat { get; set; }
 
         /// <summary>
         /// 状态-正常_0、停用_1、删除_2

@@ -76,11 +76,11 @@ namespace Furion.Extras.Admin.NET
         public string Phone { get; set; }
 
         /// <summary>
-        /// 电话
+        /// 微信
         /// </summary>
-        [Comment("电话")]
+        [Comment("微信")]
         [MaxLength(20)]
-        public string Tel { get; set; }
+        public string WeChat { get; set; }
 
         /// <summary>
         /// 最后登录IP
