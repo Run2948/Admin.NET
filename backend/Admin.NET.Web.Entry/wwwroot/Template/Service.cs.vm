@@ -164,8 +164,6 @@ if(@column.EffectType == "fk" && @column.FkEntityName != "" && @column.FkColumnN
 @foreach (var column in Model.TableField){
 if(@column.EffectType == "fk" && @column.FkEntityName != "" && @column.FkColumnName != ""){
                 @:item.@(@column.FkEntityName)@(@column.FkColumnName) = (await _@(@column.LowerFkEntityName)Rep.FirstOrDefaultAsync(e => e.Id == item.@(@column.ColumnName)))?.@column.FkColumnName;
-}else{
-                @:await Task.Run(() => Console.Write(item.@(@column.ColumnName)));
 }
 }
             }
