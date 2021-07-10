@@ -339,10 +339,13 @@
 
         // 默认选中的单选框
         // eslint-disable-next-line no-unused-vars
-        const visibleDef = false
+        // const visibleDef = false
+
         // eslint-disable-next-line eqeqeq
         if (record.visible == 'Y') {
           this.visibleDef = true
+        } else {
+          this.visibleDef = false
         }
         this.form.getFieldDecorator('weight', {
           valuePropName: 'checked',
