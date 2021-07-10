@@ -21,7 +21,7 @@
               type="text"
               placeholder="账号"
               v-decorator="[
-                'account',{ initialValue:'superAdmin', rules: [{ required: true, message: '请输入帐户名' }, { validator: handleUsernameOrEmail }], validateTrigger: 'change'}
+                'account',{ initialValue:'', rules: [{ required: true, message: '请输入账号' }, { validator: handleUsernameOrEmail }], validateTrigger: 'change'}
               ]"
             >
               <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }"/>
@@ -36,7 +36,7 @@
               placeholder="密码"
               v-decorator="[
                 'password',
-                { initialValue:'123456', rules: [{ required: true, message: '请输入密码' }], validateTrigger: 'blur'}
+                { initialValue:'', rules: [{ required: true, message: '请输入密码' }], validateTrigger: 'blur'}
               ]"
             >
               <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }"/>
@@ -73,7 +73,7 @@
       </a-tabs>
 
       <a-form-item>
-        <a-checkbox v-decorator="['rememberMe', { valuePropName: 'checked' }]">自动登录</a-checkbox>
+        <a-checkbox v-decorator="['rememberMe', { valuePropName: 'checked' }]">记住我</a-checkbox>
         <router-link
           :to="{ name: 'recover', params: { user: 'aaa'} }"
           class="forge-password"
@@ -164,6 +164,9 @@ export default {
   },
   created () {
     this.getCaptchaOpen()
+  },
+  mounted () {
+    this.getLocalStorageData()
   },
   methods: {
     ...mapActions(['Login', 'Logout', 'dictTypeData']),
@@ -291,6 +294,7 @@ export default {
       })
     },
     loginSuccess (res) {
+      this.setLocalStorageData()
       this.$router.push({ path: '/' })
       this.isLoginError = false
       // 加载字典所有字典到缓存中
@@ -299,6 +303,30 @@ export default {
     requestFailed (err) {
       this.accountLoginErrMsg = err
       this.isLoginError = true
+    },
+    /**
+     * 从 localStorage 中读取信息
+     */
+    getLocalStorageData () {
+      const account = localStorage.getItem('login_account')
+      if (account) {
+        this.form.setFieldsValue(
+          {
+            account: account,
+            rememberMe: true
+          }
+        )
+      }
+    },
+    /**
+     * 将信息写入 localStorage
+     */
+    setLocalStorageData () {
+      if (this.form.getFieldValue('rememberMe')) {
+        localStorage.setItem('login_account', this.form.getFieldValue('account'))
+      } else {
+        localStorage.setItem('login_account', '')
+      }
     }
   }
 }
