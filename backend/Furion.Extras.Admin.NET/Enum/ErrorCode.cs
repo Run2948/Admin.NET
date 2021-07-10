@@ -117,6 +117,35 @@ namespace Furion.Extras.Admin.NET
         D1017,
 
         /// <summary>
+        /// 禁止删除管理员
+        /// </summary>
+        [ErrorCodeItemMetadata("禁止删除管理员")]
+        D1018,
+
+        /// <summary>
+        /// 禁止删除系统管理员角色(sys_manager_role)
+        /// </summary>
+        [ErrorCodeItemMetadata("禁止删除系统管理员角色(sys_manager_role)")]
+        D1019,
+        /// <summary>
+        /// 禁止修改系统管理员角色(sys_manager_role)
+        /// </summary>
+        [ErrorCodeItemMetadata("禁止修改系统管理员角色(sys_manager_role)")]
+        D1020,
+
+        /// <summary>
+        /// 禁止为系统管理员角色(sys_manager_role)分配权限
+        /// </summary>
+        [ErrorCodeItemMetadata("禁止为系统管理员角色(sys_manager_role)分配权限")]
+        D1021,
+
+        /// <summary>
+        /// 禁止为超级管理员分配角色
+        /// </summary>
+        [ErrorCodeItemMetadata("禁止为超级管理员分配角色")]
+        D1022,
+
+        /// <summary>
         /// 父机构不存在
         /// </summary>
         [ErrorCodeItemMetadata("父机构不存在")]

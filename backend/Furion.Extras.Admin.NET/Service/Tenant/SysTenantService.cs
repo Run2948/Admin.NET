@@ -106,7 +106,7 @@ namespace Furion.Extras.Admin.NET.Service
             {
                 TenantId = tenantId,
                 Account = email,
-                Password = "e10adc3949ba59abbe56e057f20f883e",
+                Password = MD5Encryption.Encrypt(CommonConst.DEFAULT_PASSWORD),
                 Name = newTenant.AdminName,
                 NickName = newTenant.AdminName,
                 Email = newTenant.Email,

@@ -129,6 +129,12 @@ namespace Furion.Extras.Admin.NET.Service
             if (user.AdminType == AdminType.SuperAdmin)
                 throw Oops.Oh(ErrorCode.D1014);
 
+            if (user.AdminType == AdminType.Admin)
+                throw Oops.Oh(ErrorCode.D1018);
+
+            if (user.Id == _userManager.UserId)
+                throw Oops.Oh(ErrorCode.D1001);
+
             // 数据范围检查
             CheckDataScope(input.SysEmpParam.OrgId);
 
@@ -209,6 +215,13 @@ namespace Furion.Extras.Admin.NET.Service
         [HttpPost("/sysUser/grantRole")]
         public async Task GrantUserRole(UpdateUserRoleDataInput input)
         {
+            var user = await _sysUserRep.FirstOrDefaultAsync(u => u.Id == input.Id);
+            if (user.AdminType == AdminType.SuperAdmin)
+                throw Oops.Oh(ErrorCode.D1022);
+
+            if (user.AdminType == AdminType.Admin)
+                throw Oops.Oh(ErrorCode.D1008);
+
             // 数据范围检查
             CheckDataScope(input.SysEmpParam.OrgId);
             await _sysUserRoleService.GrantRole(input);
