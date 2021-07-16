@@ -16,6 +16,7 @@ const user = {
     welcome: '',
     avatar: '',
     buttons: [], // 按钮权限
+    allButtons: [], // 所有按钮权限
     admintype: '', // 是否是超管
     roles: [],
     info: {}
@@ -40,6 +41,9 @@ const user = {
     },
     SET_BUTTONS: (state, buttons) => {
       state.buttons = buttons
+    },
+    SET_ALL_BUTTONS: (state, allButtons) => {
+      state.allButtons = allButtons
     },
     SET_ADMINTYPE: (state, admintype) => {
       state.admintype = admintype
@@ -76,6 +80,7 @@ const user = {
             commit('SET_ADMINTYPE', data.adminType)
             commit('SET_ROLES', 1)
             commit('SET_BUTTONS', data.permissions)
+            commit('SET_ALL_BUTTONS', data.allPermissions)
             commit('SET_INFO', data)
             commit('SET_NAME', { name: data.name, welcome: welcome() })
             if (data.avatar != null) {
@@ -110,6 +115,7 @@ const user = {
           commit('SET_TOKEN', '')
           commit('SET_ROLES', [])
           commit('SET_BUTTONS', [])
+          commit('SET_ALL_BUTTONS', [])
           commit('SET_ADMINTYPE', '')
           Vue.ls.remove(ACCESS_TOKEN)
           Vue.ls.remove(ALL_APPS_MENU)

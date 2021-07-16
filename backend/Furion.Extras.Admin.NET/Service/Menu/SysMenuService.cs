@@ -50,7 +50,7 @@ namespace Furion.Extras.Admin.NET.Service
             var permissions = await _sysCacheService.GetPermission(userId); // 先从缓存里面读取
             if (permissions == null || permissions.Count < 1)
             {
-                if (!_userManager.SuperAdmin)
+                if (!_userManager.SuperAdmin && userId != 0)
                 {
                     var roleIdList = await _sysUserRoleService.GetUserRoleIdList(userId);
                     var menuIdList = await _sysRoleMenuService.GetRoleMenuIdList(roleIdList);
@@ -69,6 +69,16 @@ namespace Furion.Extras.Admin.NET.Service
                 await _sysCacheService.SetPermission(userId, permissions); // 缓存结果
             }
             return permissions;
+        }
+
+        /// <summary>
+        /// 获取所有权限(按钮权限标识集合)
+        /// </summary>
+        /// <returns></returns>
+        [NonAction]
+        public async Task<List<string>> GetAllPermissionList()
+        {
+            return await GetLoginPermissionList(0);
         }
 
         /// <summary>
@@ -114,7 +124,7 @@ namespace Furion.Extras.Admin.NET.Service
                     Path = u.OpenType == MenuOpenType.OUTER ? u.Link : u.Router,
                     Name = u.Code,
                     Component = u.Component,
-                    Redirect = u.OpenType == MenuOpenType.OUTER ? u.Link : u.Redirect,                    
+                    Redirect = u.OpenType == MenuOpenType.OUTER ? u.Link : u.Redirect,
                     Meta = new Meta
                     {
                         Title = u.Name,
@@ -241,6 +251,7 @@ namespace Furion.Extras.Admin.NET.Service
 
             // 清除缓存
             await _sysCacheService.DelByPatternAsync(CommonConst.CACHE_KEY_MENU);
+            await _sysCacheService.DelByPatternAsync(CommonConst.CACHE_KEY_PERMISSION);
         }
 
         /// <summary>
@@ -264,6 +275,7 @@ namespace Furion.Extras.Admin.NET.Service
 
             // 清除缓存
             await _sysCacheService.DelByPatternAsync(CommonConst.CACHE_KEY_MENU);
+            await _sysCacheService.DelByPatternAsync(CommonConst.CACHE_KEY_PERMISSION);
         }
 
         /// <summary>
@@ -351,6 +363,7 @@ namespace Furion.Extras.Admin.NET.Service
 
             // 清除缓存
             await _sysCacheService.DelByPatternAsync(CommonConst.CACHE_KEY_MENU);
+            await _sysCacheService.DelByPatternAsync(CommonConst.CACHE_KEY_PERMISSION);
         }
 
         /// <summary>

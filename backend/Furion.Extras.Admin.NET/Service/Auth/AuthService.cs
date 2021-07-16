@@ -138,6 +138,9 @@ namespace Furion.Extras.Admin.NET.Service
             // 权限信息
             loginOutput.Permissions = await _sysMenuService.GetLoginPermissionList(userId);
 
+            // 系统所有权限信息
+            loginOutput.AllPermissions = await _sysMenuService.GetAllPermissionList();
+
             // 数据范围信息(机构Id集合)
             loginOutput.DataScopes = await _sysUserService.GetUserDataScopeIdList(userId);
 

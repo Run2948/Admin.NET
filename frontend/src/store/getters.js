@@ -8,6 +8,7 @@ const getters = {
   welcome: state => state.user.welcome,
   roles: state => state.user.roles,
   buttons: state => state.user.buttons,
+  allButtons: state => state.user.allButtons,
   admintype: state => state.user.admintype,
   userInfo: state => state.user.info,
   addRouters: state => state.permission.addRouters,

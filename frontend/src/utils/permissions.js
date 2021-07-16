@@ -17,10 +17,12 @@ export function actionToObject (json) {
  */
 export function hasBtnPermission (permission) {
   const myBtns = store.getters.buttons
+  const allBtns = store.getters.allButtons
   const admintype = store.getters.admintype
   // eslint-disable-next-line eqeqeq
   if (admintype == '1') {
      return true
   }
-  return myBtns.indexOf(permission) > -1
+  // 所有系统按钮中不存在，则不限制
+  return allBtns.indexOf(permission) === -1 || myBtns.indexOf(permission) > -1
 }
