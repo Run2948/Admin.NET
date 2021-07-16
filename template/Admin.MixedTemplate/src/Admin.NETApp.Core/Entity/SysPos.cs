@@ -10,7 +10,11 @@ namespace Admin.NETApp.Core
     /// </summary>
     [Table("sys_pos")]
     [Comment("职位表")]
+#if (EnableTenant)    
     public class SysPos : DEntityTenant
+#else
+    public class SysPos : DEntityBase
+#endif
     {
         /// <summary>
         /// 名称

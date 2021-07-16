@@ -44,15 +44,12 @@ namespace Admin.NETApp.Core
                 new SysConfig{Id=142307070902363, Name="放开XSS过滤的接口", Code="FEAT_UN_XSS_FILTER_URL", Value="/demo/xssfilter,/demo/unxss",SysFlag="Y", Remark="多个url可以用英文逗号隔开", Status=0, GroupCode="DEFAULT"},
                 new SysConfig{Id=142307070902364, Name="单用户登陆的开关", Code="FEAT_ENABLE_SINGLE_LOGIN", Value="false",SysFlag="Y", Remark="true-打开，false-关闭，如果一个人登录两次，就会将上一次登陆挤下去", Status=0, GroupCode="DEFAULT"},
                 new SysConfig{Id=142307070902365, Name="登录验证码的开关", Code="FEAT_CAPTCHA_OPEN", Value="true",SysFlag="Y", Remark="true-打开，false-关闭", Status=0, GroupCode="DEFAULT"},
-                new SysConfig{Id=142307070902366, Name="Druid监控登录账号", Code="FEAT_DRUID_USERNAME", Value="superAdmin",SysFlag="Y", Remark="Druid监控登录账号", Status=0, GroupCode="DEFAULT"},
-                new SysConfig{Id=142307070902367, Name="Druid监控界面登录密码", Code="FEAT_DRUID_PASSWORD", Value="123456",SysFlag="Y", Remark="Druid监控界面登录密码", Status=0, GroupCode="DEFAULT"},
                 new SysConfig{Id=142307070902368, Name="阿里云定位api接口地址", Code="FEAT_IP_GEO_API", Value="http://api01.aliyun.venuscn.com/ip?ip=%s",SysFlag="Y", Remark="阿里云定位api接口地址", Status=0, GroupCode="DEFAULT"},
                 new SysConfig{Id=142307070902369, Name="阿里云定位appCode", Code="FEAT_IP_GEO_APP_CODE", Value="461535aabeae4f34861884d392f5d452",SysFlag="Y", Remark="阿里云定位appCode", Status=0, GroupCode="DEFAULT"},
                 new SysConfig{Id=142307070902370, Name="Oauth用户登录的开关", Code="FEAT_ENABLE_OAUTH_LOGIN", Value="true",SysFlag="Y", Remark="Oauth用户登录的开关", Status=0, GroupCode="OAUTH"},
                 new SysConfig{Id=142307070902371, Name="Oauth码云登录ClientId", Code="FEAT_OAUTH_GITEE_CLIENT_ID", Value="你的clientId",SysFlag="Y", Remark="Oauth码云登录ClientId", Status=0, GroupCode="OAUTH"},
                 new SysConfig{Id=142307070902372, Name="Oauth码云登录ClientSecret", Code="FEAT_OAUTH_GITEE_CLIENT_SECRET", Value="你的clientSecret",SysFlag="Y", Remark="Oauth码云登录ClientSecret", Status=0, GroupCode="OAUTH"},
                 new SysConfig{Id=142307070902373, Name="Oauth码云登录回调地址", Code="FEAT_OAUTH_GITEE_REDIRECT_URI", Value="http://127.0.0.1:5566/oauth/callback/gitee",SysFlag="Y", Remark="Oauth码云登录回调地址", Status=0, GroupCode="OAUTH"},
-                new SysConfig{Id=142307070902374, Name="演示环境", Code="FEAT_DEMO_ENV_FLAG", Value="false",SysFlag="Y", Remark="演示环境的开关,true-打开，false-关闭，如果演示环境开启，则只能读数据不能写数据", Status=0, GroupCode="DEFAULT"},
             };
         }
     }

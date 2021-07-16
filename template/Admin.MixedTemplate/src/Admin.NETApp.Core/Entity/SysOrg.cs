@@ -10,7 +10,11 @@ namespace Admin.NETApp.Core
     /// </summary>
     [Table("sys_org")]
     [Comment("组织机构表")]
+#if (EnableTenant)    
     public class SysOrg : DEntityTenant
+#else
+    public class SysOrg : DEntityBase
+#endif
     {
         /// <summary>
         /// 父Id

@@ -13,7 +13,11 @@ namespace Admin.NETApp.Core
     /// </summary>
     [Table("sys_role")]
     [Comment("角色表")]
+#if (EnableTenant)    
     public class SysRole : DEntityTenant, IEntityTypeBuilder<SysRole>
+#else
+    public class SysRole : DEntityBase, IEntityTypeBuilder<SysRole>
+#endif
     {
         /// <summary>
         /// 名称

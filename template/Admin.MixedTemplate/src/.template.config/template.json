@@ -20,6 +20,11 @@
   "sourceName": "Admin.NETApp",
   "preferNameDirectory": true,
   "symbols": {
+    "EnableTenant": {
+      "type": "parameter",
+      "dataType": "bool",
+      "defaultValue": "true"
+    },
     "dbType": {
       "type": "parameter",
       "dataType": "choice",
@@ -68,5 +73,25 @@
       "type": "computed",
       "value": "(dbType == \"Sqlite\")"
     }
-  }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(!EnableTenant)",
+          "exclude": [
+            "Admin.NETApp.EntityFramework.Core/DbContexts/MultiTenantDbContext.cs",
+            "Admin.NETApp.Core/Entity/DEntityTenant.cs",
+            "Admin.NETApp.Core/Entity/SysOnlineUser.cs",
+            "Admin.NETApp.Core/SeedData/SysTenantSeedData.cs",
+            "Admin.NETApp.Core/SeedData/SysRoleMenuSeedData.cs",
+            "Admin.NETApp.Core/SeedData/SysUserRoleSeedData.cs",
+            "Admin.NETApp.Core/SeedData/SysUserDataScopeSeedData.cs",
+            "Admin.NETApp.Core/Service/Tenant/*",
+            "Admin.NETApp.Core/Service/OnlineUser/*"
+          ]
+        }
+      ]
+    }
+  ]
 }

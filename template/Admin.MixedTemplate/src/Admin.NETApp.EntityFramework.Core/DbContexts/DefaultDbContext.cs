@@ -25,7 +25,11 @@ namespace Admin.NETApp.EntityFramework.Core
 #elif (Sqlite)
     [AppDbContext("DefaultConnection", DbProvider.Sqlite)]
 #endif
+#if (EnableTenant)    
     public class DefaultDbContext : AppDbContext<DefaultDbContext>, IMultiTenantOnTable, IModelBuilderFilter
+#else
+    public class DefaultDbContext : AppDbContext<DefaultDbContext>, IModelBuilderFilter
+#endif
     {
         public DefaultDbContext(DbContextOptions<DefaultDbContext> options) : base(options)
         {
@@ -41,7 +45,7 @@ namespace Admin.NETApp.EntityFramework.Core
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.LogTo(Console.WriteLine);
         }
-
+#if (EnableTenant)  
         /// <summary>
         /// 获取租户Id
         /// </summary>
@@ -51,9 +55,9 @@ namespace Admin.NETApp.EntityFramework.Core
             if (App.User == null) return null;
             return Convert.ToInt64(App.User.FindFirst(ClaimConst.TENANT_ID)?.Value);
         }
-
+#endif
         /// <summary>
-        /// 配置租户Id过滤器
+        /// 配置过滤器
         /// </summary>
         /// <param name="modelBuilder"></param>
         /// <param name="entityBuilder"></param>
@@ -61,8 +65,13 @@ namespace Admin.NETApp.EntityFramework.Core
         /// <param name="dbContextLocator"></param>
         public void OnCreating(ModelBuilder modelBuilder, EntityTypeBuilder entityBuilder, DbContext dbContext, Type dbContextLocator)
         {
+#if (EnableTenant) 
             // 配置租户Id以及假删除过滤器
-            LambdaExpression expression = TenantIdAndFakeDeleteQueryFilterExpression(entityBuilder, dbContext);
+            LambdaExpression expression = TenantIdAndFakeDeleteQueryFilterExpression(entityBuilder, dbContext);            
+#else
+            // 配置假删除过滤器
+            LambdaExpression expression = FakeDeleteQueryFilterExpression(entityBuilder, dbContext);
+#endif
             if (expression != null)
                 entityBuilder.HasQueryFilter(expression);
         }
@@ -78,21 +87,13 @@ namespace Admin.NETApp.EntityFramework.Core
                         (u.State == EntityState.Modified || u.State == EntityState.Deleted || u.State == EntityState.Added)).ToList();
             if (entities == null || entities.Count < 1) return;
 
-            // 判断是否是演示环境
-            var demoEnvFlag = App.GetService<ISysConfigService>().GetDemoEnvFlag().GetAwaiter().GetResult();
-            if (demoEnvFlag)
-            {
-                var sysUser = entities.Find(u => u.Entity.GetType() == typeof(SysUser));
-                if (sysUser == null || string.IsNullOrEmpty((sysUser.Entity as SysUser).LastLoginTime.ToString())) // 排除登录
-                    throw Oops.Oh(ErrorCode.D1200);
-            }
-
             // 当前操作者信息
             var userId = App.User.FindFirst(ClaimConst.CLAINM_USERID)?.Value;
             var userName = App.User.FindFirst(ClaimConst.CLAINM_ACCOUNT)?.Value;
 
             foreach (var entity in entities)
             {
+#if (EnableTenant)  
                 if (entity.Entity.GetType().IsSubclassOf(typeof(DEntityTenant)))
                 {
                     var obj = entity.Entity as DEntityTenant;
@@ -121,7 +122,8 @@ namespace Admin.NETApp.EntityFramework.Core
                             break;
                     }
                 }
-                else if (entity.Entity.GetType().IsSubclassOf(typeof(DEntityBase)))
+#endif            
+                if (entity.Entity.GetType().IsSubclassOf(typeof(DEntityBase)))
                 {
                     var obj = entity.Entity as DEntityBase;
                     if (entity.State == EntityState.Added)
@@ -144,15 +146,17 @@ namespace Admin.NETApp.EntityFramework.Core
             }
         }
 
+#if (EnableTenant)  
         /// <summary>
         /// 构建租户Id以及假删除过滤器
         /// </summary>
         /// <param name="entityBuilder"></param>
         /// <param name="dbContext"></param>
+        /// <param name="onTableTenantId"></param>
         /// <param name="isDeletedKey"></param>
         /// <param name="filterValue"></param>
         /// <returns></returns>
-        protected LambdaExpression TenantIdAndFakeDeleteQueryFilterExpression(EntityTypeBuilder entityBuilder, DbContext dbContext, string onTableTenantId = null, string isDeletedKey = null, object filterValue = null)
+        protected static LambdaExpression TenantIdAndFakeDeleteQueryFilterExpression(EntityTypeBuilder entityBuilder, DbContext dbContext, string onTableTenantId = null, string isDeletedKey = null, object filterValue = null)
         {
             onTableTenantId ??= "TenantId";
             isDeletedKey ??= "IsDeleted";
@@ -193,5 +197,41 @@ namespace Admin.NETApp.EntityFramework.Core
 
             return Expression.Lambda(finialExpression, parameterExpression);
         }
+#else
+        /// <summary>
+        /// 构建假删除过滤器
+        /// </summary>
+        /// <param name="entityBuilder"></param>
+        /// <param name="dbContext"></param>
+        /// <param name="isDeletedKey"></param>
+        /// <param name="filterValue"></param>
+        /// <returns></returns>
+        protected static LambdaExpression FakeDeleteQueryFilterExpression(EntityTypeBuilder entityBuilder, DbContext dbContext, string isDeletedKey = null, object filterValue = null)
+        {
+            isDeletedKey ??= "IsDeleted";
+            IMutableEntityType metadata = entityBuilder.Metadata;
+            if (metadata.FindProperty(isDeletedKey) == null)
+            {
+                return null;
+            }
+
+            Expression finialExpression = Expression.Constant(true);
+            ParameterExpression parameterExpression = Expression.Parameter(metadata.ClrType, "u");
+
+            // 假删除过滤器
+            if (metadata.FindProperty(isDeletedKey) != null)
+            {
+                ConstantExpression constantExpression = Expression.Constant(isDeletedKey);
+                ConstantExpression right = Expression.Constant(filterValue ?? false);
+                var fakeDeleteQueryExpression = Expression.Equal(Expression.Call(typeof(EF), "Property", new Type[1]
+                {
+                    typeof(bool)
+                }, parameterExpression, constantExpression), right);
+                finialExpression = Expression.AndAlso(finialExpression, fakeDeleteQueryExpression);
+            }
+
+            return Expression.Lambda(finialExpression, parameterExpression);
+        }
+#endif  
     }
 }

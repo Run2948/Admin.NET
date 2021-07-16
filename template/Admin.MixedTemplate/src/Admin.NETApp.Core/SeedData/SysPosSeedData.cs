@@ -20,6 +20,7 @@ namespace Admin.NETApp.Core
         {
             return new[]
             {
+#if (EnableTenant)    
                 new SysPos{TenantId=142307070918780, Id=142307070910547, Name="总经理", Code="zjl", Sort=100, Remark="总经理", Status=0 },
                 new SysPos{TenantId=142307070918780, Id=142307070910548, Name="副总经理", Code="fzjl", Sort=101, Remark="副总经理", Status=0 },
                 new SysPos{TenantId=142307070918780, Id=142307070910549, Name="部门经理", Code="bmjl", Sort=102, Remark="部门经理", Status=0 },
@@ -34,6 +35,12 @@ namespace Admin.NETApp.Core
                 new SysPos{TenantId=142307070918782, Id=142307070910556, Name="副总经理", Code="fzjl", Sort=101, Remark="副总经理", Status=0 },
                 new SysPos{TenantId=142307070918782, Id=142307070910557, Name="部门经理", Code="bmjl", Sort=102, Remark="部门经理", Status=0 },
                 new SysPos{TenantId=142307070918782, Id=142307070910558, Name="工作人员", Code="gzry", Sort=103, Remark="工作人员", Status=0 }
+#else
+                new SysPos{Id=142307070910547, Name="总经理", Code="zjl", Sort=100, Remark="总经理", Status=0 },
+                new SysPos{Id=142307070910548, Name="副总经理", Code="fzjl", Sort=101, Remark="副总经理", Status=0 },
+                new SysPos{Id=142307070910549, Name="部门经理", Code="bmjl", Sort=102, Remark="部门经理", Status=0 },
+                new SysPos{Id=142307070910550, Name="工作人员", Code="gzry", Sort=103, Remark="工作人员", Status=0 },
+#endif
             };
         }
     }

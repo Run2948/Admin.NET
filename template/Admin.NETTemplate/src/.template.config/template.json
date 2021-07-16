@@ -1,71 +1,71 @@
 {
-  "$schema": "http://json.schemastore.org/template",
-  "author": "Run2948",
-  "classifications": [
-    "Furion",
-    "Extras",
-    "AspNetCore",
-    "Mvc",
-    "WebApi",
-    "Admin.NET"
-  ],
-  "name": "Furion Extras AspNetCore Template",
-  "identity": "Furion.Extras.AspNetCore.Template",
-  "shortName": "feat",
-  "tags": {
-    "language": "C#",
-    "type": "project"
-  },
-  "sourceName": "Admin.NETApp",
-  "preferNameDirectory": true,
-  "symbols": {
-    "dbType": {
-      "type": "parameter",
-      "dataType": "choice",
-      "choices": [
-        {
-          "choice": "SqlServer",
-          "description": "Microsoft.EntityFrameworkCore.SqlServer"
-        },
-        {
-          "choice": "MySql",
-          "description": "Pomelo.EntityFrameworkCore.MySql"
-        },
-        {
-          "choice": "Oracle",
-          "description": "Oracle.EntityFrameworkCore"
-        },
-        {
-          "choice": "Npgsql",
-          "description": "Npgsql.EntityFrameworkCore.PostgreSQL"
-        },
-        {
-          "choice": "Sqlite",
-          "description": "Microsoft.EntityFrameworkCore.Sqlite"
-        }
-      ],
-      "defaultValue": "Sqlite",
-      "description": "The type of DbProvider to use"
-    },
-    "SqlServer": {
-      "type": "computed",
-      "value": "(dbType == \"SqlServer\")"
-    },
-    "MySql": {
-      "type": "computed",
-      "value": "(dbType == \"MySql\")"
-    },
-    "Oracle": {
-      "type": "computed",
-      "value": "(dbType == \"Oracle\")"
-    },
-    "Npgsql": {
-      "type": "computed",
-      "value": "(dbType == \"Npgsql\")"
-    },
-    "Sqlite": {
-      "type": "computed",
-      "value": "(dbType == \"Sqlite\")"
-    }
-  }
+	"$schema": "http://json.schemastore.org/template",
+	"author": "Run2948",
+	"classifications": [
+		"Furion",
+		"Extras",
+		"AspNetCore",
+		"Mvc",
+		"WebApi",
+		"Admin.NET"
+	],
+	"name": "Furion Extras AspNetCore Template",
+	"identity": "Furion.Extras.AspNetCore.Template",
+	"shortName": "feat",
+	"tags": {
+		"language": "C#",
+		"type": "project"
+	},
+	"sourceName": "Admin.NETApp",
+	"preferNameDirectory": true,
+	"symbols": {
+		"dbType": {
+			"type": "parameter",
+			"dataType": "choice",
+			"choices": [
+				{
+					"choice": "SqlServer",
+					"description": "Microsoft.EntityFrameworkCore.SqlServer"
+				},
+				{
+					"choice": "MySql",
+					"description": "Pomelo.EntityFrameworkCore.MySql"
+				},
+				{
+					"choice": "Oracle",
+					"description": "Oracle.EntityFrameworkCore"
+				},
+				{
+					"choice": "Npgsql",
+					"description": "Npgsql.EntityFrameworkCore.PostgreSQL"
+				},
+				{
+					"choice": "Sqlite",
+					"description": "Microsoft.EntityFrameworkCore.Sqlite"
+				}
+			],
+			"defaultValue": "Sqlite",
+			"description": "The type of DbProvider to use"
+		},
+		"SqlServer": {
+			"type": "computed",
+			"value": "(dbType == \"SqlServer\")"
+		},
+		"MySql": {
+			"type": "computed",
+			"value": "(dbType == \"MySql\")"
+		},
+		"Oracle": {
+			"type": "computed",
+			"value": "(dbType == \"Oracle\")"
+		},
+		"Npgsql": {
+			"type": "computed",
+			"value": "(dbType == \"Npgsql\")"
+		},
+		"Sqlite": {
+			"type": "computed",
+			"value": "(dbType == \"Sqlite\")"
+		}
+	}
 }

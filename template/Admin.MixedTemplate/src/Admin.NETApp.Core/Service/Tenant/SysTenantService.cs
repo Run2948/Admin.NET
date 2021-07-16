@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Admin.NETApp.Core.Service
 {
+#if (EnableTenant)
     /// <summary>
     /// 租户服务
     /// </summary>
@@ -267,4 +268,14 @@ namespace Admin.NETApp.Core.Service
                                     .Where(u => u.AdminType == AdminType.Admin).FirstOrDefaultAsync();
         }
     }
+#else
+    /// <summary>
+    /// 租户服务
+    /// </summary>
+    [ApiDescriptionSettings(Name = "Tenant", Order = 100)]
+    public class SysTenantService : ISysTenantService, IDynamicApiController, ITransient
+    {
+
+    }
+#endif
 }

@@ -94,12 +94,14 @@ const vueConfig = {
         pathRewrite: {
           '^/api': '' // 需要rewrite的,
         }
-      },
-      '/hubs': {
+      }
+//#if (EnableTenant)
+      ,'/hubs': {
         target: process.env.VUE_APP_SOCKET_BASE_URL,
         ws: true,
         changeOrigin: true
       }
+//#endif
     }
   },
   // disable source map in production

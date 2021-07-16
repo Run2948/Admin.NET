@@ -13,7 +13,11 @@ namespace Admin.NETApp.Core
     /// </summary>
     [Table("sys_user")]
     [Comment("用户表")]
+#if (EnableTenant)    
     public class SysUser : DEntityTenant, IEntityTypeBuilder<SysUser>
+#else
+    public class SysUser : DEntityBase, IEntityTypeBuilder<SysUser>
+#endif
     {
         /// <summary>
         /// 账号

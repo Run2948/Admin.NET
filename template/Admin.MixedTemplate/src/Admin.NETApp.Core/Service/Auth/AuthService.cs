@@ -86,7 +86,11 @@ namespace Admin.NETApp.Core.Service
             var accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>
             {
                 { ClaimConst.CLAINM_USERID, user.Id },
+#if (EnableTenanttrue)
                 { ClaimConst.TENANT_ID, user.TenantId },
+#else
+                { ClaimConst.TENANT_ID, "" },
+#endif
                 { ClaimConst.CLAINM_ACCOUNT, user.Account },
                 { ClaimConst.CLAINM_NAME, user.Name },
                 { ClaimConst.CLAINM_SUPERADMIN, user.AdminType },

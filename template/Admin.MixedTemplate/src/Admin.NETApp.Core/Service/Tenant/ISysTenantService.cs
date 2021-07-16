@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 namespace Admin.NETApp.Core.Service
 {
+#if (EnableTenant)
     public interface ISysTenantService
     {
         Task AddTenant(AddTenantInput input);
@@ -24,4 +25,10 @@ namespace Admin.NETApp.Core.Service
 
         Task UpdateTenant(UpdateTenantInput input);
     }
+#else
+    public interface ISysTenantService
+    {
+
+    }
+#endif
 }

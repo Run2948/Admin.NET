@@ -117,10 +117,12 @@ export default {
   computed: {
     ...mapGetters(['token', 'nickname', 'avatar', 'userInfo'])
   },
+//#if (EnableTenant)
   // 设置signalr令牌
   async mounted() {
     await this.$socket.authenticate(this.token)
   },
+//#endif
   methods: {
     ...mapActions(['Logout', 'MenuChange']),
 
@@ -188,6 +190,7 @@ export default {
       }
     }
   },
+//#if (EnableTenant)
   // signalr接收的信息
   sockets: {
     ReceiveMessage(data) {
@@ -199,6 +202,7 @@ export default {
       })
     }
   }
+//#endif
 }
 </script>
 

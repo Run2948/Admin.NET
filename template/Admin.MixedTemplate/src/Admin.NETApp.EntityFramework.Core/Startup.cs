@@ -29,7 +29,9 @@ namespace Admin.NETApp.EntityFramework.Core
                     opt.UseBatchEF_Sqlite(); // EF批量组件
 #endif
                 });
+#if (EnableTenant)
                 options.AddDb<MultiTenantDbContext, MultiTenantDbContextLocator>();
+#endif
             }, "Admin.NETApp.Database.Migrations");
         }
 
