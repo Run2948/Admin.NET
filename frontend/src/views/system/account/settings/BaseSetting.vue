@@ -120,17 +120,19 @@ export default {
           tel: this.userInfo.tel
         })
         this.birthdayString = moment(this.userInfo.birthday).format('YYYY-MM-DD')
-          if (this.userInfo.avatar != null) {
-            sysFileInfoPreview({
-              id: this.userInfo.avatar
-            }).then((res) => {
+        if (this.userInfo.avatar != null) {
+          sysFileInfoPreview({
+            id: this.userInfo.avatar
+          })
+            .then(res => {
               this.option.img = window.URL.createObjectURL(new Blob([res]))
-            }).catch((err) => {
+            })
+            .catch(err => {
               this.$message.error('预览错误：' + err.message)
             })
-          } else {
-            this.option.img = '/avatar2.jpg'
-          }
+        } else {
+          this.option.img = '/avatar2.jpg'
+        }
         // this.option.img = process.env.VUE_APP_API_BASE_URL + '/sysFileInfo/preview?id=' + this.userInfo.avatar
         this.getSexData()
       }, 100)
@@ -167,12 +169,12 @@ export default {
       sysFileInfoPreview({
         id: url
       })
-      .then(res => {
-        this.option.img = window.URL.createObjectURL(new Blob([res]))
-      })
-      .catch(err => {
-        this.$message.error('预览错误：' + err.message)
-      })
+        .then(res => {
+          this.option.img = window.URL.createObjectURL(new Blob([res]))
+        })
+        .catch(err => {
+          this.$message.error('预览错误：' + err.message)
+        })
       // this.option.img = process.env.VUE_APP_API_BASE_URL + '/sysFileInfo/preview?id=' + url
       store.dispatch('GetInfo').then(() => {})
     }

@@ -189,10 +189,10 @@ export default {
         this.isFullscreen = true
       }
     }
-  },
+  }
 //#if (EnableTenant)
   // signalr接收的信息
-  sockets: {
+  ,sockets: {
     ReceiveMessage(data) {
       this.$notification.info({
         message: '系统消息',

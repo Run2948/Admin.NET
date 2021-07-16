@@ -87,8 +87,10 @@
             "Admin.NETApp.Core/SeedData/SysRoleMenuSeedData.cs",
             "Admin.NETApp.Core/SeedData/SysUserRoleSeedData.cs",
             "Admin.NETApp.Core/SeedData/SysUserDataScopeSeedData.cs",
+            "Admin.NETApp.Core/Service/Tenant/Dto/*",
             "Admin.NETApp.Core/Service/Tenant/*",
-            "Admin.NETApp.Core/Service/OnlineUser/*"
+            "Admin.NETApp.Core/Service/OnlineUser/*",
+            "Admin.NETApp.Core/Service/Hubs/*"
           ]
         }
       ]

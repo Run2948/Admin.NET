@@ -13,8 +13,9 @@ namespace Admin.NETApp.EntityFramework.Core
         {
             services.AddDatabaseAccessor(options =>
             {
+#if (EnableTenant)
                 options.CustomizeMultiTenants(); // 自定义租户
-
+#endif
                 options.AddDb<DefaultDbContext>(providerName: default, optionBuilder: opt =>
                 {
 #if (SqlServer)

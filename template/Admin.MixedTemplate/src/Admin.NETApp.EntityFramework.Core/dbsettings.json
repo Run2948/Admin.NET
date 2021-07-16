@@ -3,35 +3,35 @@
     //#if (SqlServer)
     //#if (EnableTenant)
     "DefaultConnection": "Data Source=.;User Id=sa;Password=123456;Initial Catalog=Admin.NETApp;MultipleActiveResultSets=true;",
-    "MultiTenantConnection": "Data Source=.;User Id=sa;Password=123456;Initial Catalog=Admin.NETAppp_SaaS;MultipleActiveResultSets=true;",
+    "MultiTenantConnection": "Data Source=.;User Id=sa;Password=123456;Initial Catalog=Admin.NETAppp_SaaS;MultipleActiveResultSets=true;"
     ////#else
-    "DefaultConnection": "Data Source=.;User Id=sa;Password=123456;Initial Catalog=Admin.NETApp;MultipleActiveResultSets=true;",
+    "DefaultConnection": "Data Source=.;User Id=sa;Password=123456;Initial Catalog=Admin.NETApp;MultipleActiveResultSets=true;"
     //#endif
     ////#elseif (MySql)
     //#if (EnableTenant)
     "DefaultConnection": "Data Source=localhost;Port=3306;Database=Admin.NETApp;User ID=root;Password=123456;SslMode=none;CharSet=utf8;",
-    "MultiTenantConnection": "Data Source=localhost;Port=3306;Database=Admin.NETApp_SaaS;User ID=root;Password=123456;SslMode=none;CharSet=utf8;",
+    "MultiTenantConnection": "Data Source=localhost;Port=3306;Database=Admin.NETApp_SaaS;User ID=root;Password=123456;SslMode=none;CharSet=utf8;"
     ////#else    
-    "DefaultConnection": "Data Source=localhost;Port=3306;Database=Admin.NETApp;User ID=root;Password=123456;SslMode=none;CharSet=utf8;",
+    "DefaultConnection": "Data Source=localhost;Port=3306;Database=Admin.NETApp;User ID=root;Password=123456;SslMode=none;CharSet=utf8;"
     //#endif
     ////#elseif (Oracle)
     //#if (EnableTenant)
     "DefaultConnection": "Data Source=localhost:1521/Admin.NETApp;User ID=scott;Password=123456;Pooling=false;",
-    "MultiTenantConnection": "Data Source=localhost:1521/Admin.NETApp_SaaS;User ID=scott;Password=123456;Pooling=false;",
+    "MultiTenantConnection": "Data Source=localhost:1521/Admin.NETApp_SaaS;User ID=scott;Password=123456;Pooling=false;"
     //#else
-    "DefaultConnection": "Data Source=localhost:1521/Admin.NETApp;User ID=scott;Password=123456;Pooling=false;",
+    "DefaultConnection": "Data Source=localhost:1521/Admin.NETApp;User ID=scott;Password=123456;Pooling=false;"
     //#endif
     ////#elseif (PostgreSQL) 
     //#if (EnableTenant)
     "DefaultConnection": "Host=localhost;Port=5432;Username=postgres;Password=123456; Database=Admin.NETApp;Keepalive=30;",
-    "MultiTenantConnection": "Host=localhost;Port=5432;Username=postgres;Password=123456; Database=Admin.NETApp_SaaS;Keepalive=30;",
+    "MultiTenantConnection": "Host=localhost;Port=5432;Username=postgres;Password=123456; Database=Admin.NETApp_SaaS;Keepalive=30;"
     //#else
-    "DefaultConnection": "Host=localhost;Port=5432;Username=postgres;Password=123456; Database=Admin.NETApp;Keepalive=30;",
+    "DefaultConnection": "Host=localhost;Port=5432;Username=postgres;Password=123456; Database=Admin.NETApp;Keepalive=30;"
     //#endif
     ////#elseif (Sqlite)
     //#if (EnableTenant)
     "DefaultConnection": "Data Source=./Admin.NETApp.db;",
-    "MultiTenantConnection": "Data Source=./Admin.NETApp_SaaS.db;",
+    "MultiTenantConnection": "Data Source=./Admin.NETApp_SaaS.db;"
     //#else
     "DefaultConnection": "Data Source=./Admin.NETApp.db;"
     //#endif
