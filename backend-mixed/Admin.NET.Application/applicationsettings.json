@@ -1,0 +1,20 @@
+﻿{
+  "SpecificationDocumentSettings": {
+    "DocumentTitle": "Admin.NET",
+    "DocExpansionState": "None",
+    "GroupOpenApiInfos": [
+      {
+        "Group": "Default",
+        "Title": "Admin.NET通用权限管理平台",
+        "Description": "前后端分离架构，开箱即用，紧随前沿技术。<br/><a href='https://gitee.com/Run2948/Admin.NET/'>https://gitee.com/Run2948/Admin.NET</a>",
+        "Version": "1.0.0"
+      },
+      {
+        "Group": "Business",
+        "Title": "Admin.NET核心业务管理平台",
+        "Description": "前后端分离架构，开箱即用，紧随前沿技术。<br/><a href='https://gitee.com/Run2948/Admin.NET/'>https://gitee.com/Run2948/Admin.NET</a>",
+        "Version": "1.0.0"
+      }
+    ]
+  }
+}

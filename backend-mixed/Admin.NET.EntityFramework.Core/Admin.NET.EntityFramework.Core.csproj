@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <None Remove="dbsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="dbsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.8" />
+		<PackageReference Include="Zack.EFCore.Batch.Sqlite" Version="1.4.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Admin.NET.Core\Admin.NET.Core.csproj" />
+  </ItemGroup>
+
+</Project>

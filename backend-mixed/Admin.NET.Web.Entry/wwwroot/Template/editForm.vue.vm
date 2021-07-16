@@ -1,0 +1,614 @@
+﻿@{
+var editorColumn = ""; var fileColumn = ""; var imageColumn = "";
+foreach (var column in Model.TableField){
+if(column.EffectType == "texteditor") { editorColumn = column.ColumnName; }
+if(column.EffectType == "file") { fileColumn = column.ColumnName; }
+if(column.EffectType == "image") { imageColumn = column.ColumnName; }
+}
+<template>
+  <a-modal
+    title="编辑@(@Model.BusName)"
+    :width="@(editorColumn != "" ? 1000: 900)"
+    :visible="visible"
+    :confirmLoading="confirmLoading"
+    @@ok="handleSubmit"
+    @@cancel="handleCancel">
+    <a-spin :spinning="confirmLoading">
+      <a-form :form="form">
+@foreach (var column in Model.TableField){
+if(@column.ColumnKey == "True"){
+        @:<a-form-item v-show="false"><a-input v-decorator="['@column.ColumnName']" /></a-form-item>
+}else{
+if (@column.WhetherAddUpdate == "Y"){
+if (@column.EffectType == "select" || @column.EffectType == "radio" || @column.EffectType == "checkbox"){
+        @:<a-form-item label="@column.ColumnComment" :labelCol="labelCol" :wrapperCol="wrapperCol">
+}else{
+        @:<a-form-item label="@column.ColumnComment" :labelCol="labelCol" :wrapperCol="wrapperCol" has-feedback>
+}
+if (@column.EffectType == "user"){
+if (@column.WhetherRequired == "Y"){
+          @:<user-select placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{required: true, message: '请输入@(@column.ColumnComment)！'}]}]" />
+}else{
+          @:<user-select placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" />
+}
+}
+if (@column.EffectType == "depart"){
+if (@column.WhetherRequired == "Y"){
+          @:<depart-select placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{required: true, message: '请输入@(@column.ColumnComment)！'}]}]" />
+}else{
+          @:<depart-select placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" />
+}
+}
+if (@column.EffectType == "input"){
+if (@column.WhetherRequired == "Y"){
+          @:<a-input placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{required: true, message: '请输入@(@column.ColumnComment)！'}]}]" />
+}else{
+          @:<a-input placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" />
+}
+}
+if (@column.EffectType == "file"){
+if (@column.WhetherRequired == "Y"){
+          @:<!-- <a-input placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{required: true, message: '请输入@(@column.ColumnComment)！'}]}]" /> -->
+          @:<div class="clearfix">
+            @:<a-upload name="@(@column.ColumnName)" :file-list="defaultFileList" :customRequest="handleFileUpload" :remove="handleFileRemove" @@change="handleFileChange">
+              @:<a-button v-if="defaultFileList && defaultFileList.length === 0">
+                @:<a-icon type="upload" /> 立即上传 
+              @:</a-button>
+            @:</a-upload>
+          @:</div>		  
+}else{
+          @:<!-- <a-input placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{required: true, message: '请输入@(@column.ColumnComment)！'}]}]" /> -->
+          @:<div class="clearfix">
+            @:<a-upload name="@(@column.ColumnName)" :file-list="defaultFileList" :customRequest="handleFileUpload" :remove="handleFileRemove" @@change="handleFileChange">
+              @:<a-button v-if="defaultFileList && defaultFileList.length === 0">
+                @:<a-icon type="upload" /> 立即上传 
+              @:</a-button>
+            @:</a-upload>
+          @:</div>	  
+}
+}
+if (@column.EffectType == "image"){
+if (@column.WhetherRequired == "Y"){
+          @:<!-- <a-input placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{required: true, message: '请输入@(@column.ColumnComment)！'}]}]" /> -->
+          @:<div class="clearfix">
+            @:<a-upload name="@(@column.ColumnName)" list-type="picture-card" :file-list="defaultImageList" :before-upload="beforeUploadImage" :customRequest="handleImageUpload" :remove="handleImageRemove" @@preview="handleImagePreview" @@change="handleImageChange">
+              @:<div v-if="defaultImageList && defaultImageList.length === 0">
+                @:<a-icon type="plus" />
+				@:<div class="ant-upload-text">立即上传</div>
+              @:</div>
+            @:</a-upload>
+            @:<a-modal :visible="previewVisible" :footer="null" @@cancel="cancelImagePreview">
+              @:<img alt="@(@column.ColumnComment)" style="width: 100%" :src="previewImage" />
+            @:</a-modal>
+          @:</div>		  
+}else{
+          @:<!-- <a-input placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" /> -->
+          @:<div class="clearfix">
+            @:<a-upload name="@(@column.ColumnName)" list-type="picture-card" :file-list="defaultImageList" :before-upload="beforeUploadImage" :customRequest="handleImageUpload" :remove="handleImageRemove" @@preview="handleImagePreview" @@change="handleImageChange">
+              @:<div v-if="defaultImageList && defaultImageList.length === 0">
+                @:<a-icon type="plus" />
+				@:<div class="ant-upload-text">立即上传</div>
+              @:</div>
+            @:</a-upload>
+            @:<a-modal :visible="previewVisible" :footer="null" @@cancel="cancelImagePreview">
+              @:<img alt="@(@column.ColumnComment)" style="width: 100%" :src="previewImage" />
+            @:</a-modal>
+          @:</div>		  
+}
+}
+if (@column.EffectType == "textarea"){
+if (@column.WhetherRequired == "Y"){
+          @:<a-textarea placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{required: true, message: '请输入@(@column.ColumnComment)！'}]}]" :auto-size="{ minRows: 3, maxRows: 6 }"/>
+}else{
+          @:<a-textarea placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" :auto-size="{ minRows: 3, maxRows: 6 }"/>
+}
+}
+if (@column.EffectType == "texteditor"){
+if (@column.WhetherRequired == "Y"){
+          @:<!-- <a-textarea placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{required: true, message: '请输入@(@column.ColumnComment)！'}]}]" :auto-size="{ minRows: 3, maxRows: 6 }"/> -->
+          @:<antd-editor :uploadConfig="editorUploadConfig" v-model="editorContent" @@onchange="changeEditor" @@oninit="getEditor" :required="true" />
+}else{
+          @:<!-- <a-textarea placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" :auto-size="{ minRows: 3, maxRows: 6 }"/> -->
+          @:<antd-editor :uploadConfig="editorUploadConfig" v-model="editorContent" @@onchange="changeEditor" @@oninit="getEditor" />		  
+}
+}
+if (@column.EffectType == "inputnumber"){
+if (@column.WhetherRequired == "Y"){
+          @:<a-input-number placeholder="请输入@(@column.ColumnComment)" style="width: 100%" v-decorator="['@column.ColumnName', {rules: [{required: true, message: '请输入@(@column.ColumnComment)！'}]}]" />
+}else{
+          @:<a-input-number placeholder="请输入@(@column.ColumnComment)" style="width: 100%" v-decorator="['@column.ColumnName']" />
+}
+}
+if (@column.EffectType == "select"){
+if (@column.WhetherRequired == "Y"){
+          @:<a-select style="width: 100%" placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{ required: true, message: '请选择@(@column.ColumnComment)！' }]}]">
+            @:<a-select-option v-for="(item,index) in @(@column.ColumnName)Data" :key="index" :value="item.code">{{ item.name }}</a-select-option>
+          @:</a-select>
+}else{
+          @:<a-select style="width: 100%" placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{ required: true, message: '请选择@(@column.ColumnComment)！' }]}]">
+            @:<a-select-option v-for="(item,index) in @(@column.ColumnName)Data" :key="index" :value="item.code">{{ item.name }}</a-select-option>
+          @:</a-select>
+}
+}
+if (@column.EffectType == "radio"){
+if (@column.WhetherRequired == "Y"){
+          @:<a-radio-group placeholder="请选择@(@column.ColumnComment)}" v-decorator="['@column.ColumnName',{rules: [{ required: true, message: '请选择@(@column.ColumnComment)！' }]}]" >
+            @:<a-radio v-for="(item,index) in @(@column.ColumnName)Data" :key="index" :value="item.code">{{ item.name }}</a-radio>
+          @:</a-radio-group>
+}else{
+          @:<a-radio-group placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" >
+            @:<a-radio v-for="(item,index) in @(@column.ColumnName)Data" :key="index" :value="item.code">{{ item.name }}</a-radio>
+          @:</a-radio-group>
+}
+}
+if (@column.EffectType == "radiobutton"){
+if (@column.WhetherRequired == "Y"){
+          @:<a-radio-group placeholder="请选择@(@column.ColumnComment)}" v-decorator="['@column.ColumnName',{rules: [{ required: true, message: '请选择@(@column.ColumnComment)！' }]}]" >
+            @:<a-radio-button v-for="(item,index) in @(@column.ColumnName)Data" :key="index" :value="item.code">{{ item.name }}</a-radio-button>
+          @:</a-radio-group>
+}else{
+          @:<a-radio-group placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" >
+            @:<a-radio-button v-for="(item,index) in @(@column.ColumnName)Data" :key="index" :value="item.code">{{ item.name }}</a-radio-button>
+          @:</a-radio-group>
+}
+}
+if (@column.EffectType == "checkbox"){
+if (@column.WhetherRequired == "Y"){
+          @:<a-checkbox-group placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName',{rules: [{ required: true, message: '请选择@(@column.ColumnComment)！' }]}]" >
+            @:<a-checkbox v-for="(item,index) in @(@column.ColumnName)Data" :key="index" :value="item.code">{{ item.name }}</a-checkbox>
+          @:</a-checkbox-group>
+}else{
+          @:<a-checkbox-group placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" >
+            @:<a-checkbox v-for="(item,index) in @(@column.ColumnName)Data" :key="index" :value="item.code">{{ item.name }}</a-checkbox>
+          @:</a-checkbox-group>
+}
+}
+if (@column.EffectType == "switch"){
+if (@column.WhetherRequired == "Y"){
+          @:<a-switch v-decorator="['@column.ColumnName',{rules: [{ required: true, message: '请选择@(@column.ColumnComment)！' }], valuePropName: 'checked'}]" />
+}else{
+          @:<a-switch v-decorator="['@column.ColumnName', { valuePropName: 'checked' }]" />
+}
+}
+if (@column.EffectType == "datepicker"){
+if (@column.WhetherRequired == "Y"){
+          @:<a-date-picker style="width: 100%" placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName',{rules: [{ required: true, message: '请选择@(@column.ColumnComment)！' }]}]" @@change="onChange@(@column.ColumnName)"/>
+}else{
+          @:<a-date-picker style="width: 100%" placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" @@change="onChange@(@column.ColumnName)"/>
+}
+}
+if (@column.EffectType == "fk"){
+if (@column.WhetherRequired == "Y"){
+          @:<a-select style="width: 100%" placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{ required: true, message: '请选择@(@column.ColumnComment)！' }]}]">
+            @:<a-select-option v-for="(item,index) in  @(@column.FkEntityName)Data" :key="index" :value="item.code">{{ item.name }}</a-select-option>
+          @:</a-select>
+}else{
+          @:<a-select style="width: 100%" placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName']">
+            @:<a-select-option v-for="(item,index) in @(@column.FkEntityName)Data" :key="index" :value="item.code">{{ item.name }}</a-select-option>
+          @:</a-select>
+}
+}
+        @:</a-form-item>
+}
+}
+}
+      </a-form>
+    </a-spin>
+  </a-modal>
+</template>
+
+<script>
+@{
+    var editData = 0;
+    var DateQuery = "N";
+}
+@foreach (var column in Model.TableField){
+if (@column.WhetherAddUpdate == "Y"){
+if (@column.EffectType == "datepicker"){
+  DateQuery="Y";
+}
+if(@column.ColumnKey != "True"){
+if(@column.EffectType != "datepicker"){
+  editData++;
+}
+}
+}
+}
+@if(DateQuery == "Y"){
+  @:import moment from 'moment'
+}
+@if(editorColumn != ""){
+  @:import { AntdEditor } from '@@/components'
+}
+@if(editorColumn != "" || fileColumn != "" || imageColumn != "") {
+  @:import { sysFileInfoUploadPublic } from '@@/api/modular/system/fileManage'
+}
+  import {
+@foreach (var column in Model.TableField){
+if(@column.EffectType == "fk" && @column.FkEntityName != "" && @column.FkColumnName != ""){
+    @:@(@Model.ClassName)Fk@(@column.FkEntityName)List,
+}
+}
+    @(@Model.ClassName)Edit
+  } from '@@/api/modular/main/@(@Model.ClassName)Manage'
+  export default {
+@if(editorColumn != "") {
+   @:components: {
+     @:AntdEditor
+   @:},  
+}
+    data () {
+      return {
+        labelCol: {
+          xs: { span: 24 },
+          sm: { span: @(editorColumn != "" ? 3: 5) }
+        },
+        wrapperCol: {
+          xs: { span: 24 },
+          sm: { span: @(editorColumn != "" ? 18: 15) }
+        },
+@foreach (var column in Model.TableField){
+if (@column.WhetherAddUpdate == "Y"){
+if (@column.DictTypeCode != ""){
+if (@column.EffectType == "select" || @column.EffectType == "radio" || @column.EffectType == "radiobutton" || @column.EffectType == "checkbox"){
+        @:@(@column.ColumnName)Data: [],
+}
+}
+if (@column.EffectType == "datepicker"){
+        @:@(@column.ColumnName)DateString: '',
+}
+}
+}
+@foreach (var column in Model.TableField){
+if(@column.EffectType == "fk" && @column.FkEntityName != "" && @column.FkColumnName != ""){
+        @:@(@column.FkEntityName)Data: [],
+}
+}
+        visible: false,
+        confirmLoading: false,
+		form: this.$form.createForm(this),
+@if(fileColumn != ""){
+        @:defaultFileList: [],
+}			
+@if(imageColumn != ""){
+        @:previewVisible: false,
+        @:previewImage: '',
+        @:defaultImageList: [],
+}
+@if(editorColumn != ""){
+        @:editorContent: '',
+        @:editorUploadConfig: {
+        @:  method: 'http',
+        @:  callback: this.uploadEditorImage
+        @:}
+}
+      }
+    },
+    methods: {
+@foreach (var column in Model.TableField){
+if(@column.EffectType == "fk" && @column.FkEntityName != "" && @column.FkColumnName != ""){
+      @:@(@Model.ClassName)Fk@(@column.FkEntityName)List() {
+          @:@(@Model.ClassName)Fk@(@column.FkEntityName)List().then(res => {
+            @:this.@(@column.FkEntityName)Data = res.data
+          @:})
+      @:},
+}
+}
+@if(DateQuery == "Y"){
+      @:moment,
+}
+      // 初始化方法
+      edit (record) {
+        this.visible = true
+@foreach (var column in Model.TableField){
+if (@column.DictTypeCode != ""){
+if (@column.EffectType == "select" || @column.EffectType == "radio" || @column.EffectType == "radiobutton" || @column.EffectType == "checkbox"){
+        @:const @(@column.ColumnName)Option = this.$options
+        @:this.@(@column.ColumnName)Data = @(@column.ColumnName)Option.filters['dictData']('@column.DictTypeCode')
+}
+}
+}
+        setTimeout(() => {
+          this.form.setFieldsValue(
+            {
+@{var editDataColumn = 0;}
+@foreach (var column in Model.TableField){
+if(@column.ColumnKey == "True"){
+              @:@column.ColumnName: record.@column.ColumnName,
+}
+}
+@foreach (var column in Model.TableField){
+if (@column.WhetherAddUpdate == "Y"){
+if (@column.EffectType == "checkbox"){
+editDataColumn++;
+if(editDataColumn != editData) {
+              @:@column.ColumnName: JSON.parse(record.@column.ColumnName),
+}else{
+              @:@column.ColumnName: JSON.parse(record.@column.ColumnName)
+}
+}else if(@column.EffectType == "radio" || @column.EffectType == "radiobutton") {
+editDataColumn++;
+if(editDataColumn != editData){
+              @:@column.ColumnName: record.@(column.ColumnName).toString(),
+}else{
+              @:@column.ColumnName: record.@(column.ColumnName).toString()
+}
+}else if (@column.EffectType != "datepicker" && @column.EffectType != "texteditor" && @column.EffectType != "image" && @column.EffectType != "file"){
+editDataColumn++;
+if(editDataColumn != editData){
+              @:@column.ColumnName: record.@(column.ColumnName) || "",
+}else{
+              @:@column.ColumnName: record.@(column.ColumnName) || ""
+}
+}
+}
+}
+            }
+          )
+@if(editorColumn != ""){
+              @:this.editor.txt.html(record.@(editorColumn))
+              @:this.editorContent = record.@(editorColumn)
+}
+@foreach (var column in Model.TableField){
+if (@column.EffectType == "datepicker" && @column.WhetherAddUpdate == "Y"){
+        // 时间单独处理
+        //if (record.@column.ColumnName != null) {
+        @:this.form.getFieldDecorator('@column.ColumnName', { initialValue: moment(record.@column.ColumnName, 'YYYY-MM-DD') })
+        //}
+        @:this.@(@column.ColumnName)DateString = moment(record.@column.ColumnName).format('YYYY-MM-DD')
+}
+if (@column.EffectType == "file" && @column.WhetherAddUpdate == "Y"){
+       // 文件单独处理
+	   @:// eslint-disable-next-line eqeqeq
+       @:if(record.@column.ColumnName && record.@column.ColumnName != '') {
+	    @:const file = {
+        @:  uid: record.id,
+        @:  name: record.@(column.ColumnName).substring(record.@(column.ColumnName).lastIndexOf("\/") + 1),
+        @:  status: 'done',
+        @:  url: record.@(column.ColumnName)
+        @:}
+        @:this.defaultFileList = [file]	   
+	   @:}
+}
+if (@column.EffectType == "image" && @column.WhetherAddUpdate == "Y"){
+       // 图片单独处理
+	   @:// eslint-disable-next-line eqeqeq
+       @:if(record.@column.ColumnName && record.@column.ColumnName != '') {
+	    @:const img = {
+        @:  uid: record.id,
+        @:  name: record.@(column.ColumnName).substring(record.@(column.ColumnName).lastIndexOf("\/") + 1),
+        @:  status: 'done',
+        @:  url: record.@(column.ColumnName)
+        @:}
+        @:this.defaultImageList = [img]	   
+	   @:}
+}
+if(@column.EffectType == "fk" && @column.FkEntityName != "" && @column.FkColumnName != ""){
+      @:this.@(@Model.ClassName)Fk@(@column.FkEntityName)List()
+}
+}
+        }, 100)
+      },
+@if(fileColumn != ""){
+      @:handleFileChange({ fileList }) {
+      @:  // console.log(fileList)
+      @:  this.defaultFileList = fileList
+      @:},
+      @:handleFileUpload({ file, onError, onSuccess }) {
+      @:  const formData = new FormData()
+      @:  formData.append('pathType', 'Document')
+      @:  formData.append('files', file)
+      @:  sysFileInfoUploadPublic(formData)
+      @:    .then(res => {
+      @:      if (res.success) {
+      @:        const { data } = res
+      @:        // console.log(data)
+      @:        data.forEach(item => {
+      @:          onSuccess({
+      @:            uid: item.id,
+      @:            name: item.name,
+      @:            status: 'done',
+      @:            url: '/api' + item.url
+      @:          })
+      @:        })
+      @:      } else {
+      @:        this.$message.error('上传文件失败：' + res.message)
+      @:      }
+      @:    })
+      @:    .catch(err => {
+      @:      onError(err, file)
+      @:      this.$message.error('上传文件失败：' + err.message)
+      @:    })
+      @:},
+      @:handleFileRemove(file) {
+      @:  const index = this.defaultFileList.indexOf(file)
+      @:  this.defaultFileList.splice(index, 1)
+      @:},
+}	  
+@if(imageColumn != ""){
+      @:beforeUploadImage(file) {
+      @:  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
+      @:  if (!isJpgOrPng) {
+      @:    this.$message.error('You can only upload JPG file!')
+      @:  }
+      @:  const isLt2M = file.size / 1024 / 1024 < 2
+      @:  if (!isLt2M) {
+      @:    this.$message.error('Image must smaller than 2MB!')
+      @:  }
+      @:  return isJpgOrPng && isLt2M
+      @:},
+      @:handleImageChange({ fileList }) {
+      @:  this.defaultImageList = fileList
+      @:},	  
+      @:handleImageRemove(file) {
+      @:  // console.log(file)
+      @:  const index = this.defaultImageList.indexOf(file)
+      @:  this.defaultImageList.splice(index, 1)
+      @:},	  
+      @:handleImagePreview(file) {
+      @:  // console.log(file)
+      @:  this.previewImage = file.url
+      @:  this.previewVisible = true
+      @:},
+      @:cancelImagePreview() {
+      @:  this.previewImage = ''
+      @:  this.previewVisible = false
+      @:},	  
+      @:handleImageUpload({ file, onError, onSuccess }) {
+      @:  const formData = new FormData()
+      @:  formData.append('file', file)
+      @:  sysFileInfoUploadPublic(formData)
+      @:    .then(res => {
+      @:      if (res.success) {
+      @:        const { data } = res
+      @:        // console.log(data)
+      @:        onSuccess({
+      @:          uid: data.id,
+      @:          name: data.name,
+      @:          status: 'done',
+      @:          url: '/api' + data.url
+      @:        })
+      @:      } else {
+      @:        this.$message.error('上传图片失败：' + res.message)
+      @:      }
+      @:    })
+      @:    .catch(err => {
+      @:      onError(err, file)
+      @:      this.$message.error('上传图片失败：' + err.message)
+      @:    })
+      @:},
+}	 
+@if(editorColumn != ""){
+      @:uploadEditorImage(files, insert) {
+      @:  const formData = new FormData()
+	  @:  formData.append('pathType', 'Editor')
+      @:  files.forEach(file => {
+      @:    formData.append('files', file)
+      @:  })
+      @:  sysFileInfoUploadPublic(formData)
+      @:    .then(res => {
+      @:      if (res.success) {
+      @:        const { data } = res
+      @:        // console.log(data)
+      @:        data.forEach(item => {
+      @:          insert('/api' + item.url)
+      @:        })
+      @:      } else {
+      @:        this.$message.error('编辑器上传图片失败：' + res.message)
+      @:      }
+      @:    })
+      @:    .catch(err => {
+      @:      this.$message.error('编辑器上传图片错误：' + err.message)
+      @:    })
+      @:},
+      @:getEditor(editor) {
+      @:  this.editor = editor
+      @:  // console.log(this.editor.required)
+      @:},
+      @:changeEditor(html, ele) {
+      @:  this.editorContent = html
+      @:},
+}	  
+      handleSubmit () {
+        const { form: { validateFields } } = this	
+@if(imageColumn != "" || fileColumn != "") {
+foreach (var column in Model.TableField){
+if (@column.WhetherAddUpdate == "Y"){
+if (@column.EffectType == "image" && @column.WhetherRequired == "Y"){
+      @: if (this.defaultImageList.length === 0) {
+      @:   this.$message.error('请上传一张@(column.ColumnComment)')
+      @:   return
+      @: }
+}
+if (@column.EffectType == "file" && @column.WhetherRequired == "Y"){
+      @: if (this.defaultFileList.length === 0) {
+      @:   this.$message.error('请上传@(column.ColumnComment)')
+      @:   return
+      @: }
+}
+}
+}
+}		
+@if(editorColumn != ""){
+        @:// eslint-disable-next-line eqeqeq
+        @:if (this.editor.required && this.editorContent == '') {
+          @:this.$message.error('请在文本编辑器填写内容')
+          @:return
+        @:}
+}		
+        this.confirmLoading = true
+        validateFields((errors, values) => {
+@if(fileColumn != ""){
+          @:if (this.defaultFileList.length > 0) {
+            @:values.@(fileColumn) = this.defaultFileList[0].url
+          @:} else {
+			@:values.@(fileColumn) = ''
+		  @:}
+}			
+@if(imageColumn != ""){
+          @:if (this.defaultImageList.length > 0) {
+            @:values.@(imageColumn) = this.defaultImageList[0].url
+          @:} else {
+			@:values.@(imageColumn) = ''
+		  @:}
+}		
+@if(editorColumn != ""){
+            @:values.@(editorColumn) = this.editorContent
+}		
+          if (!errors) {
+            for (const key in values) {
+              if (typeof (values[key]) === 'object') {
+                values[key] = JSON.stringify(values[key])
+              }
+            }
+@foreach (var column in Model.TableField){
+if (@column.WhetherAddUpdate == "Y"){
+if (@column.EffectType == "datepicker"){
+            @:values.@column.ColumnName = this.@(@column.ColumnName)DateString
+}
+}
+}
+            @(@Model.ClassName)Edit(values).then((res) => {
+              if (res.success) {
+                this.$message.success('编辑成功')
+                this.confirmLoading = false
+                this.$emit('ok', values)
+                this.handleCancel()
+              } else {
+                this.$message.error('编辑失败：' + JSON.stringify(res.message))
+              }
+            }).finally((res) => {
+              this.confirmLoading = false
+            })
+          } else {
+            this.confirmLoading = false
+          }
+        })
+      },
+@foreach (var column in Model.TableField){
+if (@column.WhetherAddUpdate == "Y"){
+if (@column.EffectType == "datepicker"){
+      @:onChange@(@column.ColumnName)(date, dateString) {
+        @:this.@(@column.ColumnName)DateString = dateString
+      @:},
+}
+}
+}
+      handleCancel () {
+@if(fileColumn != ""){
+        @:this.defaultFileList = []
+}	  
+@if(imageColumn != ""){
+        @:this.previewImage = ''
+        @:this.defaultImageList = []
+}	  
+@if(editorColumn != "") {
+        @:this.editor.txt.clear()
+        @:this.editorContent = ''
+}		  
+        this.form.resetFields()
+        this.visible = false
+      }
+    }
+  }
+</script>
