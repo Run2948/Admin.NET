@@ -6,6 +6,8 @@
 [![star](https://gitee.com/dotnetchina/Furion/badge/star.svg?theme=gvp)](https://gitee.com/dotnetchina/Furion/stargazers)
 [![star](https://gitee.com/Run2948/Admin.NET/badge/star.svg?theme=dark)](https://gitee.com/Run2948/Admin.NET/stargazers)
 [![fork](https://gitee.com/Run2948/Admin.NET/badge/fork.svg?theme=dark)](https://gitee.com/Run2948/Admin.NET/members)
+[![GitHub stars](https://img.shields.io/github/stars/Run2948/Admin.NET?logo=github)](https://github.com/Run2948/Admin.NET/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Run2948/Admin.NET?logo=github)](https://github.com/Run2948/Admin.NET/network)
 [![GitHub license](https://img.shields.io/badge/license-Apache2-yellow)](https://gitee.com/dotnetchina/Furion/blob/master/LICENSE)
 
 </div>
@@ -36,8 +38,29 @@
 
 |                                                                 模板类型                                                                           | 名称                              |                                                                                 版本                                                                                                     | 描述                   |
 | :------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------- |
+| [![nuget](https://shields.io/badge/-Nuget-yellow?cacheSeconds=604800)](https://www.nuget.org/packages/Furion.Extras.Mixed.Template/) | Furion.Extras.Mixed.Template | [![nuget](https://img.shields.io/nuget/v/Furion.Extras.Mixed.Template.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Furion.Extras.Mixed.Template/) | Admin.NET 一体框架模板 |
 |       [![nuget](https://shields.io/badge/-Nuget-yellow?cacheSeconds=604800)](https://www.nuget.org/packages/Furion.Extras.AspNetCore.Template/)        | Furion.Extras.AspNetCore.Template |              [![nuget](https://img.shields.io/nuget/v/Furion.Extras.AspNetCore.Template.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Furion.Extras.AspNetCore.Template/)              | Admin.NET 框架模板  |
 | [![nuget](https://shields.io/badge/-Nuget-yellow?cacheSeconds=604800)](https://www.nuget.org/packages/Furion.Extras.Vue.Template/) | Furion.Extras.Vue.Template | [![nuget](https://img.shields.io/nuget/v/Furion.Extras.Vue.Template.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Furion.Extras.Vue.Template/) | Admin.Vue 框架模板 |
+
+**一体后端脚手架  (femt)**
+
+```
+打开 CMD 或 Powershell 执行dotnet命令
+
+1、安装脚手架
+dotnet new --install Furion.Extras.Mixed.Template
+
+2、更新脚手架
+dotnet new --install Furion.Extras.Mixed.Template
+
+3、查看手脚架
+dotnet new femt -h
+
+4、使用脚手架（生成之后推荐将所有的 nuget 包更新到最新版本）
+dotnet new femt -d 你的数据库类型 -E 是否启用租户（true/false） -n 你的项目名称
+
+其实安装之后可以直接在VS里面进行可视化及创建工程
+```
 
 **后端脚手架  (feat)**
 
@@ -54,7 +77,7 @@ dotnet new --install Furion.Extras.AspNetCore.Template
 dotnet new feat -h
 
 4、使用脚手架（生成之后推荐将所有的 nuget 包更新到最新版本）
-dotnet new feat -n 你的项目名称 -d 你的数据库类型
+dotnet new feat -d 你的数据库类型 -n 你的项目名称
 
 其实安装之后可以直接在VS里面进行可视化及创建工程
 ```
@@ -74,7 +97,7 @@ dotnet new --install Furion.Extras.Vue.Template
 dotnet new fevt -h
 
 4、使用脚手架（生成之后推荐将所有的 nuget 包更新到最新版本）
-dotnet new fevt -n 你的项目名称
+dotnet new fevt -E 是否启用租户（true/false） -n 你的项目名称
 
 ```
 
