@@ -16,6 +16,8 @@ namespace Furion.Extras.Admin.NET.Service
 
         Task<List<string>> GetLoginPermissionList(long userId);
 
+        Task<List<string>> GetAllPermissionList();
+
         Task<dynamic> GetMenu(QueryMenuInput input);
 
         Task<dynamic> GetMenuList([FromQuery] GetMenuListInput input);
