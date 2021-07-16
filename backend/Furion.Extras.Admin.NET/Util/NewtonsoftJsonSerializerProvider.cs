@@ -16,8 +16,9 @@ namespace Furion.Extras.Admin.NET
         /// </summary>
         /// <param name="value"></param>
         /// <param name="jsonSerializerOptions"></param>
+        /// <param name="inherit"></param>
         /// <returns></returns>
-        public string Serialize(object value, object jsonSerializerOptions = null)
+        public string Serialize(object value, object jsonSerializerOptions = null, bool inherit = true)
         {
             return JsonConvert.SerializeObject(value, (jsonSerializerOptions ?? GetSerializerOptions()) as JsonSerializerSettings);
         }
@@ -28,8 +29,9 @@ namespace Furion.Extras.Admin.NET
         /// <typeparam name="T"></typeparam>
         /// <param name="json"></param>
         /// <param name="jsonSerializerOptions"></param>
+        /// <param name="inherit"></param>
         /// <returns></returns>
-        public T Deserialize<T>(string json, object jsonSerializerOptions = null)
+        public T Deserialize<T>(string json, object jsonSerializerOptions = null, bool inherit = true)
         {
             return JsonConvert.DeserializeObject<T>(json, (jsonSerializerOptions ?? GetSerializerOptions()) as JsonSerializerSettings);
         }

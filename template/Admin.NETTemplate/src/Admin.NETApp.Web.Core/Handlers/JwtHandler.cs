@@ -1,8 +1,8 @@
-﻿using Furion.Extras.Admin.NET;
-using Furion.Extras.Admin.NET.Service;
-using Furion;
+﻿using Furion;
 using Furion.Authorization;
 using Furion.DataEncryption;
+using Furion.Extras.Admin.NET;
+using Furion.Extras.Admin.NET.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
