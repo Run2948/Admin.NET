@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(SqlServer)' == 'True' ">
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.8" />
     <PackageReference Include="Zack.EFCore.Batch.MSSQL" Version="1.4.6" />
   </ItemGroup>
   <ItemGroup Condition="'$(MySql)' == 'True' ">
@@ -31,7 +31,7 @@
     <PackageReference Include="Zack.EFCore.Batch.Npgsql" Version="1.4.6" />
   </ItemGroup>
   <ItemGroup Condition="'$(Sqlite)' == 'True' ">
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.8" />
     <PackageReference Include="Zack.EFCore.Batch.Sqlite" Version="1.4.5" />
   </ItemGroup>
   

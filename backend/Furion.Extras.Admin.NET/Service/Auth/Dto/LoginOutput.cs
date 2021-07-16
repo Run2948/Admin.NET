@@ -55,9 +55,9 @@ namespace Furion.Extras.Admin.NET.Service
         public String Phone { get; set; }
 
         /// <summary>
-        /// 电话
+        /// 微信
         /// </summary>
-        public String Tel { get; set; }
+        public String WeChat { get; set; }
 
         /// <summary>
         /// 管理员类型（0超级管理员 1非管理员）
