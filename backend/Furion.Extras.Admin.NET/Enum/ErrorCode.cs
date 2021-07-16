@@ -146,6 +146,12 @@ namespace Furion.Extras.Admin.NET
         D1022,
 
         /// <summary>
+        /// 禁止删除默认租户
+        /// </summary>
+        [ErrorCodeItemMetadata("禁止删除默认租户")]
+        D1023,
+
+        /// <summary>
         /// 父机构不存在
         /// </summary>
         [ErrorCodeItemMetadata("父机构不存在")]

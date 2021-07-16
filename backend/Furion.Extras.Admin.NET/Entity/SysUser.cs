@@ -96,9 +96,9 @@ namespace Furion.Extras.Admin.NET
         public DateTimeOffset? LastLoginTime { get; set; }
 
         /// <summary>
-        /// 管理员类型-超级管理员_1、非管理员_2
+        /// 管理员类型-超级管理员_1、管理员_2、普通账号_3
         /// </summary>
-        [Comment("管理员类型-超级管理员_1、非管理员_2")]
+        [Comment("管理员类型-超级管理员_1、管理员_2、普通账号_3")]
         public AdminType AdminType { get; set; }
 
         /// <summary>
