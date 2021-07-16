@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Furion.Extras.Mixed.Template</id>
+    <version>1.0.30</version>
+    <title>Furion.Extras.Mixed.Template</title>
+    <authors>Run2948</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="file">LICENSE</license>
+    <projectUrl>https://github.com/Run2948/Admin.NET</projectUrl>
+    <repository type="Gitee" url="https://gitee.com/Run2948/Admin.NET" branch="develop" />
+    <icon>icon.png</icon>
+    <description>基于 Furion 框架快速搭建 Mvc/Api 通用权限应用层架构独立模板。</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright © Run2948</copyright>
+    <tags>Furion Extras AspNetCore Mixed Mvc WebApi Admin.NET</tags>
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+  </metadata>
+</package>
