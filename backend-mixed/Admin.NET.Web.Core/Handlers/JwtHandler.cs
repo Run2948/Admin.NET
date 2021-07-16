@@ -1,5 +1,4 @@
-﻿using Furion.Extras.Admin.NET;
-using Furion.Extras.Admin.NET.Service;
+﻿using Admin.NET.Core.Service;
 using Furion;
 using Furion.Authorization;
 using Furion.DataEncryption;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Admin.NET.Core;
 
 namespace Admin.NET.Web.Core
 {
@@ -36,7 +36,7 @@ namespace Admin.NET.Web.Core
         public override async Task<bool> PipelineAsync(AuthorizationHandlerContext context, DefaultHttpContext httpContext)
         {
             // 此处已经自动验证 Jwt Token的有效性了，无需手动验证
-            return await CheckAuthorzieAsync(httpContext);
+            return await CheckAuthorizeAsync(httpContext);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Admin.NET.Web.Core
         /// </summary>
         /// <param name="httpContext"></param>
         /// <returns></returns>
-        private static async Task<bool> CheckAuthorzieAsync(DefaultHttpContext httpContext)
+        private static async Task<bool> CheckAuthorizeAsync(DefaultHttpContext httpContext)
         {
             // 管理员跳过判断
             var userManager = App.GetService<IUserManager>();
@@ -54,12 +54,12 @@ namespace Admin.NET.Web.Core
             var routeName = httpContext.Request.Path.Value[1..].Replace("/", ":");
 
             // 默认路由(获取登录用户信息)
-            var defalutRoute = new List<string>()
+            var defaultRoute = new List<string>()
             {
                 "getLoginUser"
             };
 
-            if (defalutRoute.Contains(routeName)) return true;
+            if (defaultRoute.Contains(routeName)) return true;
 
             // 获取用户权限集合（按钮或API接口）
             var permissionList = await App.GetService<ISysMenuService>().GetLoginPermissionList(userManager.UserId);

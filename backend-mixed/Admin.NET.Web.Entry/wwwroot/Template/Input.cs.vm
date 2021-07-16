@@ -1,5 +1,4 @@
 ﻿using Admin.NET.Core;
-using Furion.Extras.Admin.NET;
 using System;
 using System.ComponentModel.DataAnnotations;
 

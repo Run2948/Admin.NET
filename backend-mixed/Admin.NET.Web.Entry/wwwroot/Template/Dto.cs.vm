@@ -1,5 +1,5 @@
 using System;
-using Furion.Extras.Admin.NET;
+using Admin.NET.Core;
 
 namespace @Model.NameSpace
 {

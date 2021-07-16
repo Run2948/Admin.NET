@@ -15,8 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Admin.NET.Web.Core", "Admin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Admin.NET.Web.Entry", "Admin.NET.Web.Entry\Admin.NET.Web.Entry.csproj", "{D51B2AF6-BA72-4170-878C-82B83E89B163}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Furion.Extras.Admin.NET", "Furion.Extras.Admin.NET\Furion.Extras.Admin.NET.csproj", "{0A4C1F54-4C34-4860-93FC-1F07E4A9F165}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,10 +45,6 @@ Global
 		{D51B2AF6-BA72-4170-878C-82B83E89B163}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D51B2AF6-BA72-4170-878C-82B83E89B163}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D51B2AF6-BA72-4170-878C-82B83E89B163}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A4C1F54-4C34-4860-93FC-1F07E4A9F165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A4C1F54-4C34-4860-93FC-1F07E4A9F165}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A4C1F54-4C34-4860-93FC-1F07E4A9F165}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A4C1F54-4C34-4860-93FC-1F07E4A9F165}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

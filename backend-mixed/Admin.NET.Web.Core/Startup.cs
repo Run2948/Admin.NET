@@ -1,5 +1,5 @@
-﻿using Furion.Extras.Admin.NET;
-using Furion.Extras.Admin.NET.Service;
+﻿using Admin.NET.Core;
+using Admin.NET.Core.Service;
 using Furion;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,7 +22,7 @@ namespace Admin.NET.Web.Core
             services.AddCorsAccessor();
             services.AddRemoteRequest();
             services.AddControllersWithViews()
-                    .AddMvcFilter<RequestActionFilter>()                    
+                    .AddMvcFilter<RequestActionFilter>()
                     .AddNewtonsoftJson(options =>
                     {
                         // 首字母小写(驼峰样式)
