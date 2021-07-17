@@ -51,10 +51,9 @@ namespace Furion.Extras.Admin.NET.Service
             var roleMenuPidsList = await _sysMenuRep.DetachedEntities.Where(u => input.GrantMenuIdList.Contains(u.Id))
                 .Select(u => u.Pids).ToListAsync();
             var roleMenuSplitPids = roleMenuPidsList
-                .SelectMany(u =>
-                    u.Split(',', StringSplitOptions.RemoveEmptyEntries)
-                        .Select(v => long.Parse(v[1..^1]))
-                        .Where(v => v != 0))
+                .SelectMany(u => u.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                .Select(v => long.Parse(v[1..^1]))
+                .Where(v => v != 0))
                 .Union(input.GrantMenuIdList);
 
             var menus = roleMenuSplitPids.Select(u => new SysRoleMenu
