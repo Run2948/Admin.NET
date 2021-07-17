@@ -108,7 +108,7 @@ namespace Admin.NETApp.Web.Core
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<ChatHub>("/hubs/chathub");
-                
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
