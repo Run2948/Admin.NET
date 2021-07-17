@@ -14,19 +14,19 @@
 /**
  * 
  * @export
- * @interface ChageStateDictDataInput
+ * @interface ChangeStateDictDataInput
  */
-export interface ChageStateDictDataInput {
+export interface ChangeStateDictDataInput {
     /**
      * 主键Id
      * @type {number}
-     * @memberof ChageStateDictDataInput
+     * @memberof ChangeStateDictDataInput
      */
     id: any;
     /**
      * 
      * @type {CommonStatus}
-     * @memberof ChageStateDictDataInput
+     * @memberof ChangeStateDictDataInput
      */
     status?: any;
 }

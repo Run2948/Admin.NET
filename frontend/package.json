@@ -6,7 +6,6 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "build:preview": "vue-cli-service build --mode preview",
     "postinstall": "opencollective-postinstall",
     "lint": "vue-cli-service lint"
   },

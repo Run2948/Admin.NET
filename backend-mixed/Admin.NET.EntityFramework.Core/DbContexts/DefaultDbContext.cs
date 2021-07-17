@@ -145,6 +145,7 @@ namespace Admin.NET.EntityFramework.Core
         /// </summary>
         /// <param name="entityBuilder"></param>
         /// <param name="dbContext"></param>
+        /// <param name="onTableTenantId"></param>
         /// <param name="isDeletedKey"></param>
         /// <param name="filterValue"></param>
         /// <returns></returns>

@@ -33,12 +33,7 @@
           "exclude": [
             "src/api/modular/system/tenantManage.js",
             "src/views/system/tenant/*",
-            "src/views/main/map/index.vue",
-            "src/views/main/screenMonitor/img/*",
-            "src/views/main/screenMonitor/*",
-            "src/utils/socket.js",
-            "src/api/modular/system/onlineUserManage.js",
-            "src/views/system/onlineUser/*"
+            "src/views/main/map/index.vue"
           ]
         }
       ]

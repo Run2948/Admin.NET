@@ -166,7 +166,7 @@ namespace Admin.NET.Core.Service
             if (timer == null)
                 AddTimerJob(input);
 
-            // 如果 StartNow 为 flase , 执行 AddTimerJob 并不会启动任务
+            // 如果 StartNow 为 false , 执行 AddTimerJob 并不会启动任务
             SpareTime.Start(input.JobName);
         }
 

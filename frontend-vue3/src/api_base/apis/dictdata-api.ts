@@ -17,7 +17,7 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { AddDictDataInput } from '../models';
-import { ChageStateDictDataInput } from '../models';
+import { ChangeStateDictDataInput } from '../models';
 import { DeleteDictDataInput } from '../models';
 import { UpdateDictDataInput } from '../models';
 import { XnRestfulResultOfObject } from '../models';
@@ -71,11 +71,11 @@ export const DictdataApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary 修改字典值状态
-         * @param {ChageStateDictDataInput} [body] 
+         * @param {ChangeStateDictDataInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        sysDictDataChangeStatusPost: async (body?: ChageStateDictDataInput, options: any = {}): Promise<RequestArgs> => {
+        sysDictDataChangeStatusPost: async (body?: ChangeStateDictDataInput, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/sysDictData/changeStatus`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -398,11 +398,11 @@ export const DictdataApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary 修改字典值状态
-         * @param {ChageStateDictDataInput} [body] 
+         * @param {ChangeStateDictDataInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async sysDictDataChangeStatusPost(body?: ChageStateDictDataInput, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async sysDictDataChangeStatusPost(body?: ChangeStateDictDataInput, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await DictdataApiAxiosParamCreator(configuration).sysDictDataChangeStatusPost(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -511,11 +511,11 @@ export const DictdataApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary 修改字典值状态
-         * @param {ChageStateDictDataInput} [body] 
+         * @param {ChangeStateDictDataInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        sysDictDataChangeStatusPost(body?: ChageStateDictDataInput, options?: any): AxiosPromise<void> {
+        sysDictDataChangeStatusPost(body?: ChangeStateDictDataInput, options?: any): AxiosPromise<void> {
             return DictdataApiFp(configuration).sysDictDataChangeStatusPost(body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -602,12 +602,12 @@ export class DictdataApi extends BaseAPI {
     /**
      * 
      * @summary 修改字典值状态
-     * @param {ChageStateDictDataInput} [body] 
+     * @param {ChangeStateDictDataInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DictdataApi
      */
-    public sysDictDataChangeStatusPost(body?: ChageStateDictDataInput, options?: any) {
+    public sysDictDataChangeStatusPost(body?: ChangeStateDictDataInput, options?: any) {
         return DictdataApiFp(this.configuration).sysDictDataChangeStatusPost(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**

@@ -3,24 +3,24 @@ using System.Threading.Tasks;
 
 namespace Furion.Extras.Admin.NET.Service
 {
-    public interface ISysDictDataService
-    {
-        Task AddDictData(AddDictDataInput input);
+  public interface ISysDictDataService
+  {
+    Task AddDictData(AddDictDataInput input);
 
-        Task ChangeDictDataStatus(ChageStateDictDataInput input);
+    Task ChangeDictDataStatus(ChangeStateDictDataInput input);
 
-        Task DeleteByTypeId(long dictTypeId);
+    Task DeleteByTypeId(long dictTypeId);
 
-        Task DeleteDictData(DeleteDictDataInput input);
+    Task DeleteDictData(DeleteDictDataInput input);
 
-        Task<dynamic> GetDictData([FromQuery] QueryDictDataInput input);
+    Task<dynamic> GetDictData([FromQuery] QueryDictDataInput input);
 
-        Task<dynamic> GetDictDataList([FromQuery] QueryDictDataListInput input);
+    Task<dynamic> GetDictDataList([FromQuery] QueryDictDataListInput input);
 
-        Task<dynamic> GetDictDataListByDictTypeId(long dictTypeId);
+    Task<dynamic> GetDictDataListByDictTypeId(long dictTypeId);
 
-        Task<dynamic> QueryDictDataPageList([FromQuery] DictDataPageInput input);
+    Task<dynamic> QueryDictDataPageList([FromQuery] DictDataPageInput input);
 
-        Task UpdateDictData(UpdateDictDataInput input);
-    }
+    Task UpdateDictData(UpdateDictDataInput input);
+  }
 }

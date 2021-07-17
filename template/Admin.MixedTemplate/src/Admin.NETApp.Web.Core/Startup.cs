@@ -29,9 +29,7 @@ namespace Admin.NETApp.Web.Core
                         options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                     });
             services.AddViewEngine();
-#if (EnableTenant)
             services.AddSignalR();
-#endif
             services.AddSimpleEventBus();
 
             if (App.Configuration["Cache:CacheType"] == "RedisCache")
@@ -109,9 +107,8 @@ namespace Admin.NETApp.Web.Core
 
             app.UseEndpoints(endpoints =>
             {
-#if (EnableTenant)
                 endpoints.MapHub<ChatHub>("/hubs/chathub");
-#endif
+                
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
