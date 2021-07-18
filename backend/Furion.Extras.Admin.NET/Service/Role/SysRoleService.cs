@@ -18,11 +18,6 @@ namespace Furion.Extras.Admin.NET.Service
     [ApiDescriptionSettings(Name = "Role", Order = 149)]
     public class SysRoleService : ISysRoleService, IDynamicApiController, ITransient
     {
-        /// <summary>
-        /// 系统管理员角色编码
-        /// </summary>
-        private const string SYS_MANAGER_ROLE_CODE = "sys_manager_role";
-
         private readonly IRepository<SysRole> _sysRoleRep;  // 角色表仓储
         private readonly IRepository<SysUserRole> _sysUserRoleRep;  // 用户角色表仓储
 
@@ -151,7 +146,7 @@ namespace Furion.Extras.Admin.NET.Service
         public async Task DeleteRole(DeleteRoleInput input)
         {
             var sysRole = await _sysRoleRep.FirstOrDefaultAsync(u => u.Id == input.Id);
-            if (sysRole.Code == SYS_MANAGER_ROLE_CODE)
+            if (sysRole.Code == CommonConst.SYS_MANAGER_ROLE_CODE)
                 throw Oops.Oh(ErrorCode.D1019);
 
             await sysRole.DeleteAsync();
@@ -177,7 +172,7 @@ namespace Furion.Extras.Admin.NET.Service
         public async Task UpdateRole(UpdateRoleInput input)
         {
             var adminRole = await _sysRoleRep.DetachedEntities.FirstOrDefaultAsync(u => u.Id == input.Id);
-            if (adminRole.Code == SYS_MANAGER_ROLE_CODE)
+            if (adminRole.Code == CommonConst.SYS_MANAGER_ROLE_CODE)
                 throw Oops.Oh(ErrorCode.D1020);
 
             var isExist = await _sysRoleRep.DetachedEntities.AnyAsync(u => (u.Name == input.Name || u.Code == input.Code) && u.Id != input.Id);
@@ -208,7 +203,7 @@ namespace Furion.Extras.Admin.NET.Service
         public async Task GrantMenu(GrantRoleMenuInput input)
         {
             var adminRole = await _sysRoleRep.DetachedEntities.FirstOrDefaultAsync(u => u.Id == input.Id);
-            if (!_userManager.SuperAdmin && adminRole.Code == SYS_MANAGER_ROLE_CODE)
+            if (!_userManager.SuperAdmin && adminRole.Code == CommonConst.SYS_MANAGER_ROLE_CODE)
                 throw Oops.Oh(ErrorCode.D1021);
 
             await _sysRoleMenuService.GrantMenu(input);
