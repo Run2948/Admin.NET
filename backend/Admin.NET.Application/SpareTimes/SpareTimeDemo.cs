@@ -7,6 +7,7 @@ namespace Admin.NET.Application
 {
     /// <summary>
     /// 定时任务demo
+    ///   使用需要注册服务：services.AddTaskScheduler();
     /// </summary>
     public class SpareTimeDemo : ISpareTimeWorker
     {
