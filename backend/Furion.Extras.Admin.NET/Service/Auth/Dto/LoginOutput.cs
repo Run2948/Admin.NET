@@ -60,7 +60,7 @@ namespace Furion.Extras.Admin.NET.Service
         public String Tel { get; set; }
 
         /// <summary>
-        /// 管理员类型（0超级管理员 1非管理员）
+        /// 管理员类型（1超级管理员 2管理员 3普通账号）
         /// </summary>
         public int AdminType { get; set; }
 
@@ -108,6 +108,11 @@ namespace Furion.Extras.Admin.NET.Service
         /// 权限信息
         /// </summary>
         public List<string> Permissions { get; set; } = new List<string>();
+
+        /// <summary>
+        /// 系统所有权限信息
+        /// </summary>
+        public List<string> AllPermissions { get; set; } = new List<string>();
 
         /// <summary>
         /// 登录菜单信息---AntDesign版本菜单
