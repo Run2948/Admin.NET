@@ -46,5 +46,10 @@
         /// 在线用户缓存
         /// </summary>
         public const string CACHE_KEY_ONLINE_USER = "onlineuser";
+
+        /// <summary>
+        /// 系统管理员角色编码
+        /// </summary>
+        public const string SYS_MANAGER_ROLE_CODE = "sys_manager_role";
     }
 }
