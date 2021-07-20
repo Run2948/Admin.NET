@@ -156,6 +156,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import TwoStepCaptcha from '@/components/tools/TwoStepCaptcha'
 import { mapActions } from 'vuex'
 import { getSmsCaptcha, getCaptchaOpen } from '@/api/modular/system/loginManage'
@@ -342,7 +343,7 @@ export default {
      * 从 localStorage 中读取信息
      */
     getLocalStorageData () {
-      const account = localStorage.getItem('login_account')
+      const account = Vue.ls.get('LOGIN_ACCOUNT')
       if (account) {
         this.form.setFieldsValue(
           {
@@ -357,9 +358,9 @@ export default {
      */
     setLocalStorageData () {
       if (this.form.getFieldValue('rememberMe')) {
-        localStorage.setItem('login_account', this.form.getFieldValue('account'))
+        Vue.ls.set('LOGIN_ACCOUNT', this.form.getFieldValue('account'))
       } else {
-        localStorage.setItem('login_account', '')
+        Vue.ls.remove('LOGIN_ACCOUNT')
       }
     }
   }
