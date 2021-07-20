@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Furion.Extras.Admin.NET.Options;
 using UAParser;
 
 namespace Furion.Extras.Admin.NET.Service
@@ -96,7 +97,7 @@ namespace Furion.Extras.Admin.NET.Service
             _httpContextAccessor.SigninToSwagger(accessToken);
 
             // 生成刷新Token令牌
-            var refreshToken = JWTEncryption.GenerateRefreshToken(accessToken, 30);
+            var refreshToken = JWTEncryption.GenerateRefreshToken(accessToken, App.GetOptions<RefreshTokenSettingOptions>().ExpiredTime);
 
             // 设置刷新Token令牌
             _httpContextAccessor.HttpContext.Response.Headers["x-access-token"] = refreshToken;
@@ -154,6 +155,9 @@ namespace Furion.Extras.Admin.NET.Service
                 var defaultActiveAppCode = activeApp != null ? activeApp.Code : loginOutput.Apps.FirstOrDefault().Code;
                 loginOutput.Menus = await _sysMenuService.GetLoginMenusAntDesign(userId, defaultActiveAppCode);
             }
+
+            // 更新用户最后登录Ip和时间
+            await _sysUserRep.UpdateIncludeAsync(user, new[] { nameof(SysUser.LastLoginIp), nameof(SysUser.LastLoginTime) });
 
             MessageCenter.Send("create:vislog", new SysLogVis
             {

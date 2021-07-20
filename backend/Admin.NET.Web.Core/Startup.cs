@@ -1,6 +1,7 @@
 ﻿using Furion.Extras.Admin.NET;
 using Furion.Extras.Admin.NET.Service;
 using Furion;
+using Furion.Extras.Admin.NET.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -18,6 +19,7 @@ namespace Admin.NET.Web.Core
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddConfigurableOptions<RefreshTokenSettingOptions>();
             services.AddJwt<JwtHandler>(enableGlobalAuthorize: true);
             services.AddCorsAccessor();
             services.AddRemoteRequest();

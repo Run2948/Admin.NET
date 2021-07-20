@@ -46,7 +46,7 @@
 
   <ItemGroup>
     <Content Include="applicationconfig.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Furion.Extras.AspNetCore.xml" />
   </ItemGroup>

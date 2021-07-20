@@ -252,7 +252,7 @@ namespace Furion.Extras.Admin.NET.Service
         public async Task UpdateUserInfo(UpdateUserBaseInfoInput input)
         {
             var user = input.Adapt<SysUser>();
-            await user.UpdateExcludeAsync(new[] { nameof(SysUser.AdminType) });
+            await user.UpdateExcludeAsync(new[] { nameof(SysUser.AdminType), nameof(SysUser.LastLoginIp), nameof(SysUser.LastLoginTime) });
         }
 
         /// <summary>
