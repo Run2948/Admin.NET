@@ -113,7 +113,7 @@ namespace Furion.Extras.Admin.NET
                         Code = StatusCodes.Status401Unauthorized,
                         Success = false,
                         Data = null,
-                        Message = "401 未经授权，请登录",
+                        Message = "401 登录已过期，请重新登录",
                         Extras = UnifyContext.Take(),
                         Timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
                     }, App.GetOptions<JsonOptions>()?.JsonSerializerOptions);

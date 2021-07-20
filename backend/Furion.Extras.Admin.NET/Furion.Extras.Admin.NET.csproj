@@ -37,7 +37,7 @@
 
   <ItemGroup>
     <Content Include="applicationconfig.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Furion.Extras.Admin.NET.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

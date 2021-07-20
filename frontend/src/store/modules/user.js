@@ -59,9 +59,10 @@ const user = {
             reject(response.message)
             return
           }
-          const result = response.data
-          Vue.ls.set(ACCESS_TOKEN, result, 7 * 24 * 60 * 60 * 1000)
-          commit('SET_TOKEN', result)
+          // 从响应 Header 中读取，处理逻辑移至 request.js 中处理
+          // const result = response.data
+          // Vue.ls.set(ACCESS_TOKEN, result, 7 * 24 * 60 * 60 * 1000)
+          // commit('SET_TOKEN', result)
           resolve()
         // eslint-disable-next-line handle-callback-err
         }).catch(error => {
@@ -120,6 +121,7 @@ const user = {
           Vue.ls.remove(ACCESS_TOKEN)
           Vue.ls.remove(ALL_APPS_MENU)
           Vue.ls.remove(DICT_TYPE_TREE_DATA)
+          Vue.ls.remove('X-Access-Token')
         })
       })
     },
