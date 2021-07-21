@@ -1,6 +1,7 @@
 ﻿using Furion.Extras.Admin.NET;
 using Furion.Extras.Admin.NET.Service;
 using Furion;
+using Furion.Extras.Admin.NET.Options;
 using Furion.Authorization;
 using Furion.DataEncryption;
 using Microsoft.AspNetCore.Authorization;
@@ -20,11 +21,20 @@ namespace Admin.NETApp.Web.Core
         public override async Task HandleAsync(AuthorizationHandlerContext context)
         {
             // 自动刷新Token
-            if (JWTEncryption.AutoRefreshToken(context, context.GetCurrentHttpContext()))
+            if (JWTEncryption.AutoRefreshToken(context, context.GetCurrentHttpContext(),
+                App.GetOptions<JWTSettingsOptions>().ExpiredTime,
+                App.GetOptions<RefreshTokenSettingOptions>().ExpiredTime))
             {
                 await AuthorizeHandleAsync(context);
             }
-            else context.Fail(); // 授权失败
+            else
+            {
+                context.Fail(); // 授权失败
+                DefaultHttpContext currentHttpContext = context.GetCurrentHttpContext();
+                if (currentHttpContext == null)
+                    return;
+                currentHttpContext.SignoutToSwagger();
+            }
         }
 
         /// <summary>

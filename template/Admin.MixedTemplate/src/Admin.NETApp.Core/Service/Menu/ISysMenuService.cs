@@ -15,6 +15,8 @@ namespace Admin.NETApp.Core.Service
         Task<List<AntDesignTreeNode>> GetLoginMenusAntDesign(long userId, string appCode);
 
         Task<List<string>> GetLoginPermissionList(long userId);
+        
+        Task<List<string>> GetAllPermissionList();
 
         Task<dynamic> GetMenu(QueryMenuInput input);
 

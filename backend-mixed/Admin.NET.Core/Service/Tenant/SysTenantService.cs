@@ -106,7 +106,7 @@ namespace Admin.NET.Core.Service
             {
                 TenantId = tenantId,
                 Account = email,
-                Password = "e10adc3949ba59abbe56e057f20f883e",
+                Password = MD5Encryption.Encrypt(CommonConst.DEFAULT_PASSWORD),
                 Name = newTenant.AdminName,
                 NickName = newTenant.AdminName,
                 Email = newTenant.Email,
@@ -137,8 +137,11 @@ namespace Admin.NET.Core.Service
             var tenant = await _sysTenantRep.FirstOrDefaultAsync(u => u.Id == input.Id);
             await _sysTenantRep.DeleteAsync(tenant);
 
-            // 删除与租户相关的表数据
             var users = await Db.GetRepository<SysUser>().Where(u => u.TenantId == input.Id, false, true).ToListAsync();
+            // 超级管理员所在租户认为是默认租户
+            if (users.Any(u => u.AdminType == AdminType.SuperAdmin))
+                throw Oops.Oh(ErrorCode.D1023);
+            // 删除与租户相关的表数据
             users.ForEach(u => { u.Delete(); });
 
             var userIds = users.Select(u => u.Id).ToList();

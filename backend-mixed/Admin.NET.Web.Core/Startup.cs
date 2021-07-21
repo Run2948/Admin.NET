@@ -18,6 +18,7 @@ namespace Admin.NET.Web.Core
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddConfigurableOptions<RefreshTokenSettingOptions>();
             services.AddJwt<JwtHandler>(enableGlobalAuthorize: true);
             services.AddCorsAccessor();
             services.AddRemoteRequest();

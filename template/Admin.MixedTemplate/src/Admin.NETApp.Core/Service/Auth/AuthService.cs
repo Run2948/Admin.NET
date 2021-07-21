@@ -100,7 +100,7 @@ namespace Admin.NETApp.Core.Service
             _httpContextAccessor.SigninToSwagger(accessToken);
 
             // 生成刷新Token令牌
-            var refreshToken = JWTEncryption.GenerateRefreshToken(accessToken, 30);
+            var refreshToken = JWTEncryption.GenerateRefreshToken(accessToken, App.GetOptions<RefreshTokenSettingOptions>().ExpiredTime);
 
             // 设置刷新Token令牌
             _httpContextAccessor.HttpContext.Response.Headers["x-access-token"] = refreshToken;
@@ -142,6 +142,9 @@ namespace Admin.NETApp.Core.Service
             // 权限信息
             loginOutput.Permissions = await _sysMenuService.GetLoginPermissionList(userId);
 
+            // 系统所有权限信息
+            loginOutput.AllPermissions = await _sysMenuService.GetAllPermissionList();
+
             // 数据范围信息(机构Id集合)
             loginOutput.DataScopes = await _sysUserService.GetUserDataScopeIdList(userId);
 
@@ -155,6 +158,9 @@ namespace Admin.NETApp.Core.Service
                 var defaultActiveAppCode = activeApp != null ? activeApp.Code : loginOutput.Apps.FirstOrDefault().Code;
                 loginOutput.Menus = await _sysMenuService.GetLoginMenusAntDesign(userId, defaultActiveAppCode);
             }
+
+            // 更新用户最后登录Ip和时间
+            await _sysUserRep.UpdateIncludeAsync(user, new[] { nameof(SysUser.LastLoginIp), nameof(SysUser.LastLoginTime) });
 
             MessageCenter.Send("create:vislog", new SysLogVis
             {

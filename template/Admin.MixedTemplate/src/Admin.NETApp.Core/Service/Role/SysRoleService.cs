@@ -146,6 +146,9 @@ namespace Admin.NETApp.Core.Service
         public async Task DeleteRole(DeleteRoleInput input)
         {
             var sysRole = await _sysRoleRep.FirstOrDefaultAsync(u => u.Id == input.Id);
+            if (sysRole.Code == CommonConst.SYS_MANAGER_ROLE_CODE)
+                throw Oops.Oh(ErrorCode.D1019);
+
             await sysRole.DeleteAsync();
 
             //级联删除该角色对应的角色-数据范围关联信息
@@ -168,6 +171,10 @@ namespace Admin.NETApp.Core.Service
         [HttpPost("/sysRole/edit")]
         public async Task UpdateRole(UpdateRoleInput input)
         {
+            var adminRole = await _sysRoleRep.DetachedEntities.FirstOrDefaultAsync(u => u.Id == input.Id);
+            if (adminRole.Code == CommonConst.SYS_MANAGER_ROLE_CODE)
+                throw Oops.Oh(ErrorCode.D1020);
+
             var isExist = await _sysRoleRep.DetachedEntities.AnyAsync(u => (u.Name == input.Name || u.Code == input.Code) && u.Id != input.Id);
             if (isExist)
                 throw Oops.Oh(ErrorCode.D1006);
@@ -195,6 +202,10 @@ namespace Admin.NETApp.Core.Service
         [HttpPost("/sysRole/grantMenu")]
         public async Task GrantMenu(GrantRoleMenuInput input)
         {
+            var adminRole = await _sysRoleRep.DetachedEntities.FirstOrDefaultAsync(u => u.Id == input.Id);
+            if (!_userManager.SuperAdmin && adminRole.Code == CommonConst.SYS_MANAGER_ROLE_CODE)
+                throw Oops.Oh(ErrorCode.D1021);
+
             await _sysRoleMenuService.GrantMenu(input);
         }
 

@@ -13,11 +13,13 @@ namespace Admin.NET.Core.Service
     public class SysRoleMenuService : ISysRoleMenuService, ITransient
     {
         private readonly IRepository<SysRoleMenu> _sysRoleMenuRep;  // 角色菜单表仓储
+        private readonly IRepository<SysMenu> _sysMenuRep;  // 菜单表仓储
         private readonly ISysCacheService _sysCacheService;
 
-        public SysRoleMenuService(IRepository<SysRoleMenu> sysRoleMenuRep, ISysCacheService sysCacheService)
+        public SysRoleMenuService(IRepository<SysRoleMenu> sysRoleMenuRep, IRepository<SysMenu> sysMenuRep, ISysCacheService sysCacheService)
         {
             _sysRoleMenuRep = sysRoleMenuRep;
+            _sysMenuRep = sysMenuRep;
             _sysCacheService = sysCacheService;
         }
 
@@ -44,7 +46,16 @@ namespace Admin.NET.Core.Service
             var roleMenus = await _sysRoleMenuRep.DetachedEntities.Where(u => u.SysRoleId == input.Id).ToListAsync();
             await _sysRoleMenuRep.DeleteAsync(roleMenus);
 
-            var menus = input.GrantMenuIdList.Select(u => new SysRoleMenu
+            // 确保对按钮菜单的父级菜单能正确的授权，发现前端构造的数据会丢弃了按钮菜单的父级菜单
+            var roleMenuPidsList = await _sysMenuRep.DetachedEntities.Where(u => input.GrantMenuIdList.Contains(u.Id))
+                .Select(u => u.Pids).ToListAsync();
+            var roleMenuSplitPids = roleMenuPidsList
+                .SelectMany(u => u.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                .Select(v => long.Parse(v[1..^1]))
+                .Where(v => v != 0))
+                .Union(input.GrantMenuIdList);
+
+            var menus = roleMenuSplitPids.Select(u => new SysRoleMenu
             {
                 SysRoleId = input.Id,
                 SysMenuId = u

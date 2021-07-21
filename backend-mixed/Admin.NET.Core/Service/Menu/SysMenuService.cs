@@ -50,7 +50,7 @@ namespace Admin.NET.Core.Service
             var permissions = await _sysCacheService.GetPermission(userId); // 先从缓存里面读取
             if (permissions == null || permissions.Count < 1)
             {
-                if (!_userManager.SuperAdmin)
+                if (!_userManager.SuperAdmin && userId != 0)
                 {
                     var roleIdList = await _sysUserRoleService.GetUserRoleIdList(userId);
                     var menuIdList = await _sysRoleMenuService.GetRoleMenuIdList(roleIdList);
@@ -70,6 +70,17 @@ namespace Admin.NET.Core.Service
             }
             return permissions;
         }
+
+        /// <summary>
+        /// 获取所有权限(按钮权限标识集合)
+        /// </summary>
+        /// <returns></returns>
+        [NonAction]
+        public async Task<List<string>> GetAllPermissionList()
+        {
+            return await GetLoginPermissionList(0);
+        }
+
 
         /// <summary>
         /// 获取用户AntDesign菜单集合
@@ -241,6 +252,7 @@ namespace Admin.NET.Core.Service
 
             // 清除缓存
             await _sysCacheService.DelByPatternAsync(CommonConst.CACHE_KEY_MENU);
+            await _sysCacheService.DelByPatternAsync(CommonConst.CACHE_KEY_PERMISSION);
         }
 
         /// <summary>
@@ -264,6 +276,7 @@ namespace Admin.NET.Core.Service
 
             // 清除缓存
             await _sysCacheService.DelByPatternAsync(CommonConst.CACHE_KEY_MENU);
+            await _sysCacheService.DelByPatternAsync(CommonConst.CACHE_KEY_PERMISSION);
         }
 
         /// <summary>
@@ -351,6 +364,7 @@ namespace Admin.NET.Core.Service
 
             // 清除缓存
             await _sysCacheService.DelByPatternAsync(CommonConst.CACHE_KEY_MENU);
+            await _sysCacheService.DelByPatternAsync(CommonConst.CACHE_KEY_PERMISSION);
         }
 
         /// <summary>
