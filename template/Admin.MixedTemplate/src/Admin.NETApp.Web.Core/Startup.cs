@@ -1,5 +1,6 @@
 ﻿using Admin.NETApp.Core;
 using Admin.NETApp.Core.Service;
+using Admin.NETApp.Core.Options;
 using Furion;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

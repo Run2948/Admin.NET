@@ -1,5 +1,6 @@
 ﻿using Furion.Extras.Admin.NET;
 using Furion.Extras.Admin.NET.Service;
+using Furion.Extras.Admin.NET.Options;
 using Furion;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
