@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Admin.NET.Application</name>
+    </assembly>
+    <members>
+        <member name="T:Admin.NET.Application.Entity.Car">
+            <summary>
+            车辆信息（测试通用增删查改）
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Application.CarService.Add(Admin.NET.Application.Dto.CarAdd)">
+            <summary>
+            新增
+            </summary>
+            <param name="addDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Application.CarService.Print(System.Int64)">
+            <summary>
+            继承通用类之后默认会生成API
+            无用或者不想暴露的通用方法可以重写后打上[NonAction]特性
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Admin.NET.Application.Dto.CarImport">
+            <summary>
+            导入支持各种配置
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Application.Dto.CarImport.IsDeleted">
+            <summary>
+            bool和枚举会自动生成下拉选择框，也可自动定义文本内容
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Application.Dto.CarImport.Filter``1(Magicodes.ExporterAndImporter.Core.Models.ImportResult{``0})">
+            <summary>
+            导入结果筛选器
+            </summary>
+            <param name="importResult"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Application.Dto.CarImport.Filter(System.Collections.Generic.List{Magicodes.ExporterAndImporter.Core.Models.ImporterHeaderInfo})">
+            <summary>
+            导入列头筛选器
+            </summary>
+            <param name="importerHeaderInfos"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Admin.NET.Application.Dto.CarExport">
+            <summary>
+            导出支持各种配置
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Application.Dto.CarExport.Filter(Magicodes.ExporterAndImporter.Core.Models.ExporterHeaderInfo)">
+            <summary>
+            表头筛选器
+            </summary>
+            <param name="exporterHeaderInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Admin.NET.Application.SpareTimeDemo">
+            <summary>
+            定时任务demo
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Application.SpareTimeDemo.ExecSql(Furion.TaskScheduler.SpareTimer,System.Int64)">
+            <summary>
+            3秒后出勤统计
+            </summary>
+            <param name="timer">参数</param>
+            <param name="count">次数</param>
+        </member>
+        <member name="T:Admin.NET.Application.SystemAppService">
+            <summary>
+            系统服务接口
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Application.SystemAppService.GetDescription">
+            <summary>
+            获取系统描述
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
