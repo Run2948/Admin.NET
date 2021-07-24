@@ -62,4 +62,8 @@
     <PackageReference Include="Zack.EFCore.Batch.Sqlite" Version="1.4.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Service\OnlineUser\Dto\" />
+  </ItemGroup>
+
 </Project>

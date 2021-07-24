@@ -1198,9 +1198,39 @@
             用户Id
             </summary>
         </member>
+        <member name="P:Furion.Extras.Admin.NET.OnlineUser.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.OnlineUser.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
         <member name="P:Furion.Extras.Admin.NET.OnlineUser.LastTime">
             <summary>
             最后连接时间
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.OnlineUser.LastLoginIp">
+            <summary>
+            最后登录IP
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.OnlineUser.LastLoginBrowser">
+            <summary>
+            最后登录所用浏览器
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.OnlineUser.LastLoginOs">
+            <summary>
+            最后登录所用系统
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.OnlineUser.TenantId">
+            <summary>
+            租户id
             </summary>
         </member>
         <member name="T:Furion.Extras.Admin.NET.SysOrg">
@@ -2897,6 +2927,17 @@
             断开
             </summary>
             <param name="exception"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Furion.Extras.Admin.NET.IChatClient">
+            <summary>
+            聊天客户端接口定义
+            </summary>
+        </member>
+        <member name="M:Furion.Extras.Admin.NET.IChatClient.ForceExist">
+            <summary>
+            强制下线
+            </summary>
             <returns></returns>
         </member>
         <member name="T:Furion.Extras.Admin.NET.UserManager">
@@ -6736,15 +6777,99 @@
             <param name="openId"></param>
             <returns></returns>
         </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.OnlineUserOutput.ConnectionId">
+            <summary>
+            连接Id
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.OnlineUserOutput.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.OnlineUserOutput.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.OnlineUserOutput.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.OnlineUserOutput.LastTime">
+            <summary>
+            最后连接时间
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.OnlineUserOutput.LastLoginIp">
+            <summary>
+            最后登录IP
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.OnlineUserOutput.LastLoginBrowser">
+            <summary>
+            最后登录所用浏览器
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.OnlineUserOutput.LastLoginOs">
+            <summary>
+            最后登录所用系统
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.OnlineUserOutput.TenantId">
+            <summary>
+            租户id
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.OnlineUserOutput.TenantName">
+            <summary>
+            租户名称
+            </summary>
+        </member>
+        <member name="M:Furion.Extras.Admin.NET.Service.ISysOnlineUserService.QueryOnlineUserPageList(Furion.Extras.Admin.NET.PageInputBase)">
+            <summary>
+            分页获取在线用户信息
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Furion.Extras.Admin.NET.Service.ISysOnlineUserService.List">
+            <summary>
+            获取在线用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Furion.Extras.Admin.NET.Service.ISysOnlineUserService.ForceExist(Furion.Extras.Admin.NET.OnlineUser)">
+            <summary>
+            强制下线
+            </summary>
+            <param name="onlineUser">在线用户信息</param>
+            <returns></returns>
+        </member>
         <member name="T:Furion.Extras.Admin.NET.Service.SysOnlineUserService">
             <summary>
             在线用户服务
             </summary>
         </member>
+        <member name="M:Furion.Extras.Admin.NET.Service.SysOnlineUserService.QueryOnlineUserPageList(Furion.Extras.Admin.NET.PageInputBase)">
+            <summary>
+            分页获取在线用户信息
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:Furion.Extras.Admin.NET.Service.SysOnlineUserService.List">
             <summary>
             获取在线用户信息
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Furion.Extras.Admin.NET.Service.SysOnlineUserService.ForceExist(Furion.Extras.Admin.NET.OnlineUser)">
+            <summary>
+            强制下线
+            </summary>
+            <param name="user"></param>
             <returns></returns>
         </member>
         <member name="T:Furion.Extras.Admin.NET.Service.OrgListInput">
