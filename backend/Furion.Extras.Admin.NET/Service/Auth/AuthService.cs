@@ -126,9 +126,9 @@ namespace Furion.Extras.Admin.NET.Service
             //var ipInfo = IpTool.Search(loginOutput.LastLoginIp);
             //loginOutput.LastLoginAddress = ipInfo.Country + ipInfo.Province + ipInfo.City + "[" + ipInfo.NetworkOperator + "][" + ipInfo.Latitude + ipInfo.Longitude + "]";
 
-            var clent = Parser.GetDefault().Parse(httpContext.Request.Headers["User-Agent"]);
-            loginOutput.LastLoginBrowser = clent.UA.Family + clent.UA.Major;
-            loginOutput.LastLoginOs = clent.OS.Family + clent.OS.Major;
+            var client = Parser.GetDefault().Parse(httpContext.Request.Headers["User-Agent"]);
+            loginOutput.LastLoginBrowser = client.UA.Family + client.UA.Major;
+            loginOutput.LastLoginOs = client.OS.Family + client.OS.Major;
 
             // 员工信息
             loginOutput.LoginEmpInfo = await _sysEmpService.GetEmpInfo(userId);
@@ -179,6 +179,7 @@ namespace Furion.Extras.Admin.NET.Service
         /// </summary>
         /// <returns></returns>
         [HttpGet("/logout")]
+        [AllowAnonymous]
         public async Task LogoutAsync()
         {
             _httpContextAccessor.SignoutToSwagger();

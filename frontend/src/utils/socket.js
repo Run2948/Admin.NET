@@ -1,3 +1,5 @@
+import store from '@/store'
+import { Modal, message } from 'ant-design-vue'
 import * as SignalR from '@microsoft/signalr'
 
 const EventEmitter = require('events')
@@ -50,19 +52,40 @@ class SocketConnection extends EventEmitter {
     if (!this.socket) {
       this.socket = new SignalR.HubConnectionBuilder()
         .configureLogging(SignalR.LogLevel.Information)
-        .withUrl(
-          `/hubs/chathub`, {
-            accessTokenFactory: () => token,
-            skipNegotiation: true,
-            transport: SignalR.HttpTransportType.WebSockets
-          }
-        )
+        .withUrl(`/hubs/chathub`, {
+          accessTokenFactory: () => token,
+          skipNegotiation: true,
+          transport: SignalR.HttpTransportType.WebSockets
+        })
         .build()
 
       this.socket.onclose(async () => {
         this.offline = true
         this.emit('onclose')
         await this._initialize()
+      })
+
+      this.socket.on('ForceExist', () => {
+        // 关闭连接
+        this.socket.stop()
+        store
+          .dispatch('Logout')
+          .then(() => {
+            Modal.success({
+              title: '消息',
+              content: '你已被强制下线',
+              keyboard: false,
+              onOk: () => {
+                window.location.reload()
+              }
+            })
+          })
+          .catch(err => {
+            message.error({
+              title: '错误',
+              description: err.message
+            })
+          })
       })
 
       await this._initialize()
@@ -76,12 +99,12 @@ class SocketConnection extends EventEmitter {
   listen(method) {
     if (this.offline) return
 
-    if (this.listened.some((v) => v === method)) return
+    if (this.listened.some(v => v === method)) return
     this.listened.push(method)
 
     this.one('onstart', () => {
-      this.listened.forEach((method) => {
-        this.socket.on(method, (data) => {
+      this.listened.forEach(method => {
+        this.socket.on(method, data => {
           if (this.options.log) {
             console.log({
               type: 'receive',
@@ -129,7 +152,7 @@ class SocketConnection extends EventEmitter {
     }
 
     // eslint-disable-next-line no-async-promise-executor
-    return new Promise(async (resolve) => this.one('onstart', () => resolve(this.socket.invoke(methodName, ...args))))
+    return new Promise(async resolve => this.one('onstart', () => resolve(this.socket.invoke(methodName, ...args))))
   }
 }
 
@@ -159,16 +182,16 @@ function install(Vue, connection) {
       if (this.$options.sockets) {
         const methods = Object.getOwnPropertyNames(this.$options.sockets)
 
-        methods.forEach((method) => {
+        methods.forEach(method => {
           Socket.listen(method)
 
-          Socket.one(method, (data) => this.$options.sockets[method].call(this, data))
+          Socket.one(method, data => this.$options.sockets[method].call(this, data))
         })
       }
 
       if (this.$options.subscribe) {
         Socket.one('authenticated', () => {
-          this.$options.subscribe.forEach((channel) => {
+          this.$options.subscribe.forEach(channel => {
             Socket.invoke('join', channel)
           })
         })
