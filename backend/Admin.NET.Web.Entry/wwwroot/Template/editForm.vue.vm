@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <a-modal
     title="编辑@(@Model.BusName)"
     :width="900"
@@ -159,6 +159,7 @@ if(@column.EffectType == "fk" && @column.FkEntityName != "" && @column.FkColumnN
           xs: { span: 24 },
           sm: { span: 15 }
         },
+        record: {},
 @foreach (var column in Model.TableField){
 if (@column.WhetherAddUpdate == "Y"){
 if (@column.DictTypeCode != ""){
@@ -197,6 +198,7 @@ if(@column.EffectType == "fk" && @column.FkEntityName != "" && @column.FkColumnN
       // 初始化方法
       edit (record) {
         this.visible = true
+        this.record = record
 @foreach (var column in Model.TableField){
 if (@column.DictTypeCode != ""){
 if (@column.EffectType == "select" || @column.EffectType == "radio" || @column.EffectType == "checkbox"){
@@ -261,20 +263,22 @@ if(@column.EffectType == "fk" && @column.FkEntityName != "" && @column.FkColumnN
             for (const key in values) {
               if (typeof (values[key]) === 'object') {
                 values[key] = JSON.stringify(values[key])
+                this.record[key] = values[key]
               }
             }
 @foreach (var column in Model.TableField){
 if (@column.WhetherAddUpdate == "Y"){
 if (@column.EffectType == "datepicker"){
             @:values.@column.ColumnName = this.@(@column.ColumnName)DateString
+            this.record.@column.ColumnName = this.@(@column.ColumnName)DateString
 }
 }
 }
-            @(@Model.ClassName)Edit(values).then((res) => {
+            @(@Model.ClassName)Edit(this.record).then((res) => {
               if (res.success) {
                 this.$message.success('编辑成功')
                 this.confirmLoading = false
-                this.$emit('ok', values)
+                this.$emit('ok', this.record)
                 this.handleCancel()
               } else {
                 this.$message.error('编辑失败：' + JSON.stringify(res.message))
