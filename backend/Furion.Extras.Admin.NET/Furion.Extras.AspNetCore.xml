@@ -9488,28 +9488,28 @@
             规范化RESTful风格返回值
             </summary>
         </member>
-        <member name="M:Furion.Extras.Admin.NET.XnRestfulResultProvider.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+        <member name="M:Furion.Extras.Admin.NET.XnRestfulResultProvider.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext,Furion.UnifyResult.Internal.ExceptionMetadata)">
             <summary>
             异常返回值
             </summary>
             <param name="context"></param>
+            <param name="metadata"></param>
             <returns></returns>
         </member>
-        <member name="M:Furion.Extras.Admin.NET.XnRestfulResultProvider.OnSucceeded(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+        <member name="M:Furion.Extras.Admin.NET.XnRestfulResultProvider.OnSucceeded(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext,System.Object)">
             <summary>
             成功返回值
             </summary>
             <param name="context"></param>
+            <param name="data"></param>
             <returns></returns>
         </member>
-        <member name="M:Furion.Extras.Admin.NET.XnRestfulResultProvider.OnValidateFailed(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary,System.Collections.Generic.IEnumerable{Furion.DataValidation.ValidateFailedModel},System.String)">
+        <member name="M:Furion.Extras.Admin.NET.XnRestfulResultProvider.OnValidateFailed(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Furion.DataValidation.ValidationMetadata)">
             <summary>
             验证失败返回值
             </summary>
             <param name="context"></param>
-            <param name="modelStates"></param>
-            <param name="validationResults"></param>
-            <param name="validateFailedMessage"></param>
+            <param name="metadata"></param>
             <returns></returns>
         </member>
         <member name="M:Furion.Extras.Admin.NET.XnRestfulResultProvider.OnResponseStatusCodes(Microsoft.AspNetCore.Http.HttpContext,System.Int32,Furion.UnifyResult.UnifyResultStatusCodesOptions)">
