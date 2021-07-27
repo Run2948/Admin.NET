@@ -24,7 +24,10 @@
   },
   "RefreshTokenSetting": {
     "ExpiredTime": 60 // 过期时间，int 类型，单位分钟，默认43200分钟（一般，refresh_token 的有效时间 > 2 * access_token 的有效时间）
-  }, 
+  },
+  "CorsAccessorSettings": {
+    "WithExposedHeaders": [ "access-token", "x-access-token", "Content-Disposition" ]
+  },
   "Cache": {
     "CacheType": "MemoryCache", // RedisCache
     "RedisConnectionString": "127.0.0.1:6379,password=,defaultDatabase=2",
