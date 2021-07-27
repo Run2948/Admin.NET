@@ -9309,13 +9309,13 @@
             <param name="metadata"></param>
             <returns></returns>
         </member>
-        <member name="M:Furion.Extras.Admin.NET.XnRestfulResultProvider.OnResponseStatusCodes(Microsoft.AspNetCore.Http.HttpContext,System.Int32,Furion.UnifyResult.UnifyResultStatusCodesOptions)">
+        <member name="M:Furion.Extras.Admin.NET.XnRestfulResultProvider.OnResponseStatusCodes(Microsoft.AspNetCore.Http.HttpContext,System.Int32,Furion.UnifyResult.UnifyResultSettingsOptions)">
             <summary>
             处理输出状态码
             </summary>
             <param name="context"></param>
             <param name="statusCode"></param>
-            <param name="options"></param>
+            <param name="unifyResultSettings"></param>
             <returns></returns>
         </member>
         <member name="T:Furion.Extras.Admin.NET.XnRestfulResult`1">
