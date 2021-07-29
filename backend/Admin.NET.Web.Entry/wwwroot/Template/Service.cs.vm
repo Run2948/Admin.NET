@@ -65,7 +65,7 @@ if (@column.QueryType == "like"){
 if (@column.EffectType == "fk"){                
                                      @:.Where(input.@column.ColumnName > 0, u => u.@(@column.ColumnName) @column.QueryType input.@(@column.ColumnName))
 }else{
-                                     @:.Where(input.@column.ColumnName!=default(@column.NetType),u => u.@(@column.ColumnName) @column.QueryType input.@(@column.ColumnName))
+                                     @:.Where(u => u.@(@column.ColumnName) @column.QueryType input.@(@column.ColumnName))
 }
 }
 }
