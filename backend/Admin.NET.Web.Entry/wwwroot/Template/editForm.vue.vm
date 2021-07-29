@@ -568,7 +568,7 @@ if (@column.EffectType == "file" && @column.WhetherRequired == "Y"){
 if (@column.WhetherAddUpdate == "Y"){
 if (@column.EffectType == "datepicker"){
             @:values.@column.ColumnName = this.@(@column.ColumnName)DateString
-            this.record.@column.ColumnName = this.@(@column.ColumnName)DateString
+            @:this.record.@column.ColumnName = this.@(@column.ColumnName)DateString
 }
 }
 }
