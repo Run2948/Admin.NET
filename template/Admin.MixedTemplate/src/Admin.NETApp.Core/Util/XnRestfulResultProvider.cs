@@ -2,6 +2,7 @@
 using Furion.DataValidation;
 using Furion.DependencyInjection;
 using Furion.UnifyResult;
+using Furion.UnifyResult.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -10,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Admin.NETApp.Core
+namespace Admin.NET.Core
 {
     /// <summary>
     /// 规范化RESTful风格返回值
@@ -22,18 +23,16 @@ namespace Admin.NETApp.Core
         /// 异常返回值
         /// </summary>
         /// <param name="context"></param>
+        /// <param name="metadata"></param>
         /// <returns></returns>
-        public IActionResult OnException(ExceptionContext context)
+        public IActionResult OnException(ExceptionContext context, ExceptionMetadata metadata)
         {
-            // 解析异常信息
-            var (StatusCode, ErrorCode, Errors) = UnifyContext.GetExceptionMetadata(context);
-
             return new JsonResult(new XnRestfulResult<object>
             {
-                Code = StatusCode,
+                Code = metadata.StatusCode,
                 Success = false,
                 Data = null,
-                Message = Errors,
+                Message = metadata.Errors,
                 Extras = UnifyContext.Take(),
                 Timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
             });
@@ -43,17 +42,10 @@ namespace Admin.NETApp.Core
         /// 成功返回值
         /// </summary>
         /// <param name="context"></param>
+        /// <param name="data"></param>
         /// <returns></returns>
-        public IActionResult OnSucceeded(ActionExecutedContext context)
+        public IActionResult OnSucceeded(ActionExecutedContext context, object data)
         {
-            object data;
-            // 处理内容结果
-            if (context.Result is ContentResult contentResult) data = contentResult.Content;
-            // 处理对象结果
-            else if (context.Result is ObjectResult objectResult) data = objectResult.Value;
-            else if (context.Result is EmptyResult) data = null;
-            else return null;
-
             return new JsonResult(new XnRestfulResult<object>
             {
                 Code = context.Result is EmptyResult ? StatusCodes.Status204NoContent : StatusCodes.Status200OK,  // 处理没有返回值情况 204
@@ -69,18 +61,16 @@ namespace Admin.NETApp.Core
         /// 验证失败返回值
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="modelStates"></param>
-        /// <param name="validationResults"></param>
-        /// <param name="validateFailedMessage"></param>
+        /// <param name="metadata"></param>
         /// <returns></returns>
-        public IActionResult OnValidateFailed(ActionExecutingContext context, ModelStateDictionary modelStates, IEnumerable<ValidateFailedModel> validationResults, string validateFailedMessage)
+        public IActionResult OnValidateFailed(ActionExecutingContext context, ValidationMetadata metadata)
         {
             return new JsonResult(new XnRestfulResult<object>
             {
                 Code = StatusCodes.Status400BadRequest,
                 Success = false,
                 Data = null,
-                Message = validationResults,
+                Message = metadata.ValidationResult,
                 Extras = UnifyContext.Take(),
                 Timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
             });
@@ -91,12 +81,12 @@ namespace Admin.NETApp.Core
         /// </summary>
         /// <param name="context"></param>
         /// <param name="statusCode"></param>
-        /// <param name="options"></param>
+        /// <param name="unifyResultSettings"></param>
         /// <returns></returns>
-        public async Task OnResponseStatusCodes(HttpContext context, int statusCode, UnifyResultStatusCodesOptions options)
+        public async Task OnResponseStatusCodes(HttpContext context, int statusCode, UnifyResultSettingsOptions unifyResultSettings)
         {
             // 设置响应状态码
-            UnifyContext.SetResponseStatusCodes(context, statusCode, options);
+            UnifyContext.SetResponseStatusCodes(context, statusCode, unifyResultSettings);
 
             switch (statusCode)
             {

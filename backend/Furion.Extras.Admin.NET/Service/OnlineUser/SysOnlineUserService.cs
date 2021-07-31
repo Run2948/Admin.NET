@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using Furion.DatabaseAccessor;
 using Furion.DependencyInjection;
 using Furion.DynamicApiController;
@@ -46,7 +46,7 @@ namespace Furion.Extras.Admin.NET.Service
             var pageIndex = input.PageNo;
             var pageSize = input.PageSize;
 
-            var onlineUsers = await _sysCacheService.GetAsync<List<OnlineUser>>(CommonConst.CACHE_KEY_ONLINE_USER) ?? new List<OnlineUser>();
+            var onlineUsers = await _sysCacheService.GetAsync<List<SysOnlineUser>>(CommonConst.CACHE_KEY_ONLINE_USER) ?? new List<SysOnlineUser>();
             var onlineUserOutputs = onlineUsers
                 .Where(!_userManager.SuperAdmin, o => o.TenantId == _userManager.User.TenantId)
                 .Where(!string.IsNullOrWhiteSpace(input.SearchValue), o => o.Account.Contains(input.SearchValue) || o.Name.Contains(input.SearchValue))
@@ -80,7 +80,7 @@ namespace Furion.Extras.Admin.NET.Service
         [HttpGet("/sysOnlineUser/list")]
         public async Task<List<OnlineUserOutput>> List()
         {
-            var onlineUsers = await _sysCacheService.GetAsync<List<OnlineUser>>(CommonConst.CACHE_KEY_ONLINE_USER) ?? new List<OnlineUser>();
+            var onlineUsers = await _sysCacheService.GetAsync<List<SysOnlineUser>>(CommonConst.CACHE_KEY_ONLINE_USER) ?? new List<SysOnlineUser>();
             var onlineUserOutputs = onlineUsers
                 .Where(!_userManager.SuperAdmin, o => o.TenantId == _userManager.User.TenantId)
                 .Select(o => o.Adapt<OnlineUserOutput>())
@@ -99,7 +99,7 @@ namespace Furion.Extras.Admin.NET.Service
         /// <param name="user"></param>
         /// <returns></returns>
         [HttpPost("/sysOnlineUser/forceExist")]
-        public async Task ForceExist([FromBody] OnlineUser user)
+        public async Task ForceExist([FromBody] SysOnlineUser user)
         {
             await _chatHubContext.Clients.Client(user.ConnectionId).ForceExist();
         }

@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Admin.NET.Application</name>
+    </assembly>
+    <members>
+        <member name="T:Admin.NET.Application.SpareTimeDemo">
+            <summary>
+            定时任务demo
+              使用需要注册服务：services.AddTaskScheduler();
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Application.SpareTimeDemo.ExecSql(Furion.TaskScheduler.SpareTimer,System.Int64)">
+            <summary>
+            3秒后出勤统计
+            </summary>
+            <param name="timer">参数</param>
+            <param name="count">次数</param>
+        </member>
+        <member name="T:Admin.NET.Application.SpareTimeJobService">
+            <summary>
+            定时任务
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Application.SpareTimeJobService.InitJob(System.String)">
+            <summary>
+            初始化一个简单任务
+            </summary>
+            <param name="jobName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Application.SpareTimeJobService.InitScopedJob(System.String)">
+            <summary>
+            初始化一个简单任务，创建一个新的作用域进行数据库操作或解析服务
+            </summary>
+            <param name="jobName"></param>
+        </member>
+        <member name="M:Admin.NET.Application.SpareTimeJobService.InitCronJob(System.String,System.String)">
+            <summary>
+            初始化一个 Cron 表达式任务，5秒执行一次
+            </summary>
+            <param name="cron"></param>
+            <param name="jobName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Application.SpareTimeJobService.StartJob(System.String)">
+            <summary>
+            开始一个简单任务
+            </summary>
+            <param name="jobName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Application.SpareTimeJobService.StopJob(System.String)">
+            <summary>
+            停止一个简单任务
+            </summary>
+            <param name="jobName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Application.SpareTimeJobService.CancelJob(System.String)">
+            <summary>
+            取消一个简单任务
+            </summary>
+            <param name="jobName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Application.SpareTimeJobService.GetWorkers">
+            <summary>
+            获取所有任务信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Application.SpareTimeJobService.InitSerialJob(System.String)">
+            <summary>
+            串行执行任务
+            </summary>
+            <param name="jobName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Application.SpareTimeJobService.TestExceptionWorker">
+            <summary>
+            测试异常任务
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Application.SpareTimeJobService.DoOnce">
+            <summary>
+            测试只执行一次
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Application.SpareTimeJobService.DoIt">
+            <summary>
+            测试模拟后台执行
+            </summary>
+        </member>
+        <member name="T:Admin.NET.Application.SystemAppService">
+            <summary>
+            系统服务接口
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Application.SystemAppService.GetDescription">
+            <summary>
+            获取系统描述
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

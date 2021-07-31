@@ -13,9 +13,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Admin.NET.Core.Options;
+using Furion;
 using UAParser;
 
-namespace Admin.NETApp.Core.Service
+namespace Admin.NET.Core.Service
 {
     /// <summary>
     /// 登录授权相关服务
@@ -86,18 +88,14 @@ namespace Admin.NETApp.Core.Service
             var accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>
             {
                 { ClaimConst.CLAINM_USERID, user.Id },
-#if (EnableTenanttrue)
                 { ClaimConst.TENANT_ID, user.TenantId },
-#else
-                { ClaimConst.TENANT_ID, "" },
-#endif
                 { ClaimConst.CLAINM_ACCOUNT, user.Account },
                 { ClaimConst.CLAINM_NAME, user.Name },
                 { ClaimConst.CLAINM_SUPERADMIN, user.AdminType },
             });
 
             // 设置Swagger自动登录
-            _httpContextAccessor.SigninToSwagger(accessToken);
+            _httpContextAccessor.HttpContext.SigninToSwagger(accessToken);
 
             // 生成刷新Token令牌
             var refreshToken = JWTEncryption.GenerateRefreshToken(accessToken, App.GetOptions<RefreshTokenSettingOptions>().ExpiredTime);
@@ -129,9 +127,9 @@ namespace Admin.NETApp.Core.Service
             //var ipInfo = IpTool.Search(loginOutput.LastLoginIp);
             //loginOutput.LastLoginAddress = ipInfo.Country + ipInfo.Province + ipInfo.City + "[" + ipInfo.NetworkOperator + "][" + ipInfo.Latitude + ipInfo.Longitude + "]";
 
-            var clent = Parser.GetDefault().Parse(httpContext.Request.Headers["User-Agent"]);
-            loginOutput.LastLoginBrowser = clent.UA.Family + clent.UA.Major;
-            loginOutput.LastLoginOs = clent.OS.Family + clent.OS.Major;
+            var client = Parser.GetDefault().Parse(httpContext.Request.Headers["User-Agent"]);
+            loginOutput.LastLoginBrowser = client.UA.Family + client.UA.Major;
+            loginOutput.LastLoginOs = client.OS.Family + client.OS.Major;
 
             // 员工信息
             loginOutput.LoginEmpInfo = await _sysEmpService.GetEmpInfo(userId);
@@ -182,9 +180,10 @@ namespace Admin.NETApp.Core.Service
         /// </summary>
         /// <returns></returns>
         [HttpGet("/logout")]
+        [AllowAnonymous]
         public async Task LogoutAsync()
         {
-            _httpContextAccessor.SignoutToSwagger();
+            _httpContextAccessor.HttpContext.SignoutToSwagger();
             //_httpContextAccessor.HttpContext.Response.Headers["access-token"] = "invalid token";
 
             MessageCenter.Send("create:vislog", new SysLogVis

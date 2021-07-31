@@ -81,7 +81,7 @@ namespace Admin.NET.EntityFramework.Core
             var userId = App.User.FindFirst(ClaimConst.CLAINM_USERID)?.Value;
             var userName = App.User.FindFirst(ClaimConst.CLAINM_ACCOUNT)?.Value;
 
-            foreach (var entity in entities)
+foreach (var entity in entities)
             {
                 if (entity.Entity.GetType().IsSubclassOf(typeof(DEntityTenant)))
                 {
@@ -102,9 +102,15 @@ namespace Admin.NET.EntityFramework.Core
                                 obj.CreatedUserName = userName;
                             }
                             break;
-                        // 排除租户Id
                         case EntityState.Modified:
-                            entity.Property(nameof(Entity.TenantId)).IsModified = false;
+                            // 排除租户Id
+                            entity.Property(nameof(DEntityTenant.TenantId)).IsModified = false;
+                            // 排除创建人
+                            entity.Property(nameof(DEntityTenant.CreatedUserId)).IsModified = false;
+                            entity.Property(nameof(DEntityTenant.CreatedUserName)).IsModified = false;
+                            // 排除创建日期
+                            entity.Property(nameof(DEntityTenant.UpdatedTime)).IsModified = false;
+
                             obj.UpdatedTime = DateTimeOffset.Now;
                             if (!string.IsNullOrEmpty(userId))
                             {
@@ -129,6 +135,12 @@ namespace Admin.NET.EntityFramework.Core
                     }
                     else if (entity.State == EntityState.Modified)
                     {
+                        // 排除创建人
+                        entity.Property(nameof(DEntityBase.CreatedUserId)).IsModified = false;
+                        entity.Property(nameof(DEntityBase.CreatedUserName)).IsModified = false;
+                        // 排除创建日期
+                        entity.Property(nameof(DEntityBase.UpdatedTime)).IsModified = false;
+
                         obj.UpdatedTime = DateTimeOffset.Now;
                         if (!string.IsNullOrEmpty(userId))
                         {

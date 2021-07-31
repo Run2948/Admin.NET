@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Admin.NET.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Admin.NET.Core.Car">
+            <summary>
+            车辆信息（测试通用增删查改）
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.Car.CarName">
+            <summary>
+            车名
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.Car.CarNo">
+            <summary>
+            车号
+            </summary>
+        </member>
+    </members>
+</doc>

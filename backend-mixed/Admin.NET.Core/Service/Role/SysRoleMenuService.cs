@@ -1,4 +1,5 @@
-﻿using Furion.DatabaseAccessor;
+﻿using System;
+using Furion.DatabaseAccessor;
 using Furion.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

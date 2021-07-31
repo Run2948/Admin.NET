@@ -23,6 +23,6 @@ namespace Furion.Extras.Admin.NET.Service
         /// </summary>
         /// <param name="onlineUser">在线用户信息</param>
         /// <returns></returns>
-        Task ForceExist(OnlineUser onlineUser);
+        Task ForceExist(SysOnlineUser onlineUser);
     }
 }

@@ -70,13 +70,19 @@ service.interceptors.response.use((response) => {
       Modal.error({
         title: '提示：',
         content: resData.message,
+        keyboard: false,
         okText: '重新登录',
         onOk: () => {
-          Vue.ls.remove(ACCESS_TOKEN)
           store.dispatch('SetHasError', false)
           window.location.reload()
         }
       })
+
+      // 授权过期，清理本地缓存的记录，不论 Modal.error 的 onOk 是否确认，先清理
+      // 否则会在没按 OK 时，刷新网页或者重新访问，都会弹出“未授权的提示框”
+      // 这样的调整后，TOKEN 为空直接重定向，SetHasError 的设置和判断其实已经用不上
+      Vue.ls.remove(ACCESS_TOKEN)
+      Vue.ls.remove('X-Access-Token')
       store.dispatch('SetHasError', true)
     }
     if (code === 1013002 || code === 1016002 || code === 1015002) {

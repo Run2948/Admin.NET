@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Admin.NET.Core.Options;
+using Furion;
 using UAParser;
 
 namespace Admin.NET.Core.Service
@@ -93,7 +95,7 @@ namespace Admin.NET.Core.Service
             });
 
             // 设置Swagger自动登录
-            _httpContextAccessor.SigninToSwagger(accessToken);
+            _httpContextAccessor.HttpContext.SigninToSwagger(accessToken);
 
             // 生成刷新Token令牌
             var refreshToken = JWTEncryption.GenerateRefreshToken(accessToken, App.GetOptions<RefreshTokenSettingOptions>().ExpiredTime);
@@ -125,9 +127,9 @@ namespace Admin.NET.Core.Service
             //var ipInfo = IpTool.Search(loginOutput.LastLoginIp);
             //loginOutput.LastLoginAddress = ipInfo.Country + ipInfo.Province + ipInfo.City + "[" + ipInfo.NetworkOperator + "][" + ipInfo.Latitude + ipInfo.Longitude + "]";
 
-            var clent = Parser.GetDefault().Parse(httpContext.Request.Headers["User-Agent"]);
-            loginOutput.LastLoginBrowser = clent.UA.Family + clent.UA.Major;
-            loginOutput.LastLoginOs = clent.OS.Family + clent.OS.Major;
+            var client = Parser.GetDefault().Parse(httpContext.Request.Headers["User-Agent"]);
+            loginOutput.LastLoginBrowser = client.UA.Family + client.UA.Major;
+            loginOutput.LastLoginOs = client.OS.Family + client.OS.Major;
 
             // 员工信息
             loginOutput.LoginEmpInfo = await _sysEmpService.GetEmpInfo(userId);
@@ -178,9 +180,10 @@ namespace Admin.NET.Core.Service
         /// </summary>
         /// <returns></returns>
         [HttpGet("/logout")]
+        [AllowAnonymous]
         public async Task LogoutAsync()
         {
-            _httpContextAccessor.SignoutToSwagger();
+            _httpContextAccessor.HttpContext.SignoutToSwagger();
             //_httpContextAccessor.HttpContext.Response.Headers["access-token"] = "invalid token";
 
             MessageCenter.Send("create:vislog", new SysLogVis
