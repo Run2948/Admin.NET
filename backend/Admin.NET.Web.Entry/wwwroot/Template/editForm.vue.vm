@@ -263,7 +263,9 @@ if(@column.EffectType == "fk" && @column.FkEntityName != "" && @column.FkColumnN
             for (const key in values) {
               if (typeof (values[key]) === 'object') {
                 values[key] = JSON.stringify(values[key])
-                this.record[key] = values[key]
+                 this.record[key] = values[key]
+              }else{
+                  this.record[key] = values[key]
               }
             }
 @foreach (var column in Model.TableField){
