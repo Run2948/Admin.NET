@@ -94,7 +94,7 @@ namespace Furion.Extras.Admin.NET.Service
             });
 
             // 设置Swagger自动登录
-            _httpContextAccessor.SigninToSwagger(accessToken);
+            _httpContextAccessor.HttpContext.SigninToSwagger(accessToken);
 
             // 生成刷新Token令牌
             var refreshToken = JWTEncryption.GenerateRefreshToken(accessToken, App.GetOptions<RefreshTokenSettingOptions>().ExpiredTime);
@@ -182,7 +182,7 @@ namespace Furion.Extras.Admin.NET.Service
         [AllowAnonymous]
         public async Task LogoutAsync()
         {
-            _httpContextAccessor.SignoutToSwagger();
+            _httpContextAccessor.HttpContext.SignoutToSwagger();
             //_httpContextAccessor.HttpContext.Response.Headers["access-token"] = "invalid token";
 
             MessageCenter.Send("create:vislog", new SysLogVis
