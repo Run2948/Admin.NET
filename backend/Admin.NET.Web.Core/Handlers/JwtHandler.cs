@@ -6,6 +6,7 @@ using Furion.DataEncryption;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Furion.Extras.Admin.NET.Options;
 
@@ -72,10 +73,12 @@ namespace Admin.NET.Web.Core
             if (defalutRoute.Contains(routeName)) return true;
 
             // 获取用户权限集合（按钮或API接口）
+            var allPermissionList = await App.GetService<ISysMenuService>().GetAllPermissionList();
             var permissionList = await App.GetService<ISysMenuService>().GetLoginPermissionList(userManager.UserId);
 
             // 检查授权
-            return permissionList.Contains(routeName);
+            // 菜单中没有配置按钮权限，则不限制
+            return allPermissionList.All(u => u != routeName) || permissionList.Contains(routeName);
         }
     }
 }
