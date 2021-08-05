@@ -1,4 +1,4 @@
-﻿using Furion.DatabaseAccessor;
+using Furion.DatabaseAccessor;
 using Furion.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -29,7 +29,7 @@ namespace Furion.Extras.Admin.NET.Service
         /// <returns></returns>
         public async Task<List<long>> GetUserRoleIdList(long userId)
         {
-            return await _sysUserRoleRep.DetachedEntities.Where(u => u.SysUserId == userId).Select(u => u.SysRoleId).ToListAsync();
+            return await _sysUserRoleRep.DetachedEntities.Where(u => u.SysRole.Status == CommonStatus.ENABLE).Where(u => u.SysUserId == userId).Select(u => u.SysRoleId).ToListAsync();
         }
 
         /// <summary>
