@@ -29,7 +29,7 @@ namespace Admin.NET.Core.Service
         /// <returns></returns>
         public async Task<List<long>> GetUserRoleIdList(long userId)
         {
-            return await _sysUserRoleRep.DetachedEntities.Where(u => u.SysUserId == userId).Select(u => u.SysRoleId).ToListAsync();
+            return await _sysUserRoleRep.DetachedEntities.Where(u => u.SysRole.Status == CommonStatus.ENABLE).Where(u => u.SysUserId == userId).Select(u => u.SysRoleId).ToListAsync();
         }
 
         /// <summary>
