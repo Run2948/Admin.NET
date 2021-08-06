@@ -120,7 +120,7 @@ namespace Admin.NETApp.EntityFramework.Core
                             entity.Property(nameof(DEntityTenant.CreatedUserId)).IsModified = false;
                             entity.Property(nameof(DEntityTenant.CreatedUserName)).IsModified = false;
                             // 排除创建日期
-                            entity.Property(nameof(DEntityTenant.UpdatedTime)).IsModified = false;
+                            entity.Property(nameof(DEntityTenant.CreatedTime)).IsModified = false;
 
                             obj.UpdatedTime = DateTimeOffset.Now;
                             obj.UpdatedUserId = long.Parse(userId);
@@ -148,7 +148,7 @@ namespace Admin.NETApp.EntityFramework.Core
                         entity.Property(nameof(DEntityBase.CreatedUserId)).IsModified = false;
                         entity.Property(nameof(DEntityBase.CreatedUserName)).IsModified = false;
                         // 排除创建日期
-                        entity.Property(nameof(DEntityBase.UpdatedTime)).IsModified = false;
+                        entity.Property(nameof(DEntityBase.CreatedTime)).IsModified = false;
 
                         obj.UpdatedTime = DateTimeOffset.Now;
                         obj.UpdatedUserId = long.Parse(userId);
