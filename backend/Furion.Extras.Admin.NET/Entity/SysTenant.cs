@@ -37,7 +37,7 @@ namespace Furion.Extras.Admin.NET
         /// 电子邮箱
         /// </summary>
         [Comment("电子邮箱")]
-        [MaxLength(20)]
+        [MaxLength(50)]
         public string Email { get; set; }
 
         /// <summary>
