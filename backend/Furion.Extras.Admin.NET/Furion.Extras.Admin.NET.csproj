@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <Version>1.0.29</Version>
+    <Version>1.0.30</Version>
     <Authors>左怀军/zuohuaijun</Authors>
     <Company>Dilon Co.,Ltd.</Company>
     <Product>Furion.Extras.Admin.NET</Product>
@@ -45,15 +45,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Furion" Version="2.16.9" />
-    <PackageReference Include="Furion.Extras.Authentication.JwtBearer" Version="2.16.9" />
-    <PackageReference Include="Furion.Extras.Logging.Serilog" Version="2.16.9" />
-    <PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="2.16.9" />
-    <PackageReference Include="Magicodes.IE.Excel" Version="2.5.4.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.8" />
+    <PackageReference Include="Furion" Version="2.17.5" />
+    <PackageReference Include="Furion.Extras.Authentication.JwtBearer" Version="2.17.5" />
+    <PackageReference Include="Furion.Extras.Logging.Serilog" Version="2.17.5" />
+    <PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="2.17.5" />
+    <PackageReference Include="Magicodes.IE.Excel" Version="2.5.5.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.9" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="5.0.1" />
-    <PackageReference Include="MiniExcel" Version="0.17.2" />
-    <PackageReference Include="OnceMi.AspNetCore.OSS" Version="1.0.6" />
+    <PackageReference Include="MiniExcel" Version="0.17.3" />
+    <PackageReference Include="OnceMi.AspNetCore.OSS" Version="1.0.8" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.12" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
