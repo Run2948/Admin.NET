@@ -1,4 +1,4 @@
-﻿namespace Furion.Extras.Admin.NET.Service
+namespace Furion.Extras.Admin.NET.Service
 {
     /// <summary>
     /// 上传文件参数
@@ -25,7 +25,7 @@
     {
     }
 
-    public class QueryFileInoInput : BaseId
+    public class QueryFileInfoInput : BaseId
     {
     }
 }
