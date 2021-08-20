@@ -114,7 +114,7 @@ namespace Furion.Extras.Admin.NET.Service
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet("/sysFileInfo/detail")]
-        public async Task<SysFile> GetFileInfo([FromQuery] QueryFileInoInput input)
+        public async Task<SysFile> GetFileInfo([FromQuery] QueryFileInfoInput input)
         {
             var file = await _sysFileInfoRep.FirstOrDefaultAsync(u => u.Id == input.Id);
             if (file == null)
@@ -128,7 +128,7 @@ namespace Furion.Extras.Admin.NET.Service
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet("/sysFileInfo/preview")]
-        public async Task<IActionResult> PreviewFileInfo([FromQuery] QueryFileInoInput input)
+        public async Task<IActionResult> PreviewFileInfo([FromQuery] QueryFileInfoInput input)
         {
             return await DownloadFileInfo(input);
         }
@@ -151,7 +151,7 @@ namespace Furion.Extras.Admin.NET.Service
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet("/sysFileInfo/download")]
-        public async Task<IActionResult> DownloadFileInfo([FromQuery] QueryFileInoInput input)
+        public async Task<IActionResult> DownloadFileInfo([FromQuery] QueryFileInfoInput input)
         {
             var file = await GetFileInfo(input);
             var fileName = HttpUtility.UrlEncode(file.FileOriginName, Encoding.GetEncoding("UTF-8"));
