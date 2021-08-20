@@ -5477,14 +5477,14 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Furion.Extras.Admin.NET.Service.SysFileService.GetFileInfo(Furion.Extras.Admin.NET.Service.QueryFileInoInput)">
+        <member name="M:Furion.Extras.Admin.NET.Service.SysFileService.GetFileInfo(Furion.Extras.Admin.NET.Service.QueryFileInfoInput)">
             <summary>
             获取文件详情
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Furion.Extras.Admin.NET.Service.SysFileService.PreviewFileInfo(Furion.Extras.Admin.NET.Service.QueryFileInoInput)">
+        <member name="M:Furion.Extras.Admin.NET.Service.SysFileService.PreviewFileInfo(Furion.Extras.Admin.NET.Service.QueryFileInfoInput)">
             <summary>
             预览文件
             </summary>
@@ -5498,7 +5498,7 @@
             <param name="file"></param>
             <returns></returns>
         </member>
-        <member name="M:Furion.Extras.Admin.NET.Service.SysFileService.DownloadFileInfo(Furion.Extras.Admin.NET.Service.QueryFileInoInput)">
+        <member name="M:Furion.Extras.Admin.NET.Service.SysFileService.DownloadFileInfo(Furion.Extras.Admin.NET.Service.QueryFileInfoInput)">
             <summary>
             下载文件
             </summary>
