@@ -11,45 +11,45 @@
 @foreach (var column in Model.TableField){
 if(@column.ColumnKey == "True"){
         @:<a-form-item v-show="false"><a-input v-decorator="['@column.ColumnName']" /></a-form-item>
-}else{
+} else {
 if (@column.WhetherAddUpdate == "Y"){
 if (@column.EffectType == "select" || @column.EffectType == "radio" || @column.EffectType == "checkbox"){
         @:<a-form-item label="@column.ColumnComment" :labelCol="labelCol" :wrapperCol="wrapperCol">
-}else{
+} else {
         @:<a-form-item label="@column.ColumnComment" :labelCol="labelCol" :wrapperCol="wrapperCol" has-feedback>
 }
 if (@column.EffectType == "user"){
 if (@column.WhetherRequired == "Y"){
           @:<user-select placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{required: true, message: '请输入@(@column.ColumnComment)！'}]}]" />
-}else{
+} else {
           @:<user-select placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" />
 }
 }
 if (@column.EffectType == "depart"){
 if (@column.WhetherRequired == "Y"){
           @:<depart-select placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{required: true, message: '请输入@(@column.ColumnComment)！'}]}]" />
-}else{
+} else {
           @:<depart-select placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" />
 }
 }
 if (@column.EffectType == "input"){
 if (@column.WhetherRequired == "Y"){
           @:<a-input placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{required: true, message: '请输入@(@column.ColumnComment)！'}]}]" />
-}else{
+} else {
           @:<a-input placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" />
 }
 }
 if (@column.EffectType == "textarea"){
 if (@column.WhetherRequired == "Y"){
           @:<a-textarea placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{required: true, message: '请输入@(@column.ColumnComment)！'}]}]" :auto-size="{ minRows: 3, maxRows: 6 }"/>
-}else{
+} else {
           @:<a-textarea placeholder="请输入@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" :auto-size="{ minRows: 3, maxRows: 6 }"/>
 }
 }
 if (@column.EffectType == "inputnumber"){
 if (@column.WhetherRequired == "Y"){
           @:<a-input-number placeholder="请输入@(@column.ColumnComment)" style="width: 100%" v-decorator="['@column.ColumnName', {rules: [{required: true, message: '请输入@(@column.ColumnComment)！'}]}]" />
-}else{
+} else {
           @:<a-input-number placeholder="请输入@(@column.ColumnComment)" style="width: 100%" v-decorator="['@column.ColumnName']" />
 }
 }
@@ -58,7 +58,7 @@ if (@column.WhetherRequired == "Y"){
           @:<a-select style="width: 100%" placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{ required: true, message: '请选择@(@column.ColumnComment)！' }]}]">
             @:<a-select-option v-for="(item,index) in @(@column.ColumnName)Data" :key="index" :value="item.code">{{ item.name }}</a-select-option>
           @:</a-select>
-}else{
+} else {
           @:<a-select style="width: 100%" placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{ required: true, message: '请选择@(@column.ColumnComment)！' }]}]">
             @:<a-select-option v-for="(item,index) in @(@column.ColumnName)Data" :key="index" :value="item.code">{{ item.name }}</a-select-option>
           @:</a-select>
@@ -69,7 +69,7 @@ if (@column.WhetherRequired == "Y"){
           @:<a-radio-group placeholder="请选择@(@column.ColumnComment)}" v-decorator="['@column.ColumnName',{rules: [{ required: true, message: '请选择@(@column.ColumnComment)！' }]}]" >
             @:<a-radio v-for="(item,index) in @(@column.ColumnName)Data" :key="index" :value="item.code">{{ item.name }}</a-radio>
           @:</a-radio-group>
-}else{
+} else {
           @:<a-radio-group placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" >
             @:<a-radio v-for="(item,index) in @(@column.ColumnName)Data" :key="index" :value="item.code">{{ item.name }}</a-radio>
           @:</a-radio-group>
@@ -80,7 +80,7 @@ if (@column.WhetherRequired == "Y"){
           @:<a-checkbox-group placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName',{rules: [{ required: true, message: '请选择@(@column.ColumnComment)！' }]}]" >
             @:<a-checkbox v-for="(item,index) in @(@column.ColumnName)Data" :key="index" :value="item.code">{{ item.name }}</a-checkbox>
           @:</a-checkbox-group>
-}else{
+} else {
           @:<a-checkbox-group placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" >
             @:<a-checkbox v-for="(item,index) in @(@column.ColumnName)Data" :key="index" :value="item.code">{{ item.name }}</a-checkbox>
           @:</a-checkbox-group>
@@ -89,14 +89,14 @@ if (@column.WhetherRequired == "Y"){
 if (@column.EffectType == "switch"){
 if (@column.WhetherRequired == "Y"){
           @:<a-switch v-decorator="['@column.ColumnName',{rules: [{ required: true, message: '请选择@(@column.ColumnComment)！' }], valuePropName: 'checked'}]" />
-}else{
+} else {
           @:<a-switch v-decorator="['@column.ColumnName', { valuePropName: 'checked' }]" />
 }
 }
 if (@column.EffectType == "datepicker"){
 if (@column.WhetherRequired == "Y"){
           @:<a-date-picker style="width: 100%" placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName',{rules: [{ required: true, message: '请选择@(@column.ColumnComment)！' }]}]" @@change="onChange@(@column.ColumnName)"/>
-}else{
+} else {
           @:<a-date-picker style="width: 100%" placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName']" @@change="onChange@(@column.ColumnName)"/>
 }
 }
@@ -105,7 +105,7 @@ if (@column.WhetherRequired == "Y"){
           @:<a-select style="width: 100%" placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName', {rules: [{ required: true, message: '请选择@(@column.ColumnComment)！' }]}]">
             @:<a-select-option v-for="(item,index) in  @(@column.FkEntityName)Data" :key="index" :value="item.code">{{ item.name }}</a-select-option>
           @:</a-select>
-}else{
+} else {
           @:<a-select style="width: 100%" placeholder="请选择@(@column.ColumnComment)" v-decorator="['@column.ColumnName']">
             @:<a-select-option v-for="(item,index) in @(@column.FkEntityName)Data" :key="index" :value="item.code">{{ item.name }}</a-select-option>
           @:</a-select>
@@ -222,14 +222,14 @@ if (@column.EffectType == "checkbox"){
 editDataColumn++;
 if(editDataColumn != editData) {
               @:@column.ColumnName: JSON.parse(record.@column.ColumnName),
-}else{
+} else {
               @:@column.ColumnName: JSON.parse(record.@column.ColumnName)
 }
 }else if (@column.EffectType != "datepicker"){
 editDataColumn++;
 if(editDataColumn != editData){
               @:@column.ColumnName: record.@column.ColumnName,
-}else{
+} else {
               @:@column.ColumnName: record.@column.ColumnName
 }
 }
@@ -264,7 +264,7 @@ if(@column.EffectType == "fk" && @column.FkEntityName != "" && @column.FkColumnN
               if (typeof (values[key]) === 'object') {
                 values[key] = JSON.stringify(values[key])
                  this.record[key] = values[key]
-              }else{
+              } else {
                  this.record[key] = values[key]
               }
             }
