@@ -23,7 +23,7 @@ namespace Admin.NETApp.Core
         /// 账号
         /// </summary>
         [Comment("账号")]
-        [Required, MaxLength(20)]
+        [Required, MaxLength(50)]
         public string Account { get; set; }
 
         /// <summary>

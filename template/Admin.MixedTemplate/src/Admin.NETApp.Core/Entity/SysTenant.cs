@@ -44,7 +44,7 @@ namespace Admin.NETApp.Core
         /// 电话
         /// </summary>
         [Comment("电话")]
-        [MaxLength(20)]
+        [MaxLength(50)]
         public string Phone { get; set; }
 
         /// <summary>

@@ -26,10 +26,15 @@ namespace Admin.NETApp.Core.Service
         /// 获取用户的角色Id集合
         /// </summary>
         /// <param name="userId"></param>
+        /// <param name="checkRoleStatus"></param>
         /// <returns></returns>
-        public async Task<List<long>> GetUserRoleIdList(long userId)
+        public async Task<List<long>> GetUserRoleIdList(long userId, bool checkRoleStatus = true)
         {
-            return await _sysUserRoleRep.DetachedEntities.Where(u => u.SysRole.Status == CommonStatus.ENABLE).Where(u => u.SysUserId == userId).Select(u => u.SysRoleId).ToListAsync();
+            return await _sysUserRoleRep.DetachedEntities
+                .Where(checkRoleStatus, u => u.SysRole.Status == CommonStatus.ENABLE)
+                .Where(u => u.SysUserId == userId)
+                .Select(u => u.SysRoleId)
+                .ToListAsync();
         }
 
         /// <summary>
