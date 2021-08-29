@@ -30,7 +30,10 @@ namespace Admin.NETApp.Core.Service
         /// <returns></returns>
         public async Task<List<long>> GetUserRoleIdList(long userId, bool checkRoleStatus = true)
         {
-            return await _sysUserRoleRep.DetachedEntities
+            return await _sysUserRoleRep
+                // 检查role状态，跳过全局tenantId&delete过滤器，超级管理员使用
+                .Where(!checkRoleStatus, u => u.SysRole.Status == CommonStatus.ENABLE && !u.SysRole.IsDeleted, ignoreQueryFilters: true)
+                // 当不是超级管理员的时候检查role状态和全局tenantId&delete过滤器
                 .Where(checkRoleStatus, u => u.SysRole.Status == CommonStatus.ENABLE)
                 .Where(u => u.SysUserId == userId)
                 .Select(u => u.SysRoleId)
