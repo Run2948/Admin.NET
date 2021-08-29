@@ -9,13 +9,13 @@ namespace Admin.NETApp.Core.Service
     {
         Task DeleteFileInfo(DeleteFileInfoInput input);
 
-        Task<IActionResult> DownloadFileInfo([FromQuery] QueryFileInoInput input);
+        Task<IActionResult> DownloadFileInfo([FromQuery] QueryFileInfoInput input);
 
-        Task<SysFile> GetFileInfo([FromQuery] QueryFileInoInput input);
+        Task<SysFile> GetFileInfo([FromQuery] QueryFileInfoInput input);
 
         Task<List<SysFile>> GetFileInfoList([FromQuery] FileOutput input);
 
-        Task<IActionResult> PreviewFileInfo([FromQuery] QueryFileInoInput input);
+        Task<IActionResult> PreviewFileInfo([FromQuery] QueryFileInfoInput input);
 
         Task<dynamic> QueryFileInfoPageList([FromQuery] FilePageInput input);
 

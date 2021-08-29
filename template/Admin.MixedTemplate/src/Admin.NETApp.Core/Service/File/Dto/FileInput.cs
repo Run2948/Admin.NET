@@ -25,7 +25,7 @@
     {
     }
 
-    public class QueryFileInoInput : BaseId
+    public class QueryFileInfoInput : BaseId
     {
     }
 }
