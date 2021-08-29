@@ -349,9 +349,9 @@ export default {
         type: 'application/octet-stream;charset=UTF-8'
       })
       var contentDisposition = res.headers['content-disposition']
-      const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-      const matches = filenameRegex.exec(contentDisposition);
-      const filename = matches[1].replace(/['"]/g, '');
+      const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/
+      const matches = filenameRegex.exec(contentDisposition)
+      const filename = matches[1].replace(/['"]/g, '')
       var downloadElement = document.createElement('a')
       var href = window.URL.createObjectURL(blob) // 创建下载的链接
       var reg = /^["](.*)["]$/g
