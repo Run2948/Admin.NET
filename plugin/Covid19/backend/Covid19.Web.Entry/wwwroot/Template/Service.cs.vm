@@ -58,10 +58,10 @@ if (@column.QueryWhether == "Y"){
 if (@column.NetType == "string"){
 if (@column.QueryType == "like"){
                                      @:.Where(!string.IsNullOrEmpty(input.@column.ColumnName), u => EF.Functions.Like(u.@(@column.ColumnName), $"%{input.@(@column.ColumnName).Trim()}%"))
-}else{
+} else {
                                      @:.Where(!string.IsNullOrEmpty(input.@column.ColumnName), u => u.@(@column.ColumnName) @column.QueryType input.@(@column.ColumnName))
 }
-}else{
+} else {
 if(@column.NetType.Contains("Enum") || @column.NetType.EndsWith("int") || @column.NetType == "long" || @column.NetType == "bool") {
                                      @:.Where(input.@(@column.ColumnName).HasValue, u => u.@(@column.ColumnName) @column.QueryType input.@(@column.ColumnName).Value)
 } else {
@@ -164,7 +164,7 @@ if(@column.EffectType == "fk" && @column.FkEntityName != "" && @column.FkColumnN
 @foreach (var column in Model.TableField){
 if(@column.EffectType == "fk" && @column.FkEntityName != "" && @column.FkColumnName != ""){
                 @:item.@(@column.FkEntityName)@(@column.FkColumnName) = (await _@(@column.LowerFkEntityName)Rep.FirstOrDefaultAsync(e => e.Id == item.@(@column.ColumnName)))?.@column.FkColumnName;
-}else{
+} else {
                 @:await Task.Run(() => Console.Write(item.@(@column.ColumnName)));
 }
 }

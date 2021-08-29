@@ -26,7 +26,7 @@ if(@index >= 3){
                   <a-input v-model="queryParam.@column.ColumnName" allow-clear placeholder="请输入@(@column.ColumnComment)"/>
                 </a-form-item>
               </a-col></text>
-}else{
+} else {
             <text>
             <a-col :md="8" :sm="24">
               <a-form-item label="@column.ColumnComment">
@@ -41,7 +41,7 @@ if(@index >= 3){
                   <a-input-number v-model="queryParam.@column.ColumnName" style="width: 100%" allow-clear placeholder="请输入@(@column.ColumnComment)"/>
                 </a-form-item>
               </a-col></text>
-}else{
+} else {
             <text><a-col :md="8" :sm="24">
               <a-form-item label="@column.ColumnComment">
                 <a-input-number v-model="queryParam.@column.ColumnName" style="width: 100%" allow-clear placeholder="请输入@(@column.ColumnComment)"/>
@@ -57,7 +57,7 @@ if(@index >= 3){
                   </a-select>
                 </a-form-item>
               </a-col></text>
-}else{
+} else {
             <text><a-col :md="8" :sm="24">
               <a-form-item label="@column.ColumnComment">
                 <a-select style="width: 100%" v-model="queryParam.@column.ColumnName" placeholder="请选择@(@column.ColumnComment)">
@@ -73,7 +73,7 @@ if(@index >= 3){
                   <a-date-picker style="width: 100%" placeholder="请选择@(@column.ColumnComment)" v-model="queryParam.@(@column.ColumnName)Date" @@change="onChange@(@column.ColumnName)"/>
                 </a-form-item>
               </a-col></text>
-}else{
+} else {
             <text><a-col :md="8" :sm="24">
               <a-form-item label="@column.ColumnComment">
                 <a-date-picker style="width: 100%" placeholder="请选择@(@column.ColumnComment)" v-model="queryParam.@(@column.ColumnName)Date" @@change="onChange@(@column.ColumnName)"/>
@@ -95,7 +95,7 @@ if(Model.QueryWhetherList.Count > 2){
                 </a>
               </span>
             </a-col></text>
-}else{
+} else {
             <text><a-col :md="8" :sm="24">
               <span class="table-page-search-submitButtons">
                 <a-button type="primary" @@click="$refs.table.refresh(true)">查询</a-button>
@@ -149,7 +149,7 @@ if(@column.WhetherRetract == "Y" && (@column.EffectType == "select" || @column.E
         @:<div v-else>
         @:  <a-avatar icon="exclamation-circle" shape="square" :size="64" />
         @:</div>
-}else{
+} else {
           @:{{ '@column.DictTypeCode' | dictType(text) }}
 }
         @:</span>
@@ -188,7 +188,7 @@ if(@column.EffectType == "datepicker")
 }
 @if(Ellipsis == "Y"){
   @:import { STable, Ellipsis } from '@@/components'
-}else{
+} else {
   @:import { STable } from '@@/components'
 }
 @if(DateQuery == "Y"){
@@ -228,12 +228,12 @@ if(@column.EffectType == "fk"){
 if(@column.WhetherRetract == "Y" || @column.EffectType == "select" || @column.EffectType == "radio" || @column.EffectType == "radiobutton" || @column.EffectType == "checkbox" || @column.EffectType == "file" || @column.EffectType == "image"){
             @:dataIndex: '@column.ColumnName',
             @:scopedSlots: { customRender: '@(@column.ColumnName)scopedSlots' }
-}else{
+} else {
             @:dataIndex: '@column.ColumnName'
 }
 if(columnDataColumns != columnData){
           @:},
-}else{
+} else {
           @:}
 }
 }
@@ -244,7 +244,7 @@ if(columnDataColumns != columnData){
         loadData: parameter => {
 @if(DateQuery == "Y"){
           @:return @(@Model.ClassName)Page(Object.assign(parameter, this.switchingDate())).then((res) => {
-}else{
+} else {
           @:return @(@Model.ClassName)Page(Object.assign(parameter, this.queryParam)).then((res) => {
 }
             return res.data
