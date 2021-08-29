@@ -80,7 +80,12 @@ router.beforeEach((to, from, next) => {
                 })
               }, 1000)
             } else {
-              antDesignmenus = Vue.ls.get(ALL_APPS_MENU)[0].menu
+              var actiove = Vue.ls.get(ALL_APPS_MENU)
+              actiove.forEach(element => {
+                if (element.active === 'Y') {
+                  antDesignmenus = element.menu
+                }
+              })
             }
             store.dispatch('GenerateRoutes', { antDesignmenus }).then(() => {
               // 动态添加可访问路由表
