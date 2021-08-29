@@ -28,7 +28,7 @@ namespace Furion.Extras.Admin.NET
         /// 名称
         /// </summary>
         [Comment("名称")]
-        [Required, MaxLength(30)]
+        [Required, MaxLength(100)]
         public string Name { get; set; }
 
         /// <summary>
