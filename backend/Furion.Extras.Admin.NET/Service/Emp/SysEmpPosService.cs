@@ -72,8 +72,7 @@ namespace Furion.Extras.Admin.NET.Service
         /// <returns></returns>
         public async Task DeleteEmpPosInfoByUserId(long empId)
         {
-            var empPos = await _sysEmpPosRep.Where(u => u.SysEmpId == empId).ToListAsync();
-            await _sysEmpPosRep.DeleteAsync(empPos);
+            await _sysEmpPosRep.AsQueryable(u => u.SysEmpId == empId, false).DeleteRangeAsync(_sysEmpPosRep.Context);
         }
     }
 }
