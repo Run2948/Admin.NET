@@ -12,5 +12,12 @@ namespace Furion.Extras.Admin.NET
         /// </summary>
         /// <returns></returns>
         Task ForceExist();
+
+        /// <summary>
+        /// 发送信息
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        Task ReceiveMessage(object context);
     }
 }
