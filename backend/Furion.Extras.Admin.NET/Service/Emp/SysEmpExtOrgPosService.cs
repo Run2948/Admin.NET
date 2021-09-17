@@ -1,4 +1,4 @@
-﻿using Furion.DatabaseAccessor;
+using Furion.DatabaseAccessor;
 using Furion.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -35,7 +35,7 @@ namespace Furion.Extras.Admin.NET.Service
                 SysOrgId = u.OrgId,
                 SysPosId = u.PosId
             }).ToList();
-            await _sysEmpExtOrgPosRep.InsertAsync(extOrgPos);
+            await _sysEmpExtOrgPosRep.Context.BulkInsertAsync(extOrgPos);
         }
 
         /// <summary>
