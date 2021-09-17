@@ -40,13 +40,13 @@ namespace Furion.DatabaseAccessor
         /// <summary>
         /// 假删除立即执行，根据id删除
         /// </summary>
-        public static void FakeDeleteNow<TEntity>(this IPrivateRepository<TEntity> repository, int id)
+        public static void FakeDeleteNow<TEntity>(this IPrivateRepository<TEntity> repository, long id)
            where TEntity : class, IPrivateEntity, new()
         {
             // 创建实体对象并设置主键值
             var entity = Activator.CreateInstance<TEntity>();
             var PrimaryKeyProperty = typeof(TEntity).GetProperty(PrimaryKeyName);
-            PrimaryKeyProperty.SetValue(PrimaryKeyName, id);
+            PrimaryKeyProperty.SetValue(entity, id);
             repository.FakeDeleteNow(entity);
         }
         /// <summary>
@@ -63,13 +63,13 @@ namespace Furion.DatabaseAccessor
         /// 异步假删除
         /// </summary>
 
-        public static async Task FakeDeleteAsync<TEntity>(this IPrivateRepository<TEntity> repository, int id)
+        public static async Task FakeDeleteAsync<TEntity>(this IPrivateRepository<TEntity> repository, long id)
            where TEntity : class, IPrivateEntity, new()
         {
             // 创建实体对象并设置主键值
             var entity = Activator.CreateInstance<TEntity>();
             var PrimaryKeyProperty = typeof(TEntity).GetProperty(PrimaryKeyName);
-            PrimaryKeyProperty.SetValue(PrimaryKeyName, id);
+            PrimaryKeyProperty.SetValue(entity, id);
             await repository.FakeDeleteAsync(entity);
         }
         /// <summary>
