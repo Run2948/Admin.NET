@@ -2902,6 +2902,34 @@
             分组名称
             </summary>
         </member>
+        <member name="T:Furion.Extras.Admin.NET.Extension.NewtonsoftJsonSerializerProvider">
+            <summary>
+            自定义序列化提供器Newtonsoft
+            </summary>
+        </member>
+        <member name="M:Furion.Extras.Admin.NET.Extension.NewtonsoftJsonSerializerProvider.Serialize(System.Object,System.Object)">
+            <summary>        
+            序列化对象        
+            </summary>        
+            <param name="value"></param>        
+            <param name="jsonSerializerOptions"></param>        
+            <returns></returns>        
+        </member>
+        <member name="M:Furion.Extras.Admin.NET.Extension.NewtonsoftJsonSerializerProvider.Deserialize``1(System.String,System.Object)">
+            <summary>        
+            反序列化字符串        
+            </summary>        
+            <typeparam name="T"></typeparam>        
+            <param name="json"></param>        
+            <param name="jsonSerializerOptions"></param>        
+            <returns></returns>        
+        </member>
+        <member name="M:Furion.Extras.Admin.NET.Extension.NewtonsoftJsonSerializerProvider.GetSerializerOptions">
+            <summary>        
+            返回读取全局配置的 JSON 选项        
+            </summary>        
+            <returns></returns>        
+        </member>
         <member name="M:Furion.Extras.Admin.NET.QueryableExstenstions.Search``1(System.Linq.IQueryable{``0},Furion.Extras.Admin.NET.PageInputBase)">
             <summary>
             根据分页查询参数为IQueryable附加过滤条件
@@ -9491,6 +9519,70 @@
             <summary>
             时间戳
             </summary>
+        </member>
+        <member name="P:Furion.DatabaseAccessor.FakeDeleteExtensions.PrimaryKeyName">
+            <summary>
+            主键名称
+            </summary>
+        </member>
+        <member name="P:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDeleteColumnName">
+            <summary>
+            假删除列名
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDelete``1(Furion.DatabaseAccessor.IPrivateRepository{``0},System.Int32)">
+            <summary>
+            假删除，根据id删除
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDelete``1(Furion.DatabaseAccessor.IPrivateRepository{``0},``0)">
+            <summary>
+            假删除
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDeleteNow``1(Furion.DatabaseAccessor.IPrivateRepository{``0},System.Int64)">
+            <summary>
+            假删除立即执行，根据id删除
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDeleteNow``1(Furion.DatabaseAccessor.IPrivateRepository{``0},``0)">
+            <summary>
+            假删除立即执行
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDeleteAsync``1(Furion.DatabaseAccessor.IPrivateRepository{``0},System.Int64)">
+            <summary>
+            异步假删除
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDeleteAsync``1(Furion.DatabaseAccessor.IPrivateRepository{``0},``0)">
+            <summary>
+            异步假删除
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDeleteAsync``1(``0)">
+            <summary>
+            异步假删除
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDeleteNowAsync``1(``0)">
+            <summary>
+            异步假删除，立即执行
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDelete``1(``0)">
+            <summary>
+            假删除
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="entity"></param>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDeleteNow``1(``0)">
+            <summary>
+            假删除立即执行
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="entity"></param>
         </member>
     </members>
 </doc>
