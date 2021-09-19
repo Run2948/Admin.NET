@@ -64,14 +64,6 @@ namespace Admin.NET.Web.Core
             // 路由名称
             var routeName = httpContext.Request.Path.Value[1..].Replace("/", ":");
 
-            // 默认路由(获取登录用户信息)
-            var defalutRoute = new List<string>()
-            {
-                "getLoginUser"
-            };
-
-            if (defalutRoute.Contains(routeName)) return true;
-
             // 获取用户权限集合（按钮或API接口）
             var allPermissionList = await App.GetService<ISysMenuService>().GetAllPermissionList();
             var permissionList = await App.GetService<ISysMenuService>().GetLoginPermissionList(userManager.UserId);
