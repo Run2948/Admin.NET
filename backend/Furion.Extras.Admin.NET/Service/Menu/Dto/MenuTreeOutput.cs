@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Furion.Extras.Admin.NET.Service
@@ -26,7 +26,9 @@ namespace Furion.Extras.Admin.NET.Service
         /// <summary>
         /// 值
         /// </summary>
-        public string Value { get; set; }
+        public string Value => IntValue.ToString();
+
+        public long IntValue { get; set; }
 
         /// <summary>
         /// 排序，越小优先级越高
