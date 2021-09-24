@@ -1,7 +1,6 @@
-﻿using Furion;
-using Furion.DependencyInjection;
-using Furion.EventBus;
+﻿using Furion.DependencyInjection;
 using Furion.FriendlyException;
+using Furion.EventBridge;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Serilog;
 using System;
@@ -18,7 +17,7 @@ namespace Furion.Extras.Admin.NET
         public Task OnExceptionAsync(ExceptionContext context)
         {
             var userContext = App.User;
-            MessageCenter.Send("create:exlog", new SysLogEx
+           Event.Emit("Log:CreateExLog", new SysLogEx
             {
                 Account = userContext?.FindFirstValue(ClaimConst.CLAINM_ACCOUNT),
                 Name = userContext?.FindFirstValue(ClaimConst.CLAINM_NAME),

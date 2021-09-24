@@ -9121,7 +9121,7 @@
             <param name="orgId"></param>
             <returns></returns>
         </member>
-        <member name="T:Furion.Extras.Admin.NET.LogSubscribeHandler">
+        <member name="T:Furion.Extras.Admin.NET.LogEventHandler">
             <summary>
             日志订阅处理
             </summary>

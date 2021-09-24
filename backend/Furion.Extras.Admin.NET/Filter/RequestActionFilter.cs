@@ -1,4 +1,4 @@
-using Furion.EventBus;
+using Furion.EventBridge;
 using Furion.JsonSerialization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +35,7 @@ namespace Furion.Extras.Admin.NET
                 : null;
             var actionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
 
-            MessageCenter.Send("create:oplog", new SysLogOp
+          await Event.EmitAsync("Log:CreateOpLog", new SysLogOp
             {
                 Name = httpContext.User?.FindFirstValue(ClaimConst.CLAINM_NAME),
                 Success = isRequestSucceed ? YesOrNot.Y : YesOrNot.N,
