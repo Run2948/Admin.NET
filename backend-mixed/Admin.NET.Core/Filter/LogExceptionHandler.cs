@@ -1,4 +1,5 @@
-﻿﻿using Furion.DependencyInjection;
+﻿using Furion;﻿
+using Furion.DependencyInjection;
 using Furion.FriendlyException;
 using Furion.EventBridge;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -7,7 +8,7 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Admin.NET.Core
+ namespace Admin.NET.Core
 {
     /// <summary>
     /// 全局异常处理

@@ -1,9 +1,10 @@
-﻿using Furion.DatabaseAccessor;
+﻿using Furion;
+using Furion.DatabaseAccessor;
 using Furion.DataEncryption;
 using Furion.DependencyInjection;
 using Furion.DynamicApiController;
 using Furion.EventBridge;
-using Furion.Extras.Admin.NET.Options;
+using Admin.NET.Core.Options;
 using Furion.FriendlyException;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;

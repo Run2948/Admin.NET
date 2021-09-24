@@ -48,13 +48,13 @@ namespace Furion.Extras.Admin.NET.Service
         [HttpGet("/sysMessage/otherUser")]
         public async Task SendMessageToOtherUser(string title, string message, MessageType type, long userId)
         {
-            var onlineuserlist = await _sysCacheService.GetAsync<List<OnlineUser>>(CommonConst.CACHE_KEY_ONLINE_USER);
+            var onlineUserList = await _sysCacheService.GetAsync<List<SysOnlineUser>>(CommonConst.CACHE_KEY_ONLINE_USER);
 
-            var user = onlineuserlist.Where(x => x.UserId == userId).ToList();
+            var users = onlineUserList.Where(x => x.UserId == userId).ToList();
 
-            if (user != null)
+            if (users.Any())
             {
-                await _chatHubContext.Clients.AllExcept(user[0].ConnectionId).ReceiveMessage(new { title = title, message = message, messagetype = type });
+                await _chatHubContext.Clients.AllExcept(users[0].ConnectionId).ReceiveMessage(new { title = title, message = message, messagetype = type });
             }
         }
 
@@ -69,15 +69,14 @@ namespace Furion.Extras.Admin.NET.Service
         [HttpGet("/sysMessage/user")]
         public async Task SendMessageToUser(string title, string message, MessageType type, long userId)
         {
-            var onlineuserlist = await _sysCacheService.GetAsync<List<OnlineUser>>(CommonConst.CACHE_KEY_ONLINE_USER);
+            var onlineUserList = await _sysCacheService.GetAsync<List<SysOnlineUser>>(CommonConst.CACHE_KEY_ONLINE_USER);
 
-            var user = onlineuserlist.Where(x => x.UserId == userId).ToList();
-            if (user != null)
+            var users = onlineUserList.Where(x => x.UserId == userId).ToList();
+            if (users.Any())
             {
-                foreach (var item in user)
+                foreach (var item in users)
                 {
                     await _chatHubContext.Clients.Client(item.ConnectionId).ReceiveMessage(new { title = title, message = message, messagetype = type });
-
                 }
             }
         }
@@ -93,18 +92,18 @@ namespace Furion.Extras.Admin.NET.Service
         [HttpGet("/sysMessage/users")]
         public async Task SendMessageToUsers(string title, string message, MessageType type, List<long> userId)
         {
-            var onlineuserlist = await _sysCacheService.GetAsync<List<OnlineUser>>(CommonConst.CACHE_KEY_ONLINE_USER);
+            var onlineUserList = await _sysCacheService.GetAsync<List<SysOnlineUser>>(CommonConst.CACHE_KEY_ONLINE_USER);
 
-            List<string> userlist = new List<string>();
+            List<string> userList = new List<string>();
 
-            foreach (var item in onlineuserlist)
+            foreach (var item in onlineUserList)
             {
                 if (userId.Contains(item.UserId))
                 {
-                    userlist.Add(item.ConnectionId);
+                    userList.Add(item.ConnectionId);
                 }
             }
-            await _chatHubContext.Clients.Clients(userlist).ReceiveMessage(new { title = title, message = message, messagetype = type });
+            await _chatHubContext.Clients.Clients(userList).ReceiveMessage(new { title = title, message = message, messagetype = type });
         }
     }
 }

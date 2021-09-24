@@ -85,7 +85,7 @@ namespace Admin.NET.Core.Service
         /// <returns></returns>
         public async Task DeleteEmpExtInfoByUserId(long empId)
         {
-             await _sysEmpPosRep.AsQueryable(u => u.SysEmpId == empId, false).DeleteRangeAsync(_sysEmpPosRep.Context);
+            await _sysEmpExtOrgPosRep.AsQueryable(u => u.SysEmpId == empId, false).DeleteRangeAsync(_sysEmpExtOrgPosRep.Context);
         }
     }
 }

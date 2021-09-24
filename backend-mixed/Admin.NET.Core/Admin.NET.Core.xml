@@ -2690,6 +2690,26 @@
             业务权重
             </summary>
         </member>
+        <member name="F:Admin.NET.Core.MessageType.Info">
+            <summary>
+            普通信息
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.MessageType.Success">
+            <summary>
+            成功提示
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.MessageType.Warning">
+            <summary>
+            警告提示
+            </summary>
+        </member>
+        <member name="F:Admin.NET.Core.MessageType.Error">
+            <summary>
+            错误提示
+            </summary>
+        </member>
         <member name="T:Admin.NET.Core.NoticeStatus">
             <summary>
             通知公告状态
@@ -2930,6 +2950,11 @@
             否
             </summary>
         </member>
+        <member name="T:Admin.NET.Core.LogEventHandler">
+            <summary>
+            日志订阅处理
+            </summary>
+        </member>
         <member name="T:Admin.NET.Core.DictionaryExtensions">
             <summary>
             字典扩展
@@ -2986,6 +3011,34 @@
             分组名称
             </summary>
         </member>
+        <member name="T:Admin.NET.Core.NewtonsoftJsonSerializerProvider">
+            <summary>
+            自定义序列化提供器Newtonsoft
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Core.NewtonsoftJsonSerializerProvider.Serialize(System.Object,System.Object)">
+            <summary>        
+            序列化对象        
+            </summary>        
+            <param name="value"></param>        
+            <param name="jsonSerializerOptions"></param>        
+            <returns></returns>        
+        </member>
+        <member name="M:Admin.NET.Core.NewtonsoftJsonSerializerProvider.Deserialize``1(System.String,System.Object)">
+            <summary>        
+            反序列化字符串        
+            </summary>        
+            <typeparam name="T"></typeparam>        
+            <param name="json"></param>        
+            <param name="jsonSerializerOptions"></param>        
+            <returns></returns>        
+        </member>
+        <member name="M:Admin.NET.Core.NewtonsoftJsonSerializerProvider.GetSerializerOptions">
+            <summary>        
+            返回读取全局配置的 JSON 选项        
+            </summary>        
+            <returns></returns>        
+        </member>
         <member name="M:Admin.NET.Core.QueryableExstenstions.Search``1(System.Linq.IQueryable{``0},Admin.NET.Core.PageInputBase)">
             <summary>
             根据分页查询参数为IQueryable附加过滤条件
@@ -3033,6 +3086,63 @@
             <param name="exception"></param>
             <returns></returns>
         </member>
+        <member name="M:Admin.NET.Core.ChatHub.ClientsSendMessage(Admin.NET.Core.MessageinputDto)">
+            <summary>
+            前端调用发送方法
+            发送信息给某个人
+            </summary>
+            <param name="_message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Core.ChatHub.ClientsSendMessagetoAll(Admin.NET.Core.MessageinputDto)">
+            <summary>
+            前端调用发送方法
+            发送信息给所有人
+            </summary>
+            <param name="_message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Core.ChatHub.ClientsSendMessagetoOther(Admin.NET.Core.MessageinputDto)">
+            <summary>
+            前端调用发送方法
+            发送消息给除了发送人的其他人
+            </summary>
+            <param name="_message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Core.ChatHub.ClientsSendMessagetoUsers(Admin.NET.Core.MessageinputDto)">
+            <summary>
+            前端调用发送方法
+            发送消息给某些人
+            </summary>
+            <param name="_message"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Admin.NET.Core.MessageinputDto.userId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.MessageinputDto.userIds">
+            <summary>
+            用户ID列表
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.MessageinputDto.title">
+            <summary>
+            消息标题
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.MessageinputDto.message">
+            <summary>
+            消息内容
+            </summary>
+        </member>
+        <member name="P:Admin.NET.Core.MessageinputDto.messageType">
+            <summary>
+            消息类型
+            </summary>
+        </member>
         <member name="T:Admin.NET.Core.IChatClient">
             <summary>
             聊天客户端接口定义
@@ -3042,6 +3152,13 @@
             <summary>
             强制下线
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Core.IChatClient.ReceiveMessage(System.Object)">
+            <summary>
+            发送信息
+            </summary>
+            <param name="context"></param>
             <returns></returns>
         </member>
         <member name="T:Admin.NET.Core.UserManager">
@@ -5606,28 +5723,28 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Admin.NET.Core.Service.SysFileService.GetFileInfo(Admin.NET.Core.Service.QueryFileInoInput)">
+        <member name="M:Admin.NET.Core.Service.SysFileService.GetFileInfo(Admin.NET.Core.Service.QueryFileInfoInput)">
             <summary>
             获取文件详情
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Admin.NET.Core.Service.SysFileService.PreviewFileInfo(Admin.NET.Core.Service.QueryFileInoInput)">
+        <member name="M:Admin.NET.Core.Service.SysFileService.PreviewFileInfo(Admin.NET.Core.Service.QueryFileInfoInput)">
             <summary>
             预览文件
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Admin.NET.Core.Service.SysFileService.DownloadFileInfo(Admin.NET.Core.Service.QueryFileInoInput)">
+        <member name="M:Admin.NET.Core.Service.SysFileService.DownloadFileInfo(Admin.NET.Core.Service.QueryFileInfoInput)">
             <summary>
             下载文件
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Admin.NET.Core.Service.SysFileService.PublicFileInfo(Admin.NET.Core.Service.QueryFileInoInput)">
+        <member name="M:Admin.NET.Core.Service.SysFileService.PublicFileInfo(Admin.NET.Core.Service.QueryFileInfoInput)">
             <summary>
             公开文件
             </summary>
@@ -6598,6 +6715,89 @@
             根据系统应用切换菜单
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Core.Service.ISendMessageService.SendMessageToUser(System.String,System.String,Admin.NET.Core.MessageType,System.Int64)">
+            <summary>
+            发送消息给某个人
+            </summary>
+            <param name="title">发送标题</param>
+            <param name="message">发送内容</param>
+            <param name="userId">接收人</param>
+            <param name="type">消息类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Core.Service.ISendMessageService.SendMessageToUsers(System.String,System.String,Admin.NET.Core.MessageType,System.Collections.Generic.List{System.Int64})">
+            <summary>
+            发送消息给某些人
+            </summary>
+            <param name="title">发送标题</param>
+            <param name="message">发送内容</param>
+            <param name="userId">接收人列表</param>
+            <param name="type">消息类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Core.Service.ISendMessageService.SendMessageToAllUser(System.String,System.String,Admin.NET.Core.MessageType)">
+            <summary>
+            发送消息给所有人
+            </summary>
+            <param name="title">发送标题</param>
+            <param name="message">发送内容</param>
+            <param name="type">消息类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Core.Service.ISendMessageService.SendMessageToOtherUser(System.String,System.String,Admin.NET.Core.MessageType,System.Int64)">
+            <summary>
+            发送消息给除了发送人的其他人
+            </summary>
+            <param name="title">发送标题</param>
+            <param name="message">发送内容</param>
+            <param name="userId">发送人</param>
+            <param name="type">消息类型</param>
+            <returns></returns>
+        </member>
+        <member name="T:Admin.NET.Core.Service.SendMessageService">
+            <summary>
+            消息发送服务
+            </summary>
+        </member>
+        <member name="M:Admin.NET.Core.Service.SendMessageService.SendMessageToAllUser(System.String,System.String,Admin.NET.Core.MessageType)">
+            <summary>
+            发送消息给所有人
+            </summary>
+            <param name="title">发送标题</param>
+            <param name="message">发送内容</param>
+            <param name="type">消息类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Core.Service.SendMessageService.SendMessageToOtherUser(System.String,System.String,Admin.NET.Core.MessageType,System.Int64)">
+            <summary>
+            发送消息给除了发送人的其他人
+            </summary>
+            <param name="title">发送标题</param>
+            <param name="message">发送内容</param>
+            <param name="userId">发送人</param>
+            <param name="type">消息类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Core.Service.SendMessageService.SendMessageToUser(System.String,System.String,Admin.NET.Core.MessageType,System.Int64)">
+            <summary>
+            发送消息给某个人
+            </summary>
+            <param name="title">发送标题</param>
+            <param name="message">发送内容</param>
+            <param name="userId">接收人</param>
+            <param name="type">消息类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.NET.Core.Service.SendMessageService.SendMessageToUsers(System.String,System.String,Admin.NET.Core.MessageType,System.Collections.Generic.List{System.Int64})">
+            <summary>
+            发送消息给某些人
+            </summary>
+            <param name="title">发送标题</param>
+            <param name="message">发送内容</param>
+            <param name="userId">接收人列表</param>
+            <param name="type">消息类型</param>
             <returns></returns>
         </member>
         <member name="T:Admin.NET.Core.Service.MachineService">
@@ -8949,11 +9149,12 @@
             用户角色服务
             </summary>
         </member>
-        <member name="M:Admin.NET.Core.Service.SysUserRoleService.GetUserRoleIdList(System.Int64)">
+        <member name="M:Admin.NET.Core.Service.SysUserRoleService.GetUserRoleIdList(System.Int64,System.Boolean)">
             <summary>
             获取用户的角色Id集合
             </summary>
             <param name="userId"></param>
+            <param name="checkRoleStatus"></param>
             <returns></returns>
         </member>
         <member name="M:Admin.NET.Core.Service.SysUserRoleService.GrantRole(Admin.NET.Core.Service.UpdateUserRoleDataInput)">
@@ -9142,11 +9343,6 @@
             </summary>
             <param name="orgId"></param>
             <returns></returns>
-        </member>
-        <member name="T:Admin.NET.Core.LogSubscribeHandler">
-            <summary>
-            日志订阅处理
-            </summary>
         </member>
         <member name="T:Admin.NET.Core.CodeGenUtil">
             <summary>
@@ -9541,6 +9737,70 @@
             <summary>
             时间戳
             </summary>
+        </member>
+        <member name="P:Furion.DatabaseAccessor.FakeDeleteExtensions.PrimaryKeyName">
+            <summary>
+            主键名称
+            </summary>
+        </member>
+        <member name="P:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDeleteColumnName">
+            <summary>
+            假删除列名
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDelete``1(Furion.DatabaseAccessor.IPrivateRepository{``0},System.Int64)">
+            <summary>
+            假删除，根据id删除
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDelete``1(Furion.DatabaseAccessor.IPrivateRepository{``0},``0)">
+            <summary>
+            假删除
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDeleteNow``1(Furion.DatabaseAccessor.IPrivateRepository{``0},System.Int32)">
+            <summary>
+            假删除立即执行，根据id删除
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDeleteNow``1(Furion.DatabaseAccessor.IPrivateRepository{``0},``0)">
+            <summary>
+            假删除立即执行
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDeleteAsync``1(Furion.DatabaseAccessor.IPrivateRepository{``0},System.Int64)">
+            <summary>
+            异步假删除
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDeleteAsync``1(Furion.DatabaseAccessor.IPrivateRepository{``0},``0)">
+            <summary>
+            异步假删除
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDeleteAsync``1(``0)">
+            <summary>
+            异步假删除
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDeleteNowAsync``1(``0)">
+            <summary>
+            异步假删除，立即执行
+            </summary>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDelete``1(``0)">
+            <summary>
+            假删除
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="entity"></param>
+        </member>
+        <member name="M:Furion.DatabaseAccessor.FakeDeleteExtensions.FakeDeleteNow``1(``0)">
+            <summary>
+            假删除立即执行
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="entity"></param>
         </member>
     </members>
 </doc>

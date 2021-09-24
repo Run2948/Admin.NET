@@ -1,3 +1,4 @@
+using Furion;
 using Furion.DependencyInjection;
 using Furion.JsonSerialization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,4 +1,5 @@
-﻿﻿using Furion.DependencyInjection;
+﻿using Furion;
+using Furion.DependencyInjection;
 using Furion.FriendlyException;
 using Furion.EventBridge;
 using Microsoft.AspNetCore.Mvc.Filters;

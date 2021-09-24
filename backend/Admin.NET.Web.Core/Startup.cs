@@ -39,7 +39,7 @@ namespace Admin.NET.Web.Core
                     .AddInjectWithUnifyResult<XnRestfulResultProvider>();
             services.AddViewEngine();
             services.AddSignalR();
-            services.AddSimpleEventBus();
+            services.AddEventBridge();
 
             if (App.Configuration["Cache:CacheType"] == "RedisCache")
             {
