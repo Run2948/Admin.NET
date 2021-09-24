@@ -2,7 +2,8 @@
 using Furion.DataEncryption;
 using Furion.DependencyInjection;
 using Furion.DynamicApiController;
-using Furion.EventBus;
+using Furion.EventBridge;
+using Furion.Extras.Admin.NET.Options;
 using Furion.FriendlyException;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
@@ -13,8 +14,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Admin.NET.Core.Options;
-using Furion;
 using UAParser;
 
 namespace Admin.NET.Core.Service
@@ -159,8 +158,8 @@ namespace Admin.NET.Core.Service
 
             // 更新用户最后登录Ip和时间
             await _sysUserRep.UpdateIncludeAsync(user, new[] { nameof(SysUser.LastLoginIp), nameof(SysUser.LastLoginTime) });
-
-            MessageCenter.Send("create:vislog", new SysLogVis
+            
+            await Event.EmitAsync("Log:CreateVisLog", new SysLogVis
             {
                 Name = loginOutput.Name,
                 Success = YesOrNot.Y,
@@ -185,8 +184,8 @@ namespace Admin.NET.Core.Service
         {
             _httpContextAccessor.HttpContext.SignoutToSwagger();
             //_httpContextAccessor.HttpContext.Response.Headers["access-token"] = "invalid token";
-
-            MessageCenter.Send("create:vislog", new SysLogVis
+            
+            await Event.EmitAsync("Log:CreateVisLog", new SysLogVis
             {
                 Name = _userManager.Name,
                 Success = YesOrNot.Y,
