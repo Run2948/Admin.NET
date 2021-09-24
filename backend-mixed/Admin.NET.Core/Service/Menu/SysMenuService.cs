@@ -396,7 +396,7 @@ namespace Admin.NET.Core.Service
                                          {
                                              Id = u.Id,
                                              ParentId = u.Pid,
-                                             Value = u.Id.ToString(),
+                                             IntValue = u.Id,
                                              Title = u.Name,
                                              Weight = u.Weight
                                          }).ToListAsync();
@@ -427,7 +427,7 @@ namespace Admin.NET.Core.Service
                                          {
                                              Id = u.Id,
                                              ParentId = u.Pid,
-                                             Value = u.Id.ToString(),
+                                             IntValue = u.Id,
                                              Title = u.Name,
                                              Weight = u.Weight
                                          }).ToListAsync();

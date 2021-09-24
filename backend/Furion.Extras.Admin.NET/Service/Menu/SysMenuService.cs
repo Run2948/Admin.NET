@@ -395,7 +395,7 @@ namespace Furion.Extras.Admin.NET.Service
                                          {
                                              Id = u.Id,
                                              ParentId = u.Pid,
-                                             Value = u.Id.ToString(),
+                                             IntValue = u.Id,
                                              Title = u.Name,
                                              Weight = u.Weight
                                          }).ToListAsync();
@@ -426,7 +426,7 @@ namespace Furion.Extras.Admin.NET.Service
                                          {
                                              Id = u.Id,
                                              ParentId = u.Pid,
-                                             Value = u.Id.ToString(),
+                                             IntValue = u.Id,
                                              Title = u.Name,
                                              Weight = u.Weight
                                          }).ToListAsync();
