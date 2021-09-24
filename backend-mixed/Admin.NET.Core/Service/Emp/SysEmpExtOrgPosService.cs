@@ -35,7 +35,7 @@ namespace Admin.NET.Core.Service
                 SysOrgId = u.OrgId,
                 SysPosId = u.PosId
             }).ToList();
-            await _sysEmpExtOrgPosRep.Context.BulkInsertAsync(extOrgPos);
+            await _sysEmpExtOrgPosRep.InsertAsync(extOrgPos);
         }
 
         /// <summary>
