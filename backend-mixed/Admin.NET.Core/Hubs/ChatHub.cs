@@ -17,10 +17,11 @@ namespace Admin.NET.Core
     public class ChatHub : Hub<IChatClient>
     {
         private readonly ISysCacheService _cache;
+        private readonly ISendMessageService _sendMessageService;
 
-        public ChatHub(ISysCacheService cache)
+        public ChatHub(ISysCacheService cache, ISendMessageService sendMessageService)
         {
-            _cache = cache;
+            _sendMessageService = sendMessageService;
         }
 
         /// <summary>
@@ -71,6 +72,51 @@ namespace Admin.NET.Core
                 onlineUsers.RemoveAll(u => u.ConnectionId == Context.ConnectionId);
                 await _cache.SetAsync(CommonConst.CACHE_KEY_ONLINE_USER, onlineUsers);
             }
+        }
+
+        /// <summary>
+        /// 前端调用发送方法
+        /// 发送信息给某个人
+        /// </summary>
+        /// <param name="_message"></param>
+        /// <returns></returns>
+        public async Task ClientsSendMessage(MessageinputDto _message)
+        {
+            await _sendMessageService.SendMessageToUser(_message.title, _message.message, _message.messageType, _message.userId);
+        }
+
+        /// <summary>
+        /// 前端调用发送方法
+        /// 发送信息给所有人
+        /// </summary>
+        /// <param name="_message"></param>
+        /// <returns></returns>
+        public async Task ClientsSendMessagetoAll(MessageinputDto _message)
+        {
+            await _sendMessageService.SendMessageToAllUser(_message.title, _message.message, _message.messageType);
+        }
+
+        /// <summary>
+        /// 前端调用发送方法
+        /// 发送消息给除了发送人的其他人
+        /// </summary>
+        /// <param name="_message"></param>
+        /// <returns></returns>
+        public async Task ClientsSendMessagetoOther(MessageinputDto _message)
+        {
+            // _message.userId为发送人ID
+            await _sendMessageService.SendMessageToOtherUser(_message.title, _message.message, _message.messageType, _message.userId);
+        }
+
+        /// <summary>
+        /// 前端调用发送方法
+        /// 发送消息给某些人
+        /// </summary>
+        /// <param name="_message"></param>
+        /// <returns></returns>
+        public async Task ClientsSendMessagetoUsers(MessageinputDto _message)
+        {
+            await _sendMessageService.SendMessageToUsers(_message.title, _message.message, _message.messageType, _message.userIds);
         }
     }
 }

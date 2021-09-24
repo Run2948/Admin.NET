@@ -37,6 +37,12 @@
               <span>账户设置</span>
             </router-link>
           </a-menu-item>
+          <a-menu-item key="2">
+            <a @click="sendMessage()">
+              <a-icon type="message" />
+              <span>消息发送测试</span>
+            </a>
+          </a-menu-item>
           <a-menu-divider />
           <a-menu-item key="3">
             <a href="javascript:;" @click="handleLogout">
@@ -74,6 +80,7 @@ import { mapActions, mapGetters } from 'vuex'
 import { ALL_APPS_MENU } from '@/store/mutation-types'
 import Vue from 'vue'
 import { message } from 'ant-design-vue/es'
+import { messagesendtoAll } from '@/utils/messagesend'
 
 export default {
   name: 'UserMenu',
@@ -188,18 +195,50 @@ export default {
       } else {
         this.isFullscreen = true
       }
-    }
+    },
+    // 发送消息测试
+    sendMessage() {
+      messagesendtoAll(Object.assign({ title: '测试标题', message: '这是消息内容', messagetype: 1 }))
+    },
   }
 //#if (EnableTenant)
   // signalr接收的信息
   ,sockets: {
     ReceiveMessage(data) {
-      this.$notification.info({
-        message: '系统消息',
-        description: data,
-        placement: 'bottomRight',
-        duration: null
-      })
+      switch (data.messagetype) {
+        case 0:
+          this.$notification.info({
+            message: data.title,
+            description: data.message,
+            placement: 'bottomRight',
+            duration: null
+          })
+          break
+        case 1:
+          this.$notification.success({
+            message: data.title,
+            description: data.message,
+            placement: 'bottomRight',
+            duration: null
+          })
+          break
+        case 2:
+          this.$notification.warning({
+            message: data.title,
+            description: data.message,
+            placement: 'bottomRight',
+            duration: null
+          })
+          break
+        case 3:
+          this.$notification.error({
+            message: data.title,
+            description: data.message,
+            placement: 'bottomRight',
+            duration: null
+          })
+          break
+      }
     }
   }
 //#endif
