@@ -17,22 +17,22 @@ namespace Furion.DatabaseAccessor
         /// <summary>
         /// 假删除，根据id删除
         /// </summary>
-        public static void FakeDelete<TEntity>(this IPrivateRepository<TEntity> repository,int id)
+        public static void FakeDelete<TEntity>(this IPrivateRepository<TEntity> repository, long id)
             where TEntity : class, IPrivateEntity, new()
         {
             // 创建实体对象并设置主键值
             var entity = Activator.CreateInstance<TEntity>();
             var PrimaryKeyProperty = typeof(TEntity).GetProperty(PrimaryKeyName);
-            PrimaryKeyProperty.SetValue(PrimaryKeyName, id);
+            PrimaryKeyProperty.SetValue(entity, id);
             repository.FakeDelete(entity);
         }
         /// <summary>
         /// 假删除
         /// </summary>
-        public static void FakeDelete<TEntity>(this IPrivateRepository<TEntity> repository,TEntity entity)
+        public static void FakeDelete<TEntity>(this IPrivateRepository<TEntity> repository, TEntity entity)
             where TEntity : class, IPrivateEntity, new()
         {
-            var fakedeleteProperty= repository.EntityType.ClrType.GetProperty(FakeDeleteColumnName);
+            var fakedeleteProperty = repository.EntityType.ClrType.GetProperty(FakeDeleteColumnName);
             fakedeleteProperty.SetValue(entity, true);
             repository.UpdateInclude(entity, new[] { fakedeleteProperty.Name });
         }
@@ -63,13 +63,13 @@ namespace Furion.DatabaseAccessor
         /// 异步假删除
         /// </summary>
 
-        public static async Task FakeDeleteAsync<TEntity>(this IPrivateRepository<TEntity> repository, int id)
+        public static async Task FakeDeleteAsync<TEntity>(this IPrivateRepository<TEntity> repository, long id)
            where TEntity : class, IPrivateEntity, new()
         {
             // 创建实体对象并设置主键值
             var entity = Activator.CreateInstance<TEntity>();
             var PrimaryKeyProperty = typeof(TEntity).GetProperty(PrimaryKeyName);
-            PrimaryKeyProperty.SetValue(PrimaryKeyName, id);
+            PrimaryKeyProperty.SetValue(entity, id);
             await repository.FakeDeleteAsync(entity);
         }
         /// <summary>
@@ -112,12 +112,12 @@ namespace Furion.DatabaseAccessor
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>
-        public static void  FakeDelete<TEntity>(this TEntity entity)
+        public static void FakeDelete<TEntity>(this TEntity entity)
            where TEntity : class, IPrivateEntity, new()
         {
             var fakedeleteProperty = typeof(TEntity).GetProperty(FakeDeleteColumnName);
             fakedeleteProperty.SetValue(entity, true);
-             entity.UpdateInclude(new[] { fakedeleteProperty.Name });
+            entity.UpdateInclude(new[] { fakedeleteProperty.Name });
         }
         /// <summary>
         /// 假删除立即执行
@@ -129,7 +129,7 @@ namespace Furion.DatabaseAccessor
         {
             var fakedeleteProperty = typeof(TEntity).GetProperty(FakeDeleteColumnName);
             fakedeleteProperty.SetValue(entity, true);
-             entity.UpdateIncludeNow(new[] { fakedeleteProperty.Name });
+            entity.UpdateIncludeNow(new[] { fakedeleteProperty.Name });
         }
     }
 }
