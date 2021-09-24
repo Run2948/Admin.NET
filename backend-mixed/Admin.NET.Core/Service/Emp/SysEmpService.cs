@@ -58,8 +58,7 @@ namespace Admin.NET.Core.Service
 
             // 再新增新员工信息
             var emp = sysEmpParam.Adapt<SysEmp>();
-            await _sysEmpRep.InsertAsync(emp);
-            await _sysEmpRep.SaveNowAsync();
+            await _sysEmpRep.InsertNowAsync(emp);
 
             // 更新附属机构职位信息
             await _sysEmpExtOrgPosService.AddOrUpdate(emp.Id, sysEmpParam.ExtIds);
