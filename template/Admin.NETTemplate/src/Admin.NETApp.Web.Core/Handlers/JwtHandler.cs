@@ -74,6 +74,8 @@ namespace Admin.NETApp.Web.Core
 
             // 获取用户权限集合（按钮或API接口）
             var allPermissionList = await App.GetService<ISysMenuService>().GetAllPermissionList();
+            allPermissionList.Add("sysUser:selector");//为所有用户添加用户选择器权限
+
             var permissionList = await App.GetService<ISysMenuService>().GetLoginPermissionList(userManager.UserId);
 
             // 检查授权
