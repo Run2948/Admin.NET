@@ -5,6 +5,7 @@ using Furion.DependencyInjection;
 using Furion.DynamicApiController;
 using Furion.FriendlyException;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -320,6 +321,7 @@ namespace Admin.NET.Core.Service
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AllowAnonymous] //公告中需要使用，开放权限 
         [HttpGet("/sysUser/selector")]
         public async Task<dynamic> GetUserSelector([FromQuery] UserSelectorInput input)
         {
