@@ -74,7 +74,7 @@ namespace Furion.Extras.Admin.NET.Service
                                          .Where(!string.IsNullOrEmpty(pid), x => (x.n.e.OrgId == long.Parse(pid) ||
                                                                             x.o.Pids.Contains($"[{pid.Trim()}]")))
                                          .Where(input.SearchStatus.HasValue, x => x.n.u.Status == input.SearchStatus.Value)
-                                         .Where(!superAdmin, x => x.n.u.AdminType != AdminType.SuperAdmin)
+                                         .Where(x => x.n.u.AdminType != AdminType.SuperAdmin)//排除超级管理员
                                          .Where(!superAdmin && dataScopes.Count > 0, x => dataScopes.Contains(x.n.e.OrgId))
                                          .Select(u => u.n.u.Adapt<UserOutput>())
                                          .ToPagedListAsync(input.PageNo, input.PageSize);
@@ -92,7 +92,7 @@ namespace Furion.Extras.Admin.NET.Service
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost("/sysUser/add")]
-        [UnitOfWork]
+        //[UnitOfWork]//不能嵌套uow
         public async Task AddUser(AddUserInput input)
         {
             // 数据范围检查
@@ -119,10 +119,13 @@ namespace Furion.Extras.Admin.NET.Service
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost("/sysUser/delete")]
-        [UnitOfWork]
+        //[UnitOfWork]
         public async Task DeleteUser(DeleteUserInput input)
         {
-            var user = await _sysUserRep.FirstOrDefaultAsync(u => u.Id == input.Id);
+            // 数据范围检查
+            CheckDataScope(input.SysEmpParam.OrgId);
+
+            var user = await _sysUserRep.FirstOrDefaultAsync(u => u.Id == input.Id, false);
             if (user == null)
                 throw Oops.Oh(ErrorCode.D1002);
 
@@ -135,20 +138,17 @@ namespace Furion.Extras.Admin.NET.Service
             if (user.Id == _userManager.UserId)
                 throw Oops.Oh(ErrorCode.D1001);
 
-            // 数据范围检查
-            CheckDataScope(input.SysEmpParam.OrgId);
-
             // 直接删除用户
             await user.DeleteAsync();
 
             // 删除员工及附属机构职位信息
-            await _sysEmpService.DeleteEmpInfoByUserId(user.Id);
+            await _sysEmpService.DeleteEmpInfoByUserId(input.Id);//empId与userId相同
 
             //删除该用户对应的用户-角色表关联信息
-            await _sysUserRoleService.DeleteUserRoleListByUserId(user.Id);
+            await _sysUserRoleService.DeleteUserRoleListByUserId(input.Id);
 
             //删除该用户对应的用户-数据范围表关联信息
-            await _sysUserDataScopeService.DeleteUserDataScopeListByUserId(user.Id);
+            await _sysUserDataScopeService.DeleteUserDataScopeListByUserId(input.Id);
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace Furion.Extras.Admin.NET.Service
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost("/sysUser/edit")]
-        [UnitOfWork]
+        //[UnitOfWork]
         public async Task UpdateUser(UpdateUserInput input)
         {
             // 数据范围检查

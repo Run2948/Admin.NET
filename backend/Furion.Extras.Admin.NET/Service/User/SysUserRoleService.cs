@@ -94,8 +94,7 @@ namespace Furion.Extras.Admin.NET.Service
         /// <returns></returns>
         public async Task DeleteUserRoleListByUserId(long userId)
         {
-            var userRoles = await _sysUserRoleRep.Where(u => u.SysUserId == userId).ToListAsync();
-            await _sysUserRoleRep.DeleteAsync(userRoles);
+            await _sysUserRoleRep.Context.DeleteRangeAsync<SysUserRole>(m => m.SysUserId == userId);
         }
     }
 }

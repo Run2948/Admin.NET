@@ -68,8 +68,7 @@ namespace Admin.NETApp.Core.Service
         /// <returns></returns>
         public async Task DeleteUserDataScopeListByUserId(long userId)
         {
-            var dataScopes = await _sysUserDataScopeRep.Where(u => u.SysUserId == userId).ToListAsync();
-            await _sysUserDataScopeRep.DeleteAsync(dataScopes);
+            await _sysUserDataScopeRep.AsQueryable(m => m.SysUserId == userId, false).DeleteRangeAsync(_sysUserDataScopeRep.Context);
         }
     }
 }

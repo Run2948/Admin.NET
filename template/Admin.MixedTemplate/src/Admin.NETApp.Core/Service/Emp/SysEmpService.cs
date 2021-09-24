@@ -97,12 +97,11 @@ namespace Admin.NETApp.Core.Service
         /// </summary>
         /// <param name="empId"></param>
         /// <returns></returns>
-        [UnitOfWork]
+        //[UnitOfWork]
         public async Task DeleteEmpInfoByUserId(long empId)
         {
             // 删除员工信息
-            var emp = await _sysEmpRep.FirstOrDefaultAsync(u => u.Id == empId);
-            await emp.DeleteAsync();
+            await _sysEmpRep.DeleteAsync(empId);
 
             // 级联删除对应的员工-附属信息
             await _sysEmpExtOrgPosService.DeleteEmpExtInfoByUserId(empId);
