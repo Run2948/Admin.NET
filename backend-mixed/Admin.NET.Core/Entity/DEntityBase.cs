@@ -12,6 +12,10 @@ namespace Admin.NET.Core
     /// </summary>
     public abstract class DEntityBase : DEntityBase<long, MasterDbContextLocator>
     {
+        public DEntityBase()
+        {
+            Id = Yitter.IdGenerator.YitIdHelper.NextId();
+        }
     }
 
     public abstract class DEntityBase<TKey, TDbContextLocator1> : PrivateDEntityBase<TKey>
