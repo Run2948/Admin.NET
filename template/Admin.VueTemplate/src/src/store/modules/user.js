@@ -73,6 +73,7 @@ const user = {
         getLoginUser().then(response => {
           if (response.success) {
             const data = response.data
+            Vue.ls.remove(ALL_APPS_MENU)
             commit('SET_ADMINTYPE', data.adminType)
             commit('SET_ROLES', 1)
             commit('SET_BUTTONS', data.permissions)
