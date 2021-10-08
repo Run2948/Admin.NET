@@ -37,7 +37,7 @@ Vue.filter('Fmoney', function (val) {
     cents = '0' + cents
   }
   // eslint-disable-next-line no-undef
-  for (let i = 0; i < Math.floor((val.length - (1 + i)) / 3); I++) {
+  for (let i = 0; i < Math.floor((val.length - (1 + i)) / 3); i++) {
     val = val.substring(0, val.length - (4 * i + 3)) + ',' + val.substring(val.length - (4 * i + 3))
   }
   return (((sign) ? '' : '-') + val + '.' + cents)
