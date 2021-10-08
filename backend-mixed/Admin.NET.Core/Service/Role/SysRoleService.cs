@@ -52,9 +52,14 @@ namespace Admin.NET.Core.Service
         [NonAction]
         public async Task<List<RoleOutput>> GetUserRoleList(long userId)
         {
-            return await _sysRoleRep.DetachedEntities.Join(_sysUserRoleRep.DetachedEntities, u => u.Id, e => e.SysRoleId, (u, e) => new { u, e })
-                                    .Where(x => x.e.SysUserId == userId)
-                                    .Select(x => x.u.Adapt<RoleOutput>()).ToListAsync();
+            return await _sysUserRoleRep.Include(m => m.SysRole, false)
+                  .Where(m => m.SysUserId == userId && m.SysRole.Status == CommonStatus.ENABLE)
+                  .Select(m => new RoleOutput
+                  {
+                      Id = m.SysRoleId,
+                      Code = m.SysRole.Code,
+                      Name = m.SysRole.Name
+                  }).ToListAsync();
         }
 
         /// <summary>
