@@ -1,10 +1,10 @@
-﻿using Furion;
+﻿using Admin.NETApp.Core.Options;
+using Furion;
 using Furion.DatabaseAccessor;
 using Furion.DataEncryption;
 using Furion.DependencyInjection;
 using Furion.DynamicApiController;
 using Furion.EventBridge;
-using Furion.Extras.Admin.NET.Options;
 using Furion.FriendlyException;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
@@ -17,7 +17,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UAParser;
 
-namespace Admin.NET.Core.Service
+namespace Admin.NETApp.Core.Service
 {
     /// <summary>
     /// 登录授权相关服务
@@ -88,7 +88,11 @@ namespace Admin.NET.Core.Service
             var accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>
             {
                 { ClaimConst.CLAINM_USERID, user.Id },
+#if (EnableTenant)
                 { ClaimConst.TENANT_ID, user.TenantId },
+#else
+                //{ ClaimConst.TENANT_ID, user.TenantId },
+#endif
                 { ClaimConst.CLAINM_ACCOUNT, user.Account },
                 { ClaimConst.CLAINM_NAME, user.Name },
                 { ClaimConst.CLAINM_SUPERADMIN, user.AdminType },

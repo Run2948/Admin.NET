@@ -1,7 +1,7 @@
 ﻿﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Admin.NET.Core.Service
+namespace Admin.NETApp.Core.Service
 {
     public interface ISysOnlineUserService
     {

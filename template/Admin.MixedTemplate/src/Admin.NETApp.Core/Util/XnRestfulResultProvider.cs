@@ -1,17 +1,14 @@
 ﻿using Furion;
 using Furion.DataValidation;
-using Furion.DependencyInjection;
 using Furion.UnifyResult;
 using Furion.UnifyResult.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Admin.NET.Core
+namespace Admin.NETApp.Core
 {
     /// <summary>
     /// 规范化RESTful风格返回值

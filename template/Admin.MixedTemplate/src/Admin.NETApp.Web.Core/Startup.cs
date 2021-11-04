@@ -32,7 +32,7 @@ namespace Admin.NETApp.Web.Core
                     });
             services.AddViewEngine();
             services.AddSignalR();
-            services.AddSimpleEventBus();
+            services.AddEventBridge();
 
             if (App.Configuration["Cache:CacheType"] == "RedisCache")
             {

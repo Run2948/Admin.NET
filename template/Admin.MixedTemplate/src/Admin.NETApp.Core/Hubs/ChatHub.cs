@@ -1,4 +1,4 @@
-using Admin.NET.Core.Service;
+using Admin.NETApp.Core.Service;
 using Furion.DataEncryption;
 using Microsoft.AspNetCore.SignalR;
 using System;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Admin.NET.Core.Service
+namespace Admin.NETApp.Core.Service
 {
     public class OnlineUserOutput
     {

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Mapster;
 using Microsoft.AspNetCore.SignalR;
 
-namespace Admin.NET.Core.Service
+namespace Admin.NETApp.Core.Service
 {
     /// <summary>
     /// 在线用户服务
@@ -48,7 +48,11 @@ namespace Admin.NET.Core.Service
 
             var onlineUsers = await _sysCacheService.GetAsync<List<SysOnlineUser>>(CommonConst.CACHE_KEY_ONLINE_USER) ?? new List<SysOnlineUser>();
             var onlineUserOutputs = onlineUsers
+#if (EnableTenant)
                 .Where(!_userManager.SuperAdmin, o => o.TenantId == _userManager.User.TenantId)
+#else
+                //.Where(!_userManager.SuperAdmin, o => o.TenantId == _userManager.User.TenantId)
+#endif
                 .Where(!string.IsNullOrWhiteSpace(input.SearchValue), o => o.Account.Contains(input.SearchValue) || o.Name.Contains(input.SearchValue))
                 .Select(o => o.Adapt<OnlineUserOutput>())
                 .ToList();
@@ -82,7 +86,11 @@ namespace Admin.NET.Core.Service
         {
             var onlineUsers = await _sysCacheService.GetAsync<List<SysOnlineUser>>(CommonConst.CACHE_KEY_ONLINE_USER) ?? new List<SysOnlineUser>();
             var onlineUserOutputs = onlineUsers
+#if (EnableTenant)
                 .Where(!_userManager.SuperAdmin, o => o.TenantId == _userManager.User.TenantId)
+#else
+                //.Where(!_userManager.SuperAdmin, o => o.TenantId == _userManager.User.TenantId)
+#endif                
                 .Select(o => o.Adapt<OnlineUserOutput>())
                 .ToList();
 
