@@ -15,24 +15,24 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(SqlServer)' == 'True' ">
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.9" />
-    <PackageReference Include="Zack.EFCore.Batch.MSSQL" Version="1.4.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.11" />
+    <PackageReference Include="Zack.EFCore.Batch.MSSQL" Version="1.4.10" />
   </ItemGroup>
   <ItemGroup Condition="'$(MySql)' == 'True' ">
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
-    <PackageReference Include="Zack.EFCore.Batch.MySQL.Pomelo" Version="1.4.9" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.2" />
+    <PackageReference Include="Zack.EFCore.Batch.MySQL.Pomelo" Version="1.4.10" />
   </ItemGroup>
   <ItemGroup Condition="'$(Oracle)' == 'True' ">
-    <PackageReference Include="Oracle.EntityFrameworkCore" Version="5.21.3" />
-    <PackageReference Include="Zack.EFCore.Batch.Oracle" Version="1.4.9" />
+    <PackageReference Include="Oracle.EntityFrameworkCore" Version="5.21.4" />
+    <PackageReference Include="Zack.EFCore.Batch.Oracle" Version="1.4.10" />
   </ItemGroup>
   <ItemGroup Condition="'$(Npgsql)' == 'True' ">
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.7" />
-    <PackageReference Include="Zack.EFCore.Batch.Npgsql" Version="1.4.9" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
+    <PackageReference Include="Zack.EFCore.Batch.Npgsql" Version="1.4.10" />
   </ItemGroup>
   <ItemGroup Condition="'$(Sqlite)' == 'True' ">
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.9" />
-    <PackageReference Include="Zack.EFCore.Batch.Sqlite" Version="1.4.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.11" />
+    <PackageReference Include="Zack.EFCore.Batch.Sqlite" Version="1.4.10" />
   </ItemGroup>
   
   <ItemGroup>

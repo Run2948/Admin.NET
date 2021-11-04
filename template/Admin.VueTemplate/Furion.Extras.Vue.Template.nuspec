@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Furion.Extras.Vue.Template</id>
-    <version>1.0.34</version>
+    <version>1.0.35</version>
     <title>Furion.Extras.Vue.Template</title>
     <authors>Run2948</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

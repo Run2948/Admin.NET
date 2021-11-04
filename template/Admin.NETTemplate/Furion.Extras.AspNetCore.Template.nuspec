@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Furion.Extras.AspNetCore.Template</id>
-    <version>1.0.34</version>
+    <version>1.0.35</version>
     <title>Furion.Extras.AspNetCore.Template</title>
     <authors>Run2948</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -18,7 +18,7 @@
       <packageType name="Template" />
     </packageTypes>
     <dependencies>
-      <dependency id="Furion.Extras.AspNetCore" version="1.0.34" />
+      <dependency id="Furion.Extras.AspNetCore" version="1.0.35" />
    </dependencies>	
   </metadata>
 </package>

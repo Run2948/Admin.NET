@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.9" />
-		<PackageReference Include="Zack.EFCore.Batch.Sqlite" Version="1.4.8" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.11" />
+		<PackageReference Include="Zack.EFCore.Batch.Sqlite" Version="1.4.10" />
   </ItemGroup>
 
   <ItemGroup>
