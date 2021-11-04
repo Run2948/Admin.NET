@@ -23,6 +23,7 @@
 ```
 如果对您有帮助，点击右上角⭐Star⭐关注 ，感谢支持开源！
 ```
+[![Stargazers over time](https://whnb.wang/stars/Run2948/Admin.NET)](https://whnb.wang)
 
 ### 🍁 框架拓展包
 
