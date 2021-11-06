@@ -35,12 +35,14 @@
              </a-popconfirm>
            </span>
          </a-table> -->
-      <s-table ref="table"
-               :columns="columns"
-               :data="loadData"
-               :alert="true"
-               :rowKey="record => record.id"
-               :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }">
+      <s-table
+        ref="table"
+        :columns="columns"
+        :data="loadData"
+        :alert="true"
+        :rowKey="record => record.id"
+        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
+      >
         <span slot="lastLoginAddress" slot-scope="text">
           <ellipsis :length="20" tooltip>{{ text }}</ellipsis>
         </span>
@@ -48,10 +50,12 @@
           <ellipsis :length="20" tooltip>{{ text }}</ellipsis>
         </span>
         <span slot="action" slot-scope="text, record">
-          <a-popconfirm v-if="hasPerm('sysOnlineUser:forceExist')"
-                        placement="topRight"
-                        title="是否强制下线该用户？"
-                        @confirm="() => forceExist(record)">
+          <a-popconfirm
+            v-if="hasPerm('sysOnlineUser:forceExist')"
+            placement="topRight"
+            title="是否强制下线该用户？"
+            @confirm="() => forceExist(record)"
+          >
             <a>强制下线</a>
           </a-popconfirm>
         </span>
@@ -174,11 +178,11 @@ export default {
 }
 </script>
 <style lang="less">
-  .table-operator {
-    margin-bottom: 18px;
-  }
+.table-operator {
+  margin-bottom: 18px;
+}
 
-  button {
-    margin-right: 8px;
-  }
+button {
+  margin-right: 8px;
+}
 </style>

@@ -349,6 +349,8 @@ export default {
       // eslint-disable-next-line eqeqeq
       if (record.visible == 'Y') {
         this.visibleDef = true
+      } else {
+        this.visibleDef = false
       }
       this.form.getFieldDecorator('weight', {
         valuePropName: 'checked',

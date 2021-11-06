@@ -26,10 +26,8 @@
     "jquery": "^3.5.1",
     "jsbarcode": "^3.11.3",
     "k-form-design": "^3.7.3",
-    //#if (EnableTenant)
     "leaflet": "^1.7.1",
     "leaflet.pm": "^2.2.0",
-    //#endif
     "linq": "^3.2.3",
     "lodash.clonedeep": "^4.5.0",
     "lodash.get": "^4.4.2",
@@ -50,9 +48,7 @@
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.1.2",
     "vue-svg-component-runtime": "^1.0.1",
-    //#if (EnableTenant)
     "vue2-leaflet": "^2.7.0",
-    //#endif
     "vuedraggable": "^2.23.2",
     "vuex": "^3.1.1",
     "wangeditor": "^3.1.1"

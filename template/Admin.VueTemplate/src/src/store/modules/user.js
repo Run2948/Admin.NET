@@ -16,6 +16,7 @@ const user = {
     welcome: '',
     avatar: '',
     buttons: [], // 按钮权限
+    allButtons: [], // 所有按钮权限
     admintype: '', // 是否是超管
     roles: [],
     info: {}
@@ -41,6 +42,9 @@ const user = {
     SET_BUTTONS: (state, buttons) => {
       state.buttons = buttons
     },
+    SET_ALL_BUTTONS: (state, allButtons) => {
+      state.allButtons = allButtons
+    },
     SET_ADMINTYPE: (state, admintype) => {
       state.admintype = admintype
     }
@@ -55,9 +59,10 @@ const user = {
             reject(response.message)
             return
           }
-          const result = response.data
-          Vue.ls.set(ACCESS_TOKEN, result, 7 * 24 * 60 * 60 * 1000)
-          commit('SET_TOKEN', result)
+          // 从响应 Header 中读取，处理逻辑移至 request.js 中处理
+          // const result = response.data
+          // Vue.ls.set(ACCESS_TOKEN, result, 7 * 24 * 60 * 60 * 1000)
+          // commit('SET_TOKEN', result)
           resolve()
         // eslint-disable-next-line handle-callback-err
         }).catch(error => {
@@ -77,6 +82,7 @@ const user = {
             commit('SET_ADMINTYPE', data.adminType)
             commit('SET_ROLES', 1)
             commit('SET_BUTTONS', data.permissions)
+            commit('SET_ALL_BUTTONS', data.allPermissions)
             commit('SET_INFO', data)
             commit('SET_NAME', { name: data.name, welcome: welcome() })
             if (data.avatar != null) {
@@ -111,10 +117,12 @@ const user = {
           commit('SET_TOKEN', '')
           commit('SET_ROLES', [])
           commit('SET_BUTTONS', [])
+          commit('SET_ALL_BUTTONS', [])
           commit('SET_ADMINTYPE', '')
           Vue.ls.remove(ACCESS_TOKEN)
           Vue.ls.remove(ALL_APPS_MENU)
           Vue.ls.remove(DICT_TYPE_TREE_DATA)
+          Vue.ls.remove('X-Access-Token')
         })
       })
     },
@@ -142,7 +150,7 @@ const user = {
       return new Promise((resolve) => {
         sysMenuChange({ application: application.code }).then((res) => {
           const apps = { 'code': '', 'name': '', 'active': '', 'menu': '' }
-          apps.active = true
+          apps.active = 'Y'
           apps.menu = res.data
           // eslint-disable-next-line camelcase
           const all_app_menu = Vue.ls.get(ALL_APPS_MENU)
@@ -150,8 +158,8 @@ const user = {
           const new_false_all_app_menu = []
           // 先去除所有默认的，以为此时切换的即将成为前端缓存默认的应用
           all_app_menu.forEach(item => {
-            if (item.active) {
-              item.active = false
+            if (item.active === 'Y') {
+              item.active = 'N'
             }
             new_false_all_app_menu.push(item)
           })

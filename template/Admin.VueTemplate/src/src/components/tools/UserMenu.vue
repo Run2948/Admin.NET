@@ -124,12 +124,10 @@ export default {
   computed: {
     ...mapGetters(['token', 'nickname', 'avatar', 'userInfo'])
   },
-//#if (EnableTenant)
   // 设置signalr令牌
   async mounted() {
     await this.$socket.authenticate(this.token)
   },
-//#endif
   methods: {
     ...mapActions(['Logout', 'MenuChange']),
 
@@ -200,10 +198,9 @@ export default {
     sendMessage() {
       messagesendtoAll(Object.assign({ title: '测试标题', message: '这是消息内容', messagetype: 1 }))
     },
-  }
-//#if (EnableTenant)
+  },
   // signalr接收的信息
-  ,sockets: {
+  sockets: {
     ReceiveMessage(data) {
       switch (data.messagetype) {
         case 0:
@@ -241,7 +238,6 @@ export default {
       }
     }
   }
-//#endif
 }
 </script>
 
