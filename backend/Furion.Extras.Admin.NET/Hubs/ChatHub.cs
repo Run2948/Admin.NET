@@ -20,6 +20,7 @@ namespace Furion.Extras.Admin.NET
 
         public ChatHub(ISysCacheService cache, ISendMessageService sendMessageService)
         {
+            _cache= cache;
             _sendMessageService = sendMessageService;
         }
 

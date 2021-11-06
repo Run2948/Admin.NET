@@ -11,6 +11,7 @@ module.exports = {
     'vue/no-unused-components': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-multi-spaces': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     // 'generator-star-spacing': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-trailing-spaces': 'off',
     'space-before-function-paren': 'off'
   },
   parserOptions: {

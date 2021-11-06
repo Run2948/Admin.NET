@@ -21,6 +21,7 @@ namespace Admin.NET.Core
 
         public ChatHub(ISysCacheService cache, ISendMessageService sendMessageService)
         {
+            _cache = cache;
             _sendMessageService = sendMessageService;
         }
 

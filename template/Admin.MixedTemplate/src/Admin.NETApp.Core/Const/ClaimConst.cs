@@ -22,9 +22,11 @@
         /// </summary>
         public const string CLAINM_SUPERADMIN = "SuperAdmin";
 
+#if (EnableTenant)
         /// <summary>
         /// 租户Id
         /// </summary>
         public const string TENANT_ID = "TenantId";
+#endif
     }
 }

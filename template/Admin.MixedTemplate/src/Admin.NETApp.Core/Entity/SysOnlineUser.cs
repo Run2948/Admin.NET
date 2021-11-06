@@ -66,12 +66,13 @@ namespace Admin.NETApp.Core
         [Comment("最后登录所用系统")]
         [MaxLength(20)]
         public string LastLoginOs { get; set; }
-
+#if (EnableTenant)
         /// <summary>
         /// 租户id
         /// </summary>
         [Comment("租户id")]
         public long TenantId { get; set; }
+#endif
 
         public void Configure(EntityTypeBuilder<SysOnlineUser> entityBuilder, DbContext dbContext, Type dbContextLocator)
         {

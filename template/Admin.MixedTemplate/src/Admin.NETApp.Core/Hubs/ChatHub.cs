@@ -21,6 +21,7 @@ namespace Admin.NETApp.Core
 
         public ChatHub(ISysCacheService cache, ISendMessageService sendMessageService)
         {
+            _cache = cache;
             _sendMessageService = sendMessageService;
         }
 
@@ -40,7 +41,9 @@ namespace Admin.NETApp.Core
             var userId = claims.FirstOrDefault(e => e.Type == ClaimConst.CLAINM_USERID)?.Value;
             var account = claims.FirstOrDefault(e => e.Type == ClaimConst.CLAINM_ACCOUNT)?.Value;
             var name = claims.FirstOrDefault(e => e.Type == ClaimConst.CLAINM_NAME)?.Value;
+#if (EnableTenant)
             var tenantId = claims.FirstOrDefault(e => e.Type == ClaimConst.TENANT_ID)?.Value;
+#endif
             var onlineUsers = await _cache.GetAsync<List<SysOnlineUser>>(CommonConst.CACHE_KEY_ONLINE_USER) ?? new List<SysOnlineUser>();
             onlineUsers.Add(new SysOnlineUser
             {
