@@ -1,9 +1,11 @@
-﻿namespace Furion.Extras.Admin.NET.Service
+﻿using System.Collections.Generic;
+
+namespace Furion.Extras.Admin.NET.Service
 {
     /// <summary>
     /// 代码生成参数类
     /// </summary>
-    public class CodeGenOutput
+    public class CodeGenModel
     {
         /// <summary>
         /// 代码生成器Id
@@ -16,9 +18,32 @@
         public string AuthorName { get; set; }
 
         /// <summary>
+        /// 命名空间
+        /// </summary>
+        public string NameSpace { get; set; }
+
+        /// <summary>
+        /// 程序集
+        /// </summary>
+        public string ProName
+        {
+            get { return NameSpace.TrimEnd(new char[] { '.', 'A', 'p', 'p', 'l', 'i', 'c', 'a', 't', 'i', 'o', 'n' }); }
+        }
+
+        /// <summary>
         /// 类名
         /// </summary>
         public string ClassName { get; set; }
+
+        /// <summary>
+        /// 前端查询条件集合
+        /// </summary>
+        public List<Service.CodeGenConfig> QueryWhetherList { get; set; }
+
+        /// <summary>
+        /// 表字段集合
+        /// </summary>
+        public List<Service.CodeGenConfig> TableField { get; set; }
 
         /// <summary>
         /// 是否移除表前缀

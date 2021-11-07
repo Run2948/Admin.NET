@@ -290,6 +290,11 @@
             生成方式
             </summary>
         </member>
+        <member name="P:Furion.Extras.Admin.NET.SysCodeGen.DatabaseName">
+            <summary>
+            数据库名
+            </summary>
+        </member>
         <member name="P:Furion.Extras.Admin.NET.SysCodeGen.TableName">
             <summary>
             数据库表名
@@ -2846,6 +2851,11 @@
             否
             </summary>
         </member>
+        <member name="T:Furion.Extras.Admin.NET.LogEventHandler">
+            <summary>
+            日志订阅处理
+            </summary>
+        </member>
         <member name="T:Furion.Extras.Admin.NET.DictionaryExtensions">
             <summary>
             字典扩展
@@ -4172,6 +4182,13 @@
             <param name="tableColumnOuputList"></param>
             <param name="codeGenerate"></param>
         </member>
+        <member name="M:Furion.Extras.Admin.NET.Service.CodeGenConfigService.DtoMapper(System.Collections.Generic.ICollection{Furion.Extras.Admin.NET.Service.CodeGenConfig})">
+            <summary>
+            映射主表
+            </summary>
+            <param name="rows"></param>
+            <returns></returns>
+        </member>
         <member name="T:Furion.Extras.Admin.NET.Service.CodeGen.CodeGenService">
             <summary>
             代码生成器服务
@@ -4212,13 +4229,19 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Furion.Extras.Admin.NET.Service.CodeGen.CodeGenService.GetTableList">
+        <member name="M:Furion.Extras.Admin.NET.Service.CodeGen.CodeGenService.GetDatabaseList">
+            <summary>
+            获取数据库库集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Furion.Extras.Admin.NET.Service.CodeGen.CodeGenService.GetTableList(System.String)">
             <summary>
             获取数据库表(实体)集合
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Furion.Extras.Admin.NET.Service.CodeGen.CodeGenService.GetColumnListByTableName(System.String)">
+        <member name="M:Furion.Extras.Admin.NET.Service.CodeGen.CodeGenService.GetColumnListByTableName(System.String,System.String)">
             <summary>
             根据表名获取列
             </summary>
@@ -4252,6 +4275,11 @@
         <member name="T:Furion.Extras.Admin.NET.Service.CodeGenConfig">
             <summary>
             代码生成详细配置参数
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenConfig.CodeGen">
+            <summary>
+            所属生成主表
             </summary>
         </member>
         <member name="P:Furion.Extras.Admin.NET.Service.CodeGenConfig.Id">
@@ -4374,9 +4402,19 @@
             代码生成参数类
             </summary>
         </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenPageInput.DatabaseName">
+            <summary>
+            数据库名
+            </summary>
+        </member>
         <member name="P:Furion.Extras.Admin.NET.Service.CodeGenPageInput.TableName">
             <summary>
             数据库表名
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.AddCodeGenInput.DatabaseName">
+            <summary>
+            数据库名
             </summary>
         </member>
         <member name="P:Furion.Extras.Admin.NET.Service.AddCodeGenInput.TableName">
@@ -4434,6 +4472,11 @@
             代码生成器Id
             </summary>
         </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.UpdateCodeGenInput.DatabaseName">
+            <summary>
+            数据库名
+            </summary>
+        </member>
         <member name="P:Furion.Extras.Admin.NET.Service.UpdateCodeGenInput.TableName">
             <summary>
             数据库表名
@@ -4484,6 +4527,91 @@
             功能名（数据库表名称）
             </summary>
         </member>
+        <member name="T:Furion.Extras.Admin.NET.Service.CodeGenModel">
+            <summary>
+            代码生成参数类
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenModel.Id">
+            <summary>
+            代码生成器Id
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenModel.AuthorName">
+            <summary>
+            作者姓名
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenModel.NameSpace">
+            <summary>
+            命名空间
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenModel.ProName">
+            <summary>
+            程序集
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenModel.ClassName">
+            <summary>
+            类名
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenModel.QueryWhetherList">
+            <summary>
+            前端查询条件集合
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenModel.TableField">
+            <summary>
+            表字段集合
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenModel.TablePrefix">
+            <summary>
+            是否移除表前缀
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenModel.GenerateType">
+            <summary>
+            生成方式
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenModel.DatabaseName">
+            <summary>
+            数据库名
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenModel.TableName">
+            <summary>
+            数据库表名
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenModel.PackageName">
+            <summary>
+            包名
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenModel.BusName">
+            <summary>
+            业务名（业务代码包名称）
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenModel.TableComment">
+            <summary>
+            功能名（数据库表名称）
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenModel.MenuApplication">
+            <summary>
+            菜单应用分类（应用编码）
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenModel.MenuPid">
+            <summary>
+            菜单父级
+            </summary>
+        </member>
         <member name="T:Furion.Extras.Admin.NET.Service.CodeGenOutput">
             <summary>
             代码生成参数类
@@ -4514,6 +4642,11 @@
             生成方式
             </summary>
         </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.CodeGenOutput.DatabaseName">
+            <summary>
+            数据库名
+            </summary>
+        </member>
         <member name="P:Furion.Extras.Admin.NET.Service.CodeGenOutput.TableName">
             <summary>
             数据库表名
@@ -4542,6 +4675,31 @@
         <member name="P:Furion.Extras.Admin.NET.Service.CodeGenOutput.MenuPid">
             <summary>
             菜单父级
+            </summary>
+        </member>
+        <member name="T:Furion.Extras.Admin.NET.Service.DatabaseOutput">
+            <summary>
+            数据库库列表参数
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.DatabaseOutput.DatabaseName">
+            <summary>
+            库名（字母形式的）
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.DatabaseOutput.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.DatabaseOutput.UpdateTime">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.DatabaseOutput.DatabaseComment">
+            <summary>
+            库名称描述（注释）（功能名）
             </summary>
         </member>
         <member name="T:Furion.Extras.Admin.NET.Service.TableColumnOuput">
@@ -4577,6 +4735,16 @@
         <member name="T:Furion.Extras.Admin.NET.Service.TableOutput">
             <summary>
             数据库表列表参数
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.TableOutput.DatabaseName">
+            <summary>
+            库名（字母形式的）
+            </summary>
+        </member>
+        <member name="P:Furion.Extras.Admin.NET.Service.TableOutput.DatabaseComment">
+            <summary>
+            库名称描述（注释）（功能名）
             </summary>
         </member>
         <member name="P:Furion.Extras.Admin.NET.Service.TableOutput.TableName">
@@ -9120,11 +9288,6 @@
             </summary>
             <param name="orgId"></param>
             <returns></returns>
-        </member>
-        <member name="T:Furion.Extras.Admin.NET.LogEventHandler">
-            <summary>
-            日志订阅处理
-            </summary>
         </member>
         <member name="T:Furion.Extras.Admin.NET.CodeGenUtil">
             <summary>

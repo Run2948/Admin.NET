@@ -16,9 +16,9 @@
       <template slot="columnComment" slot-scope="text, record">
         <a-input v-model="record.columnComment" />
       </template>
-      <!--<template slot="javaType" slot-scope="text, record">
-        <a-select style="width: 120px" v-model="record.javaType" :disabled="judgeColumns(record)">
-          <a-select-option v-for="(item,index) in javaTypeData" :key="index" :value="item.code">{{ item.name }}</a-select-option>
+      <!--<template slot="netType" slot-scope="text, record">
+        <a-select style="width: 120px" v-model="record.netType" :disabled="judgeColumns(record)">
+          <a-select-option v-for="(item,index) in netTypeData" :key="index" :value="item.code">{{ item.name }}</a-select-option>
         </a-select>
       </template> -->
       <template slot="effectType" slot-scope="text, record">
@@ -105,9 +105,9 @@
             dataIndex: 'netType'
           },
           // {
-          //   title: 'java类型',
-          //   dataIndex: 'javaType',
-          //   scopedSlots: { customRender: 'javaType' }
+          //   title: 'net类型',
+          //   dataIndex: 'netType',
+          //   scopedSlots: { customRender: 'netType' }
           // },
           {
             title: '作用类型',
@@ -182,7 +182,7 @@
         tableLoading: false,
         visible: false,
         loadData: [],
-        javaTypeData: [],
+        netTypeData: [],
         effectTypeData: [],
         dictDataAll: [],
         codeGenQueryTypeData: [],
@@ -197,7 +197,7 @@
         this.indexConfigShow = true
         this.tableLoading = true
         const dictOption = this.$options
-        this.javaTypeData = dictOption.filters['dictData']('code_gen_net_type')
+        this.netTypeData = dictOption.filters['dictData']('code_gen_net_type')
         this.effectTypeData = dictOption.filters['dictData']('code_gen_effect_type')
         this.dictDataAll = dictOption.filters['dictDataAll']()
         this.yesOrNoData = dictOption.filters['dictData']('yes_or_no')
@@ -207,6 +207,7 @@
         }
         sysCodeGenerateConfigList(params).then((res) => {
           this.loadData = res.data
+          console.log(res.data);
           this.loadData.forEach(item => {
             for (const key in item) {
               if (item[key] === 'Y') {
@@ -279,7 +280,7 @@
        */
       effectTypeChange(data, value) {
         if (value === 'fk') {
-          console.log(11)
+          //打开外键设置模态框
           this.$refs.fkModal.show(data)
         }
       },

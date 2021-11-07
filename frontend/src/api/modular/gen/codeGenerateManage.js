@@ -63,6 +63,20 @@ export function codeGenerateDelete (parameter) {
 }
 
 /**
+ * 查询当前数据库用户下的所有库
+ *
+ * @author fuqiang
+ * @date 2021/10/13 15:00
+ */
+ export function codeGenerateDatabaseList (parameter) {
+  return axios({
+    url: '/codeGenerate/DatabaseList',
+    method: 'get',
+    params: parameter
+  })
+}
+
+/**
  * 查询当前数据库用户下的所有表
  *
  * @author yubaoshan
@@ -77,15 +91,16 @@ export function codeGenerateInformationList (parameter) {
 }
 
 /**
- * 根据表名获取列
+ * 根据库名表名获取列
  *
- * @author wynnyo 20210423
+ * @author fuqiang 20211014
+ * @param {*} databaseName 库名
  * @param {*} tableName 表名
  * @return {*}
  */
-export function codeGenerateColumnList (tableName) {
+export function codeGenerateColumnList (databaseName,tableName) {
   return axios({
-    url: `/codeGenerate/ColumnList/${tableName}`,
+    url: `/codeGenerate/ColumnList/${databaseName}/${tableName}`,
     method: 'get'
   })
 }

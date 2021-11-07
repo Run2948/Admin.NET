@@ -8,10 +8,26 @@
     @cancel="handleCancel">
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
+         <a-row :gutter="24">
+          <a-col :md="12" :sm="24">
+            <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="生成库" has-feedback>
+               <a-select
+                style="width: 100%"
+                placeholder="请选择数据库"
+                v-decorator="['databaseName', {rules: [{ required: true, message: '请选择数据库！' }]}]">
+                <a-select-option
+                  v-for="(item,index) in databaseNameData"
+                  :key="index"
+                  :value="item.databaseName"
+                  @click="databaseNameSele(item)">{{ item.databaseName }}</a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+        </a-row>
         <a-row :gutter="24">
           <a-col :md="12" :sm="24">
             <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="生成表" has-feedback>
-              <a-select
+              <a-select 
                 style="width: 100%"
                 placeholder="请选择数据库表"
                 v-decorator="['tableName', {rules: [{ required: true, message: '请选择数据库表！' }]}]">
@@ -138,6 +154,7 @@
     getMenuTree
   } from '@/api/modular/system/menuManage'
   import {
+    codeGenerateDatabaseList,
     codeGenerateInformationList,
     codeGenerateAdd
   } from '@/api/modular/gen/codeGenerateManage'
@@ -163,11 +180,13 @@
         visible: false,
         appData: [],
         menuTreeData: [],
+        databaseNameData:[],
         tableNameData: [],
         // tablePrefixData: [],
         generateTypeData: [],
         confirmLoading: false,
         // tablePrefixValue: 'N',
+        databaseNameValue:'',
         tableNameValue: '',
         form: this.$form.createForm(this)
       }
@@ -176,7 +195,9 @@
       // 初始化方法
       add() {
         this.visible = true
-        this.codeGenerateInformationList()
+        this.codeGenerateDatabaseList()
+       // 多库默认需要选择后调用
+       // this.codeGenerateInformationList() 
         this.dataTypeItem()
         this.selectedByDefault()
 
@@ -196,7 +217,8 @@
           initialValue: '2'
         })
         this.form.getFieldDecorator('authorName', {
-          initialValue: 'zuohuaijun'
+          //initialValue: 'zuohuaijun'
+          initialValue: 'fuqiang'
         })
 
         // 初始化菜单默认选择
@@ -205,11 +227,19 @@
         })
         this.changeApplication('busiapp')
       },
+       /**
+       * 获得所有数据库
+       */
+      codeGenerateDatabaseList() {
+        codeGenerateDatabaseList().then((res) => {
+          this.databaseNameData = res.data
+        })
+      },
       /**
        * 获得所有数据库的表
        */
-      codeGenerateInformationList() {
-        codeGenerateInformationList().then((res) => {
+      codeGenerateInformationList(parameter) {
+        codeGenerateInformationList(parameter).then((res) => {
           this.tableNameData = res.data
         })
       },
@@ -271,6 +301,24 @@
         })
         // this.form.getFieldDecorator('tableComment', { initialValue: '' })
       },
+       /**
+       * 选择数据库
+       */
+      databaseNameSele(item) {
+        this.databaseNameValue = item.databaseName
+        // this.form.getFieldDecorator('tableComment', { initialValue: item.tableComment })
+        //this.form.getFieldDecorator('busName', {
+        //  initialValue: item.databaseComment
+        //})
+        // this.settingDefaultValue()
+        // this.form.getFieldDecorator('tableName', {
+        //  //X initialValue: ''
+        //  //X defaultValue:''
+        //  //X value:''
+        // }) 这个方法不起作用
+        this.form.setFieldsValue({'tableName':''}); //这个OK
+        this.codeGenerateInformationList({ dbContextLocatorName:this.databaseNameValue});
+      },
       /**
        * 选择数据库列表
        */
@@ -280,7 +328,7 @@
         this.form.getFieldDecorator('busName', {
           initialValue: item.tableComment
         })
-        // this.settingDefaultValue()
+        this.settingDefaultValue()
       },
       /**
        * 菜单所属应用change事件

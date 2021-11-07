@@ -11,6 +11,22 @@
         <a-form-item v-show="false">
           <a-input v-decorator="['id']" />
         </a-form-item>
+         <a-row :gutter="24">
+          <a-col :md="12" :sm="24">
+            <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="生成库" has-feedback>
+              <a-select
+                style="width: 100%"
+                placeholder="请选择数据库"
+                v-decorator="['databaseName', {rules: [{ required: true, message: '请选择数据库！' }]}]">
+                <a-select-option
+                  v-for="(item,index) in databaseNameData"
+                  :key="index"
+                  :value="item.databaseName"
+                  @click="databaseNameSele(item)">{{ item.databaseName }}</a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+        </a-row>
         <a-row :gutter="24">
           <a-col :md="12" :sm="24">
             <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="生成表" has-feedback>
@@ -141,6 +157,7 @@
     getMenuTree
   } from '@/api/modular/system/menuManage'
   import {
+    codeGenerateDatabaseList,
     codeGenerateInformationList,
     codeGenerateEdit
   } from '@/api/modular/gen/codeGenerateManage'
@@ -164,6 +181,7 @@
           }
         },
         visible: false,
+        databaseNameData:[],
         tableNameData: [],
         appData: [],
         menuTreeData: [],
@@ -171,6 +189,7 @@
         generateTypeData: [],
         confirmLoading: false,
         // tablePrefixValue: 'N',
+        databaseNameValue:'',
         tableNameValue: '',
         // packageNameShow: true,
         form: this.$form.createForm(this)
@@ -180,11 +199,13 @@
       // 初始化方法
       edit(record) {
         this.visible = true
+        this.codeGenerateDatabaseList()
         this.codeGenerateInformationList()
         this.dataTypeItem()
         setTimeout(() => {
           this.form.setFieldsValue({
             id: record.id,
+            databaseName:record.databaseName,
             tableName: record.tableName,
             // tablePrefix: record.tablePrefix,
             // tableComment: record.tableComment,
@@ -197,6 +218,7 @@
             menuPid: record.menuPid
           })
         }, 100)
+        this.databaseNameValue = record.databaseName
         this.tableNameValue = record.tableName
         // this.tablePrefixValue = record.tablePrefix
 
@@ -216,11 +238,19 @@
           }
         })
       },
+        /**
+       * 获得所有数据库
+       */
+      codeGenerateDatabaseList() {
+        codeGenerateDatabaseList().then((res) => {
+          this.databaseNameData = res.data
+        })
+      },
       /**
        * 获得所有数据库的表
        */
-      codeGenerateInformationList() {
-        codeGenerateInformationList().then((res) => {
+      codeGenerateInformationList(parameter) {
+        codeGenerateInformationList(parameter).then((res) => {
           this.tableNameData = res.data
         })
       },
@@ -261,6 +291,19 @@
       handleCancel() {
         this.form.resetFields()
         this.visible = false
+      },
+        /**
+       * 选择数据库
+       */
+      databaseNameSele(item) {
+        this.databaseNameValue = item.databaseName
+        // this.form.getFieldDecorator('tableComment', { initialValue: item.tableComment })
+        //this.form.getFieldDecorator('busName', {
+        //  initialValue: item.databaseComment
+        //})
+        this.form.setFieldsValue({'tableName':''}); //这个OK
+        this.codeGenerateInformationList({ dbContextLocatorName:this.databaseNameValue});
+        //this.settingDefaultValue()
       },
       /**
        * 选择数据库列表
@@ -303,15 +346,15 @@
       // /**
       //  * 设置默认值
       //  */
-      // settingDefaultValue () {
-      //   const tableName = this.classNameToHump()
+       settingDefaultValue () {
+      //  const tableName = this.classNameToHump()
       //   this.form.setFieldsValue(
       //     {
       //       className: tableName,
       //       busName: tableName.toLowerCase()
       //     }
       //   )
-      // },
+       },
       // /**
       //  * 设置类名为数据库表的驼峰命名
       //  */
