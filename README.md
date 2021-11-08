@@ -116,9 +116,6 @@ dotnet new Admin.NET -n 你的项目名称
 
 ### 🍿 在线体验
 
-`感谢安徽合肥的网友🎉微信号Protear🎉提供的云服务器`
-
-- 体验地址：[http://www.dilon.vip:8866/](http://www.dilon.vip:8866/)
 - 开发者租户：用户名：superAdmin，密码：123456
 - 公司1租户： 公司1租户管理员（用户名：zuohuaijun@163.com 密码：123456），公司1租户普通用户（用户名：dilon@163.com 密码：123456）           
 
