@@ -2851,11 +2851,6 @@
             否
             </summary>
         </member>
-        <member name="T:Furion.Extras.Admin.NET.LogEventHandler">
-            <summary>
-            日志订阅处理
-            </summary>
-        </member>
         <member name="T:Furion.Extras.Admin.NET.DictionaryExtensions">
             <summary>
             字典扩展
@@ -9516,6 +9511,12 @@
         <member name="F:Furion.Extras.Admin.NET.TreeBuildUtil`1._rootParentId">
             <summary>
             顶级节点的父节点Id(默认0)
+            </summary>
+        </member>
+        <member name="M:Furion.Extras.Admin.NET.TreeBuildUtil`1.SetRootParentId(System.Int64)">
+            <summary>
+            设置根节点方法
+            查询数据可以设置其他节点为根节点，避免父节点永远是0，查询不到数据的问题
             </summary>
         </member>
         <member name="M:Furion.Extras.Admin.NET.TreeBuildUtil`1.Build(System.Collections.Generic.List{`0})">

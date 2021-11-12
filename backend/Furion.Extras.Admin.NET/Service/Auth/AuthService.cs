@@ -1,19 +1,19 @@
-﻿using Furion.DatabaseAccessor;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+using Furion.DatabaseAccessor;
 using Furion.DataEncryption;
 using Furion.DependencyInjection;
 using Furion.DynamicApiController;
-using Furion.EventBridge;
+using Furion.EventBus;
 using Furion.Extras.Admin.NET.Options;
 using Furion.FriendlyException;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using UAParser;
 
 namespace Furion.Extras.Admin.NET.Service
@@ -26,27 +26,22 @@ namespace Furion.Extras.Admin.NET.Service
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        private readonly IRepository<SysUser> _sysUserRep;     // 用户表仓储
+        private readonly IRepository<SysUser> _sysUserRep; // 用户表仓储
         private readonly IUserManager _userManager; // 用户管理
 
         private readonly ISysUserService _sysUserService; // 系统用户服务
-        private readonly ISysEmpService _sysEmpService;   // 系统员工服务
+        private readonly ISysEmpService _sysEmpService; // 系统员工服务
         private readonly ISysRoleService _sysRoleService; // 系统角色服务
         private readonly ISysMenuService _sysMenuService; // 系统菜单服务
-        private readonly ISysAppService _sysAppService;   // 系统应用服务
-        private readonly IClickWordCaptcha _captchaHandle;// 验证码服务
+        private readonly ISysAppService _sysAppService; // 系统应用服务
+        private readonly IClickWordCaptcha _captchaHandle; // 验证码服务
         private readonly ISysConfigService _sysConfigService; // 验证码服务
+        private readonly IEventPublisher _eventPublisher;
 
-        public AuthService(IRepository<SysUser> sysUserRep,
-                           IHttpContextAccessor httpContextAccessor,
-                           IUserManager userManager,
-                           ISysUserService sysUserService,
-                           ISysEmpService sysEmpService,
-                           ISysRoleService sysRoleService,
-                           ISysMenuService sysMenuService,
-                           ISysAppService sysAppService,
-                           IClickWordCaptcha captchaHandle,
-                           ISysConfigService sysConfigService)
+        public AuthService(IRepository<SysUser> sysUserRep, IHttpContextAccessor httpContextAccessor, IUserManager userManager,
+            ISysUserService sysUserService, ISysEmpService sysEmpService, ISysRoleService sysRoleService,
+            ISysMenuService sysMenuService, ISysAppService sysAppService, IClickWordCaptcha captchaHandle,
+            ISysConfigService sysConfigService, IEventPublisher eventPublisher)
         {
             _sysUserRep = sysUserRep;
             _httpContextAccessor = httpContextAccessor;
@@ -58,6 +53,7 @@ namespace Furion.Extras.Admin.NET.Service
             _sysAppService = sysAppService;
             _captchaHandle = captchaHandle;
             _sysConfigService = sysConfigService;
+            _eventPublisher = eventPublisher;
         }
 
         /// <summary>
@@ -75,7 +71,9 @@ namespace Furion.Extras.Admin.NET.Service
             var encryptPasswod = MD5Encryption.Encrypt(input.Password);
 
             // 判断用户名和密码是否正确 忽略全局过滤器
-            var user = _sysUserRep.Where(u => u.Account.Equals(input.Account) && u.Password.Equals(encryptPasswod) && !u.IsDeleted, false, true).FirstOrDefault();
+            var user = _sysUserRep
+                .Where(u => u.Account.Equals(input.Account) && u.Password.Equals(encryptPasswod) && !u.IsDeleted, false, true)
+                .FirstOrDefault();
             _ = user ?? throw Oops.Oh(ErrorCode.D1000);
 
             // 验证账号是否被冻结
@@ -86,18 +84,19 @@ namespace Furion.Extras.Admin.NET.Service
             //var accessToken = await _jwtBearerManager.CreateTokenAdmin(user);
             var accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>
             {
-                { ClaimConst.CLAINM_USERID, user.Id },
-                { ClaimConst.TENANT_ID, user.TenantId },
-                { ClaimConst.CLAINM_ACCOUNT, user.Account },
-                { ClaimConst.CLAINM_NAME, user.Name },
-                { ClaimConst.CLAINM_SUPERADMIN, user.AdminType },
+                {ClaimConst.CLAINM_USERID, user.Id},
+                {ClaimConst.TENANT_ID, user.TenantId},
+                {ClaimConst.CLAINM_ACCOUNT, user.Account},
+                {ClaimConst.CLAINM_NAME, user.Name},
+                {ClaimConst.CLAINM_SUPERADMIN, user.AdminType},
             });
 
             // 设置Swagger自动登录
             _httpContextAccessor.HttpContext.SigninToSwagger(accessToken);
 
             // 生成刷新Token令牌
-            var refreshToken = JWTEncryption.GenerateRefreshToken(accessToken, App.GetOptions<RefreshTokenSettingOptions>().ExpiredTime);
+            var refreshToken =
+                JWTEncryption.GenerateRefreshToken(accessToken, App.GetOptions<RefreshTokenSettingOptions>().ExpiredTime);
 
             // 设置刷新Token令牌
             _httpContextAccessor.HttpContext.Response.Headers["x-access-token"] = refreshToken;
@@ -157,20 +156,22 @@ namespace Furion.Extras.Admin.NET.Service
             }
 
             // 更新用户最后登录Ip和时间
-            await _sysUserRep.UpdateIncludeAsync(user, new[] { nameof(SysUser.LastLoginIp), nameof(SysUser.LastLoginTime) });
+            await _sysUserRep.UpdateIncludeAsync(user, new[] {nameof(SysUser.LastLoginIp), nameof(SysUser.LastLoginTime)});
 
-           await Event.EmitAsync("Log:CreateVisLog", new SysLogVis
-            {
-                Name = loginOutput.Name,
-                Success = YesOrNot.Y,
-                Message = "登录成功",
-                Ip = loginOutput.LastLoginIp,
-                Browser = loginOutput.LastLoginBrowser,
-                Os = loginOutput.LastLoginOs,
-                VisType = LoginType.LOGIN,
-                VisTime = loginOutput.LastLoginTime,
-                Account = loginOutput.Account
-            });
+            // 增加登录日志
+            await _eventPublisher.PublishAsync(new ChannelEventSource("Create:VisLog",
+                new SysLogVis
+                {
+                    Name = loginOutput.Name,
+                    Success = YesOrNot.Y,
+                    Message = "登录成功",
+                    Ip = loginOutput.LastLoginIp,
+                    Browser = loginOutput.LastLoginBrowser,
+                    Os = loginOutput.LastLoginOs,
+                    VisType = LoginType.LOGIN,
+                    VisTime = loginOutput.LastLoginTime,
+                    Account = loginOutput.Account
+                }));
             return loginOutput;
         }
 
@@ -185,17 +186,17 @@ namespace Furion.Extras.Admin.NET.Service
             _httpContextAccessor.HttpContext.SignoutToSwagger();
             //_httpContextAccessor.HttpContext.Response.Headers["access-token"] = "invalid token";
 
-           await Event.EmitAsync("Log:CreateVisLog", new SysLogVis
-            {
-                Name = _userManager.Name,
-                Success = YesOrNot.Y,
-                Message = "退出成功",
-                VisType = LoginType.LOGOUT,
-                VisTime = DateTimeOffset.Now,
-                Account = _userManager.Account
-            });
-
-            await Task.CompletedTask;
+            // 增加退出日志
+            await _eventPublisher.PublishAsync(new ChannelEventSource("Create:VisLog",
+                new SysLogVis
+                {
+                    Name = _userManager.Name,
+                    Success = YesOrNot.Y,
+                    Message = "退出成功",
+                    VisType = LoginType.LOGOUT,
+                    VisTime = DateTimeOffset.Now,
+                    Account = _userManager.Account
+                }));
         }
 
         /// <summary>

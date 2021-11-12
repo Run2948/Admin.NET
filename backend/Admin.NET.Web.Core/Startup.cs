@@ -1,7 +1,7 @@
-﻿using Furion.Extras.Admin.NET;
-using Furion.Extras.Admin.NET.Service;
-using Furion;
+﻿using Furion;
+using Furion.Extras.Admin.NET;
 using Furion.Extras.Admin.NET.Options;
+using Furion.Extras.Admin.NET.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -23,23 +23,26 @@ namespace Admin.NET.Web.Core
             services.AddJwt<JwtHandler>(enableGlobalAuthorize: true);
             services.AddCorsAccessor();
             services.AddRemoteRequest();
-            services.AddControllersWithViews()
-                    .AddMvcFilter<RequestActionFilter>()                    
-                    .AddNewtonsoftJson(options =>
-                    {
-                        // 首字母小写(驼峰样式)
-                        options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                        // 时间格式化
-                        options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
-                        // 忽略循环引用
-                        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                        // 忽略空值
-                        // options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-                    })
-                    .AddInjectWithUnifyResult<XnRestfulResultProvider>();
+            services.AddControllersWithViews().AddMvcFilter<RequestActionFilter>().AddNewtonsoftJson(options =>
+            {
+                // 首字母小写(驼峰样式)
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                // 时间格式化
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                // 忽略循环引用
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                // 忽略空值
+                // options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            }).AddInjectWithUnifyResult<XnRestfulResultProvider>();
             services.AddViewEngine();
             services.AddSignalR();
-            services.AddEventBridge();
+
+            // 注册EventBus服务
+            services.AddEventBus(builder =>
+            {
+                // 注册 Log 日志订阅者
+                builder.AddSubscriber<LogEventSubscriber>();
+            });
 
             if (App.Configuration["Cache:CacheType"] == "RedisCache")
             {
@@ -118,14 +121,12 @@ namespace Admin.NET.Web.Core
             {
                 endpoints.MapHub<ChatHub>("/hubs/chathub");
 
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
             // 设置雪花Id的workerId，确保每个实例workerId都应不同
             var workerId = ushort.Parse(App.Configuration["SnowId:WorkerId"] ?? "1");
-            YitIdHelper.SetIdGenerator(new IdGeneratorOptions { WorkerId = workerId });
+            YitIdHelper.SetIdGenerator(new IdGeneratorOptions {WorkerId = workerId});
 
             // 开启自启动定时任务
             App.GetService<ISysTimerService>().StartTimerJob();
