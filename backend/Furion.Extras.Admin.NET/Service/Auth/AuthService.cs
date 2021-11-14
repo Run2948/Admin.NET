@@ -2,7 +2,6 @@
 using Furion.DataEncryption;
 using Furion.DependencyInjection;
 using Furion.DynamicApiController;
-using Furion.EventBridge;
 using Furion.Extras.Admin.NET.Options;
 using Furion.FriendlyException;
 using Mapster;
@@ -14,6 +13,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Furion.EventBus;
 using UAParser;
 
 namespace Furion.Extras.Admin.NET.Service
@@ -36,6 +36,7 @@ namespace Furion.Extras.Admin.NET.Service
         private readonly ISysAppService _sysAppService;   // 系统应用服务
         private readonly IClickWordCaptcha _captchaHandle;// 验证码服务
         private readonly ISysConfigService _sysConfigService; // 验证码服务
+        private readonly IEventPublisher _eventPublisher;
 
         public AuthService(IRepository<SysUser> sysUserRep,
                            IHttpContextAccessor httpContextAccessor,
@@ -46,7 +47,8 @@ namespace Furion.Extras.Admin.NET.Service
                            ISysMenuService sysMenuService,
                            ISysAppService sysAppService,
                            IClickWordCaptcha captchaHandle,
-                           ISysConfigService sysConfigService)
+                           ISysConfigService sysConfigService,
+                           IEventPublisher eventPublisher)
         {
             _sysUserRep = sysUserRep;
             _httpContextAccessor = httpContextAccessor;
@@ -58,6 +60,7 @@ namespace Furion.Extras.Admin.NET.Service
             _sysAppService = sysAppService;
             _captchaHandle = captchaHandle;
             _sysConfigService = sysConfigService;
+            _eventPublisher = eventPublisher;
         }
 
         /// <summary>
@@ -159,7 +162,7 @@ namespace Furion.Extras.Admin.NET.Service
             // 更新用户最后登录Ip和时间
             await _sysUserRep.UpdateIncludeAsync(user, new[] { nameof(SysUser.LastLoginIp), nameof(SysUser.LastLoginTime) });
 
-            await Event.EmitAsync("Log:CreateVisLog", new SysLogVis
+            await _eventPublisher.PublishAsync(new ChannelEventSource("Create:VisLog", new SysLogVis
             {
                 Name = loginOutput.Name,
                 Success = YesOrNot.Y,
@@ -170,7 +173,7 @@ namespace Furion.Extras.Admin.NET.Service
                 VisType = LoginType.LOGIN,
                 VisTime = loginOutput.LastLoginTime,
                 Account = loginOutput.Account
-            });
+            }));
             return loginOutput;
         }
 
@@ -185,7 +188,8 @@ namespace Furion.Extras.Admin.NET.Service
             _httpContextAccessor.HttpContext.SignoutToSwagger();
             //_httpContextAccessor.HttpContext.Response.Headers["access-token"] = "invalid token";
 
-            await Event.EmitAsync("Log:CreateVisLog", new SysLogVis
+            // 增加退出日志
+            await _eventPublisher.PublishAsync(new ChannelEventSource("Create:VisLog", new SysLogVis
             {
                 Name = _userManager.Name,
                 Success = YesOrNot.Y,
@@ -193,7 +197,7 @@ namespace Furion.Extras.Admin.NET.Service
                 VisType = LoginType.LOGOUT,
                 VisTime = DateTimeOffset.Now,
                 Account = _userManager.Account
-            });
+            }));
 
             await Task.CompletedTask;
         }

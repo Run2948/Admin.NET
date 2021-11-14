@@ -1,23 +1,30 @@
 ﻿﻿using Furion.DependencyInjection;
 using Furion.FriendlyException;
-using Furion.EventBridge;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Serilog;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Furion.EventBus;
 
-namespace Furion.Extras.Admin.NET
+ namespace Furion.Extras.Admin.NET
 {
     /// <summary>
     /// 全局异常处理
     /// </summary>
     public class LogExceptionHandler : IGlobalExceptionHandler, ISingleton
     {
-        public Task OnExceptionAsync(ExceptionContext context)
+        private readonly IEventPublisher _eventPublisher;
+
+        public LogExceptionHandler(IEventPublisher eventPublisher)
+        {
+            _eventPublisher = eventPublisher;
+        }
+
+        public async Task OnExceptionAsync(ExceptionContext context)
         {
             var userContext = App.User;
-            Event.Emit("Log:CreateExLog", new SysLogEx
+            await _eventPublisher.PublishAsync(new ChannelEventSource("Create:ExLog", new SysLogEx
             {
                 Account = userContext?.FindFirstValue(ClaimConst.CLAINM_ACCOUNT),
                 Name = userContext?.FindFirstValue(ClaimConst.CLAINM_NAME),
@@ -29,12 +36,10 @@ namespace Furion.Extras.Admin.NET
                 StackTrace = context.Exception.StackTrace,
                 ParamsObj = context.Exception.TargetSite.GetParameters().ToString(),
                 ExceptionTime = DateTimeOffset.Now
-            });
+            }));
 
             // 写日志文件
             Log.Error(context.Exception.ToString());
-
-            return Task.CompletedTask;
         }
     }
 }

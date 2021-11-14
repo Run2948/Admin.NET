@@ -3,7 +3,6 @@ using Furion.DatabaseAccessor;
 using Furion.DataEncryption;
 using Furion.DependencyInjection;
 using Furion.DynamicApiController;
-using Furion.EventBridge;
 using Admin.NET.Core.Options;
 using Furion.FriendlyException;
 using Mapster;
@@ -37,6 +36,7 @@ namespace Admin.NET.Core.Service
         private readonly ISysAppService _sysAppService;   // 系统应用服务
         private readonly IClickWordCaptcha _captchaHandle;// 验证码服务
         private readonly ISysConfigService _sysConfigService; // 验证码服务
+        private readonly IEventPublisher _eventPublisher;
 
         public AuthService(IRepository<SysUser> sysUserRep,
                            IHttpContextAccessor httpContextAccessor,
@@ -47,7 +47,8 @@ namespace Admin.NET.Core.Service
                            ISysMenuService sysMenuService,
                            ISysAppService sysAppService,
                            IClickWordCaptcha captchaHandle,
-                           ISysConfigService sysConfigService)
+                           ISysConfigService sysConfigService,
+                           IEventPublisher eventPublisher)
         {
             _sysUserRep = sysUserRep;
             _httpContextAccessor = httpContextAccessor;
@@ -59,6 +60,7 @@ namespace Admin.NET.Core.Service
             _sysAppService = sysAppService;
             _captchaHandle = captchaHandle;
             _sysConfigService = sysConfigService;
+            _eventPublisher = eventPublisher;
         }
 
         /// <summary>
@@ -160,7 +162,7 @@ namespace Admin.NET.Core.Service
             // 更新用户最后登录Ip和时间
             await _sysUserRep.UpdateIncludeAsync(user, new[] { nameof(SysUser.LastLoginIp), nameof(SysUser.LastLoginTime) });
             
-            await Event.EmitAsync("Log:CreateVisLog", new SysLogVis
+            await _eventPublisher.PublishAsync(new ChannelEventSource("Create:VisLog", new SysLogVis
             {
                 Name = loginOutput.Name,
                 Success = YesOrNot.Y,
@@ -171,7 +173,7 @@ namespace Admin.NET.Core.Service
                 VisType = LoginType.LOGIN,
                 VisTime = loginOutput.LastLoginTime,
                 Account = loginOutput.Account
-            });
+            }));
             return loginOutput;
         }
 
@@ -186,7 +188,8 @@ namespace Admin.NET.Core.Service
             _httpContextAccessor.HttpContext.SignoutToSwagger();
             //_httpContextAccessor.HttpContext.Response.Headers["access-token"] = "invalid token";
             
-            await Event.EmitAsync("Log:CreateVisLog", new SysLogVis
+            // 增加退出日志
+            await _eventPublisher.PublishAsync(new ChannelEventSource("Create:VisLog", new SysLogVis
             {
                 Name = _userManager.Name,
                 Success = YesOrNot.Y,
@@ -194,7 +197,7 @@ namespace Admin.NET.Core.Service
                 VisType = LoginType.LOGOUT,
                 VisTime = DateTimeOffset.Now,
                 Account = _userManager.Account
-            });
+            }));
 
             await Task.CompletedTask;
         }

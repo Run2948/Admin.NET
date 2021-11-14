@@ -32,7 +32,13 @@ namespace Admin.NETApp.Web.Core
                     });
             services.AddViewEngine();
             services.AddSignalR();
-            services.AddEventBridge();
+
+            // 注册EventBus服务
+            services.AddEventBus(builder =>
+            {
+                // 注册 Log 日志订阅者
+                builder.AddSubscriber<LogEventSubscriber>();
+            });
 
             if (App.Configuration["Cache:CacheType"] == "RedisCache")
             {

@@ -1,4 +1,3 @@
-using Furion.EventBridge;
 using Furion.JsonSerialization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +7,7 @@ using System;
 using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Furion.EventBus;
 using UAParser;
 
 namespace Admin.NET.Core
@@ -17,6 +17,13 @@ namespace Admin.NET.Core
     /// </summary>
     public class RequestActionFilter : IAsyncActionFilter
     {
+        private readonly IEventPublisher _eventPublisher;
+
+        public RequestActionFilter(IEventPublisher eventPublisher)
+        {
+            _eventPublisher = eventPublisher;
+        }
+
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var httpContext = context.HttpContext;
@@ -35,7 +42,7 @@ namespace Admin.NET.Core
                 : null;
             var actionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
 
-            await Event.EmitAsync("Log:CreateOpLog", new SysLogOp
+            await _eventPublisher.PublishAsync(new ChannelEventSource("Create:OpLog", new SysLogOp
             {
                 Name = httpContext.User?.FindFirstValue(ClaimConst.CLAINM_NAME),
                 Success = isRequestSucceed ? YesOrNot.Y : YesOrNot.N,
@@ -52,7 +59,7 @@ namespace Admin.NET.Core
                 ElapsedTime = sw.ElapsedMilliseconds,
                 OpTime = DateTimeOffset.Now,
                 Account = httpContext.User?.FindFirstValue(ClaimConst.CLAINM_ACCOUNT)
-            });
+            }));
         }
     }
 }
