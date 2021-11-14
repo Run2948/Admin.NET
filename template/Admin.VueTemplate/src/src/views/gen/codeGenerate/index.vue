@@ -6,6 +6,11 @@
           <a-form layout="inline">
             <a-row :gutter="48">
               <a-col :md="8" :sm="24">
+                <a-form-item label="库名称">
+                  <a-input v-model="queryParam.databaseName" allow-clear placeholder="请输入库名称" />
+                </a-form-item>
+              </a-col>
+              <a-col :md="8" :sm="24">
                 <a-form-item label="表名称">
                   <a-input v-model="queryParam.tableName" allow-clear placeholder="请输入表名称" />
                 </a-form-item>
@@ -34,14 +39,17 @@
               >新增</a-button
             >
           </div>
+          <span slot="databaseName" slot-scope="text">
+            <ellipsis :length="20" tooltip>{{ text }}</ellipsis>
+          </span>
           <span slot="tableName" slot-scope="text">
-            <ellipsis :length="10" tooltip>{{ text }}</ellipsis>
+            <ellipsis :length="20" tooltip>{{ text }}</ellipsis>
           </span>
           <span slot="busName" slot-scope="text">
-            <ellipsis :length="10" tooltip>{{ text }}</ellipsis>
+            <ellipsis :length="20" tooltip>{{ text }}</ellipsis>
           </span>
           <span slot="nameSpace" slot-scope="text">
-            <ellipsis :length="10" tooltip>{{ text }}</ellipsis>
+            <ellipsis :length="25" tooltip>{{ text }}</ellipsis>
           </span>
           <span slot="frontProject" slot-scope="text">
             <ellipsis :length="10" tooltip>{{ text }}</ellipsis>
@@ -56,7 +64,7 @@
             <ellipsis :length="10" tooltip>{{ 'yes_or_no' | dictType(text) }}</ellipsis>
           </span> -->
           <span slot="generateType" slot-scope="text">
-            <ellipsis :length="10" tooltip>{{ 'code_gen_create_type' | dictType(text) }}</ellipsis>
+            <ellipsis :length="20" tooltip>{{ 'code_gen_create_type' | dictType(text) }}</ellipsis>
           </span>
           <span slot="action" slot-scope="text, record">
             <span v-if="record.generateType === '1'">
@@ -125,6 +133,11 @@ export default {
       queryParam: {},
       // 表头
       columns: [
+        {
+          title: '库名称',
+          dataIndex: 'databaseName',
+          scopedSlots: { customRender: 'databaseName' }
+        },
         {
           title: '表名称',
           dataIndex: 'tableName',

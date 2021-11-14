@@ -8,6 +8,7 @@ using Furion.ViewEngine;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -122,14 +123,37 @@ namespace Admin.NETApp.Core.Service
         }
 
         /// <summary>
+        /// 获取数据库库集合
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("/codeGenerate/DatabaseList")]
+        public List<DatabaseOutput> GetDatabaseList()
+        {
+            var DbContextLocators = AppDomain.CurrentDomain.GetAssemblies()
+                        .SelectMany(a => a.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IDbContextLocator))))
+                        .Select(x => new DatabaseOutput { DatabaseName = x.Name, DatabaseComment = x.FullName }).ToList();
+
+            return DbContextLocators;
+        }
+
+        /// <summary>
         /// 获取数据库表(实体)集合
         /// </summary>
         /// <returns></returns>
         [HttpGet("/codeGenerate/InformationList")]
-        public List<TableOutput> GetTableList()
+        public List<TableOutput> GetTableList(string dbContextLocatorName)
         {
-            return Db.GetDbContext().Model.GetEntityTypes().Select(u => new TableOutput
+            var dbContext = Db.GetDbContext();//默认数据库
+            if (!string.IsNullOrEmpty(dbContextLocatorName))
             {
+                var dbContentLocator = AppDomain.CurrentDomain.GetAssemblies()
+                           .SelectMany(a => a.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IDbContextLocator)))).Where(x => x.Name == dbContextLocatorName).FirstOrDefault();
+
+                dbContext = Db.GetDbContext(dbContentLocator);
+            }
+            return dbContext.Model.GetEntityTypes().Select(u => new TableOutput
+            {
+                DatabaseName = dbContextLocatorName,
                 TableName = u.GetDefaultTableName(),
                 TableComment = u.GetComment()
             }).ToList();
@@ -139,11 +163,19 @@ namespace Admin.NETApp.Core.Service
         /// 根据表名获取列
         /// </summary>
         /// <returns></returns>
-        [HttpGet("/codeGenerate/ColumnList/{tableName}")]
-        public List<TableColumnOutput> GetColumnListByTableName(string tableName)
+        [HttpGet("/codeGenerate/ColumnList/{databaseName}/{tableName}")]
+        public List<TableColumnOutput> GetColumnListByTableName(string databaseName, string tableName)
         {
+            var dbContext = Db.GetDbContext();//默认数据库
+            if (!string.IsNullOrEmpty(databaseName))
+            {
+                var dbContentLocator = AppDomain.CurrentDomain.GetAssemblies()
+                           .SelectMany(a => a.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IDbContextLocator)))).Where(x => x.Name == databaseName).FirstOrDefault();
+
+                dbContext = Db.GetDbContext(dbContentLocator);
+            }
             // 获取实体类型属性
-            var entityType = Db.GetDbContext().Model.GetEntityTypes().FirstOrDefault(u => u.ClrType.Name == tableName);
+            var entityType = dbContext.Model.GetEntityTypes().FirstOrDefault(u => u.ClrType.Name == tableName);
             if (entityType == null) return null;
 
             // 获取原始类型属性
@@ -169,8 +201,16 @@ namespace Admin.NETApp.Core.Service
         [NonAction]
         public List<TableColumnOutput> GetColumnList([FromQuery] AddCodeGenInput input)
         {
+            var dbContext = Db.GetDbContext();//默认数据库
+            if (!string.IsNullOrEmpty(input.DatabaseName))
+            {
+                var dbContentLocator = AppDomain.CurrentDomain.GetAssemblies()
+                           .SelectMany(a => a.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IDbContextLocator)))).Where(x => x.Name == input.DatabaseName).FirstOrDefault();
+
+                dbContext = Db.GetDbContext(dbContentLocator);
+            }
             // 获取实体类型属性
-            var entityType = Db.GetDbContext().Model.GetEntityTypes()
+            var entityType = dbContext.Model.GetEntityTypes()
                 .FirstOrDefault(u => u.ClrType.Name == input.TableName);
             if (entityType == null) return null;
 
@@ -218,7 +258,9 @@ namespace Admin.NETApp.Core.Service
                     input.BusName,
                     input.NameSpace,
                     input.ProName,
+                    input.DatabaseName,
                     ClassName = input.TableName,
+                    CamelizeClassName = input.TableName.Substring(0, 1).ToLower() + input.TableName[1..], //首字母小写
                     QueryWhetherList = queryWhetherList,
                     TableField = tableFieldList
                 });
@@ -229,13 +271,13 @@ namespace Admin.NETApp.Core.Service
                 File.WriteAllText(targetPathList[i], tResult, Encoding.UTF8);
             }
 
-            await AddMenu(input.TableName, input.BusName, input.MenuApplication, input.MenuPid);
+            await AddMenu(input.DatabaseName.Substring(0, 5), input.TableName, input.BusName, input.MenuApplication, input.MenuPid);
         }
 
-        private async Task AddMenu(string className, string busName, string application, long pid)
+        private async Task AddMenu(string menucodePre, string className, string busName, string application, long pid)
         {
             // 定义菜单编码前缀
-            var codePrefix = "feat_" + className.ToLower();
+            var codePrefix = menucodePre + "_" + className.ToLower();//改为取数据库定位器的前五个字母方便区分业务 //"dilon_" + className.ToLower();
 
             // 先删除该表已生成的菜单列表
             var menus = await _sysMenuRep.DetachedEntities.Where(u => u.Code == codePrefix || u.Code.StartsWith(codePrefix + "_")).ToListAsync();

@@ -18,11 +18,13 @@ namespace Admin.NETApp.Core.Service
     [ApiDescriptionSettings(Name = "CodeGenConfig", Order = 100)]
     public class CodeGenConfigService : ICodeGenConfigService, IDynamicApiController, ITransient
     {
+        private readonly IRepository<SysCodeGen> _sysCodeGenRep; // 代码生成器仓储
         private readonly IRepository<SysCodeGenConfig> _sysCodeGenConfigRep; // 代码生成详细配置仓储
 
-        public CodeGenConfigService(IRepository<SysCodeGenConfig> sysCodeGenConfigRep)
+        public CodeGenConfigService(IRepository<SysCodeGenConfig> sysCodeGenConfigRep, IRepository<SysCodeGen> sysCodeGenRep)
         {
             _sysCodeGenConfigRep = sysCodeGenConfigRep;
+            _sysCodeGenRep = sysCodeGenRep;
         }
 
         /// <summary>
@@ -33,9 +35,11 @@ namespace Admin.NETApp.Core.Service
         [HttpGet("/sysCodeGenerateConfig/list")]
         public async Task<List<CodeGenConfig>> List([FromQuery] CodeGenConfig input)
         {
-            return await _sysCodeGenConfigRep.DetachedEntities
+            var result = await _sysCodeGenConfigRep.DetachedEntities
                                              .Where(u => u.CodeGenId == input.CodeGenId && u.WhetherCommon != YesOrNot.Y.ToString())
                                              .Select(u => u.Adapt<CodeGenConfig>()).ToListAsync();
+            await DtoMapper(result);
+            return result;
         }
 
         /// <summary>
@@ -141,5 +145,21 @@ namespace Admin.NETApp.Core.Service
                 codeGenConfig.InsertAsync();
             }
         }
+
+        /// <summary>
+        /// 映射主表
+        /// </summary>
+        /// <param name="rows"></param>
+        /// <returns></returns>
+        private async Task DtoMapper(ICollection<CodeGenConfig> rows)
+        {
+            var codeGen = await _sysCodeGenRep.FirstOrDefaultAsync(x => x.Id == rows.First().CodeGenId);
+            foreach (var item in rows)
+            {
+                item.CodeGen = codeGen.Adapt<CodeGenOutput>();
+                //item.CodeGenTestName = (await _codeGenTestRep.FirstOrDefaultAsync(e => e.Id == item.CodeGenId))?.Name;
+            }
+        }
+
     }
 }

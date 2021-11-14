@@ -31,6 +31,13 @@ namespace Admin.NETApp.Core
         [Comment("生成方式")]
         [MaxLength(20)]
         public string GenerateType { get; set; }
+ 
+        /// <summary>
+        /// 数据库名
+        /// </summary>
+        [Comment("数据库名")]
+        [MaxLength(100)]
+        public string DatabaseName { get; set; }
 
         /// <summary>
         /// 数据库表名

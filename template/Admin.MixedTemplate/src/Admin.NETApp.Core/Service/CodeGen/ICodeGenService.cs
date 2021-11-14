@@ -14,7 +14,7 @@ namespace Admin.NETApp.Core.Service
 
         List<TableColumnOutput> GetColumnList(AddCodeGenInput input);
 
-        List<TableOutput> GetTableList();
+        List<TableOutput> GetTableList(string dbContextLocatorName);
 
         Task<dynamic> QueryCodeGenPageList([FromQuery] CodeGenPageInput input);
 
