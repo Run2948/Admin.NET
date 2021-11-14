@@ -325,6 +325,7 @@ Update-Database v1.0.1 -Context MultiTenantDbContext
 - [x] 集成代码生成器
 - [x] 集成导入导出
 - [x] 在线用户及黑名单
+- [x] 集成对象存储(Object Storage Service,简称OSS)
 - [ ] 邮件发送
 - [ ] 短信发送
 - [ ] 集成微信开发
